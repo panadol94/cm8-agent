@@ -133,8 +133,9 @@ export default async function BlogPost({ params }: PageProps) {
         }}
       />
 
+      {/* Hero */}
       <div className="page-hero">
-        <span className="section-tag" style={{ marginBottom: 16 }}>
+        <span className="section-tag" style={{ marginBottom: 12 }}>
           {post.category}
         </span>
         <h1 className="page-hero-title">{post.title}</h1>
@@ -142,15 +143,67 @@ export default async function BlogPost({ params }: PageProps) {
       </div>
 
       <section className="section">
-        <div className="section-inner" style={{ maxWidth: 800, margin: '0 auto' }}>
-          <article
-            className="blog-content"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-            style={{ lineHeight: 1.8, fontSize: '1.05rem', color: '#374151' }}
-          />
-          <div style={{ marginTop: 48, textAlign: 'center' }}>
+        <div className="blog-article-wrapper">
+          {/* Meta Bar */}
+          <div className="blog-article-meta">
+            <div className="blog-article-meta-item">
+              <span className="meta-icon">✍️</span>
+              <span>CM8 VVIP Team</span>
+            </div>
+            <div className="blog-article-meta-divider" />
+            <div className="blog-article-meta-item">
+              <span className="meta-icon">📅</span>
+              <span>{post.date}</span>
+            </div>
+            <div className="blog-article-meta-divider" />
+            <div className="blog-article-meta-item">
+              <span className="meta-icon">📖</span>
+              <span>5 min read</span>
+            </div>
+          </div>
+
+          {/* Article Content */}
+          <article className="blog-content" dangerouslySetInnerHTML={{ __html: post.content }} />
+
+          {/* Share Bar */}
+          <div className="blog-share-bar">
+            <span className="blog-share-label">Share</span>
+            <a
+              href={`https://wa.me/?text=${encodeURIComponent(post.title + ' — CM8 VVIP')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="blog-share-btn"
+              aria-label="Share on WhatsApp"
+            >
+              💬
+            </a>
+            <a
+              href={`https://t.me/share/url?url=cm8vvip.com/blog/${slug}&text=${encodeURIComponent(post.title)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="blog-share-btn"
+              aria-label="Share on Telegram"
+            >
+              ✈️
+            </a>
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=cm8vvip.com/blog/${slug}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="blog-share-btn"
+              aria-label="Share on Facebook"
+            >
+              📘
+            </a>
+          </div>
+
+          {/* Back Button */}
+          <div className="blog-nav-bottom">
             <Link href="/blog" className="btn btn-outline">
               ← Kembali ke Blog
+            </Link>
+            <Link href="/register" className="btn btn-gradient">
+              Daftar Jadi Agent →
             </Link>
           </div>
         </div>

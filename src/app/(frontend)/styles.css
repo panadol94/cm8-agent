@@ -5021,6 +5021,7 @@ body::before {
   color: var(--text-white); /* Default white for dark mode cards */
   background: linear-gradient(to right, #fff, #ddd); /* Silver gradient text */
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 0;
 }
@@ -5029,6 +5030,7 @@ body::before {
 .vvip-step-card.highlight-step .vvip-step-title {
   background: var(--gradient-gold);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 

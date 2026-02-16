@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getOtpStore } from '../register/route'
+import { getOtpStore } from '../utils'
 
 const GROUP_LINK = 'https://t.me/cm8vvip'
 

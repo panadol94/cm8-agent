@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { getOtpStore, normalizePhone } from '../register/route'
+import { getOtpStore, normalizePhone } from '../utils'
 
 /* ── POST /api/patch-id/verify ─────────────────────────────── */
 export async function POST(req: Request) {

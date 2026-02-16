@@ -2457,62 +2457,260 @@ ul {
 }
 
 /* â”€â”€ Center Button (Patch ID) â€” floats above curve â”€â”€ */
+/* ── Center Button (Patch ID) — Fire Animation ── */
 .btm-center {
   position: relative;
   margin-top: -28px;
   z-index: 2;
 }
 
-.btm-center svg {
-  width: 52px;
-  height: 52px;
-  background: var(--gradient-main);
+/* Main circular button */
+.btm-center-btn {
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
-  padding: 12px;
-  box-shadow: 0 4px 20px rgba(230, 53, 32, 0.45);
-  transition: all 0.3s ease;
-  border: 3px solid white;
+  background: linear-gradient(135deg, #e63520 0%, #ff6b2c 50%, #ff8c42 100%);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 5;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
+  box-shadow:
+    0 0 15px rgba(255, 80, 20, 0.5),
+    0 0 30px rgba(255, 60, 10, 0.3),
+    inset 0 -3px 8px rgba(255, 255, 255, 0.15);
 }
 
-.btm-center:hover svg {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 28px rgba(230, 53, 32, 0.55);
+.btm-center:hover .btm-center-btn {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow:
+    0 0 25px rgba(255, 80, 20, 0.7),
+    0 0 50px rgba(255, 60, 10, 0.4),
+    inset 0 -3px 8px rgba(255, 255, 255, 0.2);
+  border-color: white;
 }
 
-.btm-center:active svg {
-  transform: translateY(0) scale(0.95);
+.btm-center:active .btm-center-btn {
+  transform: translateY(0) scale(0.93);
 }
 
+.btm-center-btn::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  padding: 3px;
+  background: conic-gradient(
+    from 0deg,
+    #ffffff 0deg,
+    #ffcc00 60deg,
+    #ff6600 120deg,
+    #ff2200 180deg,
+    #ff6600 240deg,
+    #ffcc00 300deg,
+    #ffffff 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spinBorder 3s linear infinite;
+  z-index: -1;
+}
+
+@keyframes spinBorder {
+  to { transform: rotate(360deg); }
+}
+
+.btm-center-btn svg {
+  width: 26px !important;
+  height: 26px !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 0 4px rgba(255, 200, 100, 0.6));
+}
+
+/* Fire container */
+.btm-fire-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70px;
+  height: 80px;
+  margin-left: -35px;
+  margin-top: -55px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Individual flames */
+.btm-flame {
+  position: absolute;
+  bottom: 10px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  filter: blur(3px);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Main center flame — tall orange */
+.btm-flame-1 {
+  left: 50%;
+  width: 22px;
+  height: 36px;
+  margin-left: -11px;
+  background: linear-gradient(0deg, #ff4500 0%, #ff6a00 40%, #ffaa00 70%, #ffdd44 100%);
+  opacity: 0.9;
+  animation: flame1 0.4s infinite alternate;
+}
+
+/* Left flame — red-orange */
+.btm-flame-2 {
+  left: 50%;
+  width: 18px;
+  height: 28px;
+  margin-left: -18px;
+  background: linear-gradient(0deg, #ff2200 0%, #ff5500 50%, #ff8800 100%);
+  opacity: 0.8;
+  animation: flame2 0.5s infinite alternate;
+  transform-origin: bottom center;
+}
+
+/* Right flame — orange-yellow */
+.btm-flame-3 {
+  left: 50%;
+  width: 18px;
+  height: 30px;
+  margin-left: 0px;
+  background: linear-gradient(0deg, #ff3300 0%, #ff6600 50%, #ffaa00 100%);
+  opacity: 0.8;
+  animation: flame3 0.45s infinite alternate;
+  transform-origin: bottom center;
+}
+
+/* Inner core glow — bright yellow */
+.btm-flame-4 {
+  left: 50%;
+  width: 14px;
+  height: 22px;
+  margin-left: -7px;
+  background: linear-gradient(0deg, #ffaa00 0%, #ffcc33 40%, #ffee88 80%, #fff 100%);
+  opacity: 0.95;
+  animation: flame4 0.35s infinite alternate;
+  filter: blur(0.5px);
+}
+
+/* Outer glow aura — hidden */
+/* .btm-flame-5 removed */
+.btm-flame-5 {display:none;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+  bottom: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 100, 0, 0.3) 0%, rgba(255, 60, 0, 0.1) 40%, transparent 70%);
+  opacity: 0.7;
+  animation: flameGlow 1.5s ease-in-out infinite;
+  filter: blur(4px);
+}
+
+/* Floating embers */
+.btm-ember {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ffcc00;
+  box-shadow: 0 0 4px #ff8800, 0 0 8px #ff6600;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+.btm-ember-1 {
+  left: 25px;
+  bottom: 35px;
+  animation: ember1 2s infinite;
+}
+
+.btm-ember-2 {
+  left: 40px;
+  bottom: 30px;
+  animation: ember2 2.5s 0.5s infinite;
+  width: 2px;
+  height: 2px;
+}
+
+.btm-ember-3 {
+  left: 32px;
+  bottom: 32px;
+  animation: ember3 1.8s 1s infinite;
+  width: 2.5px;
+  height: 2.5px;
+}
+
+/* Label */
 .btm-center .btm-nav-label {
   color: var(--pink);
   font-weight: 700;
   margin-top: 4px;
+  
 }
 
-.btm-center-glow {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70px;
-  height: 70px;
-  background: radial-gradient(circle, rgba(230, 53, 32, 0.12) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  animation: centerGlow 2s ease-in-out infinite;
+/* ── Fire Keyframes ── */
+@keyframes flame1 {
+  0% { height: 34px; opacity: 0.85; transform: scaleX(1) rotate(-1deg); }
+  50% { height: 38px; opacity: 1; transform: scaleX(0.9) rotate(1deg); }
+  100% { height: 32px; opacity: 0.8; transform: scaleX(1.05) rotate(-2deg); }
 }
 
-@keyframes centerGlow {
-  0%,
-  100% {
-    opacity: 0.6;
-    transform: translateX(-50%) scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1.15);
-  }
+@keyframes flame2 {
+  0% { height: 26px; transform: rotate(8deg) scaleX(1); opacity: 0.75; }
+  50% { height: 30px; transform: rotate(4deg) scaleX(0.85); opacity: 0.85; }
+  100% { height: 24px; transform: rotate(10deg) scaleX(1.1); opacity: 0.7; }
 }
+
+@keyframes flame3 {
+  0% { height: 28px; transform: rotate(-6deg) scaleX(1); opacity: 0.8; }
+  50% { height: 32px; transform: rotate(-3deg) scaleX(0.9); opacity: 0.9; }
+  100% { height: 26px; transform: rotate(-8deg) scaleX(1.05); opacity: 0.7; }
+}
+
+@keyframes flame4 {
+  0% { height: 20px; opacity: 0.9; transform: scaleX(1); }
+  50% { height: 24px; opacity: 1; transform: scaleX(0.85); }
+  100% { height: 19px; opacity: 0.85; transform: scaleX(1.1); }
+}
+
+@keyframes flameGlow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.15); }
+}
+
+@keyframes ember1 {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(-8px, -30px) scale(0); opacity: 0; }
+}
+
+@keyframes ember2 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+  100% { transform: translate(6px, -35px) scale(0); opacity: 0; }
+}
+
+@keyframes ember3 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+  100% { transform: translate(-3px, -28px) scale(0); opacity: 0; }
+}
+
 
 /* â”€â”€ Active indicator â”€â”€ */
 .btm-active::after {

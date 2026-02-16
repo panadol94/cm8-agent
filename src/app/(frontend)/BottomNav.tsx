@@ -35,8 +35,24 @@ export default function BottomNav() {
 
         return (
           <Link key={key} href={href} className={cls}>
-            {center && <div className="btm-center-glow" />}
-            <Icon active={active} />
+            {center && (
+              <>
+                <div className="btm-fire-wrap">
+                  <div className="btm-flame btm-flame-1" />
+                  <div className="btm-flame btm-flame-2" />
+                  <div className="btm-flame btm-flame-3" />
+                  <div className="btm-flame btm-flame-4" />
+                  <div className="btm-flame btm-flame-5" />
+                  <div className="btm-ember btm-ember-1" />
+                  <div className="btm-ember btm-ember-2" />
+                  <div className="btm-ember btm-ember-3" />
+                </div>
+                <div className="btm-center-btn">
+                  <Icon active={active} />
+                </div>
+              </>
+            )}
+            {!center && <Icon active={active} />}
             <span className="btm-nav-label">{label}</span>
           </Link>
         )

@@ -7,8 +7,18 @@ interface RegisterGateProps {
 }
 
 const COUNTRIES = [
-  { code: '+60', flag: '🇲🇾', name: 'Malaysia', placeholder: '12-345 6789' },
-  { code: '+62', flag: '🇮🇩', name: 'Indonesia', placeholder: '812-3456-7890' },
+  {
+    code: '+60',
+    flag: 'https://flagcdn.com/w40/my.png',
+    name: 'Malaysia',
+    placeholder: '12-345 6789',
+  },
+  {
+    code: '+62',
+    flag: 'https://flagcdn.com/w40/id.png',
+    name: 'Indonesia',
+    placeholder: '812-3456-7890',
+  },
 ]
 
 export default function RegisterGate({ onVerified }: RegisterGateProps) {
@@ -171,7 +181,8 @@ export default function RegisterGate({ onVerified }: RegisterGateProps) {
                     onClick={() => setCountry(c)}
                     type="button"
                   >
-                    <span>{c.flag}</span>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={c.flag} alt={c.name} className="country-flag" />
                     <span>{c.code}</span>
                   </button>
                 ))}
@@ -202,13 +213,15 @@ export default function RegisterGate({ onVerified }: RegisterGateProps) {
                 </>
               ) : (
                 <>
-                  <span>📲</span>
-                  Dapatkan OTP
+                  <span>✈️</span>
+                  Dapatkan OTP melalui Telegram Bot
                 </>
               )}
             </button>
 
-            <p className="register-hint">🔒 OTP akan dihantar melalui Telegram Bot</p>
+            <p className="register-hint">
+              🔒 OTP akan dihantar melalui Telegram Bot — buka bot, tekan &quot;Share Contact&quot;
+            </p>
           </div>
         )}
 

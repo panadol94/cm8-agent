@@ -1848,6 +1848,14 @@ body.scan-shake {
   border-color: #fca5a5;
 }
 
+.country-flag {
+  width: 24px;
+  height: 18px;
+  border-radius: 3px;
+  object-fit: cover;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
 .country-active {
   border-color: #e63520;
   background: rgba(230, 53, 32, 0.04);

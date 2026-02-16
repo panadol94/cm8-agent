@@ -67,28 +67,6 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
         {/* Bottom Navigation */}
         <BottomNav />
-
-        {/* Floating Contact */}
-        <div className="floating-contact">
-          <a
-            href="https://wa.me/60123456789"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="float-btn float-whatsapp"
-            aria-label="WhatsApp"
-          >
-            💬
-          </a>
-          <a
-            href="https://t.me/cm8vvip"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="float-btn float-telegram"
-            aria-label="Telegram"
-          >
-            ✈️
-          </a>
-        </div>
       </body>
     </html>
   )

@@ -4951,3 +4951,119 @@ body::before {
 .feature-card {
   position: relative;
 }
+
+/* ==========================================================================
+   VVIP PARTNERSHIP STYLES (Exclusive & High-End)
+   ========================================================================== */
+
+/* Structure Steps Grid */
+.vvip-structure-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+/* Individual Step Card */
+.vvip-step-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Slightly more visible border */
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+}
+
+.vvip-step-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* Highlighted Step (Deposit) */
+.vvip-step-card.highlight-step {
+  background: linear-gradient(145deg, rgba(230, 53, 32, 0.08), rgba(0, 0, 0, 0.3));
+  border-color: rgba(230, 53, 32, 0.3);
+  box-shadow: 0 4px 20px rgba(230, 53, 32, 0.1);
+}
+
+.vvip-step-card.highlight-step:hover {
+  border-color: rgba(230, 53, 32, 0.6);
+  box-shadow: 0 15px 40px rgba(230, 53, 32, 0.2);
+}
+
+/* Step Header */
+.vvip-step-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.vvip-step-num {
+  font-size: 2rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.1);
+  font-family: var(--font-heading);
+  line-height: 1;
+}
+
+.vvip-step-card.highlight-step .vvip-step-num {
+  color: rgba(230, 53, 32, 0.2);
+}
+
+.vvip-step-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-white); /* Default white for dark mode cards */
+  background: linear-gradient(to right, #fff, #ddd); /* Silver gradient text */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+/* Gold Gradient for Highlight Title */
+.vvip-step-card.highlight-step .vvip-step-title {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Step Description */
+.vvip-step-desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0;
+}
+
+.vvip-step-card.highlight-step .vvip-step-desc {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Step List (Bullets) */
+.vvip-step-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+}
+
+.vvip-step-list li {
+  margin-bottom: 0.8rem;
+  padding-left: 0;
+  position: relative;
+  font-size: 0.95rem;
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vvip-step-list li:last-child {
+  margin-bottom: 0;
+}

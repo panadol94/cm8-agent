@@ -200,10 +200,36 @@ const incomeShowcase = [
 ]
 
 const agentSteps = [
-  { num: '01', icon: '📝', title: 'Daftar', desc: 'Isi borang online dalam 2 minit' },
-  { num: '02', icon: '🆔', title: 'Terima ID', desc: 'Dapat ID agent & akses dashboard' },
-  { num: '03', icon: '📢', title: 'Promote', desc: 'Kongsi link & tarik pemain baru' },
-  { num: '04', icon: '💰', title: 'Terima Komisen', desc: 'Komisyen masuk setiap minggu' },
+  {
+    num: '01',
+    icon: '💎',
+    title: 'VVIP Invitation Only',
+    desc: 'Akses terhad melalui Private Invitation Link dari Master Agent sah.',
+  },
+  {
+    num: '02',
+    icon: '🛡️',
+    title: 'Official Verification',
+    desc: 'Pendaftaran profil perniagaan selamat dengan sekuriti gred bank.',
+  },
+  {
+    num: '03',
+    icon: '💼',
+    title: 'Capital Allocation',
+    desc: 'Komitmen modal permulaan untuk akses Tier-1 Commission (Max Yield).',
+  },
+  {
+    num: '04',
+    icon: '🎛️',
+    title: 'System Authority',
+    desc: 'Kuasa penuh Agent Command Center untuk operasi & kawalan kewangan.',
+  },
+  {
+    num: '05',
+    icon: '📈',
+    title: 'Wealth Generation',
+    desc: 'Automasi pendapatan pasif & nikmati ROI mingguan.',
+  },
 ]
 
 const exclusiveBenefits = [

@@ -310,70 +310,96 @@ export default function InfoPage() {
         </div>
       </section>
 
-      {/* ===== SECTION 3: PROGRAM AGENT ===== */}
+      {/* ===== SECTION 3: VVIP PARTNERSHIP STRUCTURE ===== */}
       <section className="info-section">
         <div className="info-section-inner">
-          <div className="section-tag">Pendapatan</div>
-          <h2 className="info-section-title">👑 Program Agent CM8</h2>
+          <div className="section-tag">Business Model</div>
+          <h2 className="info-section-title">💎 The VVIP Partnership Structure</h2>
           <p className="info-section-desc">
-            Menjadi agent CM8 adalah cara terpantas untuk <strong>jana pendapatan pasif</strong>.
-            Setiap kali pemain anda membuat deposit, anda mendapat komisyen secara automatik. Tiada
-            modal diperlukan, tiada risiko — hanya peluang tanpa had.
+            Model perniagaan VVIP direka untuk mereka yang serius membina empayar pendapatan pasif.
+            Kami memposisikan anda sebagai <strong>Rakan Niaga Strategik</strong>, bukan sekadar
+            agent biasa.
           </p>
 
-          <div className="info-commission-tiers">
-            <div className="info-tier">
-              <div className="info-tier-header">
-                <span className="info-tier-badge">Starter</span>
-                <span className="info-tier-rate">30%</span>
+          <div className="vvip-structure-steps">
+            {/* Step 1 */}
+            <div className="vvip-step-card">
+              <div className="vvip-step-header">
+                <div className="vvip-step-num">01</div>
+                <h3 className="vvip-step-title">Secure Exclusive Access</h3>
               </div>
-              <h4>Agent Baru</h4>
-              <ul>
-                <li>Komisyen asas 30%</li>
-                <li>Akses dashboard</li>
-                <li>Sokongan asas</li>
-                <li>Bahan pemasaran</li>
+              <p className="vvip-step-desc">
+                Platform CM8 VVIP mengekalkan standard kualiti tinggi. Pendaftaran hanya dibuka
+                melalui <strong>Referral Only</strong>. Hubungi Elite Partner kami untuk mendapatkan
+                kod akses rasmi.
+              </p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="vvip-step-card">
+              <div className="vvip-step-header">
+                <div className="vvip-step-num">02</div>
+                <h3 className="vvip-step-title">Profile Establishment</h3>
+              </div>
+              <p className="vvip-step-desc">
+                Lengkapkan pendaftaran profesional anda. Kami memerlukan butiran asas (Username &
+                Banking Details) untuk tujuan pengurusan transaksi & pembayaran komisen automatik
+                yang selamat.
+              </p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="vvip-step-card highlight-step">
+              <div className="vvip-step-header">
+                <div className="vvip-step-num">03</div>
+                <h3 className="vvip-step-title">Strategic Capital Injection</h3>
+              </div>
+              <p className="vvip-step-desc">
+                Berbeza dengan agent biasa, Rakan Niaga VVIP meletakkan modal permulaan strategik.
+                Ini membuka akses kepada:
+              </p>
+              <ul className="vvip-step-list">
+                <li>🚀 Max Commission Cap (Tier-1)</li>
+                <li>💳 High Credit Limit untuk High Rollers</li>
+                <li>🎁 Priority Status & Support Lane 24/7</li>
               </ul>
             </div>
-            <div className="info-tier info-tier-popular">
-              <div className="info-tier-tag">🔥 Popular</div>
-              <div className="info-tier-header">
-                <span className="info-tier-badge">Pro</span>
-                <span className="info-tier-rate">45%</span>
+
+            {/* Step 4 */}
+            <div className="vvip-step-card">
+              <div className="vvip-step-header">
+                <div className="vvip-step-num">04</div>
+                <h3 className="vvip-step-title">Full System Handover</h3>
               </div>
-              <h4>Agent Aktif</h4>
-              <ul>
-                <li>Komisyen 45%</li>
-                <li>Dashboard premium</li>
-                <li>Sokongan prioriti 24/7</li>
-                <li>Bahan eksklusif</li>
-                <li>Bonus bulanan</li>
-              </ul>
+              <p className="vvip-step-desc">
+                Sebaik sahaja modal disahkan, anda menerima <strong>Authorised Agent Panel</strong>.
+                Ini adalah pejabat digital anda—lengkap dengan alatan untuk create ID pemain, pantau
+                turnover, dan kawal aliran tunai.
+              </p>
             </div>
-            <div className="info-tier">
-              <div className="info-tier-header">
-                <span className="info-tier-badge">Elite</span>
-                <span className="info-tier-rate">60%</span>
+
+            {/* Step 5 */}
+            <div className="vvip-step-card">
+              <div className="vvip-step-header">
+                <div className="vvip-step-num">05</div>
+                <h3 className="vvip-step-title">Passive Income Realization</h3>
               </div>
-              <h4>Master Agent</h4>
-              <ul>
-                <li>Komisyen tertinggi 60%</li>
-                <li>Dashboard VIP</li>
-                <li>Pengurus peribadi</li>
-                <li>Semua bahan pemasaran</li>
-                <li>Bonus &amp; insentif khas</li>
-                <li>Pendapatan downline</li>
-              </ul>
+              <p className="vvip-step-desc">
+                Fokus anda hanyalah pada pengembangan rangkaian. Biarkan sistem kami menguruskan
+                teknikal. Lihat bagaimana rolling pemain anda bertukar menjadi{' '}
+                <strong>keuntungan bersih</strong> mingguan.
+              </p>
             </div>
           </div>
-          <div style={{ textAlign: 'center', marginTop: '20px' }}>
+
+          <div style={{ textAlign: 'center', marginTop: '40px' }}>
             <a
               href="https://masuk10.com/Signupvvip"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-gradient btn-lg"
             >
-              🚀 Daftar Jadi Agent
+              🚀 Apply for Partnership
             </a>
           </div>
         </div>

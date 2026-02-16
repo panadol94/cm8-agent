@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -165,7 +166,16 @@ export default function InfoPage() {
         <div className="info-hero-inner">
           <div className="section-tag">Pusat Maklumat</div>
           <h1 className="info-hero-title">
-            Semua Tentang <span className="text-gradient">CM8 VVIP</span>
+            Semua Tentang{' '}
+            <Image
+              src="/cm8-logo.png"
+              alt="CM8 VVIP Logo"
+              width={280}
+              height={80}
+              className="info-hero-logo"
+              priority
+              quality={100}
+            />
           </h1>
           <p className="info-hero-subtitle">
             Scanner slot AI, program agent komisyen tinggi, dan komuniti terbesar di Malaysia.

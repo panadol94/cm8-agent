@@ -5316,3 +5316,181 @@ body::before {
   margin: 40px 0;
   gap: 16px;
 }
+
+/* ==========================================================================
+   INFO PAGE HERO  Premium Red Luxury Theme
+   ========================================================================== */
+.info-hero {
+  position: relative;
+  /* Deep premium red gradient background */
+  background: 
+    radial-gradient(circle at 50% 30%, rgba(220, 40, 30, 0.15) 0%, transparent 60%),
+    linear-gradient(135deg, #1a0505 0%, #3d0a0a 50%, #1a0505 100%);
+  padding: 140px 20px 100px;
+  text-align: center;
+  overflow: hidden;
+  color: white;
+}
+
+/* Subtle pattern overlay for texture */
+.info-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Glow effect at top center */
+.info-hero::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(230, 53, 32, 0.3) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.info-hero-inner {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.info-hero .section-tag {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffccbc;
+  box-shadow: 0 0 20px rgba(230, 53, 32, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 24px;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.info-hero-title {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 32px;
+  letter-spacing: -0.02em;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.info-hero-title .text-gradient {
+  background: linear-gradient(to right, #ffffff 0%, #f0f0f0 40%, #a0a0a0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.info-hero-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 700px;
+  margin: 0 auto 60px;
+  font-weight: 400;
+}
+
+/* Glassmorphism Stats Bar */
+.info-hero-stats {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 24px 48px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.info-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-stat-num {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+  margin-bottom: 4px;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.info-stat-label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.info-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .info-hero {
+    padding: 100px 20px 60px;
+  }
+  .info-hero-title {
+    font-size: 2.8rem;
+  }
+  .info-hero-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    border-radius: 24px;
+    width: 100%;
+  }
+  .info-stat-divider {
+    width: 100%;
+    height: 1px;
+  }
+}
+
+/* Logo in Info Hero */
+.info-hero-logo {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 0 12px;
+  max-height: 80px;
+  width: auto;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+@media (max-width: 768px) {
+  .info-hero-logo {
+    display: block;
+    margin: 12px auto 0;
+    max-height: 60px;
+  }
+}

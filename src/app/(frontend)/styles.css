@@ -4966,28 +4966,27 @@ body::before {
 
 /* Individual Step Card */
 .vvip-step-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08); /* Slightly more visible border */
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 16px;
   padding: 2rem;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 
 .vvip-step-card:hover {
   transform: translateY(-8px);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  border-color: rgba(230, 53, 32, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
 }
 
 /* Highlighted Step (Deposit) */
 .vvip-step-card.highlight-step {
-  background: linear-gradient(145deg, rgba(230, 53, 32, 0.08), rgba(0, 0, 0, 0.3));
-  border-color: rgba(230, 53, 32, 0.3);
-  box-shadow: 0 4px 20px rgba(230, 53, 32, 0.1);
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border-color: rgba(230, 53, 32, 0.4);
+  box-shadow: 0 4px 20px rgba(230, 53, 32, 0.12);
 }
 
 .vvip-step-card.highlight-step:hover {
@@ -5006,20 +5005,19 @@ body::before {
 .vvip-step-num {
   font-size: 2rem;
   font-weight: 800;
-  color: rgba(255, 255, 255, 0.1);
+  color: rgba(230, 53, 32, 0.15);
   font-family: var(--font-heading);
   line-height: 1;
 }
 
 .vvip-step-card.highlight-step .vvip-step-num {
-  color: rgba(230, 53, 32, 0.2);
+  color: rgba(230, 53, 32, 0.3);
 }
 
 .vvip-step-title {
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--text-white); /* Default white for dark mode cards */
-  background: linear-gradient(to right, #fff, #ddd); /* Silver gradient text */
+  background: linear-gradient(to right, #1a1a2e, #2d2d44);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -5038,12 +5036,12 @@ body::before {
 .vvip-step-desc {
   font-size: 1rem;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.8);
+  color: #555;
   margin-bottom: 0;
 }
 
 .vvip-step-card.highlight-step .vvip-step-desc {
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* Step List (Bullets) */

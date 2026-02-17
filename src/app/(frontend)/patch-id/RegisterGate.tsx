@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 
 interface RegisterGateProps {
-  onVerified: () => void
+  onVerified: (cm8Username?: string) => void
 }
 
 const COUNTRIES = [
@@ -115,16 +115,16 @@ export default function RegisterGate({ onVerified }: RegisterGateProps) {
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Verification failed')
 
-      // Save verified state
       localStorage.setItem(
         'patchIdVerified',
         JSON.stringify({
           phone: `${country.code}${cleanPhone}`,
+          cm8Username: data.cm8Username || null,
           verifiedAt: Date.now(),
         }),
       )
 
-      onVerified()
+      onVerified(data.cm8Username || undefined)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'OTP tidak sah')
       setOtp(['', '', '', '', '', ''])
@@ -321,8 +321,8 @@ export default function RegisterGate({ onVerified }: RegisterGateProps) {
             <div className="join-group-cta">
               <span>📢</span>
               <span>Join group Telegram kami:</span>
-              <a href="https://t.me/cm8vvip" target="_blank" rel="noopener noreferrer">
-                t.me/cm8vvip
+              <a href="https://t.me/+aK5iX_FE_b9kMzQ1" target="_blank" rel="noopener noreferrer">
+                Join Group Telegram
               </a>
             </div>
           </div>

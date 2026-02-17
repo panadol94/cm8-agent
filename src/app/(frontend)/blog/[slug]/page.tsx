@@ -27,24 +27,24 @@ const postData: Record<string, { title: string; category: string; date: string; 
     `,
     },
     'komisyen-tinggi-platform-cm8': {
-      title: 'Kenapa Komisyen CM8 Paling Tinggi Di Pasaran (Sehingga 60%)',
+      title: 'Kenapa Komisyen CM8 Paling Tinggi Di Pasaran (Sehingga 90%)',
       category: 'Tips & Strategi',
       date: '12 Feb 2026',
       content: `
-      <p>Dalam industri ejen kasino dalam talian di Malaysia, kadar komisyen adalah faktor penentu utama. Ramai agent beralih ke <strong>CM8 VVIP</strong> kerana kami menawarkan struktur komisyen yang paling kompetitif, mencecah sehingga <strong>60%</strong> tanpa kos tersembunyi.</p>
+      <p>Dalam industri ejen kasino dalam talian di Malaysia, kadar komisyen adalah faktor penentu utama. Ramai agent beralih ke <strong>CM8 VVIP</strong> kerana kami menawarkan struktur komisyen yang paling kompetitif, mencecah sehingga <strong>90%</strong> tanpa kos tersembunyi.</p>
 
       <h2>Perbandingan Komisyen: CM8 vs Platform Lain</h2>
       <p>Kebanyakan platform standard menawarkan komisyen sekitar 20% - 30%. Di CM8, kami bermula dengan asas yang lebih tinggi dan struktur kenaikan pangkat yang jelas:</p>
       <ul>
-        <li><strong>Starter Agent:</strong> 30% (vs 15% di tempat lain)</li>
-        <li><strong>Pro Agent:</strong> 45% (vs 25% di tempat lain)</li>
-        <li><strong>Master Agent:</strong> 60% (Eksklusif untuk CM8)</li>
+        <li><strong>Newbie Agent:</strong> 60% (vs 15% di tempat lain)</li>
+        <li><strong>Solo Player Agent:</strong> 80% (vs 25% di tempat lain)</li>
+        <li><strong>Team Builder Agent:</strong> 90% (Eksklusif untuk CM8)</li>
       </ul>
 
       <h2>Tiada 'Hidden Cost' atau 'Platform Fee'</h2>
       <p>Sering kali, agent terpedaya dengan tawaran komisyen tinggi tetapi dipotong pelbagai yuran (maintenance fee, platform fee). Di CM8 VVIP, <strong>apa yang anda lihat, itu yang anda dapat</strong>. Pengiraan adalah telus melalui dashboard agent kami.</p>
 
-      <h2>Bagaimana Cara Naikkan Komisyen ke 60%?</h2>
+      <h2>Bagaimana Cara Naikkan Komisyen ke 90%?</h2>
       <p>Kunci utama adalah <strong>konsistensi deposit</strong> dan <strong>jumlah turnover</strong> kumpulan anda. Sebagai Rakan Niaga VVIP, anda diberikan akses kepada:</p>
       <ol>
         <li>Sistem penjejakan real-time untuk memantau prestasi downline.</li>
@@ -202,9 +202,14 @@ export default async function BlogPost({ params }: PageProps) {
             <Link href="/blog" className="btn btn-outline">
               ← Kembali ke Blog
             </Link>
-            <Link href="/register" className="btn btn-gradient">
+            <a
+              href="https://masuk10.com/WhatsappVVIP"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-gradient"
+            >
               Daftar Jadi Agent →
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -216,7 +221,12 @@ export default async function BlogPost({ params }: PageProps) {
           <p className="cta-subtitle">
             Daftar sebagai agent CM8 dan mula jana pendapatan hari ini.
           </p>
-          <a href="/register" className="btn btn-white btn-lg">
+          <a
+            href="https://masuk10.com/WhatsappVVIP"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-white btn-lg"
+          >
             Daftar Sekarang →
           </a>
         </div>

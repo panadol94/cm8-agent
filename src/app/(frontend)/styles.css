@@ -965,7 +965,7 @@ ul {
 }
 .provider-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
 }
 .provider-tile {
@@ -1002,13 +1002,18 @@ ul {
 .provider-tile:hover {
   transform: translateY(-2px);
 }
-.provider-tile-icon {
-  font-size: 2.5rem;
+.provider-tile-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 .provider-tile-name {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: var(--text-primary);
+  letter-spacing: -0.01em;
 }
 
 /* --------------------------------------------------------------------------
@@ -3443,11 +3448,11 @@ nextjs-portal {
   transform: translateY(-4px);
   box-shadow: 0 8px 28px rgba(230, 53, 32, 0.15);
 }
-.provider-tile-icon {
+.provider-tile-logo {
   transition: transform 0.3s ease;
 }
-.provider-tile:hover .provider-tile-icon {
-  transform: scale(1.15);
+.provider-tile:hover .provider-tile-logo {
+  transform: scale(1.1);
 }
 
 /* â”€â”€ Section Title Premium Underline â”€â”€ */

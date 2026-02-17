@@ -2,6 +2,12 @@ import type { CollectionConfig } from 'payload'
 
 export const Agents: CollectionConfig = {
   slug: 'agents',
+  access: {
+    create: () => true, // Allow public registration
+    read: ({ req: { user } }) => Boolean(user),
+    update: ({ req: { user } }) => Boolean(user),
+    delete: ({ req: { user } }) => Boolean(user),
+  },
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'phone', 'whatsapp', 'status', 'createdAt'],
@@ -79,18 +85,15 @@ export const Agents: CollectionConfig = {
               .join('\n')
 
             try {
-              await fetch(
-                `https://api.telegram.org/bot${botToken}/sendMessage`,
-                {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message,
-                    parse_mode: 'HTML',
-                  }),
-                },
-              )
+              await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  chat_id: chatId,
+                  text: message,
+                  parse_mode: 'HTML',
+                }),
+              })
             } catch (error) {
               console.error('Telegram notification failed:', error)
             }

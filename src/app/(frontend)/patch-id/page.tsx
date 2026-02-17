@@ -650,6 +650,7 @@ function HexCrawl() {
 export default function PatchIDPage() {
   const [verified, setVerified] = useState(false)
   const [cm8Id, setCm8Id] = useState('')
+  const [lockedUsername, setLockedUsername] = useState<string | null>(null)
   const [selectedProvider, setSelectedProvider] = useState<string | null>(null)
   const [results, setResults] = useState<
     { name: string; img: string; rtp: number; status: string }[] | null
@@ -671,6 +672,10 @@ export default function PatchIDPage() {
         const data = JSON.parse(saved)
         if (data?.phone && data?.verifiedAt) {
           setVerified(true)
+          if (data.cm8Username) {
+            setLockedUsername(data.cm8Username)
+            setCm8Id(data.cm8Username)
+          }
         }
       }
     } catch {
@@ -702,7 +707,7 @@ export default function PatchIDPage() {
     text += `🚀 Nak scan slot anda? Guna AI Scanner PERCUMA di:\n`
     text += `🌐 cm8vvip.com/patch-id\n\n`
     text += `🔒 Scanner paling tepat — data real-time!\n`
-    text += `📲 Join: t.me/cm8vvip\n`
+    text += `📲 Join: https://t.me/+aK5iX_FE_b9kMzQ1\n`
     text += `#CM8VVIP #PatchID #SlotScanner`
 
     return text
@@ -822,7 +827,15 @@ export default function PatchIDPage() {
             <span className="terminal-prefix">&gt;_</span> Daftar untuk akses AI Scanner
           </p>
         </div>
-        <RegisterGate onVerified={() => setVerified(true)} />
+        <RegisterGate
+          onVerified={(username) => {
+            setVerified(true)
+            if (username) {
+              setLockedUsername(username)
+              setCm8Id(username)
+            }
+          }}
+        />
       </div>
     )
   }
@@ -866,6 +879,9 @@ export default function PatchIDPage() {
       <div className="patch-card hacker-card">
         <label className="patch-label hacker-label">
           <span className="label-dot" /> CM8 GAME ID
+          {lockedUsername && (
+            <span style={{ marginLeft: 8, color: '#e63520', fontSize: '0.75rem' }}>🔒 LOCKED</span>
+          )}
         </label>
         <div className="patch-input-wrap hacker-input-wrap">
           <span className="terminal-prompt">root@cm8:~$</span>
@@ -874,10 +890,16 @@ export default function PatchIDPage() {
             className="patch-input hacker-input"
             placeholder="masukkan_id"
             value={cm8Id}
-            onChange={(e) => setCm8Id(e.target.value)}
+            onChange={(e) => !lockedUsername && setCm8Id(e.target.value)}
             disabled={scanning}
+            readOnly={!!lockedUsername}
+            style={lockedUsername ? { opacity: 0.8, cursor: 'not-allowed' } : {}}
           />
-          <span className="input-cursor">▊</span>
+          {lockedUsername ? (
+            <span style={{ color: '#e63520', fontSize: '0.85rem', marginLeft: 4 }}>🔒</span>
+          ) : (
+            <span className="input-cursor">▊</span>
+          )}
         </div>
       </div>
 

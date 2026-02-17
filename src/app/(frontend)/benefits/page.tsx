@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const benefits = [
   {
     icon: '💰',
-    title: 'Komisyen Sehingga 60%',
+    title: 'Komisyen Sehingga 90%',
     desc: 'Nikmati komisyen tertinggi di pasaran. Semakin ramai downline anda, semakin tinggi peratusan komisyen yang anda dapat.',
   },
   {
@@ -100,8 +100,7 @@ export default function BenefitsPage() {
         <div className="cta-content">
           <h2 className="cta-title">Sedia Untuk Bermula?</h2>
           <p className="cta-subtitle">
-            Jangan lepaskan peluang ini. Daftar sekarang dan mula jana pendapatan sebagai agent
-            CM8.
+            Jangan lepaskan peluang ini. Daftar sekarang dan mula jana pendapatan sebagai agent CM8.
           </p>
           <a href="/register" className="btn btn-white btn-lg">
             Daftar Sebagai Agent →

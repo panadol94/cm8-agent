@@ -11,7 +11,7 @@ export const metadata = {
     template: '%s | CM8 VVIP',
   },
   description:
-    'Jadi agent CM8 sekarang. Komisyen tinggi sehingga 60%, sokongan penuh 24/7, dan peluang pendapatan tanpa had. Daftar sebagai agent CM8 VVIP hari ini.',
+    'Jadi agent CM8 sekarang. Komisyen tinggi sehingga 90%, sokongan penuh 24/7, dan peluang pendapatan tanpa had. Daftar sebagai agent CM8 VVIP hari ini.',
   keywords: [
     'CM8',
     'CM8 agent',

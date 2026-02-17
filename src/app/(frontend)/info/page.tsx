@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Info CM8 VVIP — Scanner Slot AI, Program Agent & Komuniti',
   description:
-    'Ketahui tentang CM8 VVIP: Scanner slot AI untuk analisis RTP Mega888, program agent komisyen sehingga 60%, dan komuniti agent terbesar di Malaysia. Panduan lengkap untuk bermula.',
+    'Ketahui tentang CM8 VVIP: Scanner slot AI untuk analisis RTP Mega888, program agent komisyen sehingga 90%, dan komuniti agent terbesar di Malaysia. Panduan lengkap untuk bermula.',
   keywords: [
     'CM8 agent',
     'scanner slot Mega888',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 const infoFaqs = [
   {
     q: 'Apa itu CM8 VVIP?',
-    a: 'CM8 VVIP adalah platform agent dan scanner slot terkemuka di Malaysia. Kami menyediakan teknologi AI Scanner untuk analisis peratusan slot, program komisyen agent sehingga 60%, serta komuniti sokongan yang aktif.',
+    a: 'CM8 VVIP adalah platform agent dan scanner slot terkemuka di Malaysia. Kami menyediakan teknologi AI Scanner untuk analisis peratusan slot, program komisyen agent sehingga 90%, serta komuniti sokongan yang aktif.',
   },
   {
     q: 'Bagaimana AI Scanner slot berfungsi?',
@@ -45,7 +45,7 @@ const infoFaqs = [
   },
   {
     q: 'Berapa komisyen yang boleh saya dapat sebagai agent?',
-    a: 'Komisyen bermula dari 30% untuk agent baru, 45% untuk agent aktif, dan sehingga 60% untuk Master Agent. Komisyen dibayar secara mingguan terus ke akaun bank anda tanpa had minimum.',
+    a: 'Komisyen bermula dari 60% untuk Newbie Agent, 80% untuk Solo Player Agent, dan sehingga 90% untuk Team Builder Agent. Komisyen dibayar secara mingguan terus ke akaun bank anda tanpa had minimum.',
   },
   {
     q: 'Adakah saya perlu modal untuk menjadi agent?',
@@ -119,7 +119,7 @@ export default function InfoPage() {
             name: 'CM8 VVIP',
             url: 'https://cm8vvip.com',
             description:
-              'Platform agent dan scanner slot AI #1 di Malaysia. Komisyen sehingga 60%, scanner RTP slot real-time, dan komuniti agent terbesar.',
+              'Platform agent dan scanner slot AI #1 di Malaysia. Komisyen sehingga 90%, scanner RTP slot real-time, dan komuniti agent terbesar.',
             sameAs: ['https://t.me/cm8vvip'],
           }),
         }}
@@ -225,11 +225,11 @@ export default function InfoPage() {
               <div className="info-pillar-icon">👑</div>
               <h3>Program Agent</h3>
               <p>
-                Jana komisyen sehingga 60% dengan menjadi agent CM8. Tiada modal, tiada risiko —
+                Jana komisyen sehingga 90% dengan menjadi agent CM8. Tiada modal, tiada risiko —
                 hanya peluang pendapatan tanpa had.
               </p>
               <a
-                href="https://masuk10.com/Signupvvip"
+                href="https://masuk10.com/WhatsappVVIP"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-outline btn-sm"
@@ -404,7 +404,7 @@ export default function InfoPage() {
 
           <div style={{ textAlign: 'center', marginTop: '40px' }}>
             <a
-              href="https://masuk10.com/Signupvvip"
+              href="https://masuk10.com/WhatsappVVIP"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-gradient btn-lg"
@@ -513,7 +513,7 @@ export default function InfoPage() {
         <h2>Cara Jadi Agent CM8 di Malaysia</h2>
         <p>
           Menjadi agent CM8 adalah mudah dan percuma. Daftar secara online, terima ID agent anda,
-          dan mula promote untuk jana komisyen sehingga 60%. Ramai agent kami berjaya menjana
+          dan mula promote untuk jana komisyen sehingga 90%. Ramai agent kami berjaya menjana
           pendapatan RM4,000 hingga RM10,000 seminggu. Tiada modal diperlukan, tiada risiko, dan
           komisyen dibayar setiap minggu terus ke akaun bank anda.
         </p>
@@ -534,7 +534,7 @@ export default function InfoPage() {
           </p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
-              href="https://masuk10.com/Signupvvip"
+              href="https://masuk10.com/WhatsappVVIP"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-white btn-lg"

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getOtpStore } from '../utils'
 
-const GROUP_LINK = 'https://t.me/cm8vvip'
+const GROUP_LINK = 'https://t.me/+aK5iX_FE_b9kMzQ1'
 
 /* ── Telegram Bot Webhook for Patch ID OTP ──────────────────── */
 export async function POST(req: Request) {
@@ -19,44 +19,45 @@ export async function POST(req: Request) {
     // ── User shared contact ──
     if (message.contact) {
       const phoneRaw = message.contact.phone_number || ''
-      // Normalize: ensure starts with +
       let phone = phoneRaw.replace(/\D/g, '')
       if (!phone.startsWith('+')) phone = `+${phone}`
 
-      // Look up OTP by phone
       const store = getOtpStore()
-      let otpEntry = store.get(phone)
+      let otpEntry = null
+      let otpKey = ''
 
-      // Try with/without leading + for flexible matching
-      if (!otpEntry) {
-        for (const [key, entry] of store) {
-          const keyDigits = key.replace(/\D/g, '')
-          const phoneDigits = phone.replace(/\D/g, '')
-          if (keyDigits === phoneDigits && !entry.verified) {
-            otpEntry = entry
-            break
-          }
+      // Look up OTP by phone (flexible matching)
+      for (const [key, entry] of store) {
+        const keyDigits = key.replace(/\D/g, '')
+        const phoneDigits = phone.replace(/\D/g, '')
+        if (keyDigits === phoneDigits && !entry.verified) {
+          otpEntry = entry
+          otpKey = key
+          break
         }
       }
 
       if (otpEntry && !otpEntry.verified && Date.now() < otpEntry.expiresAt) {
-        // Send OTP
+        // DON'T send OTP yet — ask for screenshot first
+        otpEntry.awaitingScreenshot = true
+        otpEntry.telegramChatId = chatId
+        store.set(otpKey, otpEntry)
+
         await sendTelegramMessage(
           botToken,
           chatId,
-          `🔐 *PATCH ID — OTP VERIFICATION*\n\n` +
-            `Kod OTP anda: \`${otpEntry.otp}\`\n\n` +
-            `⏱️ Kod ini akan tamat dalam 5 minit.\n\n` +
-            `📋 *Langkah seterusnya:*\n` +
-            `1️⃣ Masukkan kod OTP di website\n` +
-            `2️⃣ Join group kami: ${GROUP_LINK}\n\n` +
-            `🛡️ _CM8 VVIP — AI Scanner Percuma_`,
+          `✅ *Nombor telefon diterima!*\n\n` +
+            `📸 Sekarang, sila *hantar screenshot* paparan utama app CM8 anda yang menunjukkan:\n\n` +
+            `1️⃣ Logo *CM8* pada skrin\n` +
+            `2️⃣ *Username* anda\n\n` +
+            `⚠️ _Pastikan username jelas kelihatan dalam screenshot._`,
         )
       } else if (otpEntry?.verified) {
+        const usernameInfo = otpEntry.cm8Username ? `\n🔒 Username: *${otpEntry.cm8Username}*` : ''
         await sendTelegramMessage(
           botToken,
           chatId,
-          `✅ Nombor ini sudah didaftarkan.\n\n` +
+          `✅ Nombor ini sudah didaftarkan.${usernameInfo}\n\n` +
             `Sila guna scanner di:\n🌐 cm8vvip.com/patch-id\n\n` +
             `📲 Join group: ${GROUP_LINK}`,
         )
@@ -73,6 +74,99 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: true })
     }
 
+    // ── User sent a PHOTO (screenshot verification) ──
+    if (message.photo && message.photo.length > 0) {
+      const store = getOtpStore()
+
+      // Find entry awaiting screenshot for this chatId
+      let otpEntry = null
+      let otpKey = ''
+      for (const [key, entry] of store) {
+        if (entry.awaitingScreenshot && entry.telegramChatId === chatId) {
+          otpEntry = entry
+          otpKey = key
+          break
+        }
+      }
+
+      if (!otpEntry) {
+        await sendTelegramMessage(
+          botToken,
+          chatId,
+          `⚠️ Sila share contact anda terlebih dahulu sebelum hantar screenshot.\n\n` +
+            `📱 Tekan butang *"Share Contact"* di bawah 👇`,
+          true,
+        )
+        return NextResponse.json({ ok: true })
+      }
+
+      // Get the highest resolution photo
+      const fileId = message.photo[message.photo.length - 1].file_id
+
+      try {
+        // Download photo from Telegram
+        const imageBase64 = await downloadTelegramPhoto(botToken, fileId)
+
+        // Send to Gemini Vision for analysis
+        const result = await extractCM8Username(imageBase64)
+
+        if (result.error === 'NOT_CM8') {
+          await sendTelegramMessage(
+            botToken,
+            chatId,
+            `❌ *Screenshot tidak sah*\n\n` +
+              `Logo CM8 tidak dikesan dalam gambar. Sila hantar screenshot dari *app CM8* yang menunjukkan:\n\n` +
+              `1️⃣ Logo *CM8*\n` +
+              `2️⃣ *Username* anda\n\n` +
+              `📸 _Cuba lagi — hantar screenshot sekarang._`,
+          )
+          return NextResponse.json({ ok: true })
+        }
+
+        if (result.error === 'NO_USERNAME') {
+          await sendTelegramMessage(
+            botToken,
+            chatId,
+            `⚠️ *Username tidak dikesan*\n\n` +
+              `Kami nampak logo CM8 tetapi username tidak jelas. Sila pastikan:\n\n` +
+              `✅ Screenshot menunjukkan *halaman utama* app\n` +
+              `✅ Username *jelas kelihatan*\n\n` +
+              `📸 _Hantar semula screenshot anda._`,
+          )
+          return NextResponse.json({ ok: true })
+        }
+
+        if (result.username) {
+          // Success! Save username and send OTP
+          otpEntry.cm8Username = result.username
+          otpEntry.awaitingScreenshot = false
+          store.set(otpKey, otpEntry)
+
+          await sendTelegramMessage(
+            botToken,
+            chatId,
+            `🎉 *Pengesahan berjaya!*\n\n` +
+              `🔒 Username CM8: *${result.username}*\n\n` +
+              `🔐 Kod OTP anda: \`${otpEntry.otp}\`\n\n` +
+              `⏱️ Kod ini akan tamat dalam 5 minit.\n\n` +
+              `📋 *Langkah seterusnya:*\n` +
+              `1️⃣ Masukkan kod OTP di website\n` +
+              `2️⃣ Join group kami: ${GROUP_LINK}\n\n` +
+              `🛡️ _CM8 VVIP — AI Scanner Percuma_`,
+          )
+        }
+      } catch (err) {
+        console.error('[BOT-WEBHOOK] AI Vision error:', err)
+        await sendTelegramMessage(
+          botToken,
+          chatId,
+          `⚠️ Ralat semasa memproses gambar. Sila cuba hantar semula screenshot anda.`,
+        )
+      }
+
+      return NextResponse.json({ ok: true })
+    }
+
     // ── Any other message / command → ask to share contact ──
     await sendTelegramMessage(
       botToken,
@@ -80,7 +174,7 @@ export async function POST(req: Request) {
       `🛡️ *CM8 VVIP — Patch ID Scanner*\n\n` +
         `Untuk mendapatkan kod OTP, sila share contact anda.\n\n` +
         `📱 Tekan butang *"Share Contact"* di bawah 👇`,
-      true, // show share contact button
+      true,
     )
 
     return NextResponse.json({ ok: true })
@@ -88,6 +182,99 @@ export async function POST(req: Request) {
     console.error('[BOT-WEBHOOK] Error:', err)
     return NextResponse.json({ ok: true })
   }
+}
+
+/* ── Download photo from Telegram ───────────────────────────── */
+async function downloadTelegramPhoto(botToken: string, fileId: string): Promise<string> {
+  // Get file path
+  const fileRes = await fetch(`https://api.telegram.org/bot${botToken}/getFile?file_id=${fileId}`)
+  const fileData = await fileRes.json()
+  const filePath = fileData.result?.file_path
+
+  if (!filePath) throw new Error('Could not get file path')
+
+  // Download file
+  const downloadUrl = `https://api.telegram.org/file/bot${botToken}/${filePath}`
+  const imgRes = await fetch(downloadUrl)
+  const buffer = Buffer.from(await imgRes.arrayBuffer())
+
+  return buffer.toString('base64')
+}
+
+/* ── Extract CM8 username using Google Gemini Vision ────────── */
+async function extractCM8Username(
+  imageBase64: string,
+): Promise<{ username?: string; error?: string }> {
+  const apiKey = process.env.GEMINI_API_KEY
+  if (!apiKey) throw new Error('GEMINI_API_KEY not configured')
+
+  const response = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [
+          {
+            parts: [
+              {
+                text: `Analyze this screenshot from a mobile casino/gaming app. Your task:
+
+1. FIRST check if you can see the "CM8" logo or branding anywhere in the screenshot. Look for text like "CM8", "CM8 x", the CM8 logo, or any CM8-related branding.
+
+2. If CM8 branding is NOT found, respond with exactly: NOT_CM8
+
+3. If CM8 branding IS found, look for the player username. The username is typically displayed near the top of the screen, often next to a VIP badge or level indicator. It is usually a short text string (like "cyberslot", "player123", etc.)
+
+4. If you find the username, respond with ONLY the username text — nothing else. No quotes, no explanation.
+
+5. If you see CM8 branding but cannot identify the username clearly, respond with exactly: NO_USERNAME
+
+IMPORTANT: Respond with ONLY one of these:
+- The username (just the text)
+- NOT_CM8
+- NO_USERNAME`,
+              },
+              {
+                inlineData: {
+                  mimeType: 'image/jpeg',
+                  data: imageBase64,
+                },
+              },
+            ],
+          },
+        ],
+      }),
+    },
+  )
+
+  if (!response.ok) {
+    const errText = await response.text()
+    console.error('[GEMINI] API error:', errText)
+    throw new Error(`Gemini API error: ${response.status}`)
+  }
+
+  const data = await response.json()
+  const text = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || ''
+
+  console.log(`[GEMINI] Vision result: "${text}"`)
+
+  if (text === 'NOT_CM8') {
+    return { error: 'NOT_CM8' }
+  }
+
+  if (text === 'NO_USERNAME') {
+    return { error: 'NO_USERNAME' }
+  }
+
+  // Clean up the username — remove quotes, whitespace, etc.
+  const username = text.replace(/['"]/g, '').trim()
+
+  if (!username || username.length < 2 || username.length > 30) {
+    return { error: 'NO_USERNAME' }
+  }
+
+  return { username }
 }
 
 /* ── Helper: Send Telegram message ──────────────────────────── */

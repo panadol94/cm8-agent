@@ -37,6 +37,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       verified: true,
       phone: normalized,
+      cm8Username: entry.cm8Username || null,
       message: 'Berjaya! Anda kini boleh menggunakan Patch ID Scanner.',
     })
   } catch {

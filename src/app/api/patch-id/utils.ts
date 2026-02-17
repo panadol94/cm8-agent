@@ -8,6 +8,9 @@ export interface OTPEntry {
   otp: string // 6-digit code
   expiresAt: number // Date.now() + 5min
   verified: boolean
+  cm8Username?: string // extracted from screenshot via AI Vision
+  awaitingScreenshot?: boolean // true after contact shared, waiting for screenshot
+  telegramChatId?: number // to send OTP after screenshot verified
 }
 
 declare global {

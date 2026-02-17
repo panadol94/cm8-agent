@@ -9,7 +9,7 @@ import { PatchIDIcon, TelegramKomunitiIcon, WhatsAppKomunitiIcon, AdminIcon } fr
 export const metadata: Metadata = {
   title: 'CM8 VVIP — Platform Agent #1 Malaysia',
   description:
-    'Jadi agent CM8 sekarang. Komisyen tinggi sehingga 60%, sokongan penuh 24/7, dan peluang pendapatan tanpa had.',
+    'Jadi agent CM8 sekarang. Komisyen tinggi sehingga 90%, sokongan penuh 24/7, dan peluang pendapatan tanpa had.',
 }
 
 /* ============================================================
@@ -275,30 +275,53 @@ const liveFeedItems = [
 ]
 
 const providers = [
-  { icon: '🎰', name: 'MEGA888' },
-  { icon: '🎲', name: '918KISS' },
-  { icon: '🃏', name: 'PUSSY888' },
-  { icon: '🎮', name: 'XE88' },
-  { icon: '🎯', name: 'JOKER123' },
-  { icon: '🎪', name: 'LIVE22' },
+  {
+    name: 'MEGA888',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fsub_platform%2Fimage_path%2F32%2F35335f26-6f54-4387-850a-d5590768b25a.jpg',
+  },
+  {
+    name: '918KISS',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fsub_platform%2Fimage_path%2F27%2Fcf1330dc-23e2-434e-bd02-a5cf6f7ecf8d.jpg',
+  },
+  {
+    name: 'JILI',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fsub_platform%2Fimage_path%2F25%2Faece1da0-0722-4da1-b7d9-e300686f56ad.jpg',
+  },
+  {
+    name: 'Pragmatic Play',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fsub_platform%2Fimage_path%2F47%2Fbefe333c-815a-43d7-884d-5a5bf5d5c4f0.jpg',
+  },
+  {
+    name: 'Hacksaw',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fsub_platform%2Fimage_path%2F79%2Fd18411b6-519a-470f-8cdf-2442331ccf88.jpg',
+  },
+  {
+    name: 'Playtech',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fsub_platform%2Fimage_path%2F83%2F2ef04bd9-813c-4169-a397-a59dcb66e87e.jpg',
+  },
+  {
+    name: 'Habanero',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fsub_platform%2Fimage_path%2F89%2Fd22d30e6-3b31-46c9-bf4c-e671950d0402.jpg',
+  },
+  {
+    name: 'Spade Gaming',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fsub_platform%2Fimage_path%2F95%2F3741cd4c-ade6-4323-9e4a-e70691722679.jpeg',
+  },
 ]
 
 const promoCards = [
   {
     icon: '💰',
-    title: 'Weekly Bonus',
+    title: 'Weekly Deposit Bonus',
     highlight: false,
-    items: ['Auto Calculation', 'Contact Admin', 'Fast Payout', 'No Minimum'],
+    items: [
+      'Bonus 1% daripada deposit mingguan',
+      'Tempoh: Isnin – Sabtu',
+      'Diberi setiap Ahad 6:00PM',
+      'Hubungi admin untuk claim',
+    ],
     cta: 'Claim Now',
-    ctaLink: '/register',
-  },
-  {
-    icon: '🔄',
-    title: 'Rollover Rewards',
-    highlight: true,
-    items: ['100,000 → RM98', '300,000 → RM288', '600,000 → RM588', '900,000 → RM388'],
-    cta: 'Contact Admin',
-    ctaLink: 'https://wa.me/60123456789',
+    ctaLink: 'https://masuk10.com/WhatsappVVIP',
   },
   {
     icon: '🎉',
@@ -315,38 +338,42 @@ const whyItems = [
   'Exclusive Rewards',
   'One Player ID Benefits',
   'Fast Support via Admin',
-  'Komisyen Sehingga 60%',
+  'Komisyen Sehingga 90%',
   'Dashboard Real-Time',
 ]
 
 const commissions = [
   {
-    label: 'Agent Baru',
-    rate: '30%',
-    desc: 'Untuk agent yang baru bermula',
-    features: ['Komisyen asas 30%', 'Akses dashboard', 'Sokongan asas', 'Bahan pemasaran'],
-  },
-  {
-    label: 'Agent Aktif',
-    rate: '45%',
-    desc: 'Untuk agent berpengalaman',
-    popular: true,
+    label: 'Newbie Agent',
+    rate: '60%',
+    desc: 'Agent baru yang ingin bermula dan mempelajari sistem',
     features: [
-      'Komisyen 45%',
-      'Dashboard premium',
-      'Sokongan prioriti 24/7',
-      'Bahan pemasaran eksklusif',
-      'Bonus bulanan',
+      'Komisyen asas 60%',
+      'Admin ajar cara promote CM8',
+      'Akses dashboard',
+      'Naik peratus selepas capai target',
     ],
   },
   {
-    label: 'Master Agent',
-    rate: '60%',
-    desc: 'Untuk top performer',
+    label: 'Solo Player Agent',
+    rate: '80%',
+    desc: 'Agent yang fokus bermain dan menjaga player sendiri',
+    popular: true,
     features: [
-      'Komisyen tertinggi 60%',
-      'Dashboard VIP',
-      'Pengurus akaun peribadi',
+      'Komisyen 80%',
+      'Dashboard premium',
+      'Sokongan prioriti 24/7',
+      'Naik peratus selepas capai target sales',
+    ],
+  },
+  {
+    label: 'Team Builder Agent',
+    rate: '90%',
+    desc: 'Agent yang membina team dan kembangkan network',
+    features: [
+      'Komisyen tertinggi 90%',
+      'Bina team & network sendiri',
+      'Pengalaman shareholder platform',
       'Semua bahan pemasaran',
       'Bonus & insentif khas',
       'Pendapatan downline',
@@ -444,14 +471,14 @@ export default function HomePage() {
           <div className="agent-cta-headline">
             <span className="agent-cta-badge">👑 VIP AGENT</span>
             <h2 className="agent-cta-title">
-              Jana Sehingga <span className="text-gradient">45% Komisen</span>
+              Jana Sehingga <span className="text-gradient">90% Komisen</span>
             </h2>
             <p className="agent-cta-subtitle">
-              Setiap deposit pemain, anda untung. Tiada modal, tiada risiko.
+              Jumlah bet pemain akan menjadi sumber pendapatan anda. Tiada modal, tiada risiko.
             </p>
           </div>
           <div className="agent-cta-commission">
-            <span className="commission-number">45%</span>
+            <span className="commission-number">90%</span>
             <span className="commission-label">Komisen</span>
           </div>
         </div>
@@ -483,7 +510,7 @@ export default function HomePage() {
           <AnimatedStats />
           <div className="agent-cta-actions">
             <a
-              href="https://masuk10.com/Signupvvip"
+              href="https://masuk10.com/WhatsappVVIP"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-gradient btn-lg"
@@ -491,7 +518,7 @@ export default function HomePage() {
               🚀 Jadi Agent Sekarang
             </a>
             <a
-              href="https://masuk10.com/Signupvvip"
+              href="https://masuk10.com/WhatsappVVIP"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-outline btn-sm"
@@ -505,7 +532,7 @@ export default function HomePage() {
       {/* ===== QUICK ACTIONS (Patch ID / Telegram / WhatsApp / Admin) ===== */}
       <div className="quick-actions">
         <a
-          href="https://masuk10.com/Signupvvip"
+          href="https://masuk10.com/WhatsappVVIP"
           target="_blank"
           rel="noopener noreferrer"
           className="quick-action-btn qa-patch"
@@ -734,12 +761,13 @@ export default function HomePage() {
           {providers.map((p, i) => (
             <a
               key={i}
-              href="https://masuk10.com/Signupvvip"
+              href="https://masuk10.com/WhatsappVVIP"
               target="_blank"
               rel="noopener noreferrer"
               className="provider-tile"
             >
-              <div className="provider-tile-icon">{p.icon}</div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={p.img} alt={p.name} className="provider-tile-logo" />
               <div className="provider-tile-name">{p.name}</div>
             </a>
           ))}
@@ -763,7 +791,7 @@ export default function HomePage() {
               ))}
             </ul>
             <a
-              href="https://masuk10.com/Signupvvip"
+              href="https://masuk10.com/WhatsappVVIP"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-gradient"
@@ -825,7 +853,7 @@ export default function HomePage() {
         </ul>
         <div className="why-actions">
           <a
-            href="https://masuk10.com/Signupvvip"
+            href="https://masuk10.com/WhatsappVVIP"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-gradient btn-lg"
@@ -871,7 +899,7 @@ export default function HomePage() {
             Daftar sebagai agent CM8 hari ini dan mula menikmati komisyen tertinggi di pasaran.
           </p>
           <a
-            href="https://masuk10.com/Signupvvip"
+            href="https://masuk10.com/WhatsappVVIP"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-white btn-lg"
@@ -896,7 +924,7 @@ export default function HomePage() {
             <a href="https://wa.me/60123456789" target="_blank" rel="noopener noreferrer">
               💬
             </a>
-            <a href="https://t.me/cm8vvip" target="_blank" rel="noopener noreferrer">
+            <a href="https://t.me/+aK5iX_FE_b9kMzQ1" target="_blank" rel="noopener noreferrer">
               ✈️
             </a>
           </div>

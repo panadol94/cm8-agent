@@ -23,6 +23,7 @@ const COUNTRIES = [
 
 export default function RegisterGate({ onVerified }: RegisterGateProps) {
   const [step, setStep] = useState<'phone' | 'otp'>('phone')
+  const [isLogin, setIsLogin] = useState(false)
   const [country, setCountry] = useState(COUNTRIES[0])
   const [phone, setPhone] = useState('')
   const [otp, setOtp] = useState(['', '', '', '', '', ''])
@@ -145,10 +146,12 @@ export default function RegisterGate({ onVerified }: RegisterGateProps) {
         {/* Header */}
         <div className="register-header">
           <div className="register-shield">🛡️</div>
-          <h2 className="register-title">PATCH ID VERIFICATION</h2>
+          <h2 className="register-title">{isLogin ? 'LOGIN' : 'PATCH ID VERIFICATION'}</h2>
           <p className="register-desc">
             {step === 'phone'
-              ? 'Daftar nombor telefon anda untuk akses AI Scanner'
+              ? isLogin
+                ? 'Masukkan nombor telefon yang telah didaftar'
+                : 'Daftar nombor telefon anda untuk akses AI Scanner'
               : 'Masukkan kod OTP yang diterima dari Telegram Bot'}
           </p>
         </div>
@@ -222,6 +225,17 @@ export default function RegisterGate({ onVerified }: RegisterGateProps) {
             <p className="register-hint">
               🔒 OTP akan dihantar melalui Telegram Bot — buka bot, tekan &quot;Share Contact&quot;
             </p>
+
+            <button
+              type="button"
+              className="register-toggle"
+              onClick={() => {
+                setIsLogin(!isLogin)
+                setError('')
+              }}
+            >
+              {isLogin ? '✦ Belum ada akaun? Daftar' : '✦ Dah ada akaun? Login'}
+            </button>
           </div>
         )}
 

@@ -21,6 +21,23 @@ const PROVIDERS = {
   betsoft: 82,
   mega888: 32,
   '918kiss': 27,
+  // ── New providers (Feb 2026) ──
+  ap: 5,
+  gamzix: 18,
+  gfg: 20,
+  pegasus: 39,
+  playson: 44,
+  rectangle: 48,
+  simpleplay: 54,
+  uu: 61,
+  vplus: 64,
+  vpower: 65,
+  wowgaming: 72,
+  tgg: 78,
+  jilig: 85,
+  fastspin: 91,
+  inandout: 94,
+  croco: 97,
 }
 
 async function fetchGames(subPlatformId) {
@@ -51,7 +68,7 @@ async function fetchGames(subPlatformId) {
       name: g.name || 'Unknown',
       img: g.image_path || '',
     }))
-    .filter((g) => g.name && g.img)
+    .filter((g) => g.name && g.name !== 'Unknown')
 }
 
 async function main() {

@@ -358,20 +358,26 @@ const testimonials = [
   {
     name: 'Ahmad R.',
     role: 'Master Agent',
-    text: 'Sejak sertai CM8 sebagai agent, pendapatan saya meningkat 3x ganda. Platform yang sangat stabil.',
+    text: 'Sejak sertai CM8 sebagai agent, pendapatan saya meningkat 3x ganda. Platform yang sangat stabil dan komisyen memang laju masuk.',
     rating: 5,
+    avatar: '/avatars/agent-4.jpg',
+    income: 'RM4,200/minggu',
   },
   {
     name: 'Sarah M.',
     role: 'Agent Aktif',
-    text: 'Dalam masa 3 bulan sudah naik ke Agent Aktif. Komisyen memang tinggi dan pembayaran on time.',
+    text: 'Dalam masa 3 bulan sudah naik ke Agent Aktif. Komisyen memang tinggi dan pembayaran sentiasa on time. Terbaik!',
     rating: 5,
+    avatar: '/avatars/agent-8.jpg',
+    income: 'RM2,800/minggu',
   },
   {
     name: 'Rizal K.',
-    role: 'Agent Aktif',
-    text: 'Dashboard sangat mudah digunakan. Boleh pantau semua transaksi secara real-time.',
+    role: 'Senior Agent',
+    text: 'Dashboard sangat mudah digunakan. Boleh pantau semua transaksi secara real-time. Support admin pun tiptop 24/7.',
     rating: 5,
+    avatar: '/avatars/agent-11.jpg',
+    income: 'RM3,600/minggu',
   },
 ]
 
@@ -529,7 +535,7 @@ export default function HomePage() {
           <span className="qa-arrow">›</span>
         </a>
         <a
-          href="https://masuk10.com/WasapGrupVVIP"
+          href="https://whatsapp.com/channel/0029Vb7cSULCxoAtcGaunK37"
           target="_blank"
           rel="noopener noreferrer"
           className="quick-action-btn qa-whatsapp"
@@ -769,24 +775,40 @@ export default function HomePage() {
       </div>
 
       {/* ===== TESTIMONIALS ===== */}
-      <section className="testimonials-section">
+      <section className="testimonials-section-v2">
         <div className="section-header">
           <div className="section-tag">Testimoni</div>
-          <h2 className="section-title" style={{ color: 'white' }}>
-            Apa Kata Agent Kami
-          </h2>
+          <h2 className="section-title">Apa Kata Agent Kami</h2>
+          <p className="section-subtitle">Dengar sendiri pengalaman mereka bersama CM8</p>
         </div>
-        <div className="testimonials-container">
+        <div className="testimonials-grid-v2">
           {testimonials.map((t, i) => (
-            <div key={i} className="testimonial-card">
-              <div className="testimonial-stars">{'★'.repeat(t.rating)}</div>
-              <p className="testimonial-text">&ldquo;{t.text}&rdquo;</p>
-              <div className="testimonial-author">
-                <div className="testimonial-avatar">{t.name[0]}</div>
-                <div className="testimonial-info">
-                  <h4>{t.name}</h4>
-                  <p>{t.role}</p>
+            <div key={i} className="testi-card-v2">
+              <div className="testi-quote-mark">&ldquo;</div>
+              <div className="testi-stars-v2">
+                {Array.from({ length: t.rating }).map((_, j) => (
+                  <span key={j} className="testi-star">
+                    ★
+                  </span>
+                ))}
+              </div>
+              <p className="testi-text-v2">{t.text}</p>
+              <div className="testi-footer-v2">
+                <div className="testi-avatar-ring-v2">
+                  <Image
+                    src={t.avatar}
+                    alt={t.name}
+                    width={48}
+                    height={48}
+                    className="testi-avatar-img-v2"
+                    unoptimized
+                  />
                 </div>
+                <div className="testi-author-info-v2">
+                  <h4 className="testi-name-v2">{t.name}</h4>
+                  <p className="testi-role-v2">{t.role}</p>
+                </div>
+                <div className="testi-income-badge">{t.income}</div>
               </div>
             </div>
           ))}

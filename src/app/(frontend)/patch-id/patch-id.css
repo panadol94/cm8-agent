@@ -2147,6 +2147,28 @@ body.scan-shake {
   color: #e63520;
 }
 
+.register-toggle {
+  background: none;
+  border: 1px solid #2a2a3a;
+  border-radius: 8px;
+  padding: 10px;
+  color: #6b7280;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+  margin-top: 4px;
+  letter-spacing: 0.3px;
+}
+
+.register-toggle:hover {
+  border-color: #e63520;
+  color: #ff8c42;
+  background: rgba(230, 53, 32, 0.04);
+}
+
 /* OTP instruction card */
 .otp-instruction {
   display: flex;

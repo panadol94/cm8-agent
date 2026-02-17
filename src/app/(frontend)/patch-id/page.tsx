@@ -88,12 +88,95 @@ const providers = [
     name: 'BetSoft',
     img: 'https://images.cashmarket888.xyz/uploads%2Fsub_platform%2Fimage_path%2F82%2Fcd27fe88-c13b-44bb-9b9c-b36b29166c3d.jpg',
   },
+  // ── New providers (Feb 2026) ──
+  {
+    id: 'ap-slot',
+    name: 'AP Gaming',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F433%2F9b003918-d7d6-4633-9f0a-f1b1b852e519.png',
+  },
+  {
+    id: 'gamzix',
+    name: 'Gamzix',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F294%2F02bf0736-db7b-4000-8f0e-d7d94beb50fa.png',
+  },
+  {
+    id: 'gfg',
+    name: 'GFG',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F216%2Fa7d1e88d-ac1a-448d-be2d-68630eead005.png',
+  },
+  {
+    id: 'pegasus',
+    name: 'Pegasus',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F644%2F306dc15a-3a40-46d4-a057-7183fa2a18ca.png',
+  },
+  {
+    id: 'playson',
+    name: 'Playson',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F378%2F8bd1d24a-d539-4bd4-b2ef-81dd1d799e1f.png',
+  },
+  {
+    id: 'rectangle',
+    name: 'Rectangle',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F485%2F4e480277-cb2c-42d3-8a1e-539a7b99426f.png',
+  },
+  {
+    id: 'simpleplay',
+    name: 'SimplePlay',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F2011%2F736f2b41-9973-436e-a3e4-210d3b160478.png',
+  },
+  {
+    id: 'uu-slot',
+    name: 'UU Slot',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F323%2F7dcff2ec-9af7-455c-8a6e-6853d07824cf.png',
+  },
+  {
+    id: 'vplus',
+    name: 'V Plus',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F1507%2F4fdcd0c0-ccc5-494b-b537-abab9fc8a7e2.png',
+  },
+  {
+    id: 'vpower',
+    name: 'V Power',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F1629%2F4ed85273-34d2-4a59-9834-b2e07a2451fc.jpg',
+  },
+  {
+    id: 'wowgaming',
+    name: 'WOW Gaming',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F273%2F80d54715-b6c5-4abc-9cd7-093fbf72aacc.png',
+  },
+  {
+    id: 'tgg',
+    name: 'TGG',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F644%2F306dc15a-3a40-46d4-a057-7183fa2a18ca.png',
+  },
+  {
+    id: 'jilig',
+    name: 'JILI Global',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fsub_platform%2Fimage_path%2F25%2Faece1da0-0722-4da1-b7d9-e300686f56ad.jpg',
+  },
+  {
+    id: 'fastspin',
+    name: 'Fastspin',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F3650%2Fd38fb236-eb64-4b3a-bb42-441e86c54819.png',
+  },
+  {
+    id: 'inandout',
+    name: 'In & Out',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F3723%2F0f3af674-9e56-4b23-8f50-a960c4b682a8.png',
+  },
+  {
+    id: 'croco',
+    name: 'Croco',
+    img: 'https://images.cashmarket888.xyz/uploads%2Fslot_game%2Fimage_path%2F4261%2F1858f7ae-2b7b-450d-8d2c-44e1333e2c15.png',
+  },
 ]
 
 const providerKeyMap: Record<string, string> = {
   'fc-slot': 'fc',
   'va-slot': 'va',
   spadegaming: 'spade',
+  'ap-slot': 'ap',
+  'uu-slot': 'uu',
 }
 
 const defaultGames: GameInfo[] = [

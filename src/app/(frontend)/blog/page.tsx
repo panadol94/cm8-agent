@@ -1,6 +1,89 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+
+/* ── Slot Machine Counter ── */
+function SlotCounter({ value, suffix = '' }: { value: string; suffix?: string }) {
+  const [display, setDisplay] = useState(value.split('').map(() => '0'))
+  const [done, setDone] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const hasAnimated = useRef(false)
+
+  const animate = useCallback(() => {
+    if (hasAnimated.current) return
+    hasAnimated.current = true
+
+    const chars = value.split('')
+    const totalDuration = 1500 // ms
+    const stagger = 200 // ms between columns
+
+    chars.forEach((char, i) => {
+      const isDigit = /\d/.test(char)
+      if (!isDigit) {
+        // Non-digit chars appear instantly
+        setDisplay((prev) => {
+          const n = [...prev]
+          n[i] = char
+          return n
+        })
+        return
+      }
+
+      const colDelay = i * stagger
+      const rollCount = 8 + i * 3 // more rolls for later digits
+      const interval = (totalDuration - colDelay) / rollCount
+
+      let tick = 0
+      const timer = setInterval(() => {
+        tick++
+        if (tick >= rollCount) {
+          clearInterval(timer)
+          setDisplay((prev) => {
+            const n = [...prev]
+            n[i] = char
+            return n
+          })
+          if (i === chars.length - 1) setDone(true)
+        } else {
+          setDisplay((prev) => {
+            const n = [...prev]
+            n[i] = String(Math.floor(Math.random() * 10))
+            return n
+          })
+        }
+      }, interval)
+
+      // Delayed start for stagger effect
+      setTimeout(() => {}, colDelay)
+    })
+  }, [value])
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) animate()
+      },
+      { threshold: 0.5 },
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [animate])
+
+  return (
+    <div ref={ref} className={`slot-counter ${done ? 'slot-done' : ''}`}>
+      <div className="slot-digits">
+        {display.map((ch, i) => (
+          <span key={i} className={`slot-digit ${done ? '' : 'slot-rolling'}`}>
+            {ch}
+          </span>
+        ))}
+      </div>
+      {suffix && <span className="slot-suffix">{suffix}</span>}
+    </div>
+  )
+}
 
 /* ── Blog post data ── */
 const posts = [
@@ -183,26 +266,76 @@ export default function BlogPage() {
             </div>
           )}
 
-          {/* ── 5. Newsletter / WhatsApp Signup ── */}
-          <div className="blog-newsletter blog-animate" style={{ animationDelay: '0.6s' }}>
-            <div className="blog-newsletter-icon">📬</div>
-            <h3 className="blog-newsletter-title">Dapatkan Tips Terkini</h3>
-            <p className="blog-newsletter-subtitle">
-              Join channel WhatsApp kami untuk terima artikel, tips, dan promosi terbaru terus ke
-              telefon anda.
-            </p>
-            <a
-              href="https://wa.me/601126270498?text=Saya%20nak%20join%20channel%20tips%20CM8"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="blog-newsletter-btn"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.932 1.395 5.608L.05 23.708a.5.5 0 00.606.606l6.1-1.345A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.758 0-3.442-.46-4.938-1.323l-.354-.21-3.67.808.823-3.607-.23-.367A9.935 9.935 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z" />
-              </svg>
-              Join WhatsApp Channel
-            </a>
+          {/* ── 5. Newsletter / WhatsApp Signup — PREMIUM ── */}
+          {/* ── Frosted Glass Newsletter Card ── */}
+          <div className="nl-border-wrap blog-animate" style={{ animationDelay: '0.6s' }}>
+            <div className="blog-newsletter">
+              {/* Soft floating particles */}
+              <div className="nl-particles">
+                <span />
+                <span />
+                <span />
+                <span />
+              </div>
+
+              {/* Content */}
+              <div className="nl-content">
+                <div className="nl-badge">
+                  <span className="nl-badge-dot" />
+                  LIVE · EXCLUSIVE CHANNEL
+                </div>
+
+                <h3 className="blog-newsletter-title">
+                  Dapatkan Tips &<br />
+                  Strategi Terkini
+                </h3>
+                <p className="blog-newsletter-subtitle">
+                  Join channel WhatsApp kami untuk terima tips, promosi, dan strategi terkini terus
+                  ke telefon anda.
+                </p>
+
+                {/* Stats row — slot machine animation */}
+                <div className="nl-stats">
+                  <div className="nl-stat">
+                    <div className="nl-stat-num">
+                      <SlotCounter value="10" suffix="K+" />
+                    </div>
+                    <span className="nl-stat-label">Members</span>
+                  </div>
+                  <div className="nl-stat-divider" />
+                  <div className="nl-stat">
+                    <div className="nl-stat-num">
+                      <SlotCounter value="500" suffix="+" />
+                    </div>
+                    <span className="nl-stat-label">Tips Shared</span>
+                  </div>
+                  <div className="nl-stat-divider" />
+                  <div className="nl-stat">
+                    <div className="nl-stat-num">
+                      <SlotCounter value="24" suffix="/7" />
+                    </div>
+                    <span className="nl-stat-label">Updates</span>
+                  </div>
+                </div>
+
+                <a
+                  href="https://whatsapp.com/channel/0029Vb7cSULCxoAtcGaunK37"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="blog-newsletter-btn"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.025.507 3.932 1.395 5.608L.05 23.708a.5.5 0 00.606.606l6.1-1.345A11.937 11.937 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.758 0-3.442-.46-4.938-1.323l-.354-.21-3.67.808.823-3.607-.23-.367A9.935 9.935 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z" />
+                  </svg>
+                  Join WhatsApp Channel
+                  <span className="btn-arrow">→</span>
+                </a>
+                <p className="nl-disclaimer">
+                  🔒 100% Percuma · Tiada spam · Boleh keluar bila-bila
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

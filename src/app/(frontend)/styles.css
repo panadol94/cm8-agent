@@ -5078,30 +5078,74 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
-  background: var(--bg-white);
-  border-bottom: 1px solid #eee;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-bottom: 1px solid rgba(255, 170, 51, 0.15);
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+.prem-chat-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 170, 51, 0.04), transparent);
+  animation: chatHeaderShimmer 6s ease-in-out infinite;
+}
+@keyframes chatHeaderShimmer {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(50%);
+  }
 }
 .prem-chat-header-left {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+.prem-chat-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+.prem-chat-icon svg {
+  width: 100%;
+  height: 100%;
 }
 .prem-chat-title-wrap h2 {
   font-family: var(--font-heading);
   font-size: 1.05rem;
   font-weight: 800;
-  color: var(--text-primary);
+  background: linear-gradient(135deg, #ffaa33, #ff6b4a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 .prem-chat-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
   font-size: 0.68rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.5);
   font-weight: 500;
   letter-spacing: 0.01em;
+}
+.prem-chat-sub-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffaa33, #ff6b4a);
+  display: inline-block;
 }
 .prem-online-pill {
   display: inline-flex;
@@ -5109,16 +5153,19 @@ body::before {
   gap: 5px;
   font-size: 0.68rem;
   font-weight: 600;
-  color: #16a34a;
-  background: rgba(22, 163, 74, 0.08);
+  color: #ffaa33;
+  background: rgba(255, 170, 51, 0.1);
+  border: 1px solid rgba(255, 170, 51, 0.2);
   padding: 3px 10px;
   border-radius: 20px;
+  position: relative;
+  z-index: 1;
 }
 .prem-online-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #16a34a;
+  background: #ffaa33;
   animation: premPulse 2s ease-in-out infinite;
 }
 @keyframes premPulse {
@@ -5137,8 +5184,8 @@ body::before {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 2px solid #eee;
-  background: var(--bg-cream);
+  border: 2px solid rgba(255, 170, 51, 0.4);
+  background: rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5146,9 +5193,12 @@ body::before {
   font-size: 1.1rem;
   transition: all 0.3s;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 .prem-profile-btn:hover {
-  border-color: var(--red);
+  border-color: #ffaa33;
+  box-shadow: 0 0 12px rgba(255, 170, 51, 0.3);
 }
 .prem-profile-img {
   width: 100%;

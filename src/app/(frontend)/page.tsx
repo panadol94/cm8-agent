@@ -1445,7 +1445,7 @@ export default function HomePage() {
       {/* ===== FOOTER ===== */}
       <footer className="site-footer">
         <div className="footer-inner">
-          <span>© 2024 CM8 VVIP</span>
+          <span>© 2026 CM8 VVIP</span>
           <span>•</span>
           <Link href="/about">Tentang</Link>
           <span>•</span>

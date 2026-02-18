@@ -7,20 +7,30 @@ import ScrollReveal from './ScrollReveal'
 
 export const metadata = {
   title: {
-    default: 'CM8 VVIP — Platform Agent #1 Malaysia',
+    default: 'CM8 VVIP — Buat Duit Online & Agent Slot Tanpa Modal #1 Malaysia',
     template: '%s | CM8 VVIP',
   },
   description:
-    'Jadi agent CM8 sekarang. Komisyen tinggi sehingga 90%, sokongan penuh 24/7, dan peluang pendapatan tanpa had. Daftar sebagai agent CM8 VVIP hari ini.',
+    'Jana income pasif sebagai Agent Slot CM8 VVIP. Daftar percuma, tiada modal. Akses tips hack slot & scanner live. Komisyen sehingga 90%!',
   keywords: [
     'CM8',
     'CM8 agent',
     'agent CM8',
     'CM8 VVIP',
-    'jadi agent casino online',
-    'platform agent Malaysia',
-    'komisyen agent tinggi',
-    'daftar agent CM8',
+    'agent slot',
+    'agent slot tanpa modal',
+    'buat duit online',
+    'buat duit tanpa modal',
+    'income pasif',
+    'hack slot',
+    'cara hack slot',
+    'mega888 agent',
+    '918kiss agent',
+    'pussy888 agent',
+    'company trusted',
+    'judi online malaysia',
+    'slot game online',
+    'daftar agent percuma',
   ],
   authors: [{ name: 'CM8 VVIP' }],
   creator: 'CM8 VVIP',
@@ -29,12 +39,21 @@ export const metadata = {
     type: 'website',
     locale: 'ms_MY',
     siteName: 'CM8 VVIP',
-    title: 'CM8 VVIP — Platform Agent #1 Malaysia',
-    description: 'Jadi agent CM8 sekarang. Komisyen tinggi, sokongan penuh 24/7.',
+    title: 'CM8 VVIP — Buat Duit Online & Agent Slot Tanpa Modal',
+    description:
+      'Jana income pasif sebagai Agent Slot CM8 VVIP. Daftar percuma, tiada modal. Akses tips hack slot & scanner live.',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'CM8 VVIP Agent Platform' }],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 

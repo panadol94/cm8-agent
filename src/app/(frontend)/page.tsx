@@ -6,12 +6,6 @@ import BannerCarousel from './BannerCarousel'
 import AnimatedStats from './AnimatedStats'
 import { PatchIDIcon, TelegramKomunitiIcon, WhatsAppKomunitiIcon, AdminIcon } from './CM8Icons'
 
-export const metadata: Metadata = {
-  title: 'CM8 VVIP — Platform Agent #1 Malaysia',
-  description:
-    'Jadi agent CM8 sekarang. Komisyen tinggi sehingga 90%, sokongan penuh 24/7, dan peluang pendapatan tanpa had.',
-}
-
 /* ============================================================
    SECTION DATA
    ============================================================ */
@@ -432,22 +426,76 @@ const faqs = [
 ]
 
 /* ============================================================
-   PAGE
+   PAGE METADATA
+   ============================================================ */
+export const metadata: Metadata = {
+  title: 'CM8 VVIP — Buat Duit Online & Agent Slot Tanpa Modal #1 Malaysia',
+  description:
+    'Jana income pasif sebagai Agent Slot CM8 VVIP. Daftar percuma, tiada modal. Akses tips hack slot & scanner live. Komisyen sehingga 90%!',
+}
+
+// ... (existing constants)
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+}
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Cara Buat Duit Online Tanpa Modal Sebagai Agent Slot',
+  image: 'https://cm8vvip.com/og-image.jpg',
+  author: 'CM8 VVIP Team',
+  genre: 'Business & Finance',
+  keywords: 'buat duit online, agent slot, tanpa modal, income pasif, hack slot',
+  publisher: {
+    '@type': 'Organization',
+    name: 'CM8 VVIP',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://cm8vvip.com/cm8-logo.png',
+    },
+  },
+  description:
+    'Panduan lengkap cara menjana pendapatan pasif 5-angka sebulan sebagai agent slot CM8 tanpa sebarang modal. Tips hack slot dan strategi marketing percuma.',
+}
+
+/* ============================================================
+   PAGE COMPONENT
    ============================================================ */
 export default function HomePage() {
   return (
     <>
-      {/* JSON-LD */}
+      {/* JSON-LD Schema for SEO Rich Snippets */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Organization',
-            name: 'CM8 VVIP',
-            url: 'https://cm8vvip.com',
-            description: 'Platform Agent #1 Malaysia',
-          }),
+          __html: JSON.stringify([
+            {
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'CM8 VVIP',
+              url: 'https://cm8vvip.com',
+              description: 'Platform Agent #1 Malaysia - Buat Duit Tanpa Modal',
+              logo: 'https://cm8vvip.com/cm8-logo.png',
+              sameAs: [
+                'https://www.facebook.com/cm8vvip',
+                'https://twitter.com/cm8vvip',
+                'https://instagram.com/cm8vvip',
+              ],
+            },
+            faqSchema,
+            articleSchema,
+          ]),
         }}
       />
 
@@ -933,6 +981,47 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+      {/* ===== 6. SEO CONTENT SECTION (Hidden Gem) ===== */}
+      <div className="seo-content-section">
+        <div className="seo-container">
+          <h2>Cara Buat Duit Online Tanpa Modal dengan CM8 VVIP</h2>
+          <div className="seo-grid">
+            <div className="seo-item">
+              <h3>💸 Income Pasif Seumur Hidup</h3>
+              <p>
+                Ramai yang mencari cara <strong>buat duit online</strong> atau{' '}
+                <strong>income pasif</strong> tetapi tertipu dengan skim cepat kaya. Di CM8 VVIP,
+                anda menjadi rakan kongsi (shareholder) sebenar. Setiap kali pemain anda main slot
+                game seperti <strong>Mega888</strong>, <strong>918Kiss</strong>, atau{' '}
+                <strong>Pussy888</strong>, anda dapat komisyen.
+              </p>
+            </div>
+            <div className="seo-item">
+              <h3>🔓 Tips & &quot;Hack Slot&quot; Strategy</h3>
+              <p>
+                Sebagai agent, kami bekalkan anda dengan data <strong>RTP Live</strong> dan scanner
+                terkini. Walaupun tiada istilah sebenar untuk <strong>hack slot</strong> (kerana
+                sistem server-side), analisis data kami membantu pemain anda menang lebih kerap —
+                bermakna mereka deposit lebih kerap, dan komisyen anda naik!
+              </p>
+            </div>
+            <div className="seo-item">
+              <h3>🚀 Daftar Agent Slot Percuma</h3>
+              <p>
+                Berbeza dengan platform lain, pendaftaran <strong>CM8 Agent</strong> adalah 100%
+                percuma. <strong>Buat duit tanpa modal</strong> hari ini. Kami sediakan bahan
+                marketing, ayat copyayat, dan bimbingan penuh untuk anda mula menjana RM1,000 –
+                RM5,000 seminggu.
+              </p>
+            </div>
+          </div>
+          <p className="seo-footer-text">
+            Sertai 10,000+ rakyat Malaysia yang telah berjaya mengubah hidup dengan platform
+            affiliate #1 ini. Slot game online, live casino, dan sports betting — semua dalam satu
+            sistem canggih CM8.
+          </p>
+        </div>
+      </div>
     </>
   )
 }

@@ -4385,8 +4385,28 @@ body::before {
   box-shadow: var(--shadow-glow);
 }
 .info-pillar-icon {
-  font-size: 2.5rem;
-  margin-bottom: 12px;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(230, 53, 32, 0.08);
+  border: 1px solid rgba(230, 53, 32, 0.2);
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 0 20px rgba(230, 53, 32, 0.1);
+  transition:
+    box-shadow 0.3s,
+    transform 0.3s;
+}
+.info-pillar:hover .info-pillar-icon {
+  box-shadow: 0 0 30px rgba(255, 107, 74, 0.25);
+  transform: scale(1.05);
+}
+.info-pillar-icon svg {
+  width: 100%;
+  height: 100%;
 }
 .info-pillar h3 {
   font-size: 1.05rem;
@@ -6426,4 +6446,19 @@ body::before {
   .seo-footer-text {
     text-align: left;
   }
+}
+
+/* ===== COMMUNITY ICON (SVG) ===== */
+.community-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.community-icon svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
 }

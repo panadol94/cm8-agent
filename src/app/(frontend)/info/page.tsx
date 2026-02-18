@@ -211,7 +211,59 @@ export default function InfoPage() {
           </p>
           <div className="info-pillars">
             <div className="info-pillar">
-              <div className="info-pillar-icon">🔍</div>
+              <div className="info-pillar-icon">
+                {/* AI Scanner Icon */}
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient
+                      id="scanGrad"
+                      x1="0"
+                      y1="0"
+                      x2="48"
+                      y2="48"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop offset="0%" stopColor="#ff6b4a" />
+                      <stop offset="100%" stopColor="#e63520" />
+                    </linearGradient>
+                  </defs>
+                  <circle
+                    cx="20"
+                    cy="20"
+                    r="12"
+                    stroke="url(#scanGrad)"
+                    strokeWidth="3"
+                    fill="none"
+                  />
+                  <line
+                    x1="29"
+                    y1="29"
+                    x2="42"
+                    y2="42"
+                    stroke="url(#scanGrad)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                  <line
+                    x1="14"
+                    y1="20"
+                    x2="26"
+                    y2="20"
+                    stroke="url(#scanGrad)"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                  <line
+                    x1="20"
+                    y1="14"
+                    x2="20"
+                    y2="26"
+                    stroke="url(#scanGrad)"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
               <h3>AI Slot Scanner</h3>
               <p>
                 Teknologi canggih yang menganalisis peratusan RTP slot secara real-time. Ketahui
@@ -222,7 +274,36 @@ export default function InfoPage() {
               </Link>
             </div>
             <div className="info-pillar">
-              <div className="info-pillar-icon">👑</div>
+              <div className="info-pillar-icon">
+                {/* Crown / Agent Icon */}
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient
+                      id="crownGrad"
+                      x1="0"
+                      y1="0"
+                      x2="48"
+                      y2="48"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop offset="0%" stopColor="#ffaa33" />
+                      <stop offset="100%" stopColor="#ff6b4a" />
+                    </linearGradient>
+                  </defs>
+                  <polyline
+                    points="6,34 12,16 24,28 36,16 42,34"
+                    stroke="url(#crownGrad)"
+                    strokeWidth="3"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <rect x="6" y="34" width="36" height="5" rx="2.5" fill="url(#crownGrad)" />
+                  <circle cx="6" cy="16" r="3" fill="url(#crownGrad)" />
+                  <circle cx="24" cy="10" r="3" fill="url(#crownGrad)" />
+                  <circle cx="42" cy="16" r="3" fill="url(#crownGrad)" />
+                </svg>
+              </div>
               <h3>Program Agent</h3>
               <p>
                 Jana komisyen sehingga 90% dengan menjadi agent CM8. Tiada modal, tiada risiko —
@@ -238,7 +319,49 @@ export default function InfoPage() {
               </a>
             </div>
             <div className="info-pillar">
-              <div className="info-pillar-icon">💬</div>
+              <div className="info-pillar-icon">
+                {/* Community / Chat Icon */}
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient
+                      id="chatGrad"
+                      x1="0"
+                      y1="0"
+                      x2="48"
+                      y2="48"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop offset="0%" stopColor="#ff8c42" />
+                      <stop offset="100%" stopColor="#e63520" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M8 10 Q8 6 12 6 H36 Q40 6 40 10 V28 Q40 32 36 32 H28 L20 42 L20 32 H12 Q8 32 8 28 Z"
+                    stroke="url(#chatGrad)"
+                    strokeWidth="3"
+                    fill="none"
+                    strokeLinejoin="round"
+                  />
+                  <line
+                    x1="16"
+                    y1="18"
+                    x2="32"
+                    y2="18"
+                    stroke="url(#chatGrad)"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                  <line
+                    x1="16"
+                    y1="24"
+                    x2="26"
+                    y2="24"
+                    stroke="url(#chatGrad)"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
               <h3>Komuniti Agent</h3>
               <p>
                 Sertai ribuan agent aktif dalam komuniti Telegram dan WhatsApp kami. Kongsi tips,
@@ -438,7 +561,26 @@ export default function InfoPage() {
               rel="noopener noreferrer"
               className="community-card"
             >
-              <div className="community-icon">✈️</div>
+              <div className="community-icon">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient
+                      id="tgGrad"
+                      x1="0"
+                      y1="0"
+                      x2="48"
+                      y2="48"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop offset="0%" stopColor="#29b6f6" />
+                      <stop offset="100%" stopColor="#0288d1" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="24" cy="24" r="20" fill="url(#tgGrad)" />
+                  <path d="M34 14 L10 23 L18 26 L22 36 L27 29 L34 14Z" fill="white" opacity="0.9" />
+                  <line x1="18" y1="26" x2="27" y2="29" stroke="white" strokeWidth="1.5" />
+                </svg>
+              </div>
               <h3>Telegram Group</h3>
               <p>Update harian, tips scanner, dan perbincangan agent.</p>
               <span className="community-members">
@@ -452,7 +594,33 @@ export default function InfoPage() {
               rel="noopener noreferrer"
               className="community-card"
             >
-              <div className="community-icon">💬</div>
+              <div className="community-icon">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient
+                      id="waGrad"
+                      x1="0"
+                      y1="0"
+                      x2="48"
+                      y2="48"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop offset="0%" stopColor="#66bb6a" />
+                      <stop offset="100%" stopColor="#2e7d32" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="24" cy="24" r="20" fill="url(#waGrad)" />
+                  <path
+                    d="M24 12C17.4 12 12 17.4 12 24C12 26.4 12.7 28.6 13.9 30.5L12 36L17.7 34.1C19.5 35.2 21.7 35.9 24 35.9C30.6 35.9 36 30.5 36 23.9C36 17.4 30.6 12 24 12Z"
+                    fill="white"
+                    opacity="0.9"
+                  />
+                  <path
+                    d="M20 19C20 19 19 19 19 20C19 21 20 24 23 27C26 30 29 31 30 31C31 31 31 30 31 30L31 28C31 28 30 27.5 29 27C28 26.5 27.5 27 27 27.5C26.5 28 26 28 25 27C24 26 22 24 21.5 23C21 22 21.5 21.5 22 21C22.5 20.5 23 20 22.5 19C22 18 20 19 20 19Z"
+                    fill="url(#waGrad)"
+                  />
+                </svg>
+              </div>
               <h3>WhatsApp Group</h3>
               <p>Sokongan cepat, networking, dan peluang baru.</p>
               <span className="community-members">
@@ -466,7 +634,38 @@ export default function InfoPage() {
               rel="noopener noreferrer"
               className="community-card"
             >
-              <div className="community-icon">👤</div>
+              <div className="community-icon">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient
+                      id="adminGrad"
+                      x1="0"
+                      y1="0"
+                      x2="48"
+                      y2="48"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop offset="0%" stopColor="#ff8c42" />
+                      <stop offset="100%" stopColor="#e63520" />
+                    </linearGradient>
+                  </defs>
+                  <circle
+                    cx="24"
+                    cy="18"
+                    r="8"
+                    stroke="url(#adminGrad)"
+                    strokeWidth="3"
+                    fill="none"
+                  />
+                  <path
+                    d="M10 40C10 32 16 28 24 28C32 28 38 32 38 40"
+                    stroke="url(#adminGrad)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                </svg>
+              </div>
               <h3>Hubungi Admin</h3>
               <p>Perlukan bantuan peribadi? Chat terus dengan admin kami.</p>
               <span className="community-members">Respon dalam 5 minit</span>

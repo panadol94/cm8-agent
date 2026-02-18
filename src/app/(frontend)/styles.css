@@ -429,12 +429,36 @@ ul {
 }
 .agent-cta-title {
   font-family: var(--font-heading);
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-size: 1.5rem;
+  font-weight: 900;
   color: var(--text-primary);
-  line-height: 1.25;
-  margin-bottom: 4px;
-  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 6px;
+  letter-spacing: -0.03em;
+}
+.text-gradient {
+  background: linear-gradient(
+    135deg,
+    #e63520 0%,
+    #ff6b4a 25%,
+    #ffaa33 50%,
+    #ff6b4a 75%,
+    #e63520 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 3s linear infinite;
+  font-weight: 900;
+}
+@keyframes textShimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 .agent-cta-subtitle {
   font-size: 0.82rem;

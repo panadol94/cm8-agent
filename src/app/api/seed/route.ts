@@ -634,6 +634,112 @@ export async function GET(req: Request) {
     }
     results.games = gameCount
 
+    // ────────────────────────────────────────────
+    // 8. COMMISSION TIERS
+    // ────────────────────────────────────────────
+    const tiers = [
+      {
+        name: 'Newbie Agent',
+        percentage: 60,
+        minDownline: 0,
+        benefits: [
+          'Komisyen asas 60%',
+          'Admin ajar cara promote CM8',
+          'Akses dashboard',
+          'Naik peratus selepas capai target',
+        ],
+        color: '#ff6b4a',
+        icon: 'star',
+      },
+      {
+        name: 'Solo Player Agent',
+        percentage: 80,
+        minDownline: 5,
+        benefits: [
+          'Komisyen 80%',
+          'Dashboard premium',
+          'Sokongan prioriti 24/7',
+          'Naik peratus selepas capai target sales',
+        ],
+        color: '#ffaa33',
+        icon: 'crown',
+      },
+      {
+        name: 'Team Builder Agent',
+        percentage: 90,
+        minDownline: 20,
+        benefits: [
+          'Komisyen tertinggi 90%',
+          'Bina team & network sendiri',
+          'Pengalaman shareholder platform',
+          'Semua bahan pemasaran',
+          'Bonus & insentif khas',
+          'Pendapatan downline',
+        ],
+        color: '#d4a853',
+        icon: 'diamond',
+      },
+    ]
+
+    let tierCount = 0
+    for (let i = 0; i < tiers.length; i++) {
+      const t = tiers[i]
+      await payload.create({
+        collection: 'commission-tiers',
+        data: {
+          name: t.name,
+          percentage: t.percentage,
+          minDownline: t.minDownline,
+          benefits: t.benefits.map((text) => ({ text })),
+          color: t.color,
+          icon: t.icon,
+          order: i,
+          active: true,
+        },
+      })
+      tierCount++
+    }
+    results.commissionTiers = tierCount
+
+    // ────────────────────────────────────────────
+    // 9. SITE SETTINGS (global)
+    // ────────────────────────────────────────────
+    try {
+      await payload.updateGlobal({
+        slug: 'site-settings',
+        data: {
+          siteName: 'CM8 VVIP',
+          tagline: 'Platform Agent #1 Malaysia',
+          heroTitle: 'Jadi Agent CM8 Sekarang',
+          heroSubtitle:
+            'Jana pendapatan lumayan dengan menjadi agent platform CM8. Komisyen tinggi, sokongan penuh, dan peluang tanpa had.',
+          heroCTA: 'Daftar Sekarang',
+          whatsappNumber: '601110646537',
+          telegramLink: 'https://t.me/cm8vvip',
+          footerText: '© 2026 CM8 VVIP. Semua hak cipta terpelihara.',
+          metaTitle: 'CM8 VVIP — Buat Duit Online & Agent Slot Tanpa Modal #1 Malaysia',
+          metaDescription:
+            'Jana income pasif sebagai Agent Slot CM8 VVIP. Daftar percuma, tiada modal.',
+          keywords: 'agent cm8, buat duit online, agent slot, tanpa modal, income pasif, hack slot',
+          tickerEnabled: true,
+          tickerMessages: [
+            { text: '🔥 Komisyen sehingga 90% — Daftar sekarang!' },
+            { text: '💰 Ah***d baru terima RM4,200 komisyen minggu ini' },
+            { text: '🚀 1,200+ agent aktif sudah menjana pendapatan' },
+            { text: '⭐ CM8 — Platform Agent #1 Malaysia' },
+          ],
+          socialLinks: [
+            { platform: 'facebook', url: 'https://facebook.com/cm8vvip' },
+            { platform: 'instagram', url: 'https://instagram.com/cm8vvip' },
+            { platform: 'tiktok', url: 'https://tiktok.com/@cm8vvip' },
+          ],
+        },
+      })
+      results.siteSettings = 1
+    } catch {
+      results.siteSettings_error = 'Could not update site settings'
+    }
+
     return NextResponse.json({
       success: true,
       message: 'Seed completed!',

@@ -565,20 +565,47 @@ export default function InfoPage() {
                 <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <defs>
                     <linearGradient
-                      id="tgGrad"
+                      id="tgBg"
                       x1="0"
                       y1="0"
                       x2="48"
                       y2="48"
                       gradientUnits="userSpaceOnUse"
                     >
-                      <stop offset="0%" stopColor="#29b6f6" />
-                      <stop offset="100%" stopColor="#0288d1" />
+                      <stop offset="0%" stopColor="#1a1a2e" />
+                      <stop offset="100%" stopColor="#16213e" />
+                    </linearGradient>
+                    <linearGradient
+                      id="tgAccent"
+                      x1="10"
+                      y1="14"
+                      x2="34"
+                      y2="36"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop offset="0%" stopColor="#ffaa33" />
+                      <stop offset="100%" stopColor="#ff6b4a" />
                     </linearGradient>
                   </defs>
-                  <circle cx="24" cy="24" r="20" fill="url(#tgGrad)" />
-                  <path d="M34 14 L10 23 L18 26 L22 36 L27 29 L34 14Z" fill="white" opacity="0.9" />
-                  <line x1="18" y1="26" x2="27" y2="29" stroke="white" strokeWidth="1.5" />
+                  <circle cx="24" cy="24" r="22" fill="url(#tgBg)" />
+                  <circle
+                    cx="24"
+                    cy="24"
+                    r="22"
+                    stroke="url(#tgAccent)"
+                    strokeWidth="1"
+                    opacity="0.4"
+                  />
+                  <path d="M34 14L10 23L18 26L22 36L27 29L34 14Z" fill="url(#tgAccent)" />
+                  <line
+                    x1="18"
+                    y1="26"
+                    x2="27"
+                    y2="29"
+                    stroke="url(#tgAccent)"
+                    strokeWidth="1.5"
+                    opacity="0.6"
+                  />
                 </svg>
               </div>
               <h3>Telegram Group</h3>
@@ -598,26 +625,46 @@ export default function InfoPage() {
                 <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <defs>
                     <linearGradient
-                      id="waGrad"
+                      id="waBg"
                       x1="0"
                       y1="0"
                       x2="48"
                       y2="48"
                       gradientUnits="userSpaceOnUse"
                     >
-                      <stop offset="0%" stopColor="#66bb6a" />
-                      <stop offset="100%" stopColor="#2e7d32" />
+                      <stop offset="0%" stopColor="#1a1a2e" />
+                      <stop offset="100%" stopColor="#16213e" />
+                    </linearGradient>
+                    <linearGradient
+                      id="waAccent"
+                      x1="10"
+                      y1="12"
+                      x2="36"
+                      y2="36"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop offset="0%" stopColor="#ffaa33" />
+                      <stop offset="100%" stopColor="#ff6b4a" />
                     </linearGradient>
                   </defs>
-                  <circle cx="24" cy="24" r="20" fill="url(#waGrad)" />
+                  <circle cx="24" cy="24" r="22" fill="url(#waBg)" />
+                  <circle
+                    cx="24"
+                    cy="24"
+                    r="22"
+                    stroke="url(#waAccent)"
+                    strokeWidth="1"
+                    opacity="0.4"
+                  />
                   <path
                     d="M24 12C17.4 12 12 17.4 12 24C12 26.4 12.7 28.6 13.9 30.5L12 36L17.7 34.1C19.5 35.2 21.7 35.9 24 35.9C30.6 35.9 36 30.5 36 23.9C36 17.4 30.6 12 24 12Z"
-                    fill="white"
-                    opacity="0.9"
+                    stroke="url(#waAccent)"
+                    strokeWidth="2"
+                    fill="none"
                   />
                   <path
                     d="M20 19C20 19 19 19 19 20C19 21 20 24 23 27C26 30 29 31 30 31C31 31 31 30 31 30L31 28C31 28 30 27.5 29 27C28 26.5 27.5 27 27 27.5C26.5 28 26 28 25 27C24 26 22 24 21.5 23C21 22 21.5 21.5 22 21C22.5 20.5 23 20 22.5 19C22 18 20 19 20 19Z"
-                    fill="url(#waGrad)"
+                    fill="url(#waAccent)"
                   />
                 </svg>
               </div>
@@ -638,32 +685,72 @@ export default function InfoPage() {
                 <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <defs>
                     <linearGradient
-                      id="adminGrad"
+                      id="admBg"
                       x1="0"
                       y1="0"
                       x2="48"
                       y2="48"
                       gradientUnits="userSpaceOnUse"
                     >
-                      <stop offset="0%" stopColor="#ff8c42" />
-                      <stop offset="100%" stopColor="#e63520" />
+                      <stop offset="0%" stopColor="#1a1a2e" />
+                      <stop offset="100%" stopColor="#16213e" />
+                    </linearGradient>
+                    <linearGradient
+                      id="admAccent"
+                      x1="10"
+                      y1="10"
+                      x2="38"
+                      y2="38"
+                      gradientUnits="userSpaceOnUse"
+                    >
+                      <stop offset="0%" stopColor="#ffaa33" />
+                      <stop offset="100%" stopColor="#ff6b4a" />
                     </linearGradient>
                   </defs>
+                  <circle cx="24" cy="24" r="22" fill="url(#admBg)" />
                   <circle
                     cx="24"
-                    cy="18"
-                    r="8"
-                    stroke="url(#adminGrad)"
-                    strokeWidth="3"
-                    fill="none"
+                    cy="24"
+                    r="22"
+                    stroke="url(#admAccent)"
+                    strokeWidth="1"
+                    opacity="0.4"
                   />
                   <path
-                    d="M10 40C10 32 16 28 24 28C32 28 38 32 38 40"
-                    stroke="url(#adminGrad)"
-                    strokeWidth="3"
+                    d="M15 22V20C15 15 19 11 24 11C29 11 33 15 33 20V22"
+                    stroke="url(#admAccent)"
+                    strokeWidth="2.5"
                     strokeLinecap="round"
                     fill="none"
                   />
+                  <rect
+                    x="12"
+                    y="21"
+                    width="5"
+                    height="8"
+                    rx="2.5"
+                    stroke="url(#admAccent)"
+                    strokeWidth="2"
+                    fill="none"
+                  />
+                  <rect
+                    x="31"
+                    y="21"
+                    width="5"
+                    height="8"
+                    rx="2.5"
+                    stroke="url(#admAccent)"
+                    strokeWidth="2"
+                    fill="none"
+                  />
+                  <path
+                    d="M33 29V31C33 33 31 35 29 35H26"
+                    stroke="url(#admAccent)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <circle cx="25" cy="35" r="2" fill="url(#admAccent)" />
                 </svg>
               </div>
               <h3>Hubungi Admin</h3>

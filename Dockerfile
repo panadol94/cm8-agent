@@ -28,19 +28,7 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
-# Install production-only dependencies
-FROM base AS prod-deps
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile --production; \
-  elif [ -f package-lock.json ]; then npm install --omit=dev; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile --prod; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
-
-# Production image
+# Production image — NOT using standalone, keeping node_modules for Payload runtime
 FROM base AS runner
 WORKDIR /app
 
@@ -50,21 +38,22 @@ ENV NODE_OPTIONS=--no-deprecation
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Copy build output and production deps
+# Copy build output and ALL node_modules
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
-COPY --from=prod-deps /app/node_modules ./node_modules
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/next.config.mjs ./next.config.mjs
 COPY --from=builder /app/src ./src
 COPY --from=builder /app/tsconfig.json ./tsconfig.json
 
-# Set ownership  
-RUN chown -R nextjs:nodejs .next
+# Copy init-db script
+COPY --from=builder /app/init-db.mjs ./init-db.mjs
 
 USER nextjs
 
 EXPOSE 3000
 ENV PORT=3000
 
-CMD ["node_modules/.bin/next", "start"]
+# Run init-db then start server
+CMD ["sh", "-c", "node init-db.mjs && node node_modules/.bin/next start"]

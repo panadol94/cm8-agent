@@ -478,7 +478,10 @@ export default function HomePage() {
             </p>
           </div>
           <div className="agent-cta-commission">
+            <div className="commission-ring-glow" />
+            <div className="commission-ring-outer" />
             <span className="commission-number">90%</span>
+            <span className="commission-divider" />
             <span className="commission-label">Komisen</span>
           </div>
         </div>

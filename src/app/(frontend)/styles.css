@@ -442,36 +442,104 @@ ul {
   line-height: 1.4;
 }
 
-/* Commission Circle */
+/* Commission Badge */
 .agent-cta-commission {
-  width: 80px;
-  height: 80px;
+  width: 86px;
+  height: 86px;
   border-radius: 50%;
-  background: var(--gradient-main);
+  background: linear-gradient(145deg, #1a1a2e, #2d1b3d);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow:
-    0 4px 16px rgba(230, 53, 32, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  gap: 3px;
   position: relative;
-  animation: commissionPulse 2.5s ease-in-out infinite;
+  box-shadow:
+    0 4px 20px rgba(230, 53, 32, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: visible;
 }
+
+/* Spinning ring — OUTSIDE the circle */
+.commission-ring-outer {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  padding: 2.5px;
+  background: conic-gradient(
+    from 0deg,
+    #e63520,
+    #ff6b4a,
+    #ff8c42,
+    #ffaa33,
+    transparent 35%,
+    transparent 65%,
+    #e63520
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spinRing 3s linear infinite;
+  pointer-events: none;
+}
+
+/* Glow trail behind ring */
+.commission-ring-glow {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  padding: 4px;
+  background: conic-gradient(
+    from 0deg,
+    rgba(230, 53, 32, 0.4),
+    rgba(255, 140, 66, 0.3),
+    transparent 35%,
+    transparent 65%,
+    rgba(230, 53, 32, 0.4)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spinRing 3s linear infinite;
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+@keyframes spinRing {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .commission-number {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 900;
-  color: white;
+  color: #fff;
   line-height: 1;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
+  font-family: var(--font-heading);
+  text-shadow: 0 0 12px rgba(255, 107, 74, 0.5);
 }
+
+.commission-divider {
+  width: 28px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #ff8c42, transparent);
+  border-radius: 1px;
+}
+
 .commission-label {
-  font-size: 0.6rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  line-height: 1;
 }
 
 /* â”€â”€ Middle: Benefits â”€â”€ */
@@ -614,11 +682,11 @@ ul {
     font-size: 1.1rem;
   }
   .agent-cta-commission {
-    width: 68px;
-    height: 68px;
+    width: 84px;
+    height: 84px;
   }
   .commission-number {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
   .agent-cta-benefits {
     padding: 0 16px 14px;

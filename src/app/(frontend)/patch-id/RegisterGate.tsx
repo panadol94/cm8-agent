@@ -145,7 +145,65 @@ export default function RegisterGate({ onVerified }: RegisterGateProps) {
       <div className="register-card">
         {/* Header */}
         <div className="register-header">
-          <div className="register-shield">🛡️</div>
+          <div className="register-shield">
+            <svg
+              width="56"
+              height="56"
+              viewBox="0 0 56 56"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient
+                  id="shieldGrad"
+                  x1="10"
+                  y1="4"
+                  x2="46"
+                  y2="52"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0%" stopColor="#e63520" />
+                  <stop offset="50%" stopColor="#ff6b4a" />
+                  <stop offset="100%" stopColor="#ff8c42" />
+                </linearGradient>
+                <linearGradient
+                  id="shieldInner"
+                  x1="18"
+                  y1="12"
+                  x2="38"
+                  y2="44"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop offset="0%" stopColor="#fff" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#fff" stopOpacity="0.05" />
+                </linearGradient>
+                <filter id="shieldGlow">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              {/* Shield body */}
+              <path
+                d="M28 4L8 14v14c0 12.4 8.5 23.4 20 26 11.5-2.6 20-13.6 20-26V14L28 4z"
+                fill="url(#shieldGrad)"
+                filter="url(#shieldGlow)"
+              />
+              {/* Inner highlight */}
+              <path d="M28 8L12 16v12c0 10.4 7 19.4 16 21.6V8z" fill="url(#shieldInner)" />
+              {/* Checkmark */}
+              <path
+                d="M21 28l5 5 9-10"
+                stroke="white"
+                strokeWidth="3.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+              />
+            </svg>
+          </div>
           <h2 className="register-title">{isLogin ? 'LOGIN' : 'PATCH ID VERIFICATION'}</h2>
           <p className="register-desc">
             {step === 'phone'

@@ -155,13 +155,25 @@ export async function POST(req: Request) {
               `🛡️ _CM8 VVIP — AI Scanner Percuma_`,
           )
         }
-      } catch (err) {
-        console.error('[BOT-WEBHOOK] AI Vision error:', err)
-        await sendTelegramMessage(
-          botToken,
-          chatId,
-          `⚠️ Ralat semasa memproses gambar. Sila cuba hantar semula screenshot anda.`,
-        )
+      } catch (err: unknown) {
+        const errMsg = err instanceof Error ? err.message : String(err)
+        console.error('[BOT-WEBHOOK] AI Vision error:', errMsg)
+
+        let userMessage = `⚠️ Ralat semasa memproses gambar.`
+
+        if (errMsg.includes('GROQ_API_KEY')) {
+          userMessage = `⚠️ Sistem AI tidak dikonfigurasi. Sila hubungi admin.`
+          console.error('[BOT-WEBHOOK] GROQ_API_KEY is missing from env!')
+        } else if (errMsg.includes('Could not get file path')) {
+          userMessage = `⚠️ Tidak dapat memuat turun gambar dari Telegram. Sila cuba hantar semula screenshot anda.`
+        } else if (errMsg.includes('Groq API error')) {
+          userMessage = `⚠️ Perkhidmatan AI sedang sibuk. Sila cuba lagi dalam beberapa saat.`
+          console.error('[BOT-WEBHOOK] Groq API returned error:', errMsg)
+        } else {
+          userMessage = `⚠️ Ralat semasa memproses gambar. Sila cuba hantar semula screenshot anda.`
+        }
+
+        await sendTelegramMessage(botToken, chatId, userMessage)
       }
 
       return NextResponse.json({ ok: true })
@@ -201,24 +213,14 @@ async function downloadTelegramPhoto(botToken: string, fileId: string): Promise<
   return buffer.toString('base64')
 }
 
-/* ── Extract CM8 username using Google Gemini Vision ────────── */
+/* ── Extract CM8 username using Groq Vision AI ─────────────── */
 async function extractCM8Username(
   imageBase64: string,
 ): Promise<{ username?: string; error?: string }> {
-  const apiKey = process.env.GEMINI_API_KEY
-  if (!apiKey) throw new Error('GEMINI_API_KEY not configured')
+  const apiKey = process.env.GROQ_API_KEY
+  if (!apiKey) throw new Error('GROQ_API_KEY not configured')
 
-  const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: [
-              {
-                text: `Analyze this screenshot from a mobile casino/gaming app. Your task:
+  const prompt = `Analyze this screenshot from a mobile casino/gaming app. Your task:
 
 1. FIRST check if you can see the "CM8" logo or branding anywhere in the screenshot. Look for text like "CM8", "CM8 x", the CM8 logo, or any CM8-related branding.
 
@@ -233,31 +235,45 @@ async function extractCM8Username(
 IMPORTANT: Respond with ONLY one of these:
 - The username (just the text)
 - NOT_CM8
-- NO_USERNAME`,
-              },
-              {
-                inlineData: {
-                  mimeType: 'image/jpeg',
-                  data: imageBase64,
-                },
-              },
-            ],
-          },
-        ],
-      }),
+- NO_USERNAME`
+
+  const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
     },
-  )
+    body: JSON.stringify({
+      model: 'llama-4-scout-17b-16e-instruct',
+      messages: [
+        {
+          role: 'user',
+          content: [
+            { type: 'text', text: prompt },
+            {
+              type: 'image_url',
+              image_url: {
+                url: `data:image/jpeg;base64,${imageBase64}`,
+              },
+            },
+          ],
+        },
+      ],
+      max_tokens: 50,
+      temperature: 0,
+    }),
+  })
 
   if (!response.ok) {
     const errText = await response.text()
-    console.error('[GEMINI] API error:', errText)
-    throw new Error(`Gemini API error: ${response.status}`)
+    console.error('[GROQ] API error:', errText)
+    throw new Error(`Groq API error: ${response.status}`)
   }
 
   const data = await response.json()
-  const text = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || ''
+  const text = data.choices?.[0]?.message?.content?.trim() || ''
 
-  console.log(`[GEMINI] Vision result: "${text}"`)
+  console.log(`[GROQ] Vision result: "${text}"`)
 
   if (text === 'NOT_CM8') {
     return { error: 'NOT_CM8' }

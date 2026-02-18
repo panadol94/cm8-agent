@@ -1781,9 +1781,23 @@ body.scan-shake {
 }
 
 .register-shield {
-  font-size: 2.2rem;
   margin-bottom: 10px;
-  filter: drop-shadow(0 0 12px rgba(230, 53, 32, 0.5));
+  animation: shieldPulse 2.5s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes shieldPulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(230, 53, 32, 0.4));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(230, 53, 32, 0.7));
+    transform: scale(1.05);
+  }
 }
 
 .register-title {

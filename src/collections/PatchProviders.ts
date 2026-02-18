@@ -8,6 +8,7 @@ export const PatchProviders: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
+    group: '🎮 Permainan',
     defaultColumns: ['name', 'providerId', 'active', 'order', 'updatedAt'],
     listSearchableFields: ['name', 'providerId'],
     description:

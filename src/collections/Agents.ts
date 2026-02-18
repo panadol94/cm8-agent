@@ -14,6 +14,7 @@ export const Agents: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
+    group: '👥 Pengurusan Agent',
     defaultColumns: ['name', 'phone', 'status', 'experience', 'createdAt'],
     listSearchableFields: ['name', 'phone', 'whatsapp'],
     description:

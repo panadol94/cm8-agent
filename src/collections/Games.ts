@@ -8,6 +8,7 @@ export const Games: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
+    group: '🎮 Permainan',
     defaultColumns: ['name', 'provider', 'updatedAt'],
     listSearchableFields: ['name', 'provider'],
     description:

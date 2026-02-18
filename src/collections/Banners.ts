@@ -8,6 +8,7 @@ export const Banners: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
+    group: '📝 Kandungan',
     defaultColumns: ['title', 'active', 'order', 'updatedAt'],
     listSearchableFields: ['title'],
     description: 'Banner carousel di bahagian atas homepage. Susun mengikut "Susunan".',

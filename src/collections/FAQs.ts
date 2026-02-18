@@ -8,6 +8,7 @@ export const FAQs: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'question',
+    group: '📝 Kandungan',
     defaultColumns: ['question', 'category', 'order'],
     listSearchableFields: ['question', 'answer'],
     description: 'Soalan lazim (FAQ) untuk website. Filter mengikut kategori.',

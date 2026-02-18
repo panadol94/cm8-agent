@@ -8,6 +8,7 @@ export const Providers: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
+    group: '🎮 Permainan',
     defaultColumns: ['name', 'showOnHomepage', 'order', 'updatedAt'],
     listSearchableFields: ['name'],
     description:

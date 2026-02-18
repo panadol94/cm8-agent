@@ -8,6 +8,7 @@ export const Users: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'email',
+    group: '⚙️ Sistem',
     defaultColumns: ['name', 'email', 'role', 'updatedAt'],
     listSearchableFields: ['name', 'email'],
     description:

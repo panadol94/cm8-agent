@@ -8,6 +8,7 @@ export const Promos: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
+    group: '📝 Kandungan',
     defaultColumns: ['title', 'icon', 'highlight', 'order', 'updatedAt'],
     listSearchableFields: ['title'],
     description: 'Kad promosi yang dipaparkan di homepage. Toggle "Highlight" untuk featured.',

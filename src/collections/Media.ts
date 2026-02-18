@@ -10,6 +10,7 @@ export const Media: CollectionConfig = {
     read: () => true,
   },
   admin: {
+    group: '⚙️ Sistem',
     description: 'Semua gambar dan fail media untuk website. Gunakan kategori untuk susun.',
   },
   fields: [

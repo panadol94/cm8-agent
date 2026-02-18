@@ -1,0 +1,381 @@
+/* =============================================
+   CM8 VVIP Admin Panel — Custom Theme
+   Improve clarity, readability, and visual structure
+   ============================================= */
+
+/* --- CSS Variables --- */
+:root {
+  --cm8-gold: #d4a853;
+  --cm8-gold-light: #f5e6c8;
+  --cm8-dark: #1a1a2e;
+  --cm8-accent: #e2b96f;
+  --cm8-success: #22c55e;
+  --cm8-info: #3b82f6;
+  --cm8-warning: #f59e0b;
+  --cm8-danger: #ef4444;
+  --cm8-bg-subtle: #f8f7f4;
+  --cm8-border: #e5e2d9;
+}
+
+/* --- Nav Sidebar: Group Headers --- */
+.nav-group__label {
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--cm8-gold) !important;
+  padding: 16px 16px 6px !important;
+  border-top: 1px solid var(--theme-elevation-150) !important;
+  margin-top: 4px !important;
+}
+
+/* First group doesn't need top border */
+.nav-group:first-child .nav-group__label {
+  border-top: none !important;
+  margin-top: 0 !important;
+}
+
+/* Nav items inside groups */
+.nav-group .nav__link {
+  padding: 6px 16px 6px 24px !important;
+  font-size: 0.85rem !important;
+  border-radius: 6px !important;
+  margin: 1px 8px !important;
+  transition: all 0.15s ease !important;
+}
+
+.nav-group .nav__link:hover {
+  background: var(--theme-elevation-100) !important;
+}
+
+.nav-group .nav__link.active {
+  background: var(--theme-elevation-150) !important;
+  font-weight: 600 !important;
+}
+
+/* --- Collection/Global Description Banner --- */
+.collection-list__header .list-header__content p,
+.collection-edit__header p,
+header .render-title + p,
+.eyebrow + .doc-header p {
+  font-size: 0.9rem !important;
+  color: var(--theme-elevation-600) !important;
+  line-height: 1.5 !important;
+  padding: 10px 14px !important;
+  background: var(--theme-elevation-50) !important;
+  border-left: 3px solid var(--cm8-gold) !important;
+  border-radius: 0 6px 6px 0 !important;
+  margin: 8px 0 16px !important;
+}
+
+/* --- Field Labels — Larger & Bolder --- */
+.field-type label .label-title,
+.field-label,
+label[for] {
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  color: var(--theme-text) !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* --- Field Descriptions — Distinct & Clear --- */
+.field-description,
+.field-type .field-description {
+  font-size: 0.8rem !important;
+  color: var(--theme-elevation-500) !important;
+  font-style: italic !important;
+  margin-top: 4px !important;
+  line-height: 1.4 !important;
+}
+
+/* --- Field Placeholder Enhancement --- */
+.field-type input::placeholder,
+.field-type textarea::placeholder {
+  color: var(--theme-elevation-350) !important;
+  font-style: italic !important;
+}
+
+/* --- Text Inputs — Better Focus --- */
+.field-type input:focus,
+.field-type textarea:focus,
+.field-type select:focus {
+  border-color: var(--cm8-gold) !important;
+  box-shadow: 0 0 0 2px rgba(212, 168, 83, 0.15) !important;
+}
+
+/* --- Tabs — Better Spacing & Active State --- */
+.tabs-field__tabs .tabs-field__tab-button {
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  padding: 10px 18px !important;
+  transition: all 0.15s ease !important;
+  border-radius: 6px 6px 0 0 !important;
+}
+
+.tabs-field__tabs .tabs-field__tab-button--active {
+  font-weight: 700 !important;
+  border-bottom: 2px solid var(--cm8-gold) !important;
+}
+
+/* Tab description */
+.tabs-field__tab .tab-description {
+  background: var(--theme-elevation-50) !important;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  margin-bottom: 16px !important;
+  font-size: 0.82rem !important;
+  color: var(--theme-elevation-500) !important;
+}
+
+/* --- Table/List View — Clearer Rows --- */
+.cell-container,
+table.table td,
+table.table th {
+  padding: 10px 12px !important;
+}
+
+table.table thead th {
+  font-weight: 700 !important;
+  font-size: 0.78rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--theme-elevation-500) !important;
+  border-bottom: 2px solid var(--theme-elevation-200) !important;
+}
+
+table.table tbody tr {
+  transition: background 0.1s ease !important;
+}
+
+table.table tbody tr:hover {
+  background: var(--theme-elevation-50) !important;
+}
+
+/* Alternating rows for better readability */
+table.table tbody tr:nth-child(even) {
+  background: var(--theme-elevation-25, rgba(0, 0, 0, 0.015)) !important;
+}
+
+table.table tbody tr:nth-child(even):hover {
+  background: var(--theme-elevation-50) !important;
+}
+
+/* --- Sidebar Fields — Visual Separation --- */
+.sidebar-fields {
+  background: var(--theme-elevation-50) !important;
+  border-left: 2px solid var(--theme-elevation-150) !important;
+  padding: 16px !important;
+  border-radius: 8px !important;
+}
+
+.sidebar-fields .field-type {
+  margin-bottom: 16px !important;
+}
+
+/* --- Row Field Layout — Better Spacing --- */
+.field-type.row {
+  gap: 16px !important;
+  margin-bottom: 12px !important;
+}
+
+/* --- Array/Block Fields — Card Style --- */
+.field-type.array .array-field__row,
+.field-type.blocks .blocks-field__row {
+  border: 1px solid var(--theme-elevation-150) !important;
+  border-radius: 8px !important;
+  margin-bottom: 8px !important;
+  overflow: hidden !important;
+}
+
+.field-type.array .array-field__row .array-field__row-header,
+.field-type.blocks .blocks-field__row .blocks-field__row-header {
+  background: var(--theme-elevation-50) !important;
+  padding: 8px 12px !important;
+  font-weight: 600 !important;
+}
+
+/* --- Upload Field — Nicer Card --- */
+.field-type.upload .upload__thumbnail-wrap {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  border: 1px solid var(--theme-elevation-150) !important;
+}
+
+/* --- Buttons — Gold Accent --- */
+.btn.btn--style-primary {
+  background: var(--cm8-gold) !important;
+  color: var(--cm8-dark) !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn.btn--style-primary:hover {
+  background: var(--cm8-accent) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(212, 168, 83, 0.3) !important;
+}
+
+/* --- Save/Publish Button --- */
+.doc-controls__save {
+  background: var(--cm8-gold) !important;
+  color: var(--cm8-dark) !important;
+  font-weight: 700 !important;
+  border-radius: 6px !important;
+}
+
+/* --- Status Badges in Select Fields --- */
+.react-select__single-value {
+  font-weight: 500 !important;
+}
+
+/* --- Required Field Indicator --- */
+.label-required {
+  color: var(--cm8-danger) !important;
+  font-weight: 700 !important;
+}
+
+/* --- Document Header --- */
+.doc-header {
+  padding-bottom: 16px !important;
+  margin-bottom: 20px !important;
+  border-bottom: 1px solid var(--theme-elevation-100) !important;
+}
+
+.doc-header h1,
+.doc-header .render-title {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+}
+
+/* --- Dashboard Cards (if used) --- */
+.dashboard__card {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease !important;
+}
+
+.dashboard__card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+.dashboard__card-list .dashboard__label {
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+}
+
+/* --- Checkbox Fields — Better Visibility --- */
+.field-type.checkbox .check {
+  border-radius: 4px !important;
+}
+
+.field-type.checkbox .check--checked {
+  background: var(--cm8-gold) !important;
+  border-color: var(--cm8-gold) !important;
+}
+
+/* --- Relationship Field --- */
+.relationship-add-new {
+  border-radius: 6px !important;
+}
+
+/* --- Pagination --- */
+.paginator .paginator__page--is-current {
+  background: var(--cm8-gold) !important;
+  color: var(--cm8-dark) !important;
+  font-weight: 700 !important;
+}
+
+/* --- Toast Notifications --- */
+.toast-container .toast--success {
+  border-left: 4px solid var(--cm8-success) !important;
+}
+
+.toast-container .toast--error {
+  border-left: 4px solid var(--cm8-danger) !important;
+}
+
+/* --- Search Bar --- */
+.search-filter input {
+  border-radius: 8px !important;
+  border: 1px solid var(--theme-elevation-200) !important;
+  padding: 8px 12px !important;
+}
+
+.search-filter input:focus {
+  border-color: var(--cm8-gold) !important;
+  box-shadow: 0 0 0 2px rgba(212, 168, 83, 0.15) !important;
+}
+
+/* --- Global Config Pages --- */
+.global-edit .global-edit__header {
+  padding-bottom: 12px !important;
+  margin-bottom: 20px !important;
+  border-bottom: 1px solid var(--theme-elevation-100) !important;
+}
+
+/* --- Scrollbar Enhancement --- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--theme-elevation-200);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-elevation-300);
+}
+
+/* --- Rich Text Editor --- */
+.rich-text .lexical-content {
+  min-height: 200px !important;
+  border-radius: 0 0 6px 6px !important;
+}
+
+/* --- Admin Panel Logo Area --- */
+.nav-header .nav__logo {
+  padding: 16px !important;
+}
+
+/* --- Overall Spacing Improvements --- */
+.collection-edit,
+.global-edit {
+  max-width: 1200px !important;
+}
+
+.field-type {
+  margin-bottom: 14px !important;
+}
+
+/* --- Date Picker --- */
+.date-time-picker input {
+  border-radius: 6px !important;
+}
+
+/* --- Mobile Responsive Tweaks --- */
+@media (max-width: 768px) {
+  .nav-group .nav__link {
+    padding: 8px 12px 8px 20px !important;
+  }
+
+  .field-type.row {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .sidebar-fields {
+    border-left: none !important;
+    border-top: 2px solid var(--theme-elevation-150) !important;
+    margin-top: 16px !important;
+  }
+}

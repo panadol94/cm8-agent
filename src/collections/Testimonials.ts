@@ -4,7 +4,8 @@ export const Testimonials: CollectionConfig = {
   slug: 'testimonials',
   admin: {
     useAsTitle: 'name',
-    description: 'Testimoni dari agent yang berjaya.',
+    defaultColumns: ['name', 'type', 'income', 'featured', 'updatedAt'],
+    description: 'Testimoni agent & paparan pendapatan untuk homepage.',
   },
   fields: [
     {
@@ -22,7 +23,6 @@ export const Testimonials: CollectionConfig = {
     {
       name: 'content',
       type: 'textarea',
-      required: true,
       label: 'Testimoni',
     },
     {
@@ -32,6 +32,14 @@ export const Testimonials: CollectionConfig = {
       label: 'Gambar Profil',
     },
     {
+      name: 'avatarUrl',
+      type: 'text',
+      label: 'Avatar URL (External)',
+      admin: {
+        description: 'URL gambar luaran untuk avatar.',
+      },
+    },
+    {
       name: 'rating',
       type: 'number',
       label: 'Rating',
@@ -39,11 +47,66 @@ export const Testimonials: CollectionConfig = {
       max: 5,
       defaultValue: 5,
     },
+    // Income showcase fields
+    {
+      name: 'income',
+      type: 'text',
+      label: 'Pendapatan',
+      admin: {
+        description: 'Contoh: RM4,200',
+      },
+    },
+    {
+      name: 'period',
+      type: 'text',
+      label: 'Tempoh',
+      defaultValue: '/minggu',
+    },
+    {
+      name: 'growth',
+      type: 'text',
+      label: 'Pertumbuhan',
+      admin: {
+        description: 'Contoh: +32%',
+      },
+    },
+    {
+      name: 'bar',
+      type: 'number',
+      label: 'Progress Bar (%)',
+      min: 0,
+      max: 100,
+      admin: {
+        description: 'Lebar bar pendapatan dalam peratus.',
+      },
+    },
+    {
+      name: 'type',
+      type: 'select',
+      label: 'Jenis',
+      options: [
+        { label: 'Paparan Pendapatan', value: 'income' },
+        { label: 'Testimoni', value: 'testimonial' },
+      ],
+      defaultValue: 'income',
+      admin: {
+        position: 'sidebar',
+      },
+    },
     {
       name: 'featured',
       type: 'checkbox',
       label: 'Paparkan di Homepage',
       defaultValue: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'order',
+      type: 'number',
+      label: 'Susunan',
+      defaultValue: 0,
       admin: {
         position: 'sidebar',
       },

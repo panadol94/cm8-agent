@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import BannerCarousel from './BannerCarousel'
 import AnimatedStats from './AnimatedStats'
 import { PatchIDIcon, TelegramKomunitiIcon, WhatsAppKomunitiIcon, AdminIcon } from './CM8Icons'
+import { getIncomeShowcase, getHomepageProviders, getFAQs, getPromos } from '@/lib/cms'
 
 /* ============================================================
    SECTION DATA
@@ -918,7 +919,7 @@ export const metadata: Metadata = {
 
 // ... (existing constants)
 
-const faqSchema = {
+const _faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: faqs.map((faq) => ({
@@ -954,7 +955,49 @@ const articleSchema = {
 /* ============================================================
    PAGE COMPONENT
    ============================================================ */
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch CMS data (falls back to hardcoded if DB empty)
+  const cmsTestimonials = await getIncomeShowcase()
+  const cmsProviders = await getHomepageProviders()
+  const cmsFaqs = await getFAQs()
+  const _cmsPromos = await getPromos()
+
+  // Use CMS data or fallback to hardcoded
+  const displayShowcase = cmsTestimonials
+    ? cmsTestimonials.map((t) => ({
+        name: t.name || '',
+        role: t.role || 'Agent Aktif',
+        income: t.income || '',
+        period: t.period || '/minggu',
+        growth: t.growth || '',
+        avatar: t.avatarUrl || '/avatars/agent-1.png',
+        bar: t.bar || 0,
+      }))
+    : incomeShowcase
+
+  const displayProviders = cmsProviders
+    ? cmsProviders.map((p) => ({
+        name: p.name || '',
+        img: p.logoUrl || '',
+      }))
+    : providers
+
+  const displayFaqs = cmsFaqs
+    ? cmsFaqs.map((f) => ({
+        q: f.question || '',
+        a: f.answer || '',
+      }))
+    : faqs
+
+  const displayFaqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: displayFaqs.map((faq: { q: string; a: string }) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: { '@type': 'Answer', text: faq.a },
+    })),
+  }
   return (
     <>
       {/* JSON-LD Schema for SEO Rich Snippets */}
@@ -975,7 +1018,7 @@ export default function HomePage() {
                 'https://instagram.com/cm8vvip',
               ],
             },
-            faqSchema,
+            displayFaqSchema,
             articleSchema,
           ]),
         }}
@@ -1134,7 +1177,7 @@ export default function HomePage() {
       <div className="income-marquee-wrapper">
         <div className="income-marquee-track">
           {/* Original set */}
-          {incomeShowcase.map((agent, i) => (
+          {displayShowcase.map((agent, i) => (
             <div key={`a-${i}`} className="income-card">
               <div className="income-card-top">
                 <div className="income-avatar-ring">
@@ -1163,7 +1206,7 @@ export default function HomePage() {
             </div>
           ))}
           {/* Duplicate set for seamless loop */}
-          {incomeShowcase.map((agent, i) => (
+          {displayShowcase.map((agent, i) => (
             <div key={`b-${i}`} className="income-card" aria-hidden="true">
               <div className="income-card-top">
                 <div className="income-avatar-ring">
@@ -1291,7 +1334,7 @@ export default function HomePage() {
       <p className="section-subtitle-bar">High Win Rate • Smooth Gameplay</p>
       <div className="provider-section">
         <div className="provider-grid">
-          {providers.map((p, i) => (
+          {displayProviders.map((p, i) => (
             <a
               key={i}
               href="https://masuk10.com/WhatsappVVIP"
@@ -1410,7 +1453,7 @@ export default function HomePage() {
       </div>
       <div className="faq-section">
         <div className="faq-list">
-          {faqs.map((f, i) => (
+          {displayFaqs.map((f, i) => (
             <details key={i} className="faq-item">
               <summary className="faq-question">
                 {f.q}

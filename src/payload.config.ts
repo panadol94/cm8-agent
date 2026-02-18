@@ -11,6 +11,11 @@ import { Agents } from './collections/Agents'
 import { Testimonials } from './collections/Testimonials'
 import { FAQs } from './collections/FAQs'
 import { BlogPosts } from './collections/BlogPosts'
+import { Providers } from './collections/Providers'
+import { Banners } from './collections/Banners'
+import { Promos } from './collections/Promos'
+import { PatchProviders } from './collections/PatchProviders'
+import { Games } from './collections/Games'
 import { SiteSettings } from './globals/SiteSettings'
 
 const filename = fileURLToPath(import.meta.url)
@@ -26,7 +31,19 @@ export default buildConfig({
       titleSuffix: ' | CM8 VVIP Admin',
     },
   },
-  collections: [Users, Media, Agents, Testimonials, FAQs, BlogPosts],
+  collections: [
+    Users,
+    Media,
+    Agents,
+    Testimonials,
+    FAQs,
+    BlogPosts,
+    Providers,
+    Banners,
+    Promos,
+    PatchProviders,
+    Games,
+  ],
   globals: [SiteSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

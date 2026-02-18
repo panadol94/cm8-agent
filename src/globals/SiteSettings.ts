@@ -121,6 +121,62 @@ export const SiteSettings: GlobalConfig = {
             },
           ],
         },
+        {
+          label: 'SEO',
+          fields: [
+            {
+              name: 'metaTitle',
+              type: 'text',
+              label: 'Meta Title',
+              defaultValue: 'CM8 VVIP — Buat Duit Online & Agent Slot Tanpa Modal #1 Malaysia',
+            },
+            {
+              name: 'metaDescription',
+              type: 'textarea',
+              label: 'Meta Description',
+              defaultValue:
+                'Jana income pasif sebagai Agent Slot CM8 VVIP. Daftar percuma, tiada modal.',
+            },
+            {
+              name: 'keywords',
+              type: 'textarea',
+              label: 'Keywords',
+              admin: {
+                description: 'Pisahkan dengan koma. Contoh: agent cm8, buat duit online',
+              },
+            },
+            {
+              name: 'ogImage',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Open Graph Image',
+            },
+          ],
+        },
+        {
+          label: 'Ticker',
+          fields: [
+            {
+              name: 'tickerEnabled',
+              type: 'checkbox',
+              label: 'Aktifkan Ticker',
+              defaultValue: true,
+            },
+            {
+              name: 'tickerMessages',
+              type: 'array',
+              label: 'Mesej Ticker',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  required: true,
+                  label: 'Teks',
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
   ],

@@ -73,6 +73,11 @@ export interface Config {
     testimonials: Testimonial;
     faqs: Faq;
     'blog-posts': BlogPost;
+    providers: Provider;
+    banners: Banner;
+    promos: Promo;
+    'patch-providers': PatchProvider;
+    games: Game;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +91,11 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
+    providers: ProvidersSelect<false> | ProvidersSelect<true>;
+    banners: BannersSelect<false> | BannersSelect<true>;
+    promos: PromosSelect<false> | PromosSelect<true>;
+    'patch-providers': PatchProvidersSelect<false> | PatchProvidersSelect<true>;
+    games: GamesSelect<false> | GamesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -188,7 +198,7 @@ export interface Agent {
   createdAt: string;
 }
 /**
- * Testimoni dari agent yang berjaya.
+ * Testimoni agent & paparan pendapatan untuk homepage.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "testimonials".
@@ -197,10 +207,29 @@ export interface Testimonial {
   id: number;
   name: string;
   role?: string | null;
-  content: string;
+  content?: string | null;
   avatar?: (number | null) | Media;
+  /**
+   * URL gambar luaran untuk avatar.
+   */
+  avatarUrl?: string | null;
   rating?: number | null;
+  /**
+   * Contoh: RM4,200
+   */
+  income?: string | null;
+  period?: string | null;
+  /**
+   * Contoh: +32%
+   */
+  growth?: string | null;
+  /**
+   * Lebar bar pendapatan dalam peratus.
+   */
+  bar?: number | null;
+  type?: ('income' | 'testimonial') | null;
   featured?: boolean | null;
+  order?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -263,6 +292,114 @@ export interface BlogPost {
   createdAt: string;
 }
 /**
+ * Provider permainan yang dipaparkan di homepage.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "providers".
+ */
+export interface Provider {
+  id: number;
+  name: string;
+  logo?: (number | null) | Media;
+  /**
+   * URL gambar luaran. Digunakan jika tiada upload.
+   */
+  logoUrl?: string | null;
+  order?: number | null;
+  showOnHomepage?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Banner carousel di bahagian atas homepage.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banners".
+ */
+export interface Banner {
+  id: number;
+  /**
+   * Nama dalaman untuk mengenal pasti banner.
+   */
+  title: string;
+  image: number | Media;
+  /**
+   * URL apabila banner diklik.
+   */
+  link?: string | null;
+  order?: number | null;
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Kad promosi yang dipaparkan di homepage.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "promos".
+ */
+export interface Promo {
+  id: number;
+  title: string;
+  items?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  ctaText?: string | null;
+  ctaLink?: string | null;
+  icon?: ('bonus' | 'star' | 'vip') | null;
+  highlight?: boolean | null;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Provider untuk Patch ID Scanner (Pragmatic, JILI, dll).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "patch-providers".
+ */
+export interface PatchProvider {
+  id: number;
+  /**
+   * ID unik, cth: pragmatic, jili, hacksaw
+   */
+  providerId: string;
+  name: string;
+  logo?: (number | null) | Media;
+  /**
+   * URL gambar luaran. Digunakan jika tiada upload.
+   */
+  logoUrl?: string | null;
+  order?: number | null;
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Senarai permainan slot untuk Patch ID Scanner.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "games".
+ */
+export interface Game {
+  id: number;
+  name: string;
+  /**
+   * ID provider, cth: pragmatic, jili, hacksaw. Mesti sama dengan Provider ID dalam Patch Providers.
+   */
+  provider: string;
+  image?: (number | null) | Media;
+  /**
+   * URL gambar luaran. Digunakan jika tiada upload.
+   */
+  imageUrl?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -309,6 +446,26 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'blog-posts';
         value: number | BlogPost;
+      } | null)
+    | ({
+        relationTo: 'providers';
+        value: number | Provider;
+      } | null)
+    | ({
+        relationTo: 'banners';
+        value: number | Banner;
+      } | null)
+    | ({
+        relationTo: 'promos';
+        value: number | Promo;
+      } | null)
+    | ({
+        relationTo: 'patch-providers';
+        value: number | PatchProvider;
+      } | null)
+    | ({
+        relationTo: 'games';
+        value: number | Game;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -415,8 +572,15 @@ export interface TestimonialsSelect<T extends boolean = true> {
   role?: T;
   content?: T;
   avatar?: T;
+  avatarUrl?: T;
   rating?: T;
+  income?: T;
+  period?: T;
+  growth?: T;
+  bar?: T;
+  type?: T;
   featured?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -451,6 +615,78 @@ export interface BlogPostsSelect<T extends boolean = true> {
         metaTitle?: T;
         metaDescription?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "providers_select".
+ */
+export interface ProvidersSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  logoUrl?: T;
+  order?: T;
+  showOnHomepage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banners_select".
+ */
+export interface BannersSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  link?: T;
+  order?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "promos_select".
+ */
+export interface PromosSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  ctaText?: T;
+  ctaLink?: T;
+  icon?: T;
+  highlight?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "patch-providers_select".
+ */
+export interface PatchProvidersSelect<T extends boolean = true> {
+  providerId?: T;
+  name?: T;
+  logo?: T;
+  logoUrl?: T;
+  order?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "games_select".
+ */
+export interface GamesSelect<T extends boolean = true> {
+  name?: T;
+  provider?: T;
+  image?: T;
+  imageUrl?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -523,6 +759,20 @@ export interface SiteSetting {
         id?: string | null;
       }[]
     | null;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  /**
+   * Pisahkan dengan koma. Contoh: agent cm8, buat duit online
+   */
+  keywords?: string | null;
+  ogImage?: (number | null) | Media;
+  tickerEnabled?: boolean | null;
+  tickerMessages?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -547,6 +797,17 @@ export interface SiteSettingsSelect<T extends boolean = true> {
     | {
         platform?: T;
         url?: T;
+        id?: T;
+      };
+  metaTitle?: T;
+  metaDescription?: T;
+  keywords?: T;
+  ogImage?: T;
+  tickerEnabled?: T;
+  tickerMessages?:
+    | T
+    | {
+        text?: T;
         id?: T;
       };
   updatedAt?: T;

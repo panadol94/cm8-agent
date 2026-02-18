@@ -3,11 +3,11 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import '../styles.css'
 import './patch-id.css'
-import { gameData, type GameInfo } from './gameData'
+import { gameData as defaultGameData, type GameInfo } from './gameData'
 import RegisterGate from './RegisterGate'
 
-/* ── Provider data ── */
-const providers = [
+/* ── Default provider data (fallback) ── */
+const defaultProviders = [
   {
     id: 'jili',
     name: 'JILI',
@@ -180,9 +180,9 @@ const defaultGames: GameInfo[] = [
   { name: 'Royal Crown', img: '' },
 ]
 
-function generateResults(provider: string) {
+function generateResults(provider: string, activeGameData: Record<string, GameInfo[]>) {
   const key = providerKeyMap[provider] || provider
-  const allGames = gameData[key] || defaultGames
+  const allGames = activeGameData[key] || defaultGames
   return allGames
     .map((g) => ({
       name: g.name,
@@ -654,6 +654,23 @@ export default function PatchIDPage() {
   const [copied, setCopied] = useState(false)
   const deviceIntel = useDeviceIntel()
 
+  // CMS-managed providers & games (with hardcoded fallbacks)
+  const [providers, setProviders] = useState(defaultProviders)
+  const [activeGameData, setActiveGameData] = useState<Record<string, GameInfo[]>>(defaultGameData)
+
+  // Load CMS data on mount
+  useEffect(() => {
+    fetch('/api/patch-data')
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.providers && data.providers.length > 0) setProviders(data.providers)
+        if (data.gameData && Object.keys(data.gameData).length > 0) setActiveGameData(data.gameData)
+      })
+      .catch(() => {
+        /* use defaults */
+      })
+  }, [])
+
   // Check localStorage for verified status
   useEffect(() => {
     try {
@@ -701,7 +718,7 @@ export default function PatchIDPage() {
     text += `#CM8VVIP #PatchID #SlotScanner`
 
     return text
-  }, [results, selectedProvider])
+  }, [results, selectedProvider, providers])
 
   const shareResults = useCallback(
     async (method?: 'whatsapp' | 'telegram' | 'copy') => {
@@ -769,7 +786,7 @@ export default function PatchIDPage() {
     setTimeout(() => {
       setShowFlash(true)
       setTimeout(() => {
-        setResults(generateResults(selectedProvider))
+        setResults(generateResults(selectedProvider, activeGameData))
         setScanning(false)
         setScanComplete(true)
         setShowFlash(false)
@@ -778,7 +795,7 @@ export default function PatchIDPage() {
         setTimeout(() => document.body.classList.remove('scan-shake'), 500)
       }, 400)
     }, 7000)
-  }, [selectedProvider])
+  }, [selectedProvider, activeGameData])
 
   const getRtpColor = (rtp: number) => {
     if (rtp >= 85) return '#22C55E'

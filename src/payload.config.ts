@@ -16,7 +16,10 @@ import { Banners } from './collections/Banners'
 import { Promos } from './collections/Promos'
 import { PatchProviders } from './collections/PatchProviders'
 import { Games } from './collections/Games'
+import { CommissionTiers } from './collections/CommissionTiers'
+import { NotificationsLog } from './collections/NotificationsLog'
 import { SiteSettings } from './globals/SiteSettings'
+import { PopupAnnouncement } from './globals/PopupAnnouncement'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -43,8 +46,10 @@ export default buildConfig({
     Promos,
     PatchProviders,
     Games,
+    CommissionTiers,
+    NotificationsLog,
   ],
-  globals: [SiteSettings],
+  globals: [SiteSettings, PopupAnnouncement],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

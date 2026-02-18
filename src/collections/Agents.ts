@@ -61,8 +61,81 @@ export const Agents: CollectionConfig = {
         position: 'sidebar',
       },
     },
+    {
+      name: 'whatsappLink',
+      type: 'text',
+      label: 'WhatsApp Link',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Auto-generated. Klik untuk chat terus.',
+      },
+    },
+    {
+      name: 'notes',
+      type: 'array',
+      label: 'Nota Admin',
+      admin: {
+        description: 'Log setiap follow-up atau nota berkaitan agent ini.',
+      },
+      fields: [
+        {
+          name: 'note',
+          type: 'textarea',
+          required: true,
+          label: 'Nota',
+        },
+        {
+          name: 'addedBy',
+          type: 'text',
+          label: 'Ditambah oleh',
+          admin: {
+            readOnly: true,
+          },
+        },
+        {
+          name: 'addedAt',
+          type: 'date',
+          label: 'Tarikh',
+          admin: {
+            readOnly: true,
+            date: {
+              pickerAppearance: 'dayAndTime',
+            },
+          },
+        },
+      ],
+    },
   ],
   hooks: {
+    beforeChange: [
+      ({ data, req }) => {
+        if (data) {
+          // Auto-generate WhatsApp link
+          const waNumber = data.whatsapp || data.phone
+          if (waNumber) {
+            const clean = waNumber.replace(/\D/g, '')
+            data.whatsappLink = `https://wa.me/${clean}`
+          }
+
+          // Auto-fill note metadata
+          if (data.notes && Array.isArray(data.notes)) {
+            data.notes = data.notes.map(
+              (note: { addedAt?: string; addedBy?: string; note: string }) => {
+                if (!note.addedAt) {
+                  note.addedAt = new Date().toISOString()
+                }
+                if (!note.addedBy && req.user) {
+                  note.addedBy = (req.user as { email?: string }).email || 'Admin'
+                }
+                return note
+              },
+            )
+          }
+        }
+        return data
+      },
+    ],
     afterChange: [
       async ({ doc, operation }) => {
         if (operation === 'create') {

@@ -7,6 +7,9 @@ export const BlogPosts: CollectionConfig = {
     defaultColumns: ['title', 'category', 'status', 'publishedDate'],
     description: 'Artikel blog untuk SEO dan content marketing.',
   },
+  versions: {
+    drafts: true,
+  },
   fields: [
     {
       name: 'title',
@@ -116,4 +119,15 @@ export const BlogPosts: CollectionConfig = {
       ],
     },
   ],
+  hooks: {
+    beforeChange: [
+      ({ data, operation }) => {
+        // Auto-set publishedDate when status changes to published
+        if (data && data.status === 'published' && !data.publishedDate) {
+          data.publishedDate = new Date().toISOString()
+        }
+        return data
+      },
+    ],
+  },
 }

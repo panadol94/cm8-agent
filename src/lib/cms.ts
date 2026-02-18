@@ -148,3 +148,32 @@ export async function getPatchGames() {
     return null
   }
 }
+
+/* ── Commission Tiers ──────────────────────────────── */
+export async function getCommissionTiers() {
+  const payload = await getPayloadInstance()
+  if (!payload) return null
+  try {
+    const result = await payload.find({
+      collection: 'commission-tiers',
+      where: { active: { equals: true } },
+      sort: 'order',
+      limit: 20,
+    })
+    return result.docs.length > 0 ? result.docs : null
+  } catch {
+    return null
+  }
+}
+
+/* ── Popup Announcement ────────────────────────────── */
+export async function getPopupAnnouncement() {
+  const payload = await getPayloadInstance()
+  if (!payload) return null
+  try {
+    const popup = await payload.findGlobal({ slug: 'popup-announcement' })
+    return popup?.enabled ? popup : null
+  } catch {
+    return null
+  }
+}

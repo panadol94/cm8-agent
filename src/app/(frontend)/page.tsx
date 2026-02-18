@@ -387,30 +387,248 @@ const agentSteps: { num: string; icon: React.ReactNode; title: string; desc: str
   },
 ]
 
-const exclusiveBenefits = [
+const exclusiveBenefits: { icon: React.ReactNode; title: string; desc: string }[] = [
   {
-    icon: '⚡',
+    icon: (
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient
+            id="benGrad1"
+            x1="0"
+            y1="0"
+            x2="36"
+            y2="36"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ffaa33" />
+            <stop offset="100%" stopColor="#e63520" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M20 4L17 16H8L15 22L12 34L20 27L28 34L25 22L32 16H23L20 4Z"
+          stroke="url(#benGrad1)"
+          strokeWidth="2"
+          fill="none"
+          strokeLinejoin="round"
+        />
+        <line
+          x1="20"
+          y1="12"
+          x2="20"
+          y2="20"
+          stroke="url(#benGrad1)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+        <line
+          x1="16"
+          y1="16"
+          x2="24"
+          y2="16"
+          stroke="url(#benGrad1)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
     title: 'Komisen Instant',
     desc: 'Komisyen dikreditkan secara automatik setiap deposit pemain.',
   },
   {
-    icon: '🎯',
+    icon: (
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient
+            id="benGrad2"
+            x1="0"
+            y1="0"
+            x2="36"
+            y2="36"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ff6b4a" />
+            <stop offset="100%" stopColor="#e63520" />
+          </linearGradient>
+        </defs>
+        <circle cx="18" cy="18" r="14" stroke="url(#benGrad2)" strokeWidth="2" fill="none" />
+        <circle cx="18" cy="18" r="9" stroke="url(#benGrad2)" strokeWidth="2" fill="none" />
+        <circle cx="18" cy="18" r="4" fill="url(#benGrad2)" />
+      </svg>
+    ),
     title: 'Tiada Modal',
     desc: 'Bermula tanpa sebarang kos. 100% percuma untuk daftar.',
   },
   {
-    icon: '🎓',
+    icon: (
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient
+            id="benGrad3"
+            x1="0"
+            y1="0"
+            x2="36"
+            y2="36"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ffaa33" />
+            <stop offset="100%" stopColor="#ff6b4a" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M8 14L18 4L28 14"
+          stroke="url(#benGrad3)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+        <rect x="6" y="14" width="24" height="4" rx="2" fill="url(#benGrad3)" />
+        <line
+          x1="12"
+          y1="22"
+          x2="12"
+          y2="32"
+          stroke="url(#benGrad3)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <line
+          x1="18"
+          y1="22"
+          x2="18"
+          y2="32"
+          stroke="url(#benGrad3)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <line
+          x1="24"
+          y1="22"
+          x2="24"
+          y2="32"
+          stroke="url(#benGrad3)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
     title: 'Training Percuma',
     desc: 'Kursus lengkap cara promote & tingkatkan jualan.',
   },
   {
-    icon: '📊',
+    icon: (
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient
+            id="benGrad4"
+            x1="0"
+            y1="0"
+            x2="36"
+            y2="36"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ff8c42" />
+            <stop offset="100%" stopColor="#e63520" />
+          </linearGradient>
+        </defs>
+        <rect x="6" y="20" width="5" height="12" rx="1.5" fill="url(#benGrad4)" />
+        <rect x="15.5" y="14" width="5" height="18" rx="1.5" fill="url(#benGrad4)" />
+        <rect x="25" y="6" width="5" height="26" rx="1.5" fill="url(#benGrad4)" />
+        <polyline
+          points="6,12 16,8 26,3"
+          stroke="url(#benGrad4)"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+        <polyline
+          points="22,3 26,3 26,7"
+          stroke="url(#benGrad4)"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      </svg>
+    ),
     title: 'Dashboard Real-Time',
     desc: 'Pantau komisyen, pemain & prestasi secara live.',
   },
-  { icon: '🛡️', title: 'Support 24/7', desc: 'Pasukan admin sentiasa standby untuk bantu anda.' },
   {
-    icon: '🎁',
+    icon: (
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient
+            id="benGrad5"
+            x1="0"
+            y1="0"
+            x2="36"
+            y2="36"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ff6b4a" />
+            <stop offset="100%" stopColor="#e63520" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M18 3L6 10V18C6 26 11 32 18 34C25 32 30 26 30 18V10L18 3Z"
+          stroke="url(#benGrad5)"
+          strokeWidth="2.5"
+          fill="none"
+          strokeLinejoin="round"
+        />
+        <polyline
+          points="13,18 16,22 24,13"
+          stroke="url(#benGrad5)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      </svg>
+    ),
+    title: 'Support 24/7',
+    desc: 'Pasukan admin sentiasa standby untuk bantu anda.',
+  },
+  {
+    icon: (
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient
+            id="benGrad6"
+            x1="0"
+            y1="0"
+            x2="36"
+            y2="36"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ffaa33" />
+            <stop offset="100%" stopColor="#ff6b4a" />
+          </linearGradient>
+        </defs>
+        <rect
+          x="6"
+          y="14"
+          width="24"
+          height="18"
+          rx="3"
+          stroke="url(#benGrad6)"
+          strokeWidth="2.5"
+          fill="none"
+        />
+        <line x1="6" y1="20" x2="30" y2="20" stroke="url(#benGrad6)" strokeWidth="2" />
+        <line x1="18" y1="14" x2="18" y2="32" stroke="url(#benGrad6)" strokeWidth="2" />
+        <path
+          d="M10 14L18 6L26 14"
+          stroke="url(#benGrad6)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      </svg>
+    ),
     title: 'Bonus Bulanan',
     desc: 'Insentif tambahan untuk agent yang aktif & berprestasi.',
   },

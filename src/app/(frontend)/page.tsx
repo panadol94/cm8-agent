@@ -682,9 +682,58 @@ const providers = [
   },
 ]
 
-const promoCards = [
+const promoCards: {
+  icon: React.ReactNode
+  title: string
+  highlight: boolean
+  items: string[]
+  cta: string
+  ctaLink: string
+}[] = [
   {
-    icon: '💰',
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient
+            id="promoGrad1"
+            x1="0"
+            y1="0"
+            x2="40"
+            y2="40"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ffaa33" />
+            <stop offset="100%" stopColor="#e63520" />
+          </linearGradient>
+        </defs>
+        <circle cx="20" cy="20" r="14" stroke="url(#promoGrad1)" strokeWidth="2.5" fill="none" />
+        <path
+          d="M16 14C16 14 18 12 20 12C23 12 24.5 14 24.5 16C24.5 18 22 19 20 19V22"
+          stroke="url(#promoGrad1)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          fill="none"
+        />
+        <line
+          x1="17"
+          y1="26"
+          x2="23"
+          y2="26"
+          stroke="url(#promoGrad1)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+        <line
+          x1="17"
+          y1="29"
+          x2="23"
+          y2="29"
+          stroke="url(#promoGrad1)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
     title: 'Weekly Deposit Bonus',
     highlight: false,
     items: [
@@ -697,7 +746,61 @@ const promoCards = [
     ctaLink: 'https://masuk10.com/WhatsappVVIP',
   },
   {
-    icon: '🎉',
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient
+            id="promoGrad2"
+            x1="0"
+            y1="0"
+            x2="40"
+            y2="40"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ff6b4a" />
+            <stop offset="100%" stopColor="#e63520" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M20 6L22 14L30 14L24 19L26 27L20 23L14 27L16 19L10 14L18 14L20 6Z"
+          stroke="url(#promoGrad2)"
+          strokeWidth="2"
+          fill="url(#promoGrad2)"
+          fillOpacity="0.15"
+          strokeLinejoin="round"
+        />
+        <line
+          x1="20"
+          y1="2"
+          x2="20"
+          y2="6"
+          stroke="url(#promoGrad2)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <line
+          x1="32"
+          y1="8"
+          x2="30"
+          y2="11"
+          stroke="url(#promoGrad2)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <line
+          x1="8"
+          y1="8"
+          x2="10"
+          y2="11"
+          stroke="url(#promoGrad2)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <circle cx="20" cy="34" r="2" fill="url(#promoGrad2)" />
+        <circle cx="10" cy="32" r="1.5" fill="url(#promoGrad2)" />
+        <circle cx="30" cy="32" r="1.5" fill="url(#promoGrad2)" />
+      </svg>
+    ),
     title: 'Special Event',
     highlight: false,
     items: ['Weekly Bonus', 'Exclusive Rewards', 'One Player ID Benefits', 'Fast Support'],

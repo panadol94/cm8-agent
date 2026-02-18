@@ -815,6 +815,26 @@ async function initDB() {
     // Blog Posts: add _status for versions
     await addColumnIfNotExists('blog_posts', '_status', "varchar DEFAULT 'draft'")
 
+    // Scanner Config: add enum + columns to site_settings
+    await createEnumIfNotExists('enum_site_settings_scanner_seed_interval', [
+      '15',
+      '30',
+      '60',
+      '180',
+    ])
+    await addColumnIfNotExists('site_settings', 'scanner_min_rtp', 'numeric DEFAULT 30')
+    await addColumnIfNotExists('site_settings', 'scanner_max_rtp', 'numeric DEFAULT 97')
+    await addColumnIfNotExists('site_settings', 'scanner_hot_threshold', 'numeric DEFAULT 85')
+    await addColumnIfNotExists('site_settings', 'scanner_warm_threshold', 'numeric DEFAULT 65')
+    await addColumnIfNotExists('site_settings', 'scanner_hot_percent', 'numeric DEFAULT 10')
+    await addColumnIfNotExists('site_settings', 'scanner_warm_percent', 'numeric DEFAULT 30')
+    await addColumnIfNotExists('site_settings', 'scanner_cold_percent', 'numeric DEFAULT 60')
+    await addColumnIfNotExists(
+      'site_settings',
+      'scanner_seed_interval',
+      "enum_site_settings_scanner_seed_interval DEFAULT '60'",
+    )
+
     // Payload locked docs rels: add new collection refs
     await addColumnIfNotExists(
       'payload_locked_documents_rels',

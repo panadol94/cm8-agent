@@ -180,20 +180,87 @@ const defaultGames: GameInfo[] = [
   { name: 'Royal Crown', img: '' },
 ]
 
-function generateResults(provider: string, activeGameData: Record<string, GameInfo[]>) {
+/* ── Scanner Config type ── */
+type ScannerConfig = {
+  minRtp: number
+  maxRtp: number
+  hotThreshold: number
+  warmThreshold: number
+  hotPercent: number
+  warmPercent: number
+  seedInterval: number
+}
+
+const defaultScannerConfig: ScannerConfig = {
+  minRtp: 30,
+  maxRtp: 97,
+  hotThreshold: 85,
+  warmThreshold: 65,
+  hotPercent: 10,
+  warmPercent: 30,
+  seedInterval: 60,
+}
+
+/* ── Time-seeded PRNG (deterministic within interval) ── */
+function seededRandom(seed: number): () => number {
+  let s = seed
+  return () => {
+    s = (s * 1664525 + 1013904223) & 0xffffffff
+    return (s >>> 0) / 0xffffffff
+  }
+}
+
+function getTimeSeed(provider: string, intervalMinutes: number): number {
+  const slot = Math.floor(Date.now() / (intervalMinutes * 60 * 1000))
+  // Simple string hash
+  let hash = 0
+  const str = `${provider}-${slot}`
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash + str.charCodeAt(i)) & 0xffffffff
+  }
+  return hash
+}
+
+function generateResults(
+  provider: string,
+  activeGameData: Record<string, GameInfo[]>,
+  cfg: ScannerConfig = defaultScannerConfig,
+) {
   const key = providerKeyMap[provider] || provider
   const allGames = activeGameData[key] || defaultGames
+
+  const seed = getTimeSeed(provider, cfg.seedInterval)
+  const rand = seededRandom(seed)
+
+  const { minRtp, maxRtp, hotThreshold, warmThreshold, hotPercent, warmPercent } = cfg
+
   return allGames
-    .map((g) => ({
-      name: g.name,
-      img: g.img,
-      rtp: Math.floor(Math.random() * 30 + 65),
-      status: '' as string,
-    }))
-    .map((g) => ({
-      ...g,
-      status: g.rtp >= 85 ? 'HOT' : g.rtp >= 75 ? 'WARM' : 'COLD',
-    }))
+    .map((g, i) => {
+      // Determine tier for this game based on weighted distribution
+      const tierRoll = rand() * 100
+      let rtp: number
+      let status: string
+
+      // Use game index + seed for per-game determinism
+      const gameRand = seededRandom(seed + i + 1)
+      gameRand() // skip first value for better distribution
+
+      if (tierRoll < hotPercent) {
+        // HOT tier
+        rtp = Math.floor(gameRand() * (maxRtp - hotThreshold + 1) + hotThreshold)
+        status = 'HOT'
+      } else if (tierRoll < hotPercent + warmPercent) {
+        // WARM tier
+        rtp = Math.floor(gameRand() * (hotThreshold - warmThreshold) + warmThreshold)
+        status = 'WARM'
+      } else {
+        // COLD tier
+        rtp = Math.floor(gameRand() * (warmThreshold - minRtp) + minRtp)
+        status = 'COLD'
+      }
+
+      return { name: g.name, img: g.img, rtp, status }
+    })
     .sort((a, b) => b.rtp - a.rtp)
 }
 
@@ -654,9 +721,10 @@ export default function PatchIDPage() {
   const [copied, setCopied] = useState(false)
   const deviceIntel = useDeviceIntel()
 
-  // CMS-managed providers & games (with hardcoded fallbacks)
+  // CMS-managed providers, games & scanner config (with hardcoded fallbacks)
   const [providers, setProviders] = useState(defaultProviders)
   const [activeGameData, setActiveGameData] = useState<Record<string, GameInfo[]>>(defaultGameData)
+  const [scannerConfig, setScannerConfig] = useState<ScannerConfig>(defaultScannerConfig)
 
   // Load CMS data on mount
   useEffect(() => {
@@ -665,6 +733,7 @@ export default function PatchIDPage() {
       .then((data) => {
         if (data.providers && data.providers.length > 0) setProviders(data.providers)
         if (data.gameData && Object.keys(data.gameData).length > 0) setActiveGameData(data.gameData)
+        if (data.scannerConfig) setScannerConfig(data.scannerConfig)
       })
       .catch(() => {
         /* use defaults */
@@ -786,7 +855,7 @@ export default function PatchIDPage() {
     setTimeout(() => {
       setShowFlash(true)
       setTimeout(() => {
-        setResults(generateResults(selectedProvider, activeGameData))
+        setResults(generateResults(selectedProvider, activeGameData, scannerConfig))
         setScanning(false)
         setScanComplete(true)
         setShowFlash(false)
@@ -795,7 +864,7 @@ export default function PatchIDPage() {
         setTimeout(() => document.body.classList.remove('scan-shake'), 500)
       }, 400)
     }, 7000)
-  }, [selectedProvider, activeGameData])
+  }, [selectedProvider, activeGameData, scannerConfig])
 
   const getRtpColor = (rtp: number) => {
     if (rtp >= 85) return '#22C55E'

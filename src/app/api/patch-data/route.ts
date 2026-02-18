@@ -4,7 +4,7 @@ import config from '@/payload.config'
 
 export const dynamic = 'force-dynamic'
 
-// GET /api/patch-data — serves patch providers + games from CMS
+// GET /api/patch-data — serves patch providers + games + scanner config from CMS
 export async function GET() {
   try {
     const payload = await getPayload({ config })
@@ -22,6 +22,25 @@ export async function GET() {
       collection: 'games',
       limit: 5000,
     })
+
+    // Fetch scanner config from site-settings global
+    let scannerConfig = null
+    try {
+      const siteSettings = await payload.findGlobal({ slug: 'site-settings' })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const ss = siteSettings as any
+      scannerConfig = {
+        minRtp: ss.scannerMinRtp ?? 30,
+        maxRtp: ss.scannerMaxRtp ?? 97,
+        hotThreshold: ss.scannerHotThreshold ?? 85,
+        warmThreshold: ss.scannerWarmThreshold ?? 65,
+        hotPercent: ss.scannerHotPercent ?? 10,
+        warmPercent: ss.scannerWarmPercent ?? 30,
+        seedInterval: parseInt(ss.scannerSeedInterval || '60', 10),
+      }
+    } catch {
+      // Use defaults if global not available
+    }
 
     // Format providers
     const providers = providersResult.docs.map((p) => ({
@@ -41,10 +60,10 @@ export async function GET() {
       })
     }
 
-    return NextResponse.json({ providers, gameData })
+    return NextResponse.json({ providers, gameData, scannerConfig })
   } catch (error) {
     // If CMS not available, return empty — client will use fallback
     console.error('[PATCH-DATA] Error:', error)
-    return NextResponse.json({ providers: null, gameData: null })
+    return NextResponse.json({ providers: null, gameData: null, scannerConfig: null })
   }
 }

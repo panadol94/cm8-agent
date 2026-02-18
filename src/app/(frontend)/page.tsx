@@ -193,34 +193,195 @@ const incomeShowcase = [
   },
 ]
 
-const agentSteps = [
+const agentSteps: { num: string; icon: React.ReactNode; title: string; desc: string }[] = [
   {
     num: '01',
-    icon: '💎',
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient
+            id="stepGrad1"
+            x1="0"
+            y1="0"
+            x2="40"
+            y2="40"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ff6b4a" />
+            <stop offset="100%" stopColor="#e63520" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M20 4L24.5 14.5H36L26.5 21.5L30 33L20 26L10 33L13.5 21.5L4 14.5H15.5L20 4Z"
+          stroke="url(#stepGrad1)"
+          strokeWidth="2.5"
+          fill="none"
+          strokeLinejoin="round"
+        />
+        <circle cx="20" cy="20" r="4" fill="url(#stepGrad1)" />
+      </svg>
+    ),
     title: 'VVIP Invitation Only',
     desc: 'Akses terhad melalui Private Invitation Link dari Master Agent sah.',
   },
   {
     num: '02',
-    icon: '🛡️',
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient
+            id="stepGrad2"
+            x1="0"
+            y1="0"
+            x2="40"
+            y2="40"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ff8c42" />
+            <stop offset="100%" stopColor="#e63520" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M20 3L6 12V22C6 30 12 36 20 38C28 36 34 30 34 22V12L20 3Z"
+          stroke="url(#stepGrad2)"
+          strokeWidth="2.5"
+          fill="none"
+          strokeLinejoin="round"
+        />
+        <polyline
+          points="14,20 18,25 27,15"
+          stroke="url(#stepGrad2)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      </svg>
+    ),
     title: 'Official Verification',
     desc: 'Pendaftaran profil perniagaan selamat dengan sekuriti gred bank.',
   },
   {
     num: '03',
-    icon: '💼',
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient
+            id="stepGrad3"
+            x1="0"
+            y1="0"
+            x2="40"
+            y2="40"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ffaa33" />
+            <stop offset="100%" stopColor="#ff6b4a" />
+          </linearGradient>
+        </defs>
+        <rect
+          x="6"
+          y="10"
+          width="28"
+          height="22"
+          rx="3"
+          stroke="url(#stepGrad3)"
+          strokeWidth="2.5"
+          fill="none"
+        />
+        <line x1="6" y1="17" x2="34" y2="17" stroke="url(#stepGrad3)" strokeWidth="2" />
+        <circle cx="20" cy="25" r="3" fill="url(#stepGrad3)" />
+      </svg>
+    ),
     title: 'Capital Allocation',
     desc: 'Komitmen modal permulaan untuk akses Tier-1 Commission (Max Yield).',
   },
   {
     num: '04',
-    icon: '🎛️',
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient
+            id="stepGrad4"
+            x1="0"
+            y1="0"
+            x2="40"
+            y2="40"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ff6b4a" />
+            <stop offset="100%" stopColor="#e63520" />
+          </linearGradient>
+        </defs>
+        <rect
+          x="4"
+          y="8"
+          width="32"
+          height="24"
+          rx="3"
+          stroke="url(#stepGrad4)"
+          strokeWidth="2.5"
+          fill="none"
+        />
+        <circle cx="14" cy="20" r="3" stroke="url(#stepGrad4)" strokeWidth="2" fill="none" />
+        <circle cx="26" cy="20" r="3" stroke="url(#stepGrad4)" strokeWidth="2" fill="none" />
+        <line
+          x1="14"
+          y1="27"
+          x2="14"
+          y2="29"
+          stroke="url(#stepGrad4)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+        <line
+          x1="26"
+          y1="27"
+          x2="26"
+          y2="29"
+          stroke="url(#stepGrad4)"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      </svg>
+    ),
     title: 'System Authority',
     desc: 'Kuasa penuh Agent Command Center untuk operasi & kawalan kewangan.',
   },
   {
     num: '05',
-    icon: '📈',
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient
+            id="stepGrad5"
+            x1="0"
+            y1="0"
+            x2="40"
+            y2="40"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop offset="0%" stopColor="#ffaa33" />
+            <stop offset="100%" stopColor="#e63520" />
+          </linearGradient>
+        </defs>
+        <polyline
+          points="6,32 14,22 22,26 34,10"
+          stroke="url(#stepGrad5)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+        <polyline
+          points="26,10 34,10 34,18"
+          stroke="url(#stepGrad5)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      </svg>
+    ),
     title: 'Wealth Generation',
     desc: 'Automasi pendapatan pasif & nikmati ROI mingguan.',
   },

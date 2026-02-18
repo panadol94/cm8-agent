@@ -4016,14 +4016,19 @@ body::before {
   height: 70px;
   border-radius: 50%;
   background: linear-gradient(145deg, #fff8f5, #fff0eb);
-  border: 2px solid rgba(230, 53, 32, 0.1);
+  border: 2px solid rgba(230, 53, 32, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(230, 53, 32, 0.08);
   transition:
     transform 0.3s,
     box-shadow 0.3s;
+}
+.step-icon svg {
+  width: 100%;
+  height: 100%;
 }
 .step-item:hover .step-icon {
   transform: scale(1.08);

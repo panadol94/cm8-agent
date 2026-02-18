@@ -2,30 +2,39 @@ import type { CollectionConfig } from 'payload'
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  labels: {
+    singular: 'Media',
+    plural: 'Galeri Media',
+  },
   access: {
     read: () => true,
   },
   admin: {
-    description: 'Gambar dan fail media untuk website.',
+    description: 'Semua gambar dan fail media untuk website. Gunakan kategori untuk susun.',
   },
   fields: [
     {
       name: 'alt',
       type: 'text',
       required: true,
-      label: 'Alt Text',
+      label: 'Alt Text (SEO)',
+      admin: {
+        description: 'Penerangan gambar untuk SEO dan accessibility.',
+        placeholder: 'cth: Logo CM8 VVIP berwarna emas',
+      },
     },
+    // Sidebar
     {
       name: 'category',
       type: 'select',
-      label: 'Kategori',
+      label: '📁 Kategori',
       options: [
-        { label: 'Banner', value: 'banner' },
-        { label: 'Avatar', value: 'avatar' },
-        { label: 'Blog', value: 'blog' },
-        { label: 'Provider Logo', value: 'provider' },
-        { label: 'Game', value: 'game' },
-        { label: 'Lain-lain', value: 'other' },
+        { label: '🖼️ Banner', value: 'banner' },
+        { label: '👤 Avatar', value: 'avatar' },
+        { label: '📝 Blog', value: 'blog' },
+        { label: '🎮 Provider Logo', value: 'provider' },
+        { label: '🎰 Game', value: 'game' },
+        { label: '📦 Lain-lain', value: 'other' },
       ],
       defaultValue: 'other',
       admin: {

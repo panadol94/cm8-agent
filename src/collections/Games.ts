@@ -2,41 +2,67 @@ import type { CollectionConfig } from 'payload'
 
 export const Games: CollectionConfig = {
   slug: 'games',
+  labels: {
+    singular: 'Permainan',
+    plural: 'Senarai Permainan',
+  },
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'provider', 'updatedAt'],
-    description: 'Senarai permainan slot untuk Patch ID Scanner.',
+    listSearchableFields: ['name', 'provider'],
+    description:
+      'Senarai permainan slot untuk Patch ID Scanner. Setiap game mesti ada Provider ID.',
   },
   fields: [
     {
-      name: 'name',
-      type: 'text',
-      required: true,
-      label: 'Nama Permainan',
+      type: 'row',
+      fields: [
+        {
+          name: 'name',
+          type: 'text',
+          required: true,
+          label: '🎰 Nama Permainan',
+          admin: {
+            placeholder: 'cth: Sweet Bonanza',
+            width: '50%',
+          },
+        },
+        {
+          name: 'provider',
+          type: 'text',
+          required: true,
+          label: 'Provider ID',
+          admin: {
+            description: 'Mesti sama dengan Provider ID dalam Patch Providers.',
+            placeholder: 'cth: pragmatic, jili, hacksaw',
+            width: '50%',
+          },
+        },
+      ],
     },
     {
-      name: 'provider',
-      type: 'text',
-      required: true,
-      label: 'Provider ID',
-      admin: {
-        description:
-          'ID provider, cth: pragmatic, jili, hacksaw. Mesti sama dengan Provider ID dalam Patch Providers.',
-      },
-    },
-    {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-      label: 'Gambar (Upload)',
-    },
-    {
-      name: 'imageUrl',
-      type: 'text',
-      label: 'Gambar URL (External)',
-      admin: {
-        description: 'URL gambar luaran. Digunakan jika tiada upload.',
-      },
+      type: 'row',
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          label: '🖼️ Gambar (Upload)',
+          admin: {
+            width: '50%',
+          },
+        },
+        {
+          name: 'imageUrl',
+          type: 'text',
+          label: '🔗 Gambar URL (External)',
+          admin: {
+            description: 'Guna URL luaran jika tiada upload. Salah satu sahaja diperlukan.',
+            placeholder: 'https://example.com/game-image.png',
+            width: '50%',
+          },
+        },
+      ],
     },
   ],
 }

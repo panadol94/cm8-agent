@@ -2,19 +2,25 @@ import type { CollectionConfig } from 'payload'
 
 export const Banners: CollectionConfig = {
   slug: 'banners',
+  labels: {
+    singular: 'Banner',
+    plural: 'Banner Carousel',
+  },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'order', 'active', 'updatedAt'],
-    description: 'Banner carousel di bahagian atas homepage.',
+    defaultColumns: ['title', 'active', 'order', 'updatedAt'],
+    listSearchableFields: ['title'],
+    description: 'Banner carousel di bahagian atas homepage. Susun mengikut "Susunan".',
   },
   fields: [
     {
       name: 'title',
       type: 'text',
       required: true,
-      label: 'Tajuk',
+      label: 'Tajuk Banner',
       admin: {
-        description: 'Nama dalaman untuk mengenal pasti banner.',
+        description: 'Nama dalaman untuk mengenal pasti banner. Tidak dipapar di frontend.',
+        placeholder: 'cth: Promosi Raya 2026',
       },
     },
     {
@@ -22,16 +28,21 @@ export const Banners: CollectionConfig = {
       type: 'upload',
       relationTo: 'media',
       required: true,
-      label: 'Gambar Banner',
+      label: '🖼️ Gambar Banner',
+      admin: {
+        description: 'Saiz disyorkan: 1920 x 640 piksel.',
+      },
     },
     {
       name: 'link',
       type: 'text',
-      label: 'Link (Optional)',
+      label: '🔗 Link (Optional)',
       admin: {
-        description: 'URL apabila banner diklik.',
+        description: 'URL apabila banner diklik. Kosongkan jika tiada.',
+        placeholder: 'cth: https://cm8vvip.com/promo',
       },
     },
+    // Sidebar
     {
       name: 'order',
       type: 'number',
@@ -39,15 +50,17 @@ export const Banners: CollectionConfig = {
       defaultValue: 0,
       admin: {
         position: 'sidebar',
+        description: 'Nombor kecil = papar dulu.',
       },
     },
     {
       name: 'active',
       type: 'checkbox',
-      label: 'Aktif',
+      label: '✅ Aktif',
       defaultValue: true,
       admin: {
         position: 'sidebar',
+        description: 'Nyahaktif untuk sembunyikan tanpa delete.',
       },
     },
   ],

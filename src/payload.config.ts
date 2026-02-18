@@ -32,7 +32,33 @@ export default buildConfig({
     },
     meta: {
       titleSuffix: ' | CM8 VVIP Admin',
+      title: 'CM8 VVIP Admin',
+      description: 'Panel pentadbiran CM8 VVIP — urus agent, komisyen, dan kandungan laman.',
+      icons: [{ url: '/cm8-logo.png', type: 'image/png' }],
+      openGraph: {
+        title: 'CM8 VVIP Admin Panel',
+        description: 'Panel pentadbiran CM8 VVIP',
+        images: [{ url: '/og-image.jpg' }],
+      },
     },
+    groups: [
+      {
+        label: '👥 Pengurusan Agent',
+        items: ['agents', 'commission-tiers', 'notifications-log'],
+      },
+      {
+        label: '📝 Kandungan',
+        items: ['blog-posts', 'testimonials', 'promos', 'faqs', 'banners'],
+      },
+      {
+        label: '🎮 Permainan',
+        items: ['providers', 'patch-providers', 'games'],
+      },
+      {
+        label: '⚙️ Sistem',
+        items: ['users', 'media'],
+      },
+    ],
   },
   collections: [
     Users,

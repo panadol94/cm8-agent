@@ -2,10 +2,17 @@ import type { CollectionConfig } from 'payload'
 
 export const NotificationsLog: CollectionConfig = {
   slug: 'notifications-log',
+  labels: {
+    singular: 'Log Notifikasi',
+    plural: 'Log Notifikasi',
+  },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'channel', 'status', 'createdAt'],
-    description: 'Log semua notifikasi yang dihantar (Telegram, WhatsApp).',
+    group: '👥 Pengurusan Agent',
+    defaultColumns: ['title', 'channel', 'status', 'recipient', 'createdAt'],
+    listSearchableFields: ['title', 'recipient'],
+    description:
+      'Log semua notifikasi yang dihantar (Telegram, WhatsApp, Email). Filter mengikut saluran atau status.',
   },
   access: {
     create: () => true, // Allow system to create
@@ -18,22 +25,38 @@ export const NotificationsLog: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
-      label: 'Tajuk',
+      label: 'Tajuk Notifikasi',
+      admin: {
+        placeholder: 'cth: Agent Baru Mendaftar',
+      },
     },
     {
       name: 'message',
       type: 'textarea',
       required: true,
       label: 'Mesej',
+      admin: {
+        description: 'Kandungan yang dihantar.',
+      },
     },
+    {
+      name: 'recipient',
+      type: 'text',
+      label: '📬 Penerima',
+      admin: {
+        description: 'Chat ID, nombor telefon, atau email penerima.',
+        placeholder: 'cth: 60123456789 atau chat_id',
+      },
+    },
+    // Sidebar
     {
       name: 'channel',
       type: 'select',
-      label: 'Saluran',
+      label: '📡 Saluran',
       options: [
-        { label: 'Telegram', value: 'telegram' },
-        { label: 'WhatsApp', value: 'whatsapp' },
-        { label: 'Email', value: 'email' },
+        { label: '✈️ Telegram', value: 'telegram' },
+        { label: '💬 WhatsApp', value: 'whatsapp' },
+        { label: '📧 Email', value: 'email' },
       ],
       required: true,
       admin: {
@@ -45,9 +68,9 @@ export const NotificationsLog: CollectionConfig = {
       type: 'select',
       label: 'Status',
       options: [
-        { label: 'Dihantar', value: 'sent' },
-        { label: 'Gagal', value: 'failed' },
-        { label: 'Pending', value: 'pending' },
+        { label: '✅ Dihantar', value: 'sent' },
+        { label: '❌ Gagal', value: 'failed' },
+        { label: '🟡 Pending', value: 'pending' },
       ],
       defaultValue: 'pending',
       admin: {
@@ -55,18 +78,10 @@ export const NotificationsLog: CollectionConfig = {
       },
     },
     {
-      name: 'recipient',
-      type: 'text',
-      label: 'Penerima',
-      admin: {
-        description: 'Chat ID, nombor telefon, atau email penerima.',
-      },
-    },
-    {
       name: 'relatedAgent',
       type: 'relationship',
       relationTo: 'agents',
-      label: 'Agent Berkaitan',
+      label: '👤 Agent Berkaitan',
       admin: {
         position: 'sidebar',
       },
@@ -74,9 +89,9 @@ export const NotificationsLog: CollectionConfig = {
     {
       name: 'errorMessage',
       type: 'textarea',
-      label: 'Mesej Ralat',
+      label: '⚠️ Mesej Ralat',
       admin: {
-        description: 'Mesej ralat jika status gagal.',
+        description: 'Mesej ralat jika notifikasi gagal dihantar.',
         condition: (data) => data?.status === 'failed',
       },
     },

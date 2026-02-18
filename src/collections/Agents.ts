@@ -2,6 +2,10 @@ import type { CollectionConfig } from 'payload'
 
 export const Agents: CollectionConfig = {
   slug: 'agents',
+  labels: {
+    singular: 'Agent',
+    plural: 'Senarai Agent',
+  },
   access: {
     create: () => true, // Allow public registration
     read: ({ req: { user } }) => Boolean(user),
@@ -10,101 +14,167 @@ export const Agents: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'phone', 'whatsapp', 'status', 'createdAt'],
-    description: 'Senarai agent yang mendaftar melalui website.',
+    defaultColumns: ['name', 'phone', 'status', 'experience', 'createdAt'],
+    listSearchableFields: ['name', 'phone', 'whatsapp'],
+    description:
+      'Senarai agent yang mendaftar melalui website. Gunakan filter untuk cari agent mengikut status.',
   },
   fields: [
     {
-      name: 'name',
-      type: 'text',
-      required: true,
-      label: 'Nama Penuh',
-    },
-    {
-      name: 'phone',
-      type: 'text',
-      required: true,
-      label: 'Nombor Telefon',
-    },
-    {
-      name: 'whatsapp',
-      type: 'text',
-      label: 'Nombor WhatsApp',
-    },
-    {
-      name: 'experience',
-      type: 'select',
-      label: 'Pengalaman',
-      options: [
-        { label: 'Baru (Tiada Pengalaman)', value: 'baru' },
-        { label: 'Berpengalaman', value: 'berpengalaman' },
+      type: 'tabs',
+      tabs: [
+        {
+          label: '📋 Maklumat Asas',
+          description: 'Maklumat pendaftaran agent.',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'name',
+                  type: 'text',
+                  required: true,
+                  label: 'Nama Penuh',
+                  admin: {
+                    placeholder: 'cth: Ahmad bin Ali',
+                    width: '50%',
+                  },
+                },
+                {
+                  name: 'experience',
+                  type: 'select',
+                  label: 'Pengalaman',
+                  options: [
+                    { label: '🟢 Baru (Tiada Pengalaman)', value: 'baru' },
+                    { label: '🔵 Berpengalaman', value: 'berpengalaman' },
+                  ],
+                  defaultValue: 'baru',
+                  admin: {
+                    width: '50%',
+                  },
+                },
+              ],
+            },
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'phone',
+                  type: 'text',
+                  required: true,
+                  label: 'Nombor Telefon',
+                  admin: {
+                    placeholder: 'cth: 0123456789',
+                    width: '50%',
+                  },
+                },
+                {
+                  name: 'whatsapp',
+                  type: 'text',
+                  label: 'Nombor WhatsApp',
+                  admin: {
+                    placeholder: 'cth: 60123456789 (jika berbeza)',
+                    description: 'Kosongkan jika sama dengan nombor telefon.',
+                    width: '50%',
+                  },
+                },
+              ],
+            },
+            {
+              name: 'message',
+              type: 'textarea',
+              label: 'Mesej Tambahan',
+              admin: {
+                description: 'Mesej yang ditulis oleh agent semasa pendaftaran.',
+                placeholder: 'Apa-apa mesej dari agent...',
+              },
+            },
+          ],
+        },
+        {
+          label: '📝 Nota Admin',
+          description: 'Nota dalaman untuk follow-up agent ini.',
+          fields: [
+            {
+              name: 'notes',
+              type: 'array',
+              label: 'Nota Admin',
+              labels: {
+                singular: 'Nota',
+                plural: 'Nota',
+              },
+              admin: {
+                description: 'Tambah nota setiap kali follow-up atau ada perkembangan baru.',
+                initCollapsed: true,
+              },
+              fields: [
+                {
+                  name: 'note',
+                  type: 'textarea',
+                  required: true,
+                  label: 'Nota',
+                  admin: {
+                    placeholder: 'cth: Sudah hubungi, berminat untuk join...',
+                  },
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'addedBy',
+                      type: 'text',
+                      label: 'Ditambah oleh',
+                      admin: {
+                        readOnly: true,
+                        width: '50%',
+                      },
+                    },
+                    {
+                      name: 'addedAt',
+                      type: 'date',
+                      label: 'Tarikh',
+                      admin: {
+                        readOnly: true,
+                        width: '50%',
+                        date: {
+                          pickerAppearance: 'dayAndTime',
+                        },
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
-      defaultValue: 'baru',
     },
-    {
-      name: 'message',
-      type: 'textarea',
-      label: 'Mesej Tambahan',
-    },
+    // Sidebar fields
     {
       name: 'status',
       type: 'select',
-      label: 'Status',
+      label: 'Status Agent',
       options: [
-        { label: 'Pending', value: 'pending' },
-        { label: 'Dihubungi', value: 'contacted' },
-        { label: 'Diluluskan', value: 'approved' },
-        { label: 'Ditolak', value: 'rejected' },
+        { label: '🟡 Pending', value: 'pending' },
+        { label: '📞 Dihubungi', value: 'contacted' },
+        { label: '✅ Diluluskan', value: 'approved' },
+        { label: '❌ Ditolak', value: 'rejected' },
       ],
       defaultValue: 'pending',
       admin: {
         position: 'sidebar',
+        description: 'Tukar status selepas follow-up.',
       },
     },
     {
       name: 'whatsappLink',
       type: 'text',
-      label: 'WhatsApp Link',
+      label: '💬 WhatsApp Link',
       admin: {
         position: 'sidebar',
         readOnly: true,
-        description: 'Auto-generated. Klik untuk chat terus.',
+        description: 'Auto-generated. Klik untuk chat terus dengan agent.',
       },
-    },
-    {
-      name: 'notes',
-      type: 'array',
-      label: 'Nota Admin',
-      admin: {
-        description: 'Log setiap follow-up atau nota berkaitan agent ini.',
-      },
-      fields: [
-        {
-          name: 'note',
-          type: 'textarea',
-          required: true,
-          label: 'Nota',
-        },
-        {
-          name: 'addedBy',
-          type: 'text',
-          label: 'Ditambah oleh',
-          admin: {
-            readOnly: true,
-          },
-        },
-        {
-          name: 'addedAt',
-          type: 'date',
-          label: 'Tarikh',
-          admin: {
-            readOnly: true,
-            date: {
-              pickerAppearance: 'dayAndTime',
-            },
-          },
-        },
-      ],
     },
   ],
   hooks: {

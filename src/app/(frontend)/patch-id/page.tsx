@@ -210,11 +210,12 @@ function seededRandom(seed: number): () => number {
   }
 }
 
-function getTimeSeed(provider: string, intervalMinutes: number): number {
+function getTimeSeed(provider: string, intervalMinutes: number, cfg: ScannerConfig): number {
   const slot = Math.floor(Date.now() / (intervalMinutes * 60 * 1000))
-  // Simple string hash
+  // Include config values in hash so results change when admin saves new settings
+  const configFingerprint = `${cfg.minRtp}-${cfg.maxRtp}-${cfg.hotThreshold}-${cfg.warmThreshold}-${cfg.hotPercent}-${cfg.warmPercent}`
   let hash = 0
-  const str = `${provider}-${slot}`
+  const str = `${provider}-${slot}-${configFingerprint}`
   for (let i = 0; i < str.length; i++) {
     hash = ((hash << 5) - hash + str.charCodeAt(i)) & 0xffffffff
   }
@@ -229,7 +230,7 @@ function generateResults(
   const key = providerKeyMap[provider] || provider
   const allGames = activeGameData[key] || defaultGames
 
-  const seed = getTimeSeed(provider, cfg.seedInterval)
+  const seed = getTimeSeed(provider, cfg.seedInterval, cfg)
   const rand = seededRandom(seed)
 
   const { minRtp, maxRtp, hotThreshold, warmThreshold, hotPercent, warmPercent } = cfg

@@ -1820,6 +1820,11 @@ ul {
 /* --------------------------------------------------------------------------
    BLOG
    -------------------------------------------------------------------------- */
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 16px;
+}
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1848,7 +1853,8 @@ ul {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  margin: 0 16px 20px;
+  margin: 0 auto 20px;
+  padding: 0 16px;
   max-width: var(--max-width);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   transition:

@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 import BannerCarousel from './BannerCarousel'
 import AnimatedStats from './AnimatedStats'
 import { PatchIDIcon, TelegramKomunitiIcon, WhatsAppKomunitiIcon, AdminIcon } from './CM8Icons'
-import { getIncomeShowcase, getHomepageProviders, getFAQs, getPromos } from '@/lib/cms'
+import { getIncomeShowcase, getHomepageProviders, getFAQs, getPromos, getBanners } from '@/lib/cms'
 
 /* ============================================================
    SECTION DATA
@@ -961,6 +961,23 @@ export default async function HomePage() {
   const cmsProviders = await getHomepageProviders()
   const cmsFaqs = await getFAQs()
   const _cmsPromos = await getPromos()
+  const rawBanners = await getBanners()
+
+  // Map CMS banners to carousel format
+  const cmsBanners = rawBanners
+    ? (rawBanners
+        .map((b) => {
+          const img = b.image as { url?: string } | string | undefined
+          const src = typeof img === 'object' && img?.url ? img.url : null
+          if (!src) return null
+          return {
+            src,
+            alt: (b.title as string) || 'Banner',
+            link: (b.link as string) || undefined,
+          }
+        })
+        .filter(Boolean) as { src: string; alt: string; link?: string }[])
+    : undefined
 
   // Use CMS data or fallback to hardcoded
   const displayShowcase = cmsTestimonials
@@ -1025,7 +1042,7 @@ export default async function HomePage() {
       />
 
       {/* ===== HERO BANNER (real promo carousel) ===== */}
-      <BannerCarousel />
+      <BannerCarousel banners={cmsBanners} />
 
       {/* ===== WINNER TICKER ===== */}
       <div className="winner-ticker">

@@ -78,6 +78,8 @@ export interface Config {
     promos: Promo;
     'patch-providers': PatchProvider;
     games: Game;
+    'commission-tiers': CommissionTier;
+    'notifications-log': NotificationsLog;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -96,6 +98,8 @@ export interface Config {
     promos: PromosSelect<false> | PromosSelect<true>;
     'patch-providers': PatchProvidersSelect<false> | PatchProvidersSelect<true>;
     games: GamesSelect<false> | GamesSelect<true>;
+    'commission-tiers': CommissionTiersSelect<false> | CommissionTiersSelect<true>;
+    'notifications-log': NotificationsLogSelect<false> | NotificationsLogSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -107,9 +111,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     'site-settings': SiteSetting;
+    'popup-announcement': PopupAnnouncement;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    'popup-announcement': PopupAnnouncementSelect<false> | PopupAnnouncementSelect<true>;
   };
   locale: null;
   user: User;
@@ -137,11 +143,16 @@ export interface UserAuthOperations {
   };
 }
 /**
+ * Pengguna admin yang boleh mengakses panel ini.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
   id: number;
+  name?: string | null;
+  role?: ('super-admin' | 'editor' | 'viewer') | null;
+  avatar?: (number | null) | Media;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -162,12 +173,15 @@ export interface User {
   collection: 'users';
 }
 /**
+ * Gambar dan fail media untuk website.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
   id: number;
   alt: string;
+  category?: ('banner' | 'avatar' | 'blog' | 'provider' | 'game' | 'other') | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -179,6 +193,32 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    banner?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * Senarai agent yang mendaftar melalui website.
@@ -194,6 +234,21 @@ export interface Agent {
   experience?: ('baru' | 'berpengalaman') | null;
   message?: string | null;
   status?: ('pending' | 'contacted' | 'approved' | 'rejected') | null;
+  /**
+   * Auto-generated. Klik untuk chat terus.
+   */
+  whatsappLink?: string | null;
+  /**
+   * Log setiap follow-up atau nota berkaitan agent ini.
+   */
+  notes?:
+    | {
+        note: string;
+        addedBy?: string | null;
+        addedAt?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -290,6 +345,7 @@ export interface BlogPost {
   };
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * Provider permainan yang dipaparkan di homepage.
@@ -400,6 +456,66 @@ export interface Game {
   createdAt: string;
 }
 /**
+ * Struktur komisyen mengikut tier agent. Dipaparkan di homepage.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "commission-tiers".
+ */
+export interface CommissionTier {
+  id: number;
+  /**
+   * Contoh: Agent Biasa, Senior Agent, Master Agent
+   */
+  name: string;
+  /**
+   * Peratusan komisyen. Contoh: 25, 35, 45
+   */
+  percentage: number;
+  /**
+   * Jumlah minimum downline untuk layak tier ini.
+   */
+  minDownline?: number | null;
+  benefits?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Warna hex untuk badge tier di frontend. Contoh: #d4a853
+   */
+  color?: string | null;
+  icon?: ('star' | 'crown' | 'diamond' | 'rocket') | null;
+  order?: number | null;
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Log semua notifikasi yang dihantar (Telegram, WhatsApp).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "notifications-log".
+ */
+export interface NotificationsLog {
+  id: number;
+  title: string;
+  message: string;
+  channel: 'telegram' | 'whatsapp' | 'email';
+  status?: ('sent' | 'failed' | 'pending') | null;
+  /**
+   * Chat ID, nombor telefon, atau email penerima.
+   */
+  recipient?: string | null;
+  relatedAgent?: (number | null) | Agent;
+  /**
+   * Mesej ralat jika status gagal.
+   */
+  errorMessage?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -466,6 +582,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'games';
         value: number | Game;
+      } | null)
+    | ({
+        relationTo: 'commission-tiers';
+        value: number | CommissionTier;
+      } | null)
+    | ({
+        relationTo: 'notifications-log';
+        value: number | NotificationsLog;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -514,6 +638,9 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  avatar?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -537,6 +664,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  category?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -548,6 +676,40 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        banner?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -560,6 +722,15 @@ export interface AgentsSelect<T extends boolean = true> {
   experience?: T;
   message?: T;
   status?: T;
+  whatsappLink?: T;
+  notes?:
+    | T
+    | {
+        note?: T;
+        addedBy?: T;
+        addedAt?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -617,6 +788,7 @@ export interface BlogPostsSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -687,6 +859,42 @@ export interface GamesSelect<T extends boolean = true> {
   provider?: T;
   image?: T;
   imageUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "commission-tiers_select".
+ */
+export interface CommissionTiersSelect<T extends boolean = true> {
+  name?: T;
+  percentage?: T;
+  minDownline?: T;
+  benefits?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  color?: T;
+  icon?: T;
+  order?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "notifications-log_select".
+ */
+export interface NotificationsLogSelect<T extends boolean = true> {
+  title?: T;
+  message?: T;
+  channel?: T;
+  status?: T;
+  recipient?: T;
+  relatedAgent?: T;
+  errorMessage?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -777,6 +985,45 @@ export interface SiteSetting {
   createdAt?: string | null;
 }
 /**
+ * Popup modal yang dipaparkan di homepage. Boleh toggle on/off.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "popup-announcement".
+ */
+export interface PopupAnnouncement {
+  id: number;
+  enabled?: boolean | null;
+  title?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  image?: (number | null) | Media;
+  ctaText?: string | null;
+  /**
+   * Jika ada, butang akan redirect ke link ini.
+   */
+  ctaLink?: string | null;
+  /**
+   * Jika aktif, popup hanya dipapar sekali per sesi.
+   */
+  showOnce?: boolean | null;
+  backgroundColor?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
@@ -810,6 +1057,23 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "popup-announcement_select".
+ */
+export interface PopupAnnouncementSelect<T extends boolean = true> {
+  enabled?: T;
+  title?: T;
+  content?: T;
+  image?: T;
+  ctaText?: T;
+  ctaLink?: T;
+  showOnce?: T;
+  backgroundColor?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

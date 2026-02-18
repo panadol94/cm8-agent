@@ -75,7 +75,37 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             </Link>
             <div className="header-right">
               <span className="header-url">VVIP URL: cm8vvip.com</span>
-              <span className="header-globe">🌐</span>
+              <span className="header-globe">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="9.5" stroke="#c23616" strokeWidth="1.5" />
+                  <ellipse cx="12" cy="12" rx="4" ry="9.5" stroke="#c23616" strokeWidth="1.5" />
+                  <line x1="2.5" y1="12" x2="21.5" y2="12" stroke="#c23616" strokeWidth="1.5" />
+                  <line
+                    x1="4"
+                    y1="7"
+                    x2="20"
+                    y2="7"
+                    stroke="#c23616"
+                    strokeWidth="1"
+                    opacity="0.5"
+                  />
+                  <line
+                    x1="4"
+                    y1="17"
+                    x2="20"
+                    y2="17"
+                    stroke="#c23616"
+                    strokeWidth="1"
+                    opacity="0.5"
+                  />
+                </svg>
+              </span>
             </div>
           </div>
         </header>

@@ -5067,7 +5067,7 @@ body::before {
 .prem-chat {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 150px);
   max-width: var(--max-width);
   margin: 0 auto;
   background: var(--bg-body);
@@ -5730,10 +5730,7 @@ h3,
 
 /* ── 2. Gold VVIP Accents ── */
 .header-url {
-  background: var(--gradient-gold);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #1a1a1a;
   font-weight: 700;
 }
 .section-tag {

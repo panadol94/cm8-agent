@@ -5073,43 +5073,23 @@ body::before {
   background: var(--bg-body);
 }
 
-/* â”€â”€ Header â”€â”€ */
+/* ── Header ── */
 .prem-chat-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  border-bottom: 1px solid rgba(255, 170, 51, 0.15);
+  background: rgba(255, 252, 248, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200, 170, 140, 0.2);
   flex-shrink: 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  position: relative;
-  overflow: hidden;
-}
-.prem-chat-header::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 170, 51, 0.04), transparent);
-  animation: chatHeaderShimmer 6s ease-in-out infinite;
-}
-@keyframes chatHeaderShimmer {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(50%);
-  }
+  box-shadow: 0 2px 12px rgba(180, 140, 100, 0.08);
 }
 .prem-chat-header-left {
   display: flex;
   align-items: center;
   gap: 10px;
-  position: relative;
-  z-index: 1;
 }
 .prem-chat-icon {
   width: 38px;
@@ -5124,7 +5104,7 @@ body::before {
   font-family: var(--font-heading);
   font-size: 1.05rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #ffaa33, #ff6b4a);
+  background: linear-gradient(135deg, #e63520, #ff6b4a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -5136,7 +5116,7 @@ body::before {
   align-items: center;
   gap: 5px;
   font-size: 0.68rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted);
   font-weight: 500;
   letter-spacing: 0.01em;
 }
@@ -5144,7 +5124,7 @@ body::before {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #ffaa33, #ff6b4a);
+  background: linear-gradient(135deg, #e63520, #ff6b4a);
   display: inline-block;
 }
 .prem-online-pill {
@@ -5153,19 +5133,16 @@ body::before {
   gap: 5px;
   font-size: 0.68rem;
   font-weight: 600;
-  color: #ffaa33;
-  background: rgba(255, 170, 51, 0.1);
-  border: 1px solid rgba(255, 170, 51, 0.2);
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.08);
   padding: 3px 10px;
   border-radius: 20px;
-  position: relative;
-  z-index: 1;
 }
 .prem-online-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #ffaa33;
+  background: #16a34a;
   animation: premPulse 2s ease-in-out infinite;
 }
 @keyframes premPulse {
@@ -5184,8 +5161,8 @@ body::before {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 170, 51, 0.4);
-  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(230, 53, 32, 0.2);
+  background: var(--bg-cream);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5193,12 +5170,10 @@ body::before {
   font-size: 1.1rem;
   transition: all 0.3s;
   overflow: hidden;
-  position: relative;
-  z-index: 1;
 }
 .prem-profile-btn:hover {
-  border-color: #ffaa33;
-  box-shadow: 0 0 12px rgba(255, 170, 51, 0.3);
+  border-color: var(--red);
+  box-shadow: 0 0 8px rgba(230, 53, 32, 0.15);
 }
 .prem-profile-img {
   width: 100%;

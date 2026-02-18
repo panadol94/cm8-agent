@@ -454,17 +454,6 @@ export default function ChatPage() {
             <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient
-                  id="chatBg"
-                  x1="0"
-                  y1="0"
-                  x2="40"
-                  y2="40"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop offset="0%" stopColor="#1a1a2e" />
-                  <stop offset="100%" stopColor="#16213e" />
-                </linearGradient>
-                <linearGradient
                   id="chatAccent"
                   x1="8"
                   y1="8"
@@ -472,18 +461,18 @@ export default function ChatPage() {
                   y2="32"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop offset="0%" stopColor="#ffaa33" />
+                  <stop offset="0%" stopColor="#e63520" />
                   <stop offset="100%" stopColor="#ff6b4a" />
                 </linearGradient>
               </defs>
-              <circle cx="20" cy="20" r="19" fill="url(#chatBg)" />
+              <circle cx="20" cy="20" r="19" fill="#fef0e8" />
               <circle
                 cx="20"
                 cy="20"
                 r="19"
                 stroke="url(#chatAccent)"
                 strokeWidth="1"
-                opacity="0.5"
+                opacity="0.3"
               />
               <path
                 d="M12 16C12 13.8 13.8 12 16 12H24C26.2 12 28 13.8 28 16V22C28 24.2 26.2 26 24 26H18L14 29V26H16C13.8 26 12 24.2 12 22V16Z"

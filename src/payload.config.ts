@@ -30,6 +30,9 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      beforeDashboard: ['./app/(payload)/DashboardCards'],
+    },
     meta: {
       titleSuffix: ' | CM8 VVIP Admin',
       title: 'CM8 VVIP Admin',

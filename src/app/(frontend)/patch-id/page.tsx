@@ -9,16 +9,6 @@ import RegisterGate from './RegisterGate'
 /* ── Provider data ── */
 const providers = [
   {
-    id: 'mega888',
-    name: 'Mega888',
-    img: 'https://images.cashmarket888.xyz/uploads%2Fsub_platform%2Fimage_path%2F32%2F35335f26-6f54-4387-850a-d5590768b25a.jpg',
-  },
-  {
-    id: '918kiss',
-    name: 'Kiss918',
-    img: 'https://images.cashmarket888.xyz/uploads%2Fsub_platform%2Fimage_path%2F27%2Fcf1330dc-23e2-434e-bd02-a5cf6f7ecf8d.jpg',
-  },
-  {
     id: 'jili',
     name: 'JILI',
     img: 'https://images.cashmarket888.xyz/uploads%2Fsub_platform%2Fimage_path%2F25%2Faece1da0-0722-4da1-b7d9-e300686f56ad.jpg',

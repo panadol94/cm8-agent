@@ -3,15 +3,15 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Patch ID Scanner — Scan Slot RTP Real-Time',
   description:
-    'Gunakan AI Patch ID Scanner untuk scan percentage slot secara real-time. Dapatkan data RTP terkini untuk Mega888, Kiss918, Pragmatic Play, JILI dan 10+ provider lain. 100% percuma di CM8 VVIP.',
+    'Gunakan AI Patch ID Scanner untuk scan percentage slot secara real-time. Dapatkan data RTP terkini untuk Pragmatic Play, JILI dan 20+ provider lain. 100% percuma di CM8 VVIP.',
   keywords: [
     'patch id',
     'patch id CM8',
     'scan slot percentage',
     'slot scanner',
     'RTP scanner',
-    'Mega888 RTP',
-    'Kiss918 scanner',
+    'slot RTP Malaysia',
+    'CM8 slot scanner',
     'slot percentage checker',
     'CM8 scanner',
     'AI slot scanner',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Patch ID Scanner — Scan Slot RTP Real-Time | CM8 VVIP',
     description:
-      'AI Scanner percuma untuk check percentage slot. Data real-time untuk 16+ provider termasuk Mega888, Kiss918, Pragmatic Play & JILI.',
+      'AI Scanner percuma untuk check percentage slot. Data real-time untuk 20+ provider termasuk Pragmatic Play, JILI, BNG & Hacksaw.',
     url: 'https://cm8vvip.com/patch-id',
     type: 'website',
     siteName: 'CM8 VVIP',
@@ -53,7 +53,7 @@ export default function PatchIDLayout({ children }: { children: React.ReactNode 
             '@type': 'WebApplication',
             name: 'CM8 VVIP Patch ID Scanner',
             description:
-              'AI-powered slot RTP scanner yang menyemak percentage slot secara real-time untuk 16+ provider termasuk Mega888, Kiss918, Pragmatic Play dan JILI.',
+              'AI-powered slot RTP scanner yang menyemak percentage slot secara real-time untuk 20+ provider termasuk Pragmatic Play, JILI, BNG dan Hacksaw.',
             url: 'https://cm8vvip.com/patch-id',
             applicationCategory: 'UtilityApplication',
             operatingSystem: 'Web',
@@ -113,7 +113,7 @@ export default function PatchIDLayout({ children }: { children: React.ReactNode 
                 name: 'Apa itu Patch ID Scanner CM8 VVIP?',
                 acceptedAnswer: {
                   '@type': 'Answer',
-                  text: 'Patch ID Scanner adalah tool AI percuma yang menganalisis RTP (Return to Player) slot secara real-time. Ia menyokong 16+ provider termasuk Mega888, Kiss918, Pragmatic Play, JILI dan banyak lagi.',
+                  text: 'Patch ID Scanner adalah tool AI percuma yang menganalisis RTP (Return to Player) slot secara real-time. Ia menyokong 20+ provider termasuk Pragmatic Play, JILI, BNG, Hacksaw dan banyak lagi.',
                 },
               },
               {
@@ -153,9 +153,9 @@ export default function PatchIDLayout({ children }: { children: React.ReactNode 
         <p>
           Patch ID Scanner adalah tool AI percuma oleh CM8 VVIP yang membolehkan anda menyemak
           percentage slot (RTP - Return to Player) secara real-time. Scanner ini menyokong lebih
-          dari 16 provider permainan termasuk Mega888, Kiss918, Pragmatic Play, JILI, BNG, Hacksaw
-          Gaming, Habanero, JDB, Playtech, BetSoft, Spade Gaming, NoLimit City, Relax Gaming, FC
-          Slot, VA Slot, dan Acewin Slot.
+          dari 20 provider permainan termasuk Pragmatic Play, JILI, BNG, Hacksaw Gaming, Habanero,
+          JDB, Playtech, BetSoft, Spade Gaming, NoLimit City, Relax Gaming, FC Slot, VA Slot, Acewin
+          Slot, AP Gaming, Gamzix dan banyak lagi.
         </p>
         <p>
           Guna scanner untuk melihat game mana yang sedang HOT (RTP tinggi), WARM (sederhana), atau
@@ -163,12 +163,12 @@ export default function PatchIDLayout({ children }: { children: React.ReactNode 
         </p>
         <h3>Provider Yang Disokong</h3>
         <ul>
-          <li>Mega888 - Platform slot #1 di Malaysia</li>
-          <li>Kiss918 (918Kiss) - Slot klasik kegemaran ramai</li>
           <li>Pragmatic Play - Provider antarabangsa premium</li>
           <li>JILI - Slot Asia yang popular</li>
           <li>BNG (Booongo) - Slot moden berkualiti tinggi</li>
           <li>Hacksaw Gaming - Slot inovatif dari Eropah</li>
+          <li>Habanero - Provider slot berkualiti tinggi</li>
+          <li>Playtech - Provider antarabangsa terkemuka</li>
         </ul>
       </div>
     </>

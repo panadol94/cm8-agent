@@ -428,13 +428,13 @@ ul {
   border: 1px solid rgba(146, 64, 14, 0.15);
 }
 .agent-cta-title {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.6rem;
   font-weight: 900;
   color: var(--text-primary);
   line-height: 1.2;
   margin-bottom: 6px;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.01em;
 }
 .text-gradient {
   background: linear-gradient(

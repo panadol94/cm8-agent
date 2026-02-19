@@ -1646,7 +1646,7 @@ export default async function HomePage() {
           <h2>Cara Buat Duit Online Tanpa Modal dengan CM8 VVIP</h2>
           <div className="seo-grid">
             <div className="seo-item">
-              <h3>🪙 Income Pasif Seumur Hidup</h3>
+              <h3>💰 Income Pasif Seumur Hidup</h3>
               <p>
                 Ramai yang mencari cara{' '}
                 <Link href="/buat-duit-online">
@@ -1682,7 +1682,7 @@ export default async function HomePage() {
               </p>
             </div>
             <div className="seo-item">
-              <h3>⚡ Daftar Agent Slot Percuma</h3>
+              <h3>✅ Daftar Agent Slot Percuma</h3>
               <p>
                 Berbeza dengan platform lain, pendaftaran{' '}
                 <Link href="/cm8">

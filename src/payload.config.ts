@@ -33,6 +33,15 @@ export default buildConfig({
     components: {
       beforeDashboard: ['./app/(payload)/DashboardCards'],
     },
+    livePreview: {
+      url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+      globals: ['site-settings'],
+      collections: ['banners', 'promos', 'faqs', 'testimonials', 'providers'],
+      breakpoints: [
+        { label: '📱 Mobile', name: 'mobile', width: 375, height: 667 },
+        { label: '💻 Desktop', name: 'desktop', width: 1440, height: 900 },
+      ],
+    },
     meta: {
       titleSuffix: ' | CM8 VVIP Admin',
       title: 'CM8 VVIP Admin',

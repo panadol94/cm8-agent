@@ -67,6 +67,44 @@ export const SiteSettings: GlobalConfig = {
               relationTo: 'media',
               label: 'Gambar Hero',
             },
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'ctaButton1Text',
+                  type: 'text',
+                  label: 'Butang CTA 1 — Teks',
+                  defaultValue: '🚀 Jadi Agent Sekarang',
+                  admin: { width: '50%', description: 'Teks butang utama (oren/gradient)' },
+                },
+                {
+                  name: 'ctaButton1Link',
+                  type: 'text',
+                  label: 'Butang CTA 1 — Link',
+                  defaultValue: 'https://masuk10.com/WhatsappVVIP',
+                  admin: { width: '50%', description: 'URL yang dituju bila klik butang utama' },
+                },
+              ],
+            },
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'ctaButton2Text',
+                  type: 'text',
+                  label: 'Butang CTA 2 — Teks',
+                  defaultValue: 'Daftar Akaun CM8',
+                  admin: { width: '50%', description: 'Teks butang kedua (outline)' },
+                },
+                {
+                  name: 'ctaButton2Link',
+                  type: 'text',
+                  label: 'Butang CTA 2 — Link',
+                  defaultValue: 'https://masuk10.com/WhatsappVVIP',
+                  admin: { width: '50%', description: 'URL yang dituju bila klik butang kedua' },
+                },
+              ],
+            },
           ],
         },
         {

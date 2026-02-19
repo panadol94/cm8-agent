@@ -5,7 +5,14 @@ import type { Metadata } from 'next'
 import BannerCarousel from './BannerCarousel'
 import AnimatedStats from './AnimatedStats'
 import { PatchIDIcon, TelegramKomunitiIcon, WhatsAppKomunitiIcon, AdminIcon } from './CM8Icons'
-import { getIncomeShowcase, getHomepageProviders, getFAQs, getPromos, getBanners } from '@/lib/cms'
+import {
+  getIncomeShowcase,
+  getHomepageProviders,
+  getFAQs,
+  getPromos,
+  getBanners,
+  getSiteSettings,
+} from '@/lib/cms'
 
 /* ============================================================
    SECTION DATA
@@ -962,6 +969,14 @@ export default async function HomePage() {
   const cmsFaqs = await getFAQs()
   const _cmsPromos = await getPromos()
   const rawBanners = await getBanners()
+  const siteSettings = await getSiteSettings()
+
+  // CTA buttons from admin panel (fallback to defaults)
+  const ss = siteSettings as unknown as Record<string, string> | null
+  const cta1Text = ss?.ctaButton1Text || '🚀 Jadi Agent Sekarang'
+  const cta1Link = ss?.ctaButton1Link || 'https://masuk10.com/WhatsappVVIP'
+  const cta2Text = ss?.ctaButton2Text || 'Daftar Akaun CM8'
+  const cta2Link = ss?.ctaButton2Link || 'https://masuk10.com/WhatsappVVIP'
 
   // Map CMS banners to carousel format
   const cmsBanners = rawBanners
@@ -1103,20 +1118,20 @@ export default async function HomePage() {
           <AnimatedStats />
           <div className="agent-cta-actions">
             <a
-              href="https://masuk10.com/WhatsappVVIP"
+              href={cta1Link}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-gradient btn-lg"
             >
-              🚀 Jadi Agent Sekarang
+              {cta1Text}
             </a>
             <a
-              href="https://masuk10.com/WhatsappVVIP"
+              href={cta2Link}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-outline btn-sm"
             >
-              Daftar Akaun CM8
+              {cta2Text}
             </a>
           </div>
         </div>

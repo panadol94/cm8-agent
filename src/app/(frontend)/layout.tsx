@@ -4,6 +4,7 @@ import './styles.css'
 import Image from 'next/image'
 import BottomNav from './BottomNav'
 import ScrollReveal from './ScrollReveal'
+import { RefreshRouteOnSave } from './RefreshRouteOnSave'
 
 export const metadata = {
   title: {
@@ -111,6 +112,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         </header>
 
         <ScrollReveal />
+        <RefreshRouteOnSave />
 
         <main>{children}</main>
 

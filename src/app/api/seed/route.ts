@@ -1,4 +1,3 @@
-// @ts-nocheck — seed script uses dynamically-registered collections
 import { NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
@@ -391,7 +390,7 @@ export async function GET(req: Request) {
           items: p.items.map((text) => ({ text })),
           ctaText: p.ctaText,
           ctaLink: p.ctaLink,
-          icon: p.icon,
+          icon: p.icon as 'bonus' | 'star' | 'vip',
           highlight: p.highlight,
           order: i,
         },
@@ -692,7 +691,7 @@ export async function GET(req: Request) {
           minDownline: t.minDownline,
           benefits: t.benefits.map((text) => ({ text })),
           color: t.color,
-          icon: t.icon,
+          icon: t.icon as 'star' | 'crown' | 'diamond' | 'rocket',
           order: i,
           active: true,
         },
@@ -737,7 +736,7 @@ export async function GET(req: Request) {
       })
       results.siteSettings = 1
     } catch {
-      results.siteSettings_error = 'Could not update site settings'
+      results.siteSettings_error = 0 // failed
     }
 
     return NextResponse.json({

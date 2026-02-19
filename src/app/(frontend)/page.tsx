@@ -969,7 +969,7 @@ export default async function HomePage() {
   const cmsTestimonials = await getIncomeShowcase()
   const cmsProviders = await getHomepageProviders()
   const cmsFaqs = await getFAQs()
-  const _cmsPromos = await getPromos()
+  const cmsPromos = await getPromos()
   const rawBanners = await getBanners()
   const siteSettings = await getSiteSettings()
 
@@ -1038,6 +1038,27 @@ export default async function HomePage() {
     }
     return [...seen.values()]
   })()
+
+  // Map CMS promo icon to SVG
+  const promoIconMap: Record<string, React.ReactNode> = {
+    bonus: promoCards[0]?.icon,
+    star: promoCards[1]?.icon,
+    vip: promoCards[1]?.icon,
+  }
+
+  const displayPromos = cmsPromos
+    ? cmsPromos.map((p) => {
+        const items = (p.items as { text: string }[] | undefined)?.map((i) => i.text) || []
+        return {
+          icon: promoIconMap[(p.icon as string) || 'bonus'] || promoCards[0]?.icon,
+          title: (p.title as string) || '',
+          highlight: !!p.highlight,
+          items,
+          cta: (p.ctaText as string) || 'Claim Now',
+          ctaLink: (p.ctaLink as string) || 'https://masuk10.com/WhatsappVVIP',
+        }
+      })
+    : promoCards
 
   const displayFaqSchema = {
     '@context': 'https://schema.org',
@@ -1354,7 +1375,7 @@ export default async function HomePage() {
         <h2>🎁 Promotions</h2>
       </div>
       <div className="promo-grid">
-        {promoCards.map((card, i) => (
+        {displayPromos.map((card, i) => (
           <div key={i} className={`promo-card${card.highlight ? ' highlight' : ''}`}>
             <div className="promo-card-header">
               <div className="promo-card-icon">{card.icon}</div>

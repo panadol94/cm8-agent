@@ -203,27 +203,32 @@ export async function GET(req: Request) {
       },
     ]
 
-    let testimonialCount = 0
-    for (let i = 0; i < incomeShowcase.length; i++) {
-      const a = incomeShowcase[i]
-      await payload.create({
-        collection: 'testimonials',
-        data: {
-          name: a.name,
-          role: a.role,
-          income: a.income,
-          period: a.period,
-          growth: a.growth,
-          avatarUrl: a.avatarUrl,
-          bar: a.bar,
-          type: 'income',
-          featured: true,
-          order: i,
-        },
-      })
-      testimonialCount++
+    const existingTestimonials = await payload.find({ collection: 'testimonials', limit: 1 })
+    if (existingTestimonials.docs.length === 0) {
+      let testimonialCount = 0
+      for (let i = 0; i < incomeShowcase.length; i++) {
+        const a = incomeShowcase[i]
+        await payload.create({
+          collection: 'testimonials',
+          data: {
+            name: a.name,
+            role: a.role,
+            income: a.income,
+            period: a.period,
+            growth: a.growth,
+            avatarUrl: a.avatarUrl,
+            bar: a.bar,
+            type: 'income',
+            featured: true,
+            order: i,
+          },
+        })
+        testimonialCount++
+      }
+      results.testimonials = testimonialCount
+    } else {
+      results.testimonials_skipped = existingTestimonials.totalDocs
     }
-    results.testimonials = testimonialCount
 
     // ────────────────────────────────────────────
     // 2. HOMEPAGE PROVIDERS
@@ -380,24 +385,29 @@ export async function GET(req: Request) {
       },
     ]
 
-    let promoCount = 0
-    for (let i = 0; i < promos.length; i++) {
-      const p = promos[i]
-      await payload.create({
-        collection: 'promos',
-        data: {
-          title: p.title,
-          items: p.items.map((text) => ({ text })),
-          ctaText: p.ctaText,
-          ctaLink: p.ctaLink,
-          icon: p.icon as 'bonus' | 'star' | 'vip',
-          highlight: p.highlight,
-          order: i,
-        },
-      })
-      promoCount++
+    const existingPromos = await payload.find({ collection: 'promos', limit: 1 })
+    if (existingPromos.docs.length === 0) {
+      let promoCount = 0
+      for (let i = 0; i < promos.length; i++) {
+        const p = promos[i]
+        await payload.create({
+          collection: 'promos',
+          data: {
+            title: p.title,
+            items: p.items.map((text) => ({ text })),
+            ctaText: p.ctaText,
+            ctaLink: p.ctaLink,
+            icon: p.icon as 'bonus' | 'star' | 'vip',
+            highlight: p.highlight,
+            order: i,
+          },
+        })
+        promoCount++
+      }
+      results.promos = promoCount
+    } else {
+      results.promos_skipped = existingPromos.totalDocs
     }
-    results.promos = promoCount
 
     // ────────────────────────────────────────────
     // 6. PATCH ID PROVIDERS

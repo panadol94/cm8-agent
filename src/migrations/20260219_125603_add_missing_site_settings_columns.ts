@@ -1,6 +1,6 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
-export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
+export async function up({ db, payload: _payload, req: _req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
     ALTER TABLE "site_settings" ADD COLUMN IF NOT EXISTS "cta_button1_text" varchar DEFAULT '🚀 Jadi Agent Sekarang';
     ALTER TABLE "site_settings" ADD COLUMN IF NOT EXISTS "cta_button1_link" varchar DEFAULT 'https://masuk10.com/WhatsappVVIP';
@@ -19,7 +19,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   `)
 }
 
-export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
+export async function down({ db, payload: _payload, req: _req }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
     ALTER TABLE "site_settings" DROP COLUMN IF EXISTS "cta_button1_text";
     ALTER TABLE "site_settings" DROP COLUMN IF EXISTS "cta_button1_link";

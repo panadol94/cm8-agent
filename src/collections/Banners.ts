@@ -28,10 +28,18 @@ export const Banners: CollectionConfig = {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
-      required: true,
-      label: '🖼️ Gambar Banner',
+      label: '🖼️ Gambar Banner (Upload)',
       admin: {
-        description: 'Saiz disyorkan: 1920 x 640 piksel.',
+        description: 'Upload gambar banner. Saiz disyorkan: 1920 x 640 piksel.',
+      },
+    },
+    {
+      name: 'imageUrl',
+      type: 'text',
+      label: '🔗 Gambar URL (External)',
+      admin: {
+        description: 'Guna URL jika tiada upload. Salah satu sahaja diperlukan.',
+        placeholder: 'cth: /banners/banner-cm8-1.png',
       },
     },
     {

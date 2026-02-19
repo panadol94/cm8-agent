@@ -987,7 +987,8 @@ export default async function HomePage() {
     ? (rawBanners
         .map((b) => {
           const img = b.image as { url?: string } | string | undefined
-          const src = typeof img === 'object' && img?.url ? img.url : null
+          const uploadSrc = typeof img === 'object' && img?.url ? img.url : null
+          const src = uploadSrc || ((b as any).imageUrl as string) || null
           if (!src) return null
           return {
             src,

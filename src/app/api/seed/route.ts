@@ -739,6 +739,44 @@ export async function GET(req: Request) {
       results.siteSettings_error = 0 // failed
     }
 
+    // ---------- Banners ----------
+    try {
+      const existingBanners = await payload.find({ collection: 'banners', limit: 1 })
+      if (existingBanners.docs.length === 0) {
+        const bannerData = [
+          {
+            title: 'CM8 Promo Banner 1',
+            imageUrl: '/banners/banner-cm8-1.png',
+            order: 1,
+            active: true,
+          },
+          {
+            title: 'CM8 Promo Banner 2',
+            imageUrl: '/banners/banner-cm8-2.png',
+            order: 2,
+            active: true,
+          },
+          {
+            title: 'CM8 Promo Banner 3',
+            imageUrl: '/banners/banner-cm8-3.png',
+            order: 3,
+            active: true,
+          },
+        ]
+        let count = 0
+        for (const b of bannerData) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          await payload.create({ collection: 'banners', data: b as any })
+          count++
+        }
+        results.banners = count
+      } else {
+        results.banners_skipped = existingBanners.docs.length
+      }
+    } catch {
+      results.banners_error = 0
+    }
+
     return NextResponse.json({
       success: true,
       message: 'Seed completed!',

@@ -14,6 +14,7 @@ import {
   getPromos,
   getBanners,
   getSiteSettings,
+  getCommissionTiers,
 } from '@/lib/cms'
 
 /* ============================================================
@@ -972,6 +973,7 @@ export default async function HomePage() {
   const cmsPromos = await getPromos()
   const rawBanners = await getBanners()
   const siteSettings = await getSiteSettings()
+  const cmsCommissions = await getCommissionTiers()
 
   // CTA buttons from admin panel (fallback to defaults)
   const ss = siteSettings as unknown as Record<string, string> | null
@@ -1059,6 +1061,39 @@ export default async function HomePage() {
         }
       })
     : promoCards
+
+  // Commission tiers from CMS or fallback
+  const displayCommissions = cmsCommissions
+    ? cmsCommissions.map((c) => {
+        const benefits = (c.benefits as { text: string }[] | undefined)?.map((b) => b.text) || []
+        return {
+          label: (c.name as string) || '',
+          rate: `${c.percentage}%`,
+          desc: '',
+          popular: false,
+          features: benefits,
+        }
+      })
+    : commissions
+
+  // Testimonials from CMS or fallback
+  const cmsTestimonialCards = cmsTestimonials
+    ? cmsTestimonials
+        .filter((t) => !!t.content)
+        .map((t) => ({
+          name: (t.name as string) || '',
+          role: (t.role as string) || 'Agent Aktif',
+          text: (t.content as string) || '',
+          rating: (t.rating as number) || 5,
+          avatar: (t.avatarUrl as string) || '/avatars/agent-1.png',
+          income: `${t.income || 'RM0'}${t.period || '/minggu'}`,
+        }))
+    : null
+  const displayTestimonials =
+    cmsTestimonialCards && cmsTestimonialCards.length > 0 ? cmsTestimonialCards : testimonials
+
+  // WhatsApp link from SiteSettings (used everywhere)
+  const mainWhatsappLink = cta1Link
 
   const displayFaqSchema = {
     '@context': 'https://schema.org',
@@ -1224,7 +1259,7 @@ export default async function HomePage() {
           <span className="qa-arrow">›</span>
         </a>
         <a
-          href="https://masuk10.com/WhatsappVVIP"
+          href={mainWhatsappLink}
           target="_blank"
           rel="noopener noreferrer"
           className="quick-action-btn qa-admin"
@@ -1408,7 +1443,7 @@ export default async function HomePage() {
           {displayProviders.map((p, i) => (
             <a
               key={i}
-              href="https://masuk10.com/WhatsappVVIP"
+              href={mainWhatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               className="provider-tile"
@@ -1426,7 +1461,7 @@ export default async function HomePage() {
         <h2>💎 Komisyen Agent</h2>
       </div>
       <div className="commission-grid">
-        {commissions.map((c, i) => (
+        {displayCommissions.map((c, i) => (
           <div key={i} className={`commission-card${c.popular ? ' popular' : ''}`}>
             {c.popular && <div className="commission-badge">Popular</div>}
             <div className="commission-label">{c.label}</div>
@@ -1438,7 +1473,7 @@ export default async function HomePage() {
               ))}
             </ul>
             <a
-              href="https://masuk10.com/WhatsappVVIP"
+              href={mainWhatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-gradient"
@@ -1457,7 +1492,7 @@ export default async function HomePage() {
           <p className="section-subtitle">Dengar sendiri pengalaman mereka bersama CM8</p>
         </div>
         <div className="testimonials-grid-v2">
-          {testimonials.map((t, i) => (
+          {displayTestimonials.map((t, i) => (
             <div key={i} className="testi-card-v2">
               <div className="testi-quote-mark">&ldquo;</div>
               <div className="testi-stars-v2">
@@ -1500,7 +1535,7 @@ export default async function HomePage() {
         </ul>
         <div className="why-actions">
           <a
-            href="https://masuk10.com/WhatsappVVIP"
+            href={mainWhatsappLink}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-gradient btn-lg"
@@ -1546,7 +1581,7 @@ export default async function HomePage() {
             Daftar sebagai agent CM8 hari ini dan mula menikmati komisyen tertinggi di pasaran.
           </p>
           <a
-            href="https://masuk10.com/WhatsappVVIP"
+            href={mainWhatsappLink}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-white btn-lg"

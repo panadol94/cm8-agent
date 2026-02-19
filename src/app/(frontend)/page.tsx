@@ -988,7 +988,7 @@ export default async function HomePage() {
         .map((b) => {
           const img = b.image as { url?: string } | string | undefined
           const uploadSrc = typeof img === 'object' && img?.url ? img.url : null
-          const src = uploadSrc || ((b as any).imageUrl as string) || null
+          const src = uploadSrc || (b as unknown as Record<string, string>).imageUrl || null
           if (!src) return null
           return {
             src,

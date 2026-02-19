@@ -1077,6 +1077,34 @@ async function initDB() {
       'CREATE INDEX payload_locked_documents_rels_notifications_log_id_idx ON payload_locked_documents_rels (notifications_log_id)',
     )
 
+    // ─── Deduplicate FAQs and Providers ───
+    console.log('[init-db] Checking for duplicate records...')
+    try {
+      const dedupFaqs = await client.query(`
+        DELETE FROM faqs WHERE id NOT IN (
+          SELECT MIN(id) FROM faqs GROUP BY question
+        )
+      `)
+      if (dedupFaqs.rowCount > 0) {
+        console.log('[init-db] Removed ' + dedupFaqs.rowCount + ' duplicate FAQ(s)')
+      }
+    } catch (_e) {
+      /* faqs table might not exist yet */
+    }
+
+    try {
+      const dedupProviders = await client.query(`
+        DELETE FROM providers WHERE id NOT IN (
+          SELECT MIN(id) FROM providers GROUP BY name
+        )
+      `)
+      if (dedupProviders.rowCount > 0) {
+        console.log('[init-db] Removed ' + dedupProviders.rowCount + ' duplicate provider(s)')
+      }
+    } catch (_e) {
+      /* providers table might not exist yet */
+    }
+
     if (createdAnything) {
       console.log('[init-db] ✅ Schema initialization complete!')
     } else {

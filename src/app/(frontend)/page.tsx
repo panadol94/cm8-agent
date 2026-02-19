@@ -1519,6 +1519,19 @@ export default async function HomePage() {
 
       {/* ===== FOOTER ===== */}
       <footer className="site-footer">
+        <div className="footer-seo-links">
+          <h3>Panduan & Info</h3>
+          <div className="footer-links-grid">
+            <Link href="/agent-judi">Agent Judi Online</Link>
+            <Link href="/buat-duit-online">Buat Duit Online</Link>
+            <Link href="/hack-slot-malaysia">Hack Slot Malaysia</Link>
+            <Link href="/komisen-tanpa-modal">Komisen Tanpa Modal</Link>
+            <Link href="/cm8">Platform CM8</Link>
+            <Link href="/cm8-play">CM8 Play</Link>
+            <Link href="/kiosk-mega888">Kiosk Mega888</Link>
+            <Link href="/kiosk-918kiss">Kiosk 918Kiss</Link>
+          </div>
+        </div>
         <div className="footer-inner">
           <span>© 2026 CM8 VVIP</span>
           <span>•</span>
@@ -1546,29 +1559,53 @@ export default async function HomePage() {
             <div className="seo-item">
               <h3>💸 Income Pasif Seumur Hidup</h3>
               <p>
-                Ramai yang mencari cara <strong>buat duit online</strong> atau{' '}
-                <strong>income pasif</strong> tetapi tertipu dengan skim cepat kaya. Di CM8 VVIP,
-                anda menjadi rakan kongsi (shareholder) sebenar. Setiap kali pemain anda main slot
-                game seperti <strong>Mega888</strong>, <strong>918Kiss</strong>, atau{' '}
-                <strong>Pussy888</strong>, anda dapat komisyen.
+                Ramai yang mencari cara{' '}
+                <Link href="/buat-duit-online">
+                  <strong>buat duit online</strong>
+                </Link>{' '}
+                atau{' '}
+                <Link href="/komisen-tanpa-modal">
+                  <strong>income pasif tanpa modal</strong>
+                </Link>{' '}
+                tetapi tertipu dengan skim cepat kaya. Di CM8 VVIP, anda menjadi{' '}
+                <Link href="/agent-judi">rakan kongsi (agent)</Link> sebenar. Setiap kali pemain
+                anda main slot game seperti{' '}
+                <Link href="/kiosk-mega888">
+                  <strong>Mega888</strong>
+                </Link>
+                ,{' '}
+                <Link href="/kiosk-918kiss">
+                  <strong>918Kiss</strong>
+                </Link>
+                , atau <strong>Pussy888</strong>, anda dapat komisyen.
               </p>
             </div>
             <div className="seo-item">
               <h3>🔓 Tips & &quot;Hack Slot&quot; Strategy</h3>
               <p>
                 Sebagai agent, kami bekalkan anda dengan data <strong>RTP Live</strong> dan scanner
-                terkini. Walaupun tiada istilah sebenar untuk <strong>hack slot</strong> (kerana
-                sistem server-side), analisis data kami membantu pemain anda menang lebih kerap —
-                bermakna mereka deposit lebih kerap, dan komisyen anda naik!
+                terkini. Walaupun tiada istilah sebenar untuk{' '}
+                <Link href="/hack-slot-malaysia">
+                  <strong>hack slot</strong>
+                </Link>{' '}
+                (kerana sistem server-side), analisis data kami membantu pemain anda menang lebih
+                kerap — bermakna mereka deposit lebih kerap, dan komisyen anda naik!
               </p>
             </div>
             <div className="seo-item">
               <h3>🚀 Daftar Agent Slot Percuma</h3>
               <p>
-                Berbeza dengan platform lain, pendaftaran <strong>CM8 Agent</strong> adalah 100%
-                percuma. <strong>Buat duit tanpa modal</strong> hari ini. Kami sediakan bahan
-                marketing, ayat copyayat, dan bimbingan penuh untuk anda mula menjana RM1,000 –
-                RM5,000 seminggu.
+                Berbeza dengan platform lain, pendaftaran{' '}
+                <Link href="/cm8">
+                  <strong>CM8 Agent</strong>
+                </Link>{' '}
+                adalah 100% percuma.{' '}
+                <Link href="/komisen-tanpa-modal">
+                  <strong>Buat duit tanpa modal</strong>
+                </Link>{' '}
+                hari ini. Kami sediakan bahan marketing, ayat copyayat, dan bimbingan penuh untuk
+                anda mula menjana RM1,000 – RM5,000 seminggu.{' '}
+                <Link href="/cm8-play">Cuba CM8 Play</Link> sekarang.
               </p>
             </div>
           </div>

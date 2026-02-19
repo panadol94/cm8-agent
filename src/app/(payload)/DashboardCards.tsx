@@ -2,231 +2,201 @@ import React from 'react'
 import Link from 'next/link'
 import './DashboardCards.scss'
 
-const sections = [
+/* ── Section edit hotspots ──────────────────────── */
+const editSections = [
   {
-    group: '👥 Pengurusan Agent',
-    color: '#3b82f6',
-    cards: [
-      {
-        icon: '👤',
-        title: 'Agent',
-        desc: 'Lihat, luluskan, atau tolak pendaftaran agent baru.',
-        href: '/admin/collections/agents',
-        addHref: null,
-        badge: 'Senarai',
-      },
-      {
-        icon: '📊',
-        title: 'Tier Komisyen',
-        desc: 'Atur peratusan komisyen mengikut tier dan downline.',
-        href: '/admin/collections/commission-tiers',
-        addHref: '/admin/collections/commission-tiers/create',
-        badge: null,
-      },
-      {
-        icon: '🔔',
-        title: 'Log Notifikasi',
-        desc: 'Semak semua notifikasi yang dihantar via Telegram.',
-        href: '/admin/collections/notifications-log',
-        addHref: null,
-        badge: 'Log',
-      },
-    ],
-  },
-  {
-    group: '📝 Kandungan',
+    id: 'hero',
+    label: '🎨 Hero & Tajuk',
+    desc: 'Edit tajuk, subtitle, gambar hero',
+    href: '/admin/globals/site-settings',
     color: '#f59e0b',
-    cards: [
-      {
-        icon: '🖼️',
-        title: 'Banner',
-        desc: 'Upload banner promo untuk carousel di homepage.',
-        href: '/admin/collections/banners',
-        addHref: '/admin/collections/banners/create',
-        badge: null,
-      },
-      {
-        icon: '✍️',
-        title: 'Blog',
-        desc: 'Tulis dan terbitkan artikel blog.',
-        href: '/admin/collections/blog-posts',
-        addHref: '/admin/collections/blog-posts/create',
-        badge: null,
-      },
-      {
-        icon: '⭐',
-        title: 'Testimoni',
-        desc: 'Urus testimoni agent untuk dipapar di website.',
-        href: '/admin/collections/testimonials',
-        addHref: '/admin/collections/testimonials/create',
-        badge: null,
-      },
-      {
-        icon: '❓',
-        title: 'FAQ',
-        desc: 'Tambah soalan lazim untuk bahagian FAQ.',
-        href: '/admin/collections/faqs',
-        addHref: '/admin/collections/faqs/create',
-        badge: null,
-      },
-      {
-        icon: '🎁',
-        title: 'Promo',
-        desc: 'Kad promosi yang dipapar di homepage.',
-        href: '/admin/collections/promos',
-        addHref: '/admin/collections/promos/create',
-        badge: null,
-      },
-    ],
   },
   {
-    group: '🎮 Permainan',
-    color: '#22c55e',
-    cards: [
-      {
-        icon: '🏢',
-        title: 'Provider Homepage',
-        desc: 'Provider yang dipaparkan di homepage (logo).',
-        href: '/admin/collections/providers',
-        addHref: '/admin/collections/providers/create',
-        badge: null,
-      },
-      {
-        icon: '🔧',
-        title: 'Patch Providers',
-        desc: 'Provider untuk Patch ID Scanner.',
-        href: '/admin/collections/patch-providers',
-        addHref: '/admin/collections/patch-providers/create',
-        badge: null,
-      },
-      {
-        icon: '🎰',
-        title: 'Permainan',
-        desc: 'Senarai game untuk Patch ID Scanner.',
-        href: '/admin/collections/games',
-        addHref: '/admin/collections/games/create',
-        badge: null,
-      },
-    ],
+    id: 'cta',
+    label: '🚀 Butang CTA',
+    desc: 'Tukar teks & link butang',
+    href: '/admin/globals/site-settings',
+    color: '#ef4444',
   },
   {
-    group: '⚙️ Sistem',
+    id: 'banner',
+    label: '🖼️ Banner Carousel',
+    desc: 'Upload, susun, aktif/nyahaktif banner',
+    href: '/admin/collections/banners',
     color: '#8b5cf6',
-    cards: [
-      {
-        icon: '👨‍💻',
-        title: 'Pengguna Admin',
-        desc: 'Urus akaun admin (Super Admin, Editor, Viewer).',
-        href: '/admin/collections/users',
-        addHref: '/admin/collections/users/create',
-        badge: null,
-      },
-      {
-        icon: '📁',
-        title: 'Media',
-        desc: 'Semua gambar dan fail yang dimuat naik.',
-        href: '/admin/collections/media',
-        addHref: '/admin/collections/media/create',
-        badge: null,
-      },
-    ],
+  },
+  {
+    id: 'promo',
+    label: '🎁 Promosi',
+    desc: 'Edit kad promosi di homepage',
+    href: '/admin/collections/promos',
+    color: '#22c55e',
+  },
+  {
+    id: 'testimonial',
+    label: '⭐ Testimoni',
+    desc: 'Urus bukti pendapatan agent',
+    href: '/admin/collections/testimonials',
+    color: '#3b82f6',
+  },
+  {
+    id: 'faq',
+    label: '❓ FAQ',
+    desc: 'Tambah/edit soalan lazim',
+    href: '/admin/collections/faqs',
+    color: '#06b6d4',
+  },
+  {
+    id: 'provider',
+    label: '🎮 Game Provider',
+    desc: 'Logo provider di homepage',
+    href: '/admin/collections/providers',
+    color: '#10b981',
+  },
+  {
+    id: 'popup',
+    label: '📢 Popup Pengumuman',
+    desc: 'Toggle & edit popup',
+    href: '/admin/globals/popup-announcement',
+    color: '#f97316',
+  },
+  {
+    id: 'seo',
+    label: '🔍 SEO & Meta',
+    desc: 'Title, description, keywords, OG image',
+    href: '/admin/globals/site-settings',
+    color: '#6366f1',
+  },
+  {
+    id: 'footer',
+    label: '📋 Footer & Sosial',
+    desc: 'Edit footer text & pautan sosial',
+    href: '/admin/globals/site-settings',
+    color: '#78716c',
   },
 ]
 
-const globalLinks = [
+/* ── Quick action shortcuts ──────────────────────── */
+const quickActions = [
+  { icon: '🖼️', label: '+ Banner', href: '/admin/collections/banners/create', color: 'amber' },
   {
-    icon: '🌐',
-    title: 'Tetapan Laman',
-    desc: 'Logo, hero section, SEO, footer, dan lain-lain.',
-    href: '/admin/globals/site-settings',
+    icon: '✍️',
+    label: '+ Blog',
+    href: '/admin/collections/blog-posts/create',
+    color: 'green',
   },
   {
-    icon: '📢',
-    title: 'Popup / Pengumuman',
-    desc: 'Toggle popup announcement di homepage.',
-    href: '/admin/globals/popup-announcement',
+    icon: '⭐',
+    label: '+ Testimoni',
+    href: '/admin/collections/testimonials/create',
+    color: 'blue',
+  },
+  {
+    icon: '🎁',
+    label: '+ Promo',
+    href: '/admin/collections/promos/create',
+    color: 'purple',
   },
 ]
 
 const DashboardCards: React.FC = () => {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://cm8vvip.com'
+
   return (
-    <div className="cm8-dashboard">
-      {/* Welcome Header */}
-      <div className="cm8-dashboard__welcome">
-        <h2>📢 Selamat Datang ke CM8 Admin</h2>
-        <p>Pilih bahagian yang anda ingin urus. Semua kandungan boleh diubah terus dari sini.</p>
-      </div>
-
-      {/* Quick Actions */}
-      <div className="cm8-dashboard__quick">
-        <h3>⚡ Tindakan Pantas</h3>
-        <div className="cm8-dashboard__quick-row">
-          <Link href="/admin/collections/agents" className="cm8-quick-btn cm8-quick-btn--blue">
-            👥 Lihat Agent Baru
-          </Link>
-          <Link
-            href="/admin/collections/banners/create"
-            className="cm8-quick-btn cm8-quick-btn--amber"
-          >
-            🖼️ Tambah Banner
-          </Link>
-          <Link
-            href="/admin/collections/blog-posts/create"
-            className="cm8-quick-btn cm8-quick-btn--green"
-          >
-            ✍️ Tulis Blog
-          </Link>
-          <Link href="/admin/globals/site-settings" className="cm8-quick-btn cm8-quick-btn--purple">
-            🌐 Tetapan Laman
-          </Link>
+    <div className="cm8-visual-editor">
+      {/* Header */}
+      <div className="cm8-ve__header">
+        <div className="cm8-ve__header-left">
+          <h2>🎯 Visual Editor</h2>
+          <p>Klik mana-mana section untuk edit terus. Preview website di sebelah kanan.</p>
         </div>
-      </div>
-
-      {/* Global Settings */}
-      <div className="cm8-dashboard__section">
-        <h3>🔧 Tetapan Global</h3>
-        <div className="cm8-dashboard__grid cm8-dashboard__grid--2">
-          {globalLinks.map((g) => (
-            <Link key={g.href} href={g.href} className="cm8-card cm8-card--global">
-              <div className="cm8-card__icon">{g.icon}</div>
-              <div className="cm8-card__body">
-                <div className="cm8-card__title">{g.title}</div>
-                <div className="cm8-card__desc">{g.desc}</div>
-              </div>
-              <span className="cm8-card__arrow">→</span>
+        <div className="cm8-ve__header-actions">
+          {quickActions.map((a) => (
+            <Link key={a.href} href={a.href} className={`cm8-ve__quick cm8-ve__quick--${a.color}`}>
+              {a.icon} {a.label}
             </Link>
           ))}
         </div>
       </div>
 
-      {/* Collection Groups */}
-      {sections.map((section) => (
-        <div key={section.group} className="cm8-dashboard__section">
-          <h3 style={{ borderLeftColor: section.color }}>{section.group}</h3>
-          <div className="cm8-dashboard__grid">
-            {section.cards.map((card) => (
-              <div key={card.href} className="cm8-card">
-                <Link href={card.href} className="cm8-card__main">
-                  <div className="cm8-card__icon">{card.icon}</div>
-                  <div className="cm8-card__body">
-                    <div className="cm8-card__title">
-                      {card.title}
-                      {card.badge && <span className="cm8-card__badge">{card.badge}</span>}
-                    </div>
-                    <div className="cm8-card__desc">{card.desc}</div>
-                  </div>
-                  <span className="cm8-card__arrow">→</span>
-                </Link>
-                {card.addHref && (
-                  <Link href={card.addHref} className="cm8-card__add">
-                    + Tambah
-                  </Link>
-                )}
-              </div>
+      {/* Main Layout: Edit Panel + Preview */}
+      <div className="cm8-ve__layout">
+        {/* Left: Edit Sections */}
+        <div className="cm8-ve__panel">
+          <div className="cm8-ve__panel-title">📝 Bahagian Website</div>
+          <div className="cm8-ve__sections">
+            {editSections.map((s) => (
+              <Link
+                key={s.id}
+                href={s.href}
+                className="cm8-ve__section-card"
+                style={{ '--accent': s.color } as React.CSSProperties}
+              >
+                <div className="cm8-ve__section-dot" />
+                <div className="cm8-ve__section-info">
+                  <div className="cm8-ve__section-label">{s.label}</div>
+                  <div className="cm8-ve__section-desc">{s.desc}</div>
+                </div>
+                <span className="cm8-ve__section-arrow">✏️</span>
+              </Link>
             ))}
           </div>
+
+          {/* Extra: All Collections */}
+          <div className="cm8-ve__panel-title" style={{ marginTop: 20 }}>
+            📂 Lain-lain
+          </div>
+          <div className="cm8-ve__extra-links">
+            <Link href="/admin/collections/agents" className="cm8-ve__extra">
+              👥 Senarai Agent
+            </Link>
+            <Link href="/admin/collections/commission-tiers" className="cm8-ve__extra">
+              📊 Tier Komisyen
+            </Link>
+            <Link href="/admin/collections/games" className="cm8-ve__extra">
+              🎰 Senarai Game
+            </Link>
+            <Link href="/admin/collections/patch-providers" className="cm8-ve__extra">
+              🔧 Patch Provider
+            </Link>
+            <Link href="/admin/collections/notifications-log" className="cm8-ve__extra">
+              🔔 Log Notifikasi
+            </Link>
+            <Link href="/admin/collections/users" className="cm8-ve__extra">
+              👨‍💻 Pengguna Admin
+            </Link>
+            <Link href="/admin/collections/media" className="cm8-ve__extra">
+              📁 Galeri Media
+            </Link>
+          </div>
         </div>
-      ))}
+
+        {/* Right: Live Website Preview */}
+        <div className="cm8-ve__preview">
+          <div className="cm8-ve__preview-bar">
+            <div className="cm8-ve__preview-dots">
+              <span className="cm8-ve__dot cm8-ve__dot--red" />
+              <span className="cm8-ve__dot cm8-ve__dot--yellow" />
+              <span className="cm8-ve__dot cm8-ve__dot--green" />
+            </div>
+            <div className="cm8-ve__preview-url">{siteUrl}</div>
+            <a
+              href={siteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cm8-ve__preview-open"
+            >
+              ↗ Buka
+            </a>
+          </div>
+          <iframe
+            src={siteUrl}
+            className="cm8-ve__iframe"
+            title="Website Preview"
+            sandbox="allow-scripts allow-same-origin allow-popups"
+          />
+        </div>
+      </div>
     </div>
   )
 }

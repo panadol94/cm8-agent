@@ -1007,19 +1007,35 @@ export default async function HomePage() {
       }))
     : incomeShowcase
 
-  const displayProviders = cmsProviders
-    ? cmsProviders.map((p) => ({
-        name: p.name || '',
-        img: p.logoUrl || '',
-      }))
-    : providers
+  const displayProviders = (() => {
+    const raw = cmsProviders
+      ? cmsProviders.map((p) => ({
+          name: p.name || '',
+          img: p.logoUrl || '',
+        }))
+      : providers
+    // Deduplicate by name
+    const seen = new Map<string, (typeof raw)[0]>()
+    for (const p of raw) {
+      if (!seen.has(p.name)) seen.set(p.name, p)
+    }
+    return [...seen.values()]
+  })()
 
-  const displayFaqs = cmsFaqs
-    ? cmsFaqs.map((f) => ({
-        q: f.question || '',
-        a: f.answer || '',
-      }))
-    : faqs
+  const displayFaqs = (() => {
+    const raw = cmsFaqs
+      ? cmsFaqs.map((f) => ({
+          q: f.question || '',
+          a: f.answer || '',
+        }))
+      : faqs
+    // Deduplicate by question
+    const seen = new Map<string, (typeof raw)[0]>()
+    for (const f of raw) {
+      if (!seen.has(f.q)) seen.set(f.q, f)
+    }
+    return [...seen.values()]
+  })()
 
   const displayFaqSchema = {
     '@context': 'https://schema.org',

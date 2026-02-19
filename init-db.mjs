@@ -815,6 +815,28 @@ async function initDB() {
     // Blog Posts: add _status for versions
     await addColumnIfNotExists('blog_posts', '_status', "varchar DEFAULT 'draft'")
 
+    // Site Settings: CTA button columns
+    await addColumnIfNotExists(
+      'site_settings',
+      'cta_button1_text',
+      "varchar DEFAULT '🚀 Jadi Agent Sekarang'",
+    )
+    await addColumnIfNotExists(
+      'site_settings',
+      'cta_button1_link',
+      "varchar DEFAULT 'https://masuk10.com/WhatsappVVIP'",
+    )
+    await addColumnIfNotExists(
+      'site_settings',
+      'cta_button2_text',
+      "varchar DEFAULT 'Daftar Akaun CM8'",
+    )
+    await addColumnIfNotExists(
+      'site_settings',
+      'cta_button2_link',
+      "varchar DEFAULT 'https://masuk10.com/WhatsappVVIP'",
+    )
+
     // Scanner Config: add enum + columns to site_settings
     await createEnumIfNotExists('enum_site_settings_scanner_seed_interval', [
       '15',

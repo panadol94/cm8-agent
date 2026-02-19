@@ -50,6 +50,9 @@ COPY --from=builder /app/tsconfig.json ./tsconfig.json
 # Copy init-db script
 COPY --from=builder /app/init-db.mjs ./init-db.mjs
 
+# Create media upload directory with proper permissions
+RUN mkdir -p /app/media && chown nextjs:nodejs /app/media
+
 USER nextjs
 
 EXPOSE 3000

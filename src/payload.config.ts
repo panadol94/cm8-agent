@@ -31,7 +31,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     components: {
-      beforeDashboard: ['./app/(payload)/DashboardCards'],
+      beforeDashboard: ['./components/VisualEditor'],
     },
     livePreview: {
       url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',

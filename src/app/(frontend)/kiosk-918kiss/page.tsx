@@ -34,23 +34,43 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: 'Apa itu Kiosk 918Kiss?',
-    a: 'Kiosk 918Kiss merujuk kepada sistem pengurusan akaun 918Kiss di mana anda boleh mendaftar, menyemak baki, dan membuat transaksi. Di CM8, semua ini diuruskan melalui agent anda.',
+    a: 'Kiosk 918Kiss merujuk kepada sistem pengurusan akaun 918Kiss di mana anda boleh mendaftar, menyemak baki, dan membuat transaksi. Di CM8, semua ini diuruskan melalui agent anda dengan cepat dan selamat.',
   },
   {
     q: 'Bagaimana cara download 918Kiss?',
-    a: '918Kiss boleh dimuat turun untuk Android (APK) dan iOS. Hubungi agent CM8 anda untuk link download terkini yang selamat.',
+    a: '918Kiss boleh dimuat turun untuk Android (APK) dan iOS. Hubungi agent CM8 anda untuk link download terkini yang selamat. Jangan download dari sumber tidak dikenali.',
   },
   {
     q: 'Berapa minimum deposit 918Kiss?',
-    a: 'Di CM8, deposit minimum serendah RM10. Deposit dan withdrawal diproses dengan pantas melalui agent.',
+    a: 'Di CM8, deposit minimum serendah RM10. Deposit dan withdrawal diproses dengan pantas melalui agent. Proses biasanya kurang 5 minit.',
   },
   {
     q: 'Apa beza 918Kiss dengan Mega888?',
-    a: '918Kiss adalah platform klasik yang lebih lama, dikenali dengan koleksi slot tradisional. Mega888 lebih moden dengan grafik terkini. Kedua-dua platform boleh diakses melalui CM8.',
+    a: '918Kiss adalah platform klasik yang lebih lama, dikenali dengan koleksi slot tradisional yang stabil. Mega888 lebih moden dengan grafik terkini. Kedua-dua platform boleh diakses melalui satu akaun CM8.',
   },
   {
     q: 'Bolehkah scan slot 918Kiss?',
-    a: 'Ya! AI Scanner CM8 menyokong sepenuhnya 918Kiss. Scan peratusan RTP setiap slot secara real-time.',
+    a: 'Ya! AI Scanner CM8 menyokong sepenuhnya 918Kiss. Scan peratusan RTP setiap slot secara real-time untuk pilih yang terpanas.',
+  },
+  {
+    q: 'Apakah slot 918Kiss paling popular?',
+    a: 'Antara slot 918Kiss paling popular termasuk Great Blue, Safari Heat, Panther Moon, dan Highway Kings. Slot-slot klasik ini dikenali dengan RTP yang stabil dan gameplay yang menarik.',
+  },
+  {
+    q: 'Adakah 918Kiss masih relevan pada 2026?',
+    a: 'Ya! Walaupun sudah lama beroperasi, 918Kiss kekal popular kerana koleksi slot klasik yang dipercayai, interface yang mudah, dan RTP yang konsisten. Ramai pemain setia kekal dengan 918Kiss.',
+  },
+  {
+    q: 'Bolehkah main 918Kiss dari iPhone?',
+    a: 'Ya! 918Kiss menyokong kedua-dua Android dan iOS. Agent CM8 anda akan memberikan link download yang sesuai untuk peranti anda.',
+  },
+  {
+    q: 'Berapa lama proses withdrawal 918Kiss?',
+    a: 'Melalui agent CM8, proses withdrawal biasanya mengambil masa kurang 5 minit. Tiada had withdrawal minimum yang membebankan.',
+  },
+  {
+    q: 'Bagaimana jadi agent 918Kiss?',
+    a: 'Daftar sebagai agent CM8 secara percuma dan anda boleh menawarkan 918Kiss serta 20+ provider lain. Jana komisyen sehingga 90% tanpa modal.',
   },
 ]
 
@@ -99,7 +119,7 @@ export default function Kiosk918KissPage() {
             author: { '@type': 'Organization', name: 'CM8 VVIP' },
             publisher: { '@type': 'Organization', name: 'CM8 VVIP' },
             datePublished: '2026-01-08',
-            dateModified: '2026-02-19',
+            dateModified: '2026-02-20',
           }),
         }}
       />
@@ -129,6 +149,12 @@ export default function Kiosk918KissPage() {
             <Link href="/komisen-tanpa-modal">komisyen tertinggi</Link> jika anda mendaftar sebagai{' '}
             <Link href="/agent-judi">agent</Link>.
           </p>
+          <p className="info-section-desc">
+            Walaupun platform moden seperti <Link href="/kiosk-mega888">Mega888</Link> semakin
+            popular, 918Kiss kekal relevan kerana koleksi slot klasik yang dipercayai dan gameplay
+            yang stabil. Ramai pemain setia memilih 918Kiss kerana nostalgia dan konsistensi
+            hasilnya.
+          </p>
         </div>
       </section>
 
@@ -150,7 +176,7 @@ export default function Kiosk918KissPage() {
                   >
                     WhatsApp
                   </a>{' '}
-                  untuk mendaftar akaun 918Kiss.
+                  untuk mendaftar akaun 918Kiss. Proses mengambil masa kurang 5 minit.
                 </p>
               </div>
             </div>
@@ -158,7 +184,10 @@ export default function Kiosk918KissPage() {
               <div className="how-to-num">2</div>
               <div className="how-to-content">
                 <h4>Terima ID & Password</h4>
-                <p>Agent akan memberikan ID dan password 918Kiss anda dalam masa beberapa minit.</p>
+                <p>
+                  Agent akan memberikan ID dan password 918Kiss anda dalam masa beberapa minit.
+                  Simpan maklumat ini dengan selamat.
+                </p>
               </div>
             </div>
             <div className="how-to-step">
@@ -167,7 +196,7 @@ export default function Kiosk918KissPage() {
                 <h4>Download APK</h4>
                 <p>
                   Muat turun 918Kiss untuk Android (APK) atau iOS. Agent akan berikan link download
-                  sah.
+                  yang sah dan bebas malware.
                 </p>
               </div>
             </div>
@@ -194,17 +223,28 @@ export default function Kiosk918KissPage() {
               <h3>AI Scanner</h3>
               <p>
                 Analisis RTP slot 918Kiss secara real-time. Pilih slot terpanas sebelum bermain.
+                Teknologi eksklusif hanya di CM8.
               </p>
             </div>
             <div className="info-pillar">
               <h3>Deposit RM10</h3>
-              <p>Bermula serendah RM10. Proses deposit dan withdrawal pantas melalui agent CM8.</p>
+              <p>
+                Bermula serendah RM10. Proses deposit dan withdrawal pantas melalui agent CM8.
+                Biasanya selesai dalam masa kurang 5 minit.
+              </p>
             </div>
             <div className="info-pillar">
               <h3>Koleksi Klasik</h3>
               <p>
-                Slot klasik yang terbukti popular — Great Blue, Safari Heat, Panther Moon, dan
-                ratusan lagi.
+                Slot klasik yang terbukti popular — Great Blue, Safari Heat, Panther Moon, Highway
+                Kings, dan ratusan slot lain yang stabil.
+              </p>
+            </div>
+            <div className="info-pillar">
+              <h3>Sokongan 24/7</h3>
+              <p>
+                Agent CM8 sedia membantu pada bila-bila masa. Deposit, withdrawal, masalah teknikal
+                — semua diselesaikan dengan pantas.
               </p>
             </div>
           </div>
@@ -213,6 +253,41 @@ export default function Kiosk918KissPage() {
 
       <section className="info-section info-section-alt">
         <div className="info-section-inner">
+          <div className="section-tag">Slot Popular</div>
+          <h2 className="info-section-title">🔥 Slot 918Kiss Paling Popular</h2>
+          <div className="info-pillars">
+            <div className="info-pillar">
+              <h3>Great Blue</h3>
+              <p>
+                Slot klasik 918Kiss yang paling popular sepanjang masa. Free spins feature dengan
+                multiplier besar dan RTP yang konsisten menjadikannya kegemaran ramai.
+              </p>
+            </div>
+            <div className="info-pillar">
+              <h3>Safari Heat</h3>
+              <p>
+                Slot bertema safari Afrika. Bonus rounds yang menarik dan potensi kemenangan besar.
+                Salah satu slot paling dimainkan di 918Kiss.
+              </p>
+            </div>
+            <div className="info-pillar">
+              <h3>Panther Moon</h3>
+              <p>
+                Slot misteri bertema malam. Feature wild dan free spins yang kerap memberi
+                kemenangan kepada pemain. RTP yang stabil dan volatiliti sederhana.
+              </p>
+            </div>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 20 }}>
+            <Link href="/patch-id" className="btn btn-gradient btn-lg">
+              🔍 Scan Slot 918Kiss Sekarang
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="info-section">
+        <div className="info-section-inner">
           <div className="section-tag">Perbandingan</div>
           <h2 className="info-section-title">📊 918Kiss vs Mega888</h2>
           <div className="info-pillars">
@@ -220,7 +295,7 @@ export default function Kiosk918KissPage() {
               <h3>918Kiss</h3>
               <p>
                 Platform klasik sejak 2010. Interface nostalgik yang mudah digunakan. Koleksi slot
-                tradisional yang terbukti popular. Stabil dan dipercayai.
+                tradisional yang terbukti popular. RTP stabil dan konsisten.
               </p>
             </div>
             <div className="info-pillar">
@@ -241,7 +316,7 @@ export default function Kiosk918KissPage() {
         </div>
       </section>
 
-      <section className="info-section">
+      <section className="info-section info-section-alt">
         <div className="info-section-inner">
           <div className="section-tag">Tips</div>
           <h2 className="info-section-title">🎯 Tips Menang 918Kiss</h2>
@@ -250,25 +325,36 @@ export default function Kiosk918KissPage() {
               <h3>Scan Sebelum Main</h3>
               <p>
                 Guna AI Scanner untuk kenal pasti slot dengan RTP tinggi.{' '}
-                <Link href="/patch-id">Cuba scanner di sini</Link>.
+                <Link href="/patch-id">Cuba scanner di sini</Link>. Jangan bermain secara buta —
+                data adalah kawan anda.
               </p>
             </div>
             <div className="info-pillar">
               <h3>Main Slot Klasik</h3>
               <p>
                 Slot klasik seperti Great Blue dan Safari Heat biasanya mempunyai RTP yang lebih
-                stabil.
+                stabil dan konsisten berbanding slot baru.
               </p>
             </div>
             <div className="info-pillar">
               <h3>Berdisiplin</h3>
-              <p>Tetapkan had kerugian dan keuntungan. Stop apabila target tercapai.</p>
+              <p>
+                Tetapkan had kerugian dan keuntungan. Stop apabila target tercapai. Disiplin adalah
+                kunci kejayaan jangka panjang.
+              </p>
+            </div>
+            <div className="info-pillar">
+              <h3>Cuba Pelbagai Slot</h3>
+              <p>
+                Jangan terpaku pada satu slot sahaja. Scan dan cuba pelbagai slot untuk cari mana
+                yang sedang &quot;panas&quot; pada waktu itu.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="info-section info-section-alt">
+      <section className="info-section">
         <div className="info-section-inner">
           <div className="section-tag">Soalan Lazim</div>
           <h2 className="info-section-title">❓ Soalan Lazim — 918Kiss</h2>
@@ -288,7 +374,7 @@ export default function Kiosk918KissPage() {
         </div>
       </section>
 
-      <section className="info-section">
+      <section className="info-section info-section-alt">
         <div className="info-section-inner">
           <div className="section-tag">Artikel Berkaitan</div>
           <h2 className="info-section-title">📚 Baca Lagi</h2>
@@ -297,19 +383,25 @@ export default function Kiosk918KissPage() {
               <h3>
                 <Link href="/kiosk-mega888">Kiosk Mega888</Link>
               </h3>
-              <p>Panduan lengkap Mega888.</p>
+              <p>Panduan lengkap Mega888 — daftar, download, dan tips menang.</p>
             </div>
             <div className="info-pillar">
               <h3>
                 <Link href="/hack-slot-malaysia">Hack Slot Malaysia</Link>
               </h3>
-              <p>AI Scanner untuk semua platform.</p>
+              <p>AI Scanner untuk analisis RTP semua platform termasuk 918Kiss.</p>
             </div>
             <div className="info-pillar">
               <h3>
                 <Link href="/cm8-play">CM8 Play</Link>
               </h3>
-              <p>Semua provider game di CM8.</p>
+              <p>Senarai semua 20+ provider game yang tersedia di CM8.</p>
+            </div>
+            <div className="info-pillar">
+              <h3>
+                <Link href="/agent-judi">Jadi Agent 918Kiss</Link>
+              </h3>
+              <p>Jana komisyen sehingga 90% sebagai agent 918Kiss melalui CM8.</p>
             </div>
           </div>
         </div>

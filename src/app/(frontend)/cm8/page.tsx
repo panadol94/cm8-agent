@@ -38,19 +38,39 @@ const cm8Faqs = [
   },
   {
     q: 'Adakah CM8 platform yang sah?',
-    a: 'Ya, CM8 beroperasi sebagai platform perantara agent yang telah beroperasi sejak 2020. Kami mempunyai ribuan agent aktif dan rekod pembayaran yang konsisten.',
+    a: 'Ya, CM8 beroperasi sebagai platform perantara agent yang telah beroperasi sejak 2020. Kami mempunyai ribuan agent aktif dan rekod pembayaran yang konsisten setiap minggu.',
   },
   {
     q: 'Bagaimana cara daftar CM8?',
-    a: 'Anda boleh mendaftar secara percuma melalui halaman pendaftaran kami atau menghubungi admin melalui WhatsApp. Proses pendaftaran mengambil masa kurang dari 5 minit.',
+    a: 'Anda boleh mendaftar secara percuma melalui halaman pendaftaran kami atau menghubungi admin melalui WhatsApp. Proses pendaftaran mengambil masa kurang dari 5 minit dan tiada modal diperlukan.',
   },
   {
     q: 'Berapa komisyen yang ditawarkan CM8?',
-    a: 'CM8 menawarkan komisyen bermula dari 60% untuk Newbie Agent, 80% untuk Solo Player Agent, dan sehingga 90% untuk Team Builder Agent. Bayaran dibuat secara mingguan.',
+    a: 'CM8 menawarkan komisyen bermula dari 60% untuk Newbie Agent, 80% untuk Solo Player Agent, dan sehingga 90% untuk Team Builder Agent. Bayaran dibuat secara mingguan terus ke akaun bank.',
   },
   {
     q: 'Apakah kelebihan CM8 berbanding platform lain?',
-    a: 'CM8 menawarkan komisyen tertinggi di pasaran, AI scanner slot real-time, dashboard agent yang lengkap, sokongan 24/7, dan tiada yuran tersembunyi.',
+    a: 'CM8 menawarkan komisyen tertinggi di pasaran, AI scanner slot real-time, dashboard agent yang lengkap, sokongan 24/7, tiada yuran tersembunyi, dan 20+ provider gaming.',
+  },
+  {
+    q: 'Adakah CM8 menyokong Mega888 dan 918Kiss?',
+    a: 'Ya! CM8 menyokong sepenuhnya Mega888, 918Kiss, dan 20+ provider lain termasuk JILI, Pragmatic Play, Hacksaw Gaming, Habanero, Playtech, Spade Gaming, dan banyak lagi.',
+  },
+  {
+    q: 'Apa itu AI Scanner CM8?',
+    a: 'AI Scanner CM8 adalah teknologi eksklusif yang menganalisis peratusan RTP (Return to Player) slot secara real-time. Ia membantu pemain memilih slot yang sedang "panas" untuk peluang menang yang lebih baik.',
+  },
+  {
+    q: 'Bolehkah saya jadi agent CM8 secara part-time?',
+    a: 'Ya! Ramai agent CM8 menjalankannya secara part-time. Anda hanya perlu 2-3 jam sehari untuk mengurus pemain dan promosi. Tiada jadual tetap — kerja pada masa yang sesuai untuk anda.',
+  },
+  {
+    q: 'Berapa pendapatan purata agent CM8?',
+    a: 'Agent baru biasa menjana RM500-RM2,000 seminggu. Agent berpengalaman dengan rangkaian yang kukuh menjana RM5,000-RM15,000 seminggu. Pendapatan bergantung pada usaha dan saiz rangkaian anda.',
+  },
+  {
+    q: 'Adakah CM8 menyediakan latihan untuk agent baru?',
+    a: 'Ya! CM8 menyediakan panduan lengkap, tutorial video, bahan pemasaran percuma, dan sokongan mentor 24/7. Anda juga boleh belajar dari komuniti 1,200+ agent aktif di Telegram.',
   },
 ]
 
@@ -96,12 +116,11 @@ export default function CM8Page() {
             author: { '@type': 'Organization', name: 'CM8 VVIP' },
             publisher: { '@type': 'Organization', name: 'CM8 VVIP' },
             datePublished: '2026-01-01',
-            dateModified: '2026-02-19',
+            dateModified: '2026-02-20',
           }),
         }}
       />
 
-      {/* Hero */}
       <div className="page-hero">
         <h1 className="page-hero-title">CM8 — Platform Agent Slot #1 Malaysia</h1>
         <p className="page-hero-subtitle">
@@ -110,7 +129,6 @@ export default function CM8Page() {
         </p>
       </div>
 
-      {/* Section 1: Apa Itu CM8 */}
       <section className="info-section">
         <div className="info-section-inner">
           <div className="section-tag">Pengenalan</div>
@@ -134,10 +152,14 @@ export default function CM8Page() {
             perlukan untuk berjaya. Ramai agent kami yang bermula tanpa pengalaman kini menjana{' '}
             <strong>RM3,000 - RM15,000 seminggu</strong>.
           </p>
+          <p className="info-section-desc">
+            Platform CM8 direka untuk kemudahan — dari pendaftaran yang mengambil masa kurang 5
+            minit hingga pembayaran komisyen automatik setiap minggu. Kami percaya teknologi harus
+            memudahkan kerja anda, bukan menyukarkannya.
+          </p>
         </div>
       </section>
 
-      {/* Section 2: Kelebihan CM8 */}
       <section className="info-section info-section-alt">
         <div className="info-section-inner">
           <div className="section-tag">Kelebihan</div>
@@ -175,18 +197,59 @@ export default function CM8Page() {
                 Lihat Komuniti →
               </Link>
             </div>
+            <div className="info-pillar">
+              <h3>📱 Dashboard Canggih</h3>
+              <p>
+                Dashboard agent CM8 memberikan data real-time tentang pemain, komisyen, dan prestasi
+                anda. Pantau segala-galanya dari smartphone atau komputer anda.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Section 3: Platform Yang Disokong */}
       <section className="info-section">
+        <div className="info-section-inner">
+          <div className="section-tag">Teknologi</div>
+          <h2 className="info-section-title">🤖 Teknologi Eksklusif CM8</h2>
+          <p className="info-section-desc">
+            CM8 bukan sekadar platform agent biasa. Kami melaburkan dalam teknologi canggih untuk
+            memberikan kelebihan kepada agent dan pemain kami.
+          </p>
+          <div className="info-pillars">
+            <div className="info-pillar">
+              <h3>AI Scanner RTP</h3>
+              <p>
+                <Link href="/hack-slot-malaysia">Scanner AI</Link> yang menganalisis peratusan RTP
+                slot dari 20+ provider secara real-time. Pemain anda boleh membuat keputusan yang
+                lebih bijak tentang slot mana yang patut dimainkan.
+              </p>
+            </div>
+            <div className="info-pillar">
+              <h3>Dashboard Real-Time</h3>
+              <p>
+                Pantau jualan, komisyen, dan prestasi anda secara langsung. Data dikemas kini setiap
+                saat — tiada kelewatan atau ketidaktepatan.
+              </p>
+            </div>
+            <div className="info-pillar">
+              <h3>Sistem Downline Automatik</h3>
+              <p>
+                Override commission dikira secara automatik. Apabila downline anda menjana
+                pendapatan, anda turut menerima komisyen tanpa perlu buat apa-apa.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="info-section info-section-alt">
         <div className="info-section-inner">
           <div className="section-tag">Platform</div>
           <h2 className="info-section-title">🎰 Platform Game CM8</h2>
           <p className="info-section-desc">
             CM8 menyokong pelbagai platform gaming terkemuka di Malaysia. Sebagai agent CM8, anda
-            boleh menawarkan permainan dari semua platform ini kepada pemain anda:
+            boleh menawarkan permainan dari semua platform ini kepada pemain anda.
           </p>
           <div className="info-pillars">
             <div className="info-pillar">
@@ -194,7 +257,7 @@ export default function CM8Page() {
               <p>
                 Platform slot paling popular di Malaysia. CM8 menyediakan{' '}
                 <Link href="/kiosk-mega888">kiosk Mega888</Link> lengkap dengan scanner AI untuk
-                analisis RTP setiap slot.
+                analisis RTP setiap slot. Ratusan permainan tersedia.
               </p>
             </div>
             <div className="info-pillar">
@@ -208,16 +271,16 @@ export default function CM8Page() {
             <div className="info-pillar">
               <h3>20+ Provider Lain</h3>
               <p>
-                JILI, Pragmatic Play, Hacksaw, Habanero, Playtech, Spade Gaming, dan banyak lagi.
-                Lihat semua provider di halaman <Link href="/cm8-play">CM8 Play</Link>.
+                JILI, Pragmatic Play, Hacksaw, Habanero, Playtech, Spade Gaming, BNG, BetSoft,
+                NoLimit City, Relax Gaming, dan banyak lagi. Lihat semua provider di halaman{' '}
+                <Link href="/cm8-play">CM8 Play</Link>.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 4: Cara Mula */}
-      <section className="info-section info-section-alt">
+      <section className="info-section">
         <div className="info-section-inner">
           <div className="section-tag">Panduan</div>
           <h2 className="info-section-title">🚀 Cara Bermula Dengan CM8</h2>
@@ -229,7 +292,7 @@ export default function CM8Page() {
                 <p>
                   Pendaftaran adalah <strong>100% percuma</strong>. Tiada modal diperlukan. Isi
                   borang di halaman <Link href="/register">pendaftaran</Link> atau hubungi admin
-                  melalui WhatsApp.
+                  melalui WhatsApp. Proses mengambil masa kurang 5 minit.
                 </p>
               </div>
             </div>
@@ -239,7 +302,8 @@ export default function CM8Page() {
                 <h4>Terima Akses Dashboard</h4>
                 <p>
                   Sebaik sahaja pendaftaran disahkan, anda akan menerima akses ke dashboard agent
-                  CM8. Di sini anda boleh pantau jualan, komisyen, dan downline anda.
+                  CM8. Di sini anda boleh pantau jualan, komisyen, dan downline anda secara
+                  real-time.
                 </p>
               </div>
             </div>
@@ -257,8 +321,7 @@ export default function CM8Page() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="info-section">
+      <section className="info-section info-section-alt">
         <div className="info-section-inner">
           <div className="section-tag">Soalan Lazim</div>
           <h2 className="info-section-title">❓ Soalan Lazim Tentang CM8</h2>
@@ -278,8 +341,7 @@ export default function CM8Page() {
         </div>
       </section>
 
-      {/* Related Links */}
-      <section className="info-section info-section-alt">
+      <section className="info-section">
         <div className="info-section-inner">
           <div className="section-tag">Artikel Berkaitan</div>
           <h2 className="info-section-title">📚 Baca Lagi</h2>
@@ -302,11 +364,16 @@ export default function CM8Page() {
               </h3>
               <p>Ketahui teknologi AI scanner slot dan cara ia membantu pemain.</p>
             </div>
+            <div className="info-pillar">
+              <h3>
+                <Link href="/komisen-tanpa-modal">Komisen Tanpa Modal</Link>
+              </h3>
+              <p>Jana komisyen sehingga 90% tanpa sebarang modal permulaan.</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
       <section className="cta-section">
         <div className="cta-content">
           <h2 className="cta-title">Sedia Untuk Mula Dengan CM8?</h2>

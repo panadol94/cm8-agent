@@ -281,11 +281,6 @@ export default function FloatingSocials() {
         onTouchEnd={handleTouchEnd}
         aria-label="Toggle AI Chat"
       >
-        {/* Radar sweeping background */}
-        <div className="radar-sweep"></div>
-        <div className="radar-ring r1"></div>
-        <div className="radar-ring r2"></div>
-
         <span className="btn-icon">
           {isOpen ? (
             <svg

@@ -29,6 +29,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",
+    "lottie-react": "^2.4.1",
     "lru-cache": "^11.2.6",
     "next": "15.4.11",
     "next-sitemap": "^4.2.3",

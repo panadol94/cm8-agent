@@ -281,6 +281,11 @@ export default function FloatingSocials() {
         onTouchEnd={handleTouchEnd}
         aria-label="Toggle AI Chat"
       >
+        {/* Radar sweeping background */}
+        <div className="radar-sweep"></div>
+        <div className="radar-ring r1"></div>
+        <div className="radar-ring r2"></div>
+
         <span className="btn-icon">
           {isOpen ? (
             <svg
@@ -289,7 +294,7 @@ export default function FloatingSocials() {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
@@ -297,18 +302,17 @@ export default function FloatingSocials() {
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           ) : (
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-            </svg>
+            // Premium Floating 3D-like AI Robot Mascot
+            <div className="bot-mascot">
+              <div className="bot-head">
+                <div className="bot-eyes">
+                  <div className="bot-eye"></div>
+                  <div className="bot-eye"></div>
+                </div>
+                <div className="bot-mouth"></div>
+              </div>
+              <div className="bot-antenna"></div>
+            </div>
           )}
         </span>
       </button>

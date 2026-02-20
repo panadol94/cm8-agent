@@ -120,8 +120,7 @@ const posts = [
       'Bongkar strategi elit bagaimana untuk mencari dan mengekalkan VIP Player yang sanggup deposit RM10k sekali masuk.',
     category: 'Tips & Strategi',
     date: '17 Feb 2026',
-    image:
-      'https://images.unsplash.com/photo-1565373676839-4d642b59196b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80',
+    image: '/blog/high-commission.png',
     readTime: 7,
     views: 6100,
     tags: ['#HighRoller', '#Strategi', '#VIP'],
@@ -133,8 +132,7 @@ const posts = [
       'Penjelasan telus tentang status dan tahap keselamatan sistem CM8 VVIP untuk ketenangan minda agent.',
     category: 'Panduan Agent',
     date: '16 Feb 2026',
-    image:
-      'https://images.unsplash.com/photo-1533022130541-e9dbdeb4fc44?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+    image: '/blog/agent-success.png',
     readTime: 4,
     views: 11200,
     tags: ['#Trusted', '#Selamat', '#Platform'],

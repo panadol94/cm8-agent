@@ -118,40 +118,12 @@
   transform: scale(0.92);
 }
 
+/* Hide the floating robot entirely when the chat is open (since the Close button is in the header now) */
 .floating-toggle-btn.active {
-  background: rgba(15, 20, 28, 0.95); /* Keep the premium glass look for the close button */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  width: 50px; /* Make the close button smaller and elegant */
-  height: 50px;
-  box-shadow:
-    0 10px 25px rgba(0, 0, 0, 0.4),
-    0 0 15px rgba(255, 107, 74, 0.15); /* Soft reddish glow for close action */
-  transform: rotate(0deg);
-}
-
-.btn-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.btn-icon svg {
-  width: 22px; /* Scale down the X icon so it isn't huge */
-  height: 22px;
-}
-
-.floating-toggle-btn.active .btn-icon {
-  transform: rotate(90deg);
-}
-
-.floating-toggle-btn.active::before,
-.floating-toggle-btn.active::after,
-.floating-toggle-btn.active .radar-sweep,
-.floating-toggle-btn.active .radar-ring {
-  animation: none;
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.5);
+  pointer-events: none;
 }
 
 /* ── PREMIUM TOOLTIP ───────────────────────────────── */
@@ -250,41 +222,17 @@
   visibility: visible;
 }
 
-/* ── CHAT HEADER ───────────────────────────────────── */
+/* ── CHAT HEADER (FROSTED GLASS) ───────────────────────────────────── */
 .floating-menu-header {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+  background: rgba(255, 255, 255, 0.75); /* Light semi-transparent */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Subtle separator */
   padding: 18px 20px 14px;
-  color: white;
+  color: #1a1a2e; /* Dark text for contrast */
   flex-shrink: 0;
   position: relative;
-  overflow: hidden;
-}
-
-/* Subtle animated gradient shimmer */
-.floating-menu-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 170, 51, 0.06),
-    rgba(255, 107, 74, 0.08),
-    transparent
-  );
-  animation: header-shimmer 4s ease-in-out infinite;
-}
-
-@keyframes header-shimmer {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(50%);
-  }
+  z-index: 10;
 }
 
 .fm-header-top {
@@ -317,14 +265,22 @@
   animation: dot-pulse 1.5s ease-in-out infinite;
 }
 
+.fm-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .fm-quick-links {
   display: flex;
   gap: 6px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  padding-right: 12px;
 }
 
 .fm-icon {
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
+  color: #1a1a2e; /* Dark icon for light theme */
+  background: rgba(0, 0, 0, 0.04); /* Very subtle dark background */
   backdrop-filter: blur(4px);
   width: 30px;
   height: 30px;
@@ -333,7 +289,7 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .fm-icon:hover {
@@ -342,21 +298,48 @@
 
 .fm-icon:hover.whatsapp-icon {
   background: #25d366;
+  color: white;
+  border-color: #25d366;
   box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
 }
 .fm-icon:hover.telegram-icon {
   background: #0088cc;
+  color: white;
+  border-color: #0088cc;
   box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
 }
 .fm-icon:hover.facebook-icon {
   background: #1877f2;
+  color: white;
+  border-color: #1877f2;
   box-shadow: 0 4px 15px rgba(24, 119, 242, 0.4);
+}
+
+.fm-close-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  color: #1a1a2e;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.fm-close-btn:hover {
+  background: rgba(255, 59, 48, 0.1); /* Subtle iOS red tint on hover */
+  color: #ff3b30;
+  transform: scale(1.1);
 }
 
 .fm-subtitle {
   margin: 2px 0 0 0;
   font-size: 0.78rem;
-  opacity: 0.7;
+  color: #666; /* Darker gray for light theme */
   position: relative;
   z-index: 1;
 }

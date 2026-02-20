@@ -95,7 +95,7 @@ const scannerSteps = [
    ============================================================ */
 export default async function InfoPage() {
   const telegramGroupLink = 'https://t.me/+7qOP1Y8RQcthYjll'
-  const whatsappGroupLink = 'https://chat.whatsapp.com/DIbOdL7C8FrA8FYfy3bcWU?mode=gi_t'
+  const whatsappGroupLink = 'https://masuk10.com/FeedbackVVIP'
   const adminWhatsappLink = 'https://masuk10.com/Wasapvvipcs'
 
   return (

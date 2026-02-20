@@ -1,123 +1,62 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
-/* ================================================================
-   In-memory chat store — Premium Edition
-   Supports text, image, and voice messages.
-   ================================================================ */
-
-interface ChatMessage {
-  id: string
-  name: string
-  avatar: string
-  text: string
-  type: 'text' | 'image' | 'voice'
-  media?: string // base64 data URL for image/voice
-  duration?: number // voice duration in seconds
-  timestamp: number
-  isAdmin?: boolean
-}
-
-interface OnlineUser {
-  id: string
-  name: string
-  avatar: string
-  lastSeen: number
-}
-
-declare global {
-  var __chatMessages: ChatMessage[] | undefined
-  var __chatOnlineUsers: Map<string, OnlineUser> | undefined
-}
-
-const MAX_MESSAGES = 200
-const ONLINE_TIMEOUT = 30_000
-
-function getMessages(): ChatMessage[] {
-  if (!global.__chatMessages) global.__chatMessages = []
-  return global.__chatMessages
-}
-
-function getOnlineUsers(): Map<string, OnlineUser> {
-  if (!global.__chatOnlineUsers) global.__chatOnlineUsers = new Map()
-  return global.__chatOnlineUsers
-}
-
-function pruneOffline() {
-  const now = Date.now()
-  const users = getOnlineUsers()
-  for (const [id, u] of users) {
-    if (now - u.lastSeen > ONLINE_TIMEOUT) users.delete(id)
-  }
-}
-
-/* ── GET /api/chat?after=<timestamp> ────────────────────────── */
-export async function GET(req: NextRequest) {
-  const after = Number(req.nextUrl.searchParams.get('after') || '0')
-  const msgs = getMessages()
-
-  pruneOffline()
-  const users = getOnlineUsers()
-
-  const newMessages = after ? msgs.filter((m) => m.timestamp > after) : msgs.slice(-50)
-
-  return NextResponse.json({
-    messages: newMessages,
-    onlineCount: users.size,
-    onlineUsers: Array.from(users.values()).map((u) => ({
-      id: u.id,
-      name: u.name,
-      avatar: u.avatar,
-    })),
-  })
-}
-
-/* ── POST /api/chat ─────────────────────────────────────────── */
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   try {
-    const body = await req.json()
-    const { userId, name, avatar, text, type, media, duration } = body
+    const { messages } = await req.json()
 
-    if (!name || !userId) {
-      return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
+    if (!messages || !Array.isArray(messages)) {
+      return NextResponse.json({ error: 'Invalid messages format' }, { status: 400 })
     }
 
-    const msgType = type || 'text'
-
-    // Validate based on type
-    if (msgType === 'text' && !text) {
-      return NextResponse.json({ error: 'Missing text' }, { status: 400 })
-    }
-    if ((msgType === 'image' || msgType === 'voice') && !media) {
-      return NextResponse.json({ error: 'Missing media' }, { status: 400 })
+    const groqApiKey = process.env.GROQ_API_KEY
+    if (!groqApiKey) {
+      console.error('GROQ_API_KEY is not set')
+      return NextResponse.json({ error: 'System configuration error' }, { status: 500 })
     }
 
-    const msgs = getMessages()
-
-    const msg: ChatMessage = {
-      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-      name: String(name).slice(0, 30),
-      avatar: String(avatar || ''),
-      text: msgType === 'text' ? String(text).slice(0, 500) : '',
-      type: msgType,
-      media: media ? String(media) : undefined,
-      duration: duration ? Number(duration) : undefined,
-      timestamp: Date.now(),
-      isAdmin: false,
+    // System instruction injected at the start of conversation
+    const systemPrompt = {
+      role: 'system',
+      content: `Anda adalah AI Assistant rasmi untuk CM8 VVIP (https://cm8vvip.com).
+Anda bertugas membantu pelanggan di website. Nada anda mesra, profesional, santai, gaya bahasa Melayu Malaysia (tapi sopan).
+Maklumat penting CM8:
+- Kami platform 100% percuma untuk daftar agent Judi Online (Mega888, 918Kiss, dsb).
+- Agent dapat komisyen sehingga 90% secara auto bayar (real-time dashboard).
+- Kami sedia khidmat AI Scanner untuk hack RTP slot secara langsung.
+- Support 24/7 melalui Admin WhatsApp.
+- Jika pengguna bertanya soalan teknikal akaun atau deposit/withdraw, minta mereka klik butang WhatsApp Admin.
+- Jangan berjanji pulangan pasti. Berikan info padat dan relevan. Jawab ringkas dan tepat.`,
     }
 
-    msgs.push(msg)
-    if (msgs.length > MAX_MESSAGES) msgs.splice(0, msgs.length - MAX_MESSAGES)
-
-    const users = getOnlineUsers()
-    users.set(userId, {
-      id: userId,
-      name: msg.name,
-      avatar: msg.avatar,
-      lastSeen: Date.now(),
+    // Call Groq API (OpenAI compatibility layer)
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${groqApiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'llama-3.1-8b-instant', // Fast model for chat
+        messages: [systemPrompt, ...messages],
+        temperature: 0.7,
+        max_tokens: 500,
+      }),
     })
 
-    return NextResponse.json({ success: true, message: msg })
-  } catch {
-    return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+    if (!response.ok) {
+      const errorText = await response.text()
+      console.error('Groq API Error:', errorText)
+      return NextResponse.json({ error: 'Failed to fetch response from AI' }, { status: 500 })
+    }
+
+    const data = await response.json()
+    const reply =
+      data.choices?.[0]?.message?.content ||
+      'Maaf, saya tak pasti macam mana nak jawab soalan tu. Boleh hubungi Admin?'
+
+    return NextResponse.json({ reply })
+  } catch (error) {
+    console.error('Chatbot route error:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

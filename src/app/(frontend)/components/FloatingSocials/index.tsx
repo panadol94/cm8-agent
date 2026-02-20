@@ -302,16 +302,23 @@ export default function FloatingSocials() {
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           ) : (
-            // Premium Floating 3D-like AI Robot Mascot
-            <div className="bot-mascot">
-              <div className="bot-head">
-                <div className="bot-eyes">
-                  <div className="bot-eye"></div>
-                  <div className="bot-eye"></div>
-                </div>
-                <div className="bot-mouth"></div>
-              </div>
-              <div className="bot-antenna"></div>
+            // Premium Glowing AI Core + Sparkles
+            <div className="premium-ai-core">
+              <div className="core-glow"></div>
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="ai-sparkle-icon"
+              >
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                <circle cx="12" cy="12" r="4" />
+              </svg>
             </div>
           )}
         </span>

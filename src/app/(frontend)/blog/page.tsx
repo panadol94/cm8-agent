@@ -371,7 +371,7 @@ export default function BlogPage() {
                 </div>
 
                 <a
-                  href="https://whatsapp.com/channel/0029Vb7cSULCxoAtcGaunK37"
+                  href="https://chat.whatsapp.com/DIbOdL7C8FrA8FYfy3bcWU?mode=gi_t"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="blog-newsletter-btn"

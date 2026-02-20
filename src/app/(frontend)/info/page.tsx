@@ -106,7 +106,8 @@ export default async function InfoPage() {
   }
 
   const telegramGroupLink = ssAny?.telegramGroupLink || 'https://t.me/+7qOP1Y8RQcthYjll'
-  const whatsappGroupLink = ssAny?.whatsappGroupLink || 'https://masuk10.com/WasapGrupVVIP'
+  const whatsappGroupLink =
+    ssAny?.whatsappGroupLink || 'https://chat.whatsapp.com/DIbOdL7C8FrA8FYfy3bcWU?mode=gi_t'
   const adminWhatsappLink = ssAny?.adminWhatsappLink || 'https://masuk10.com/Wasapvvipcs'
 
   return (

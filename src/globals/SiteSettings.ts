@@ -143,7 +143,7 @@ export const SiteSettings: GlobalConfig = {
               name: 'whatsappGroupLink',
               type: 'text',
               label: 'Link WhatsApp Group',
-              defaultValue: 'https://masuk10.com/WasapGrupVVIP',
+              defaultValue: 'https://chat.whatsapp.com/DIbOdL7C8FrA8FYfy3bcWU?mode=gi_t',
               admin: {
                 description: 'Link group WhatsApp komuniti agent.',
               },

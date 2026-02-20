@@ -1230,7 +1230,7 @@ export default async function HomePage() {
           <span className="qa-arrow">›</span>
         </a>
         <a
-          href="https://masuk10.com/TeleGrupVVIP"
+          href="https://t.me/+7qOP1Y8RQcthYjll"
           target="_blank"
           rel="noopener noreferrer"
           className="quick-action-btn qa-telegram"
@@ -1245,7 +1245,7 @@ export default async function HomePage() {
           <span className="qa-arrow">›</span>
         </a>
         <a
-          href="https://whatsapp.com/channel/0029Vb7cSULCxoAtcGaunK37"
+          href="https://chat.whatsapp.com/DIbOdL7C8FrA8FYfy3bcWU?mode=gi_t"
           target="_blank"
           rel="noopener noreferrer"
           className="quick-action-btn qa-whatsapp"

@@ -880,7 +880,9 @@ export const site_settings = pgTable(
     whatsappNumber: varchar('whatsapp_number'),
     telegramLink: varchar('telegram_link'),
     telegramGroupLink: varchar('telegram_group_link').default('https://t.me/+7qOP1Y8RQcthYjll'),
-    whatsappGroupLink: varchar('whatsapp_group_link').default('https://masuk10.com/WasapGrupVVIP'),
+    whatsappGroupLink: varchar('whatsapp_group_link').default(
+      'https://chat.whatsapp.com/DIbOdL7C8FrA8FYfy3bcWU?mode=gi_t',
+    ),
     adminWhatsappLink: varchar('admin_whatsapp_link').default('https://masuk10.com/Wasapvvipcs'),
     footerText: varchar('footer_text').default('© 2026 CM8 VVIP. Semua hak cipta terpelihara.'),
     metaTitle: varchar('meta_title').default(

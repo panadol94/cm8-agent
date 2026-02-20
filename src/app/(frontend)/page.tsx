@@ -1250,7 +1250,7 @@ export default async function HomePage() {
           <span className="qa-arrow">›</span>
         </a>
         <a
-          href="https://chat.whatsapp.com/DIbOdL7C8FrA8FYfy3bcWU?mode=gi_t"
+          href="https://masuk10.com/FeedbackVVIP"
           target="_blank"
           rel="noopener noreferrer"
           className="quick-action-btn qa-whatsapp"

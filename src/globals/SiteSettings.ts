@@ -152,7 +152,7 @@ export const SiteSettings: GlobalConfig = {
               name: 'adminWhatsappLink',
               type: 'text',
               label: 'Link WhatsApp Admin',
-              defaultValue: 'https://masuk10.com/WhatsappVVIP',
+              defaultValue: 'https://masuk10.com/Wasapvvipcs',
               admin: {
                 description:
                   'Link WhatsApp untuk chat terus dengan admin / pendaftaran agent baru.',

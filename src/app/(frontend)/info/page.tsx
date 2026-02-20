@@ -102,7 +102,7 @@ export default async function InfoPage() {
   const ssAny = ss as unknown as Record<string, string>
   const telegramGroupLink = ssAny?.telegramGroupLink || 'https://masuk10.com/TeleGrupVVIP'
   const whatsappGroupLink = ssAny?.whatsappGroupLink || 'https://masuk10.com/WasapGrupVVIP'
-  const adminWhatsappLink = ssAny?.adminWhatsappLink || 'https://masuk10.com/WhatsappVVIP'
+  const adminWhatsappLink = ssAny?.adminWhatsappLink || 'https://masuk10.com/Wasapvvipcs'
 
   return (
     <>

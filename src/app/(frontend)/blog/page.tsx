@@ -88,6 +88,58 @@ function SlotCounter({ value, suffix = '' }: { value: string; suffix?: string })
 /* ── Blog post data ── */
 const posts = [
   {
+    slug: 'cara-guna-scanner-ai-mega888',
+    title: 'Cara Guna Scanner AI Mega888 & 918Kiss Untuk Tarik Pemain',
+    excerpt:
+      'Rahsia bagaimana Top Agent menggunakan data RTP Live dan Scanner AI untuk gandakan deposit harian pemain.',
+    category: 'Panduan Agent',
+    date: '20 Feb 2026',
+    image:
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+    readTime: 6,
+    views: 4520,
+    tags: ['#Scanner', '#Mega888', '#HackSlot'],
+  },
+  {
+    slug: 'bisnes-online-tiada-modal',
+    title: 'Sebenar: 5 Bisnes Online Tanpa Modal Paling Menguntungkan',
+    excerpt:
+      'Jangan tertipu lagi. Kenali 5 model perniagaan online 100% tanpa modal yang boleh jana RM5,000 sebulan.',
+    category: 'Tips & Strategi',
+    date: '18 Feb 2026',
+    image:
+      'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+    readTime: 8,
+    views: 8900,
+    tags: ['#TanpaModal', '#BisnesOnline', '#IncomePasif'],
+  },
+  {
+    slug: 'rahsia-tarik-high-roller',
+    title: 'Rahsia Agent Judi Tarik "High Roller" Deposit Besar',
+    excerpt:
+      'Bongkar strategi elit bagaimana untuk mencari dan mengekalkan VIP Player yang sanggup deposit RM10k sekali masuk.',
+    category: 'Tips & Strategi',
+    date: '17 Feb 2026',
+    image:
+      'https://images.unsplash.com/photo-1565373676839-4d642b59196b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80',
+    readTime: 7,
+    views: 6100,
+    tags: ['#HighRoller', '#Strategi', '#VIP'],
+  },
+  {
+    slug: 'adakah-agent-cm8-selamat',
+    title: 'Adakah Menjadi Agent CM8 VVIP Selamat & Sah?',
+    excerpt:
+      'Penjelasan telus tentang status dan tahap keselamatan sistem CM8 VVIP untuk ketenangan minda agent.',
+    category: 'Panduan Agent',
+    date: '16 Feb 2026',
+    image:
+      'https://images.unsplash.com/photo-1533022130541-e9dbdeb4fc44?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+    readTime: 4,
+    views: 11200,
+    tags: ['#Trusted', '#Selamat', '#Platform'],
+  },
+  {
     slug: 'cara-jadi-agent-cm8-berjaya',
     title: '5 Cara Menjadi Agent CM8 Yang Berjaya',
     excerpt:

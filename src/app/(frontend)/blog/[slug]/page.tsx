@@ -5,6 +5,114 @@ import type { Metadata } from 'next'
 /* Placeholder blog post detail — will be fetched from CMS */
 const postData: Record<string, { title: string; category: string; date: string; content: string }> =
   {
+    'cara-guna-scanner-ai-mega888': {
+      title: 'Cara Guna Scanner AI Mega888 & 918Kiss Untuk Tarik Pemain',
+      category: 'Panduan Agent',
+      date: '20 Feb 2026',
+      content: `
+      <p>Dalam dunia kasino dalam talian yang penuh persaingan, agent perlu mempunyai kelebihan yang tidak adil. <strong>Memperkenalkan sistem Scanner AI Mega888 dan 918Kiss khusus untuk rakan niaga CM8 VVIP.</strong></p>
+      
+      <h2>Apa Itu Scanner AI Slot?</h2>
+      <p>Bukan seperti aplikasi "hack slot" palsu yang bersepah di pasaran, Scanner AI yang tulen menggunakan data besar (Big Data) dan algoritma pembelajaran mesin untuk meramalkan <em>RTP (Return to Player)</em> masa nyata bagi permainan seperti <strong>Great Blue</strong>, <strong>Panther Moon</strong>, dan <strong>Ocean King</strong>.</p>
+      <p>Apabila anda menjadi agent sah CM8, anda akan diberikan akses eksklusif kepada dashboard <em>Scanner Mega888</em> ini secara percuma.</p>
+
+      <h2>Cara Tarik Pemain Menggunakan Data RTP</h2>
+      <p>Sebagai agent, nilai terbesar anda kepada pemain adalah "kemenangan". Ikuti langkah ini:</p>
+      <h3>1. Screenshot Data RTP Panas</h3>
+      <p>Buka <a href="/kiosk-mega888">Kiosk Mega888 VVIP</a> anda dan ambil screenshot peratusan RTP yang menunjukkan >95%. Hantarkan ke dalam WhatsApp Group atau Telegram Channel pemain anda.</p>
+      
+      <h3>2. Tawarkan "Signal" Vip</h3>
+      <p>Cipta kumpulan eksklusif. "Sesiapa yang deposit minimum RM50 harini melalui link saya, saya akan masukkan ke dalam group Signal VIP." Pemain suka panduan, dan signal dari Scanner AI meningkatkan peluang mereka mencuci.</p>
+
+      <h3>3. Buktikan Dengan Transaksi "Cuci"</h3>
+      <p>Apabila pemain anda jackpot hasil daripada signal yang anda berikan, minta kebenaran untuk kongsikan resit kemenangan. Bukti kejayaan adalah alat pemasaran terkuat untuk menaikkan <strong>trust issue</strong> pemain baru.</p>
+      
+      <h2>Kenapa Pemain Suka Agent Yang Ada Scanner?</h2>
+      <p>Kerana anda dilihat sebagai "Penasihat Kewangan" mereka, bukan sekadar promoter. Dengan <a href="/agent-judi">sistem agent CM8 VVIP</a>, kami melatih anda cara membaca graf matriks Mega888 dan Pussy888 supaya anda sentiasa selangkah di hadapan admin kasino biasa.</p>
+      <p>Bersedia untuk gandakan deposit pemain anda? Sertai Rakan Niaga CM8 sekarang.</p>
+      `,
+    },
+    'bisnes-online-tiada-modal': {
+      title: 'Sebenar: 5 Bisnes Online Tanpa Modal Paling Menguntungkan 2026',
+      category: 'Tips & Strategi',
+      date: '18 Feb 2026',
+      content: `
+      <p>Dalam keadaan ekonomi sekarang, ramai yang mencari jalan untuk <strong>buat duit online tanpa modal</strong>. Namun, awas! Banyak "peluang" di luar sana hanyalah skim penipuan yang meminta yuran pendaftaran terselindung. Berikut adalah 5 model perniagaan online legit 100% tanpa modal yang boleh menjana pendapatan RM5,000 sebulan.</p>
+
+      <h2>1. Affiliate Marketing Kasino (Agent VVIP)</h2>
+      <p>Ini adalah rahsia terbuka yang ramai orang biasa tak tahu. Menjadi Ejen Kasino dalam Talian (Affiliate) membolehkan anda mempromosikan platform besar seperti CM8 dan menerima <a href="/komisen-tanpa-modal">komisyen sehingga 90%</a>. Anda <strong>tidak perlu letak modal</strong>, tidak perlu simpan stok, dan tidak perlu pegang duit pemain. Sistem platform mencatat segala-galanya.</p>
+      
+      <h2>2. Freelance Copywriting</h2>
+      <p>Jika anda pandai menyusun kata, ramai usahawan perlukan khidmat anda. Daftar di platform seperti Fiverr atau Upwork. Modalnya hanyalah sambungan internet dan kreativiti.</p>
+
+      <h2>3. Dropship Produk Digital</h2>
+      <p>Berbeza dengan dropship fizikal, produk digital (seperti e-book, template Canva) tidak mempunyai kos penghantaran. Margin keuntungan selalunya menghampiri 100%.</p>
+      
+      <h2>4. Pengurusan Media Sosial B2B</h2>
+      <p>Banyak syarikat kecil tempatan (seperti kedai makan, klinik) tidak pandai menguruskan TikTok atau Instagram mereka. Tawarkan perkhidmatan menguruskan akaun mereka dengan bayaran bulanan.</p>
+
+      <h2>5. TikTok Affiliate</h2>
+      <p>Sangat popular sekarang. Anda buat video reviu barang, letak beg kuning, dan tunggu komisyen masuk apabila ada jualan. Namun, peratusan komisyen affiliate TikTok fizikal selalunya kecil (3%-10%).</p>
+
+      <h2>Kenapa Affiliate Kasino Lebih Menguntungkan?</h2>
+      <p>Berbanding dropship atau TikTok Affiliate di mana anda dapat komisyen <em>sekali sahaja</em> untuk setiap jualan, Affiliate Kasino memberi anda kelangsungan (continuity). Apabila seorang pemain mendaftar di bawah link anda, "Setiap kali mereka deposit dan kalah, anda dapat komisyen, <strong>SELAMANYA</strong>." Inilah dipanggil <strong>Passive Income sebenar</strong>.</p>
+      <p>Jika anda nak bermula bisnes tanpa risiko, <a href="/register">Daftar secara percuma sebagai Rakan Niaga VVIP CM8</a> hari ini. Kami sediakan latihan pemasaran dari A ke Z.</p>
+      `,
+    },
+    'rahsia-tarik-high-roller': {
+      title: 'Rahsia Agent Judi Tarik "High Roller" Deposit Besar',
+      category: 'Tips & Strategi',
+      date: '17 Feb 2026',
+      content: `
+      <p>Mempunyai 100 pemain yang deposit RM10 setiap seorang memenatkan. Tetapi, melayani 5 "High Roller" atau VIP Player yang mendeposit RM10,000 seminggu jauh lebih mudah dan menguntungkan. Bagaimana <strong>Dewa Agent CM8</strong> memburu golongan elit ini?</p>
+
+      <h2>1. Fahami Psikologi VIP Player</h2>
+      <p>High rollers tidak kisah pasal bonus 100% Free Credit RM5. Apa yang mereka cari adalah:</p>
+      <ul>
+        <li><strong>Keselamatan (Trust):</strong> Adakah platform ini cuci (bayar) jika mereka menang RM150,000?</li>
+        <li><strong>Kelajuan:</strong> Proses deposit & cuci dalam masa kurang 2 minit.</li>
+        <li><strong>Eksklusiviti:</strong> Layanan seperti raja.</li>
+      </ul>
+
+      <h2>2. Profile Media Sosial Anda Mesti Premium</h2>
+      <p>Anda tidak boleh tarik ikan jerung pakai umpan dedak. Jika anda mahu <a href="/agent-judi">menjadi agent judi yang berjaya</a>, pastikan profil Facebook atau TikTok anda kelihatan profesional. Jangan post benda merapu. Kongsikan gaya hidup mewah (dengan rasional), resit kemenangan besar pemain (blur nama), dan status platform CM8 sebagai <strong>Platform Terbesar & Paling Teguh di Malaysia</strong>.</p>
+
+      <h2>3. Network Di Tempat Yang Betul</h2>
+      <p>Di mana VIP lepak? Selain dari kelab malam, mereka berada di forum-forum perniagaan, kumpulan kereta mewah, kumpul jam tangan berjenama, atau group golf. Masuk kumpulan ini, bina hubungan (networking) dan perlahan-lahan kenalkan mereka kepada <a href="/">Platform VVIP CM8</a>.</p>
+
+      <h2>4. Tawarkan Rebate Khas</h2>
+      <p>Dalam platform CM8, ejen diberi kuasa untuk menetapkan kadar rebate atau cashback automatik kepada pemain mereka. Gunakan ini sebagai senjata. Kepada VIP, tawarkan <em>peratusan rebate pulangan setiap minggu</em> yang ditarik terus dari komisyen anda. Sedikit memotong margin komisyen anda adalah berbaloi untuk mengekalkan pemain RM100k.</p>
+      
+      <p>Tinggalkan tabiat lama mencari deposit ciput. Naik taraf diri anda ke taraf Rakan Niaga Master. Kami sedia membimbing anda.</p>
+      `,
+    },
+    'adakah-agent-cm8-selamat': {
+      title: 'Adakah Menjadi Agent CM8 VVIP Selamat & Sah?',
+      category: 'Panduan Agent',
+      date: '16 Feb 2026',
+      content: `
+      <p>Ramai ejen baru yang takut untuk mengembangkan perniagaan pengiklanan platform kasino ini kerana is keselamatan. Mereka sering bertanya: <em>"Aman ke bos saya promosi link ni? Tak kena cekup ke?"</em>. Mari kita bincangkan secara terbuka dan jujur kenapa CM8 VVIP adalah pilihan paling selamat.</p>
+
+      <h2>Sistem Tanpa Jejak Kaki (Zero Footprint)</h2>
+      <p>Konsep pangkalan ejen zaman lama: Anda kuti duit pemain, transfer pergi akaun syarikat, dan kemudian bayar kemenangan pemain. <strong>INI SANGAT BERBAHAYA.</strong></p>
+      <p>Di CM8 VVIP, kami beroperasi 100% menggunakan sistem <a href="/komisen-tanpa-modal">Affiliate / Revenue Share Tulen</a>.</p>
+      <ul>
+        <li>❌ Anda <strong>TIDAK</strong> menguruskan mana-mana dana, deposit, atau urusan "cuci".</li>
+        <li>❌ Anda <strong>TIDAK</strong> perlu menyimpan rekod bank pemain.</li>
+        <li>✅ Peranan anda hanyalah pengiklanan. Pemain menekan link Unik anda, mendaftar ke CM8 Main Server di Filipina, dan sistem HQ menyelesaikan semuanya.</li>
+      </ul>
+
+      <h2>Server Luar Pesisir (Offshore Server)</h2>
+      <p>Semua pangkalan data ahli, IP, dan transaksi CM8 VVIP dihoskan di server kebal kalis peluru (Bulletproof servers) yang berada di luar bidang kuasa pihak berkuasa tempatan. Enkripsi hujung-ke-hujung 256-bit AES memastikan identiti agent sentiasa selamat.</p>
+
+      <h2>Bayaran Komisyen Menggunakan Kriptowang (USDT)</h2>
+      <p>Agent standard mungkin menerima bayaran masuk bank tempatan (yang mana boleh mendatangkan tanda merah pada bank). Untuk Master Agent CM8 VVIP terutamanya yang komisyen mencecah puluhan ribu sebulan, anda ditawarkan pilihan pengeluaran melalui <a href="/kiosk-mega888">dompet pertukaran USDT (TRC20)</a>. Ini menjadikan aliran wang komisyen anda 100% tanpa jejak dan bersih.</p>
+
+      <h2>Bimbingan Privasi Oleh Pihak Pengurusan</h2>
+      <p>Kami memastikan semua Ejen VVIP kami dibekalkan dengan tutorial penggunaan VPN, pengurusan Telegram yang betul, dan taktik memisahkan nombor telefon simkad personal dengan nombor bisnes.</p>
+      <p>Ketenangan minda adalah kunci kejayaan. Sertai payung besar yang utuh dan kuat — Sertai Rakan Niaga VVIP CM8 hari ini tanpa ragu.</p>
+      `,
+    },
     'cara-jadi-agent-cm8-berjaya': {
       title: '5 Cara Menjadi Agent CM8 Yang Berjaya',
       category: 'Panduan Agent',

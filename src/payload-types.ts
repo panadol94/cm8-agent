@@ -67,19 +67,19 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    users: User;
-    media: Media;
     agents: Agent;
+    'commission-tiers': CommissionTier;
+    'notifications-log': NotificationsLog;
+    banners: Banner;
+    promos: Promo;
     testimonials: Testimonial;
     faqs: Faq;
     'blog-posts': BlogPost;
     providers: Provider;
-    banners: Banner;
-    promos: Promo;
     'patch-providers': PatchProvider;
     games: Game;
-    'commission-tiers': CommissionTier;
-    'notifications-log': NotificationsLog;
+    users: User;
+    media: Media;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -87,19 +87,19 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
     agents: AgentsSelect<false> | AgentsSelect<true>;
+    'commission-tiers': CommissionTiersSelect<false> | CommissionTiersSelect<true>;
+    'notifications-log': NotificationsLogSelect<false> | NotificationsLogSelect<true>;
+    banners: BannersSelect<false> | BannersSelect<true>;
+    promos: PromosSelect<false> | PromosSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     providers: ProvidersSelect<false> | ProvidersSelect<true>;
-    banners: BannersSelect<false> | BannersSelect<true>;
-    promos: PromosSelect<false> | PromosSelect<true>;
     'patch-providers': PatchProvidersSelect<false> | PatchProvidersSelect<true>;
     games: GamesSelect<false> | GamesSelect<true>;
-    'commission-tiers': CommissionTiersSelect<false> | CommissionTiersSelect<true>;
-    'notifications-log': NotificationsLogSelect<false> | NotificationsLogSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -143,40 +143,149 @@ export interface UserAuthOperations {
   };
 }
 /**
- * Pengguna admin yang boleh mengakses panel ini. Setiap pengguna ada peranan tersendiri.
+ * Senarai agent yang mendaftar melalui website. Gunakan filter untuk cari agent mengikut status.
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "agents".
  */
-export interface User {
+export interface Agent {
   id: number;
-  name?: string | null;
+  name: string;
+  experience?: ('baru' | 'berpengalaman') | null;
+  phone: string;
   /**
-   * Gambar profil pengguna.
+   * Kosongkan jika sama dengan nombor telefon.
    */
-  avatar?: (number | null) | Media;
+  whatsapp?: string | null;
   /**
-   * Super Admin: full access. Editor: edit content. Viewer: read only.
+   * Mesej yang ditulis oleh agent semasa pendaftaran.
    */
-  role?: ('super-admin' | 'editor' | 'viewer') | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
+  message?: string | null;
+  /**
+   * Tambah nota setiap kali follow-up atau ada perkembangan baru.
+   */
+  notes?:
     | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
+        note: string;
+        addedBy?: string | null;
+        addedAt?: string | null;
+        id?: string | null;
       }[]
     | null;
-  password?: string | null;
-  collection: 'users';
+  /**
+   * Tukar status selepas follow-up.
+   */
+  status?: ('pending' | 'contacted' | 'approved' | 'rejected') | null;
+  /**
+   * Auto-generated. Klik untuk chat terus dengan agent.
+   */
+  whatsappLink?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Struktur komisyen mengikut tier agent. Dipaparkan di homepage sebagai kad tier.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "commission-tiers".
+ */
+export interface CommissionTier {
+  id: number;
+  /**
+   * Contoh: Agent Biasa, Senior Agent, Master Agent
+   */
+  name: string;
+  /**
+   * Peratusan komisyen. Contoh: 25, 35, 45
+   */
+  percentage: number;
+  /**
+   * Jumlah minimum downline untuk layak tier ini.
+   */
+  minDownline?: number | null;
+  /**
+   * Warna hex untuk badge tier di frontend. Contoh: #d4a853
+   */
+  color?: string | null;
+  /**
+   * Senarai kelebihan yang dipapar di kad tier.
+   */
+  benefits?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  icon?: ('star' | 'crown' | 'diamond' | 'rocket') | null;
+  /**
+   * Nombor kecil = papar dulu.
+   */
+  order?: number | null;
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Log semua notifikasi yang dihantar (Telegram, WhatsApp, Email). Filter mengikut saluran atau status.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "notifications-log".
+ */
+export interface NotificationsLog {
+  id: number;
+  title: string;
+  /**
+   * Kandungan yang dihantar.
+   */
+  message: string;
+  /**
+   * Chat ID, nombor telefon, atau email penerima.
+   */
+  recipient?: string | null;
+  channel: 'telegram' | 'whatsapp' | 'email';
+  status?: ('sent' | 'failed' | 'pending') | null;
+  relatedAgent?: (number | null) | Agent;
+  /**
+   * Mesej ralat jika notifikasi gagal dihantar.
+   */
+  errorMessage?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Banner carousel di bahagian atas homepage. Susun mengikut "Susunan".
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banners".
+ */
+export interface Banner {
+  id: number;
+  /**
+   * Nama dalaman untuk mengenal pasti banner. Tidak dipapar di frontend.
+   */
+  title: string;
+  /**
+   * Upload gambar banner. Saiz disyorkan: 1920 x 640 piksel.
+   */
+  image?: (number | null) | Media;
+  /**
+   * Guna URL jika tiada upload. Salah satu sahaja diperlukan.
+   */
+  imageUrl?: string | null;
+  /**
+   * URL apabila banner diklik. Kosongkan jika tiada.
+   */
+  link?: string | null;
+  /**
+   * Nombor kecil = papar dulu.
+   */
+  order?: number | null;
+  /**
+   * Nyahaktif untuk sembunyikan tanpa delete.
+   */
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * Semua gambar dan fail media untuk website. Gunakan kategori untuk susun.
@@ -230,43 +339,37 @@ export interface Media {
   };
 }
 /**
- * Senarai agent yang mendaftar melalui website. Gunakan filter untuk cari agent mengikut status.
+ * Kad promosi yang dipaparkan di homepage. Toggle "Highlight" untuk featured.
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "agents".
+ * via the `definition` "promos".
  */
-export interface Agent {
+export interface Promo {
   id: number;
-  name: string;
-  experience?: ('baru' | 'berpengalaman') | null;
-  phone: string;
+  title: string;
   /**
-   * Kosongkan jika sama dengan nombor telefon.
+   * Poin-poin yang dipapar dalam kad promosi.
    */
-  whatsapp?: string | null;
-  /**
-   * Mesej yang ditulis oleh agent semasa pendaftaran.
-   */
-  message?: string | null;
-  /**
-   * Tambah nota setiap kali follow-up atau ada perkembangan baru.
-   */
-  notes?:
+  items?:
     | {
-        note: string;
-        addedBy?: string | null;
-        addedAt?: string | null;
+        text: string;
         id?: string | null;
       }[]
     | null;
+  ctaText?: string | null;
   /**
-   * Tukar status selepas follow-up.
+   * URL yang dibuka apabila butang diklik.
    */
-  status?: ('pending' | 'contacted' | 'approved' | 'rejected') | null;
+  ctaLink?: string | null;
+  icon?: ('bonus' | 'star' | 'vip') | null;
   /**
-   * Auto-generated. Klik untuk chat terus dengan agent.
+   * Aktifkan untuk jadikan kad ini lebih menonjol.
    */
-  whatsappLink?: string | null;
+  highlight?: boolean | null;
+  /**
+   * Nombor kecil = papar dulu.
+   */
+  order?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -418,76 +521,6 @@ export interface Provider {
   createdAt: string;
 }
 /**
- * Banner carousel di bahagian atas homepage. Susun mengikut "Susunan".
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "banners".
- */
-export interface Banner {
-  id: number;
-  /**
-   * Nama dalaman untuk mengenal pasti banner. Tidak dipapar di frontend.
-   */
-  title: string;
-  /**
-   * Upload gambar banner. Saiz disyorkan: 1920 x 640 piksel.
-   */
-  image?: (number | null) | Media;
-  /**
-   * Guna URL jika tiada upload. Salah satu sahaja diperlukan.
-   */
-  imageUrl?: string | null;
-  /**
-   * URL apabila banner diklik. Kosongkan jika tiada.
-   */
-  link?: string | null;
-  /**
-   * Nombor kecil = papar dulu.
-   */
-  order?: number | null;
-  /**
-   * Nyahaktif untuk sembunyikan tanpa delete.
-   */
-  active?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * Kad promosi yang dipaparkan di homepage. Toggle "Highlight" untuk featured.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "promos".
- */
-export interface Promo {
-  id: number;
-  title: string;
-  /**
-   * Poin-poin yang dipapar dalam kad promosi.
-   */
-  items?:
-    | {
-        text: string;
-        id?: string | null;
-      }[]
-    | null;
-  ctaText?: string | null;
-  /**
-   * URL yang dibuka apabila butang diklik.
-   */
-  ctaLink?: string | null;
-  icon?: ('bonus' | 'star' | 'vip') | null;
-  /**
-   * Aktifkan untuk jadikan kad ini lebih menonjol.
-   */
-  highlight?: boolean | null;
-  /**
-   * Nombor kecil = papar dulu.
-   */
-  order?: number | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * Provider untuk Patch ID Scanner (Pragmatic, JILI, dll). Setiap provider ada ID unik.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -538,73 +571,40 @@ export interface Game {
   createdAt: string;
 }
 /**
- * Struktur komisyen mengikut tier agent. Dipaparkan di homepage sebagai kad tier.
+ * Pengguna admin yang boleh mengakses panel ini. Setiap pengguna ada peranan tersendiri.
  *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "commission-tiers".
+ * via the `definition` "users".
  */
-export interface CommissionTier {
+export interface User {
   id: number;
+  name?: string | null;
   /**
-   * Contoh: Agent Biasa, Senior Agent, Master Agent
+   * Gambar profil pengguna.
    */
-  name: string;
+  avatar?: (number | null) | Media;
   /**
-   * Peratusan komisyen. Contoh: 25, 35, 45
+   * Super Admin: full access. Editor: edit content. Viewer: read only.
    */
-  percentage: number;
-  /**
-   * Jumlah minimum downline untuk layak tier ini.
-   */
-  minDownline?: number | null;
-  /**
-   * Warna hex untuk badge tier di frontend. Contoh: #d4a853
-   */
-  color?: string | null;
-  /**
-   * Senarai kelebihan yang dipapar di kad tier.
-   */
-  benefits?:
+  role?: ('super-admin' | 'editor' | 'viewer') | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
     | {
-        text: string;
-        id?: string | null;
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
       }[]
     | null;
-  icon?: ('star' | 'crown' | 'diamond' | 'rocket') | null;
-  /**
-   * Nombor kecil = papar dulu.
-   */
-  order?: number | null;
-  active?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * Log semua notifikasi yang dihantar (Telegram, WhatsApp, Email). Filter mengikut saluran atau status.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "notifications-log".
- */
-export interface NotificationsLog {
-  id: number;
-  title: string;
-  /**
-   * Kandungan yang dihantar.
-   */
-  message: string;
-  /**
-   * Chat ID, nombor telefon, atau email penerima.
-   */
-  recipient?: string | null;
-  channel: 'telegram' | 'whatsapp' | 'email';
-  status?: ('sent' | 'failed' | 'pending') | null;
-  relatedAgent?: (number | null) | Agent;
-  /**
-   * Mesej ralat jika notifikasi gagal dihantar.
-   */
-  errorMessage?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  password?: string | null;
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -631,16 +631,24 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'users';
-        value: number | User;
-      } | null)
-    | ({
-        relationTo: 'media';
-        value: number | Media;
-      } | null)
-    | ({
         relationTo: 'agents';
         value: number | Agent;
+      } | null)
+    | ({
+        relationTo: 'commission-tiers';
+        value: number | CommissionTier;
+      } | null)
+    | ({
+        relationTo: 'notifications-log';
+        value: number | NotificationsLog;
+      } | null)
+    | ({
+        relationTo: 'banners';
+        value: number | Banner;
+      } | null)
+    | ({
+        relationTo: 'promos';
+        value: number | Promo;
       } | null)
     | ({
         relationTo: 'testimonials';
@@ -659,14 +667,6 @@ export interface PayloadLockedDocument {
         value: number | Provider;
       } | null)
     | ({
-        relationTo: 'banners';
-        value: number | Banner;
-      } | null)
-    | ({
-        relationTo: 'promos';
-        value: number | Promo;
-      } | null)
-    | ({
         relationTo: 'patch-providers';
         value: number | PatchProvider;
       } | null)
@@ -675,12 +675,12 @@ export interface PayloadLockedDocument {
         value: number | Game;
       } | null)
     | ({
-        relationTo: 'commission-tiers';
-        value: number | CommissionTier;
+        relationTo: 'users';
+        value: number | User;
       } | null)
     | ({
-        relationTo: 'notifications-log';
-        value: number | NotificationsLog;
+        relationTo: 'media';
+        value: number | Media;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -723,6 +723,194 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "agents_select".
+ */
+export interface AgentsSelect<T extends boolean = true> {
+  name?: T;
+  experience?: T;
+  phone?: T;
+  whatsapp?: T;
+  message?: T;
+  notes?:
+    | T
+    | {
+        note?: T;
+        addedBy?: T;
+        addedAt?: T;
+        id?: T;
+      };
+  status?: T;
+  whatsappLink?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "commission-tiers_select".
+ */
+export interface CommissionTiersSelect<T extends boolean = true> {
+  name?: T;
+  percentage?: T;
+  minDownline?: T;
+  color?: T;
+  benefits?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  icon?: T;
+  order?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "notifications-log_select".
+ */
+export interface NotificationsLogSelect<T extends boolean = true> {
+  title?: T;
+  message?: T;
+  recipient?: T;
+  channel?: T;
+  status?: T;
+  relatedAgent?: T;
+  errorMessage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "banners_select".
+ */
+export interface BannersSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  imageUrl?: T;
+  link?: T;
+  order?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "promos_select".
+ */
+export interface PromosSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  ctaText?: T;
+  ctaLink?: T;
+  icon?: T;
+  highlight?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  content?: T;
+  avatar?: T;
+  avatarUrl?: T;
+  rating?: T;
+  income?: T;
+  period?: T;
+  growth?: T;
+  bar?: T;
+  type?: T;
+  featured?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs_select".
+ */
+export interface FaqsSelect<T extends boolean = true> {
+  question?: T;
+  answer?: T;
+  category?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-posts_select".
+ */
+export interface BlogPostsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  featuredImage?: T;
+  content?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+      };
+  category?: T;
+  status?: T;
+  publishedDate?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "providers_select".
+ */
+export interface ProvidersSelect<T extends boolean = true> {
+  name?: T;
+  logo?: T;
+  logoUrl?: T;
+  order?: T;
+  showOnHomepage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "patch-providers_select".
+ */
+export interface PatchProvidersSelect<T extends boolean = true> {
+  name?: T;
+  providerId?: T;
+  logo?: T;
+  logoUrl?: T;
+  order?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "games_select".
+ */
+export interface GamesSelect<T extends boolean = true> {
+  name?: T;
+  provider?: T;
+  image?: T;
+  imageUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -804,194 +992,6 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "agents_select".
- */
-export interface AgentsSelect<T extends boolean = true> {
-  name?: T;
-  experience?: T;
-  phone?: T;
-  whatsapp?: T;
-  message?: T;
-  notes?:
-    | T
-    | {
-        note?: T;
-        addedBy?: T;
-        addedAt?: T;
-        id?: T;
-      };
-  status?: T;
-  whatsappLink?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "testimonials_select".
- */
-export interface TestimonialsSelect<T extends boolean = true> {
-  name?: T;
-  role?: T;
-  content?: T;
-  avatar?: T;
-  avatarUrl?: T;
-  rating?: T;
-  income?: T;
-  period?: T;
-  growth?: T;
-  bar?: T;
-  type?: T;
-  featured?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "faqs_select".
- */
-export interface FaqsSelect<T extends boolean = true> {
-  question?: T;
-  answer?: T;
-  category?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blog-posts_select".
- */
-export interface BlogPostsSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  excerpt?: T;
-  featuredImage?: T;
-  content?: T;
-  seo?:
-    | T
-    | {
-        metaTitle?: T;
-        metaDescription?: T;
-      };
-  category?: T;
-  status?: T;
-  publishedDate?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "providers_select".
- */
-export interface ProvidersSelect<T extends boolean = true> {
-  name?: T;
-  logo?: T;
-  logoUrl?: T;
-  order?: T;
-  showOnHomepage?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "banners_select".
- */
-export interface BannersSelect<T extends boolean = true> {
-  title?: T;
-  image?: T;
-  imageUrl?: T;
-  link?: T;
-  order?: T;
-  active?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "promos_select".
- */
-export interface PromosSelect<T extends boolean = true> {
-  title?: T;
-  items?:
-    | T
-    | {
-        text?: T;
-        id?: T;
-      };
-  ctaText?: T;
-  ctaLink?: T;
-  icon?: T;
-  highlight?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "patch-providers_select".
- */
-export interface PatchProvidersSelect<T extends boolean = true> {
-  name?: T;
-  providerId?: T;
-  logo?: T;
-  logoUrl?: T;
-  order?: T;
-  active?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "games_select".
- */
-export interface GamesSelect<T extends boolean = true> {
-  name?: T;
-  provider?: T;
-  image?: T;
-  imageUrl?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "commission-tiers_select".
- */
-export interface CommissionTiersSelect<T extends boolean = true> {
-  name?: T;
-  percentage?: T;
-  minDownline?: T;
-  color?: T;
-  benefits?:
-    | T
-    | {
-        text?: T;
-        id?: T;
-      };
-  icon?: T;
-  order?: T;
-  active?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "notifications-log_select".
- */
-export interface NotificationsLogSelect<T extends boolean = true> {
-  title?: T;
-  message?: T;
-  recipient?: T;
-  channel?: T;
-  status?: T;
-  relatedAgent?: T;
-  errorMessage?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -1067,6 +1067,18 @@ export interface SiteSetting {
    */
   whatsappNumber?: string | null;
   telegramLink?: string | null;
+  /**
+   * Link group Telegram komuniti agent. Dipapar di halaman Info & Blog.
+   */
+  telegramGroupLink?: string | null;
+  /**
+   * Link group WhatsApp komuniti agent.
+   */
+  whatsappGroupLink?: string | null;
+  /**
+   * Link WhatsApp untuk chat terus dengan admin / pendaftaran agent baru.
+   */
+  adminWhatsappLink?: string | null;
   footerText?: string | null;
   socialLinks?:
     | {
@@ -1182,6 +1194,9 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   ctaButton2Link?: T;
   whatsappNumber?: T;
   telegramLink?: T;
+  telegramGroupLink?: T;
+  whatsappGroupLink?: T;
+  adminWhatsappLink?: T;
   footerText?: T;
   socialLinks?:
     | T

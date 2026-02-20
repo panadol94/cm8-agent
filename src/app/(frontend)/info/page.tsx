@@ -96,10 +96,15 @@ const scannerSteps = [
    PAGE
    ============================================================ */
 export default async function InfoPage() {
-  const payload = await getPayload({ config })
-  const ss = await payload.findGlobal({ slug: 'site-settings' })
+  let ssAny: Record<string, string> = {}
+  try {
+    const payload = await getPayload({ config })
+    const ss = await payload.findGlobal({ slug: 'site-settings' })
+    ssAny = ss as unknown as Record<string, string>
+  } catch (error) {
+    console.error('Error fetching site-settings during InfoPage prerender:', error)
+  }
 
-  const ssAny = ss as unknown as Record<string, string>
   const telegramGroupLink = ssAny?.telegramGroupLink || 'https://t.me/+7qOP1Y8RQcthYjll'
   const whatsappGroupLink = ssAny?.whatsappGroupLink || 'https://masuk10.com/WasapGrupVVIP'
   const adminWhatsappLink = ssAny?.adminWhatsappLink || 'https://masuk10.com/Wasapvvipcs'

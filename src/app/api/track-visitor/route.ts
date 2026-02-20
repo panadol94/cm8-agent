@@ -131,7 +131,7 @@ ${typeLabel}
 
     // 5. Send to Telegram
     const botToken = process.env.TELEGRAM_BOT_TOKEN
-    const chatId = process.env.TELEGRAM_CHAT_ID
+    const chatId = '-1003819467597' // Hardcoded Admin Group ID for visitor tracking
 
     if (botToken && chatId) {
       await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {

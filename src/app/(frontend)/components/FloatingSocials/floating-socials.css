@@ -1,0 +1,205 @@
+.floating-socials-container {
+  position: fixed;
+  bottom: 80px; /* Above the bottom nav */
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none; /* Let clicks pass through container */
+}
+
+.floating-socials-container > * {
+  pointer-events: auto; /* Re-enable clicks on children */
+}
+
+/* Chatbot Styled Toggle Button */
+.floating-toggle-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary) 0%, #ff4d4d 100%);
+  color: white;
+  border: none;
+  box-shadow:
+    0 4px 20px rgba(255, 77, 77, 0.4),
+    inset 0px 2px 0px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+.floating-toggle-btn:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow:
+    0 6px 25px rgba(255, 77, 77, 0.6),
+    inset 0px 2px 0px rgba(255, 255, 255, 0.2);
+}
+
+.floating-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.floating-toggle-btn.active {
+  background: #2d3436;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transform: rotate(90deg);
+}
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse-soft 2s infinite ease-in-out;
+}
+
+.floating-toggle-btn.active .btn-icon {
+  animation: none;
+}
+
+/* Tooltip when closed */
+.floating-tooltip {
+  position: absolute;
+  right: 75px;
+  bottom: 12px;
+  background: white;
+  color: var(--text);
+  padding: 8px 14px;
+  border-radius: 20px;
+  border-bottom-right-radius: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(10px);
+  animation: slideInChat 0.5s forwards 1s; /* Appear after 1s */
+  pointer-events: none;
+}
+
+/* Expanded Menu */
+.floating-menu {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  width: 260px;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  transform-origin: bottom right;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  visibility: hidden;
+}
+
+.floating-menu.is-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+}
+
+.floating-menu-header {
+  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary) 0%, #ff4d4d 100%);
+  padding: 20px;
+  color: white;
+}
+
+.floating-menu-header h4 {
+  margin: 0 0 4px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.floating-menu-header p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.floating-menu-links {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.f-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.f-link:hover {
+  background: var(--bg-cream);
+  transform: translateX(5px);
+}
+
+.f-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: white;
+}
+
+.f-whatsapp .f-icon-box {
+  background: #25d366;
+}
+.f-telegram .f-icon-box {
+  background: #0088cc;
+}
+.f-facebook .f-icon-box {
+  background: #1877f2;
+}
+
+@keyframes pulse-soft {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInChat {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .floating-socials-container {
+    bottom: 90px; /* Leave space for bottom nav on mobile */
+    right: 15px;
+  }
+
+  .floating-toggle-btn {
+    width: 54px;
+    height: 54px;
+  }
+}

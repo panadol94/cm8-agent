@@ -6,6 +6,7 @@ import BottomNav from './BottomNav'
 import ScrollReveal from './ScrollReveal'
 import { RefreshRouteOnSave } from './RefreshRouteOnSave'
 import VisitorTracker from './components/VisitorTracker'
+import FloatingSocials from './components/FloatingSocials'
 
 export const metadata = {
   title: {
@@ -118,6 +119,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <main>{children}</main>
 
         <VisitorTracker />
+        <FloatingSocials />
 
         {/* Bottom Navigation */}
         <BottomNav />

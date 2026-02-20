@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
 import './floating-socials.css'
 
 interface Message {
@@ -20,13 +20,85 @@ export default function FloatingSocials() {
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  const toggleOpen = () => setIsOpen(!isOpen)
+  // Drag state
+  const isDragging = useRef(false)
+  const dragStartPos = useRef({ x: 0, y: 0 })
+  const dragStartTime = useRef(0)
+  const hasMoved = useRef(false)
+  const [position, setPosition] = useState<{ x: number; y: number } | null>(null)
+
+  const toggleOpen = () => {
+    // Only open if we didn't just finish dragging
+    if (!hasMoved.current) {
+      setIsOpen(!isOpen)
+    }
+    hasMoved.current = false
+  }
 
   // Auto scroll to bottom when new messages arrive
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, isTyping])
+
+  // Touch drag handlers
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      if (isOpen) return // Don't drag when chat is open
+      const touch = e.touches[0]
+      isDragging.current = true
+      hasMoved.current = false
+      dragStartTime.current = Date.now()
+      dragStartPos.current = {
+        x: touch.clientX - (position?.x ?? window.innerWidth - 80),
+        y: touch.clientY - (position?.y ?? window.innerHeight - 114),
+      }
+    },
+    [isOpen, position],
+  )
+
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (!isDragging.current || isOpen) return
+      e.preventDefault()
+      const touch = e.touches[0]
+      const newX = touch.clientX - dragStartPos.current.x
+      const newY = touch.clientY - dragStartPos.current.y
+
+      // Check if moved beyond threshold (8px) to distinguish tap vs drag
+      const dx = touch.clientX - (dragStartPos.current.x + (position?.x ?? window.innerWidth - 80))
+      const dy =
+        touch.clientY - (dragStartPos.current.y + (position?.y ?? window.innerHeight - 114))
+      if (Math.sqrt(dx * dx + dy * dy) > 8) {
+        hasMoved.current = true
+      }
+
+      // Clamp within viewport
+      const btnSize = 62
+      const clampedX = Math.max(8, Math.min(window.innerWidth - btnSize - 8, newX))
+      const clampedY = Math.max(8, Math.min(window.innerHeight - btnSize - 86, newY)) // 86 = nav bar
+
+      setPosition({ x: clampedX, y: clampedY })
+    },
+    [isOpen, position],
+  )
+
+  const handleTouchEnd = useCallback(() => {
+    if (!isDragging.current) return
+    isDragging.current = false
+
+    if (!hasMoved.current) return // Was a tap, not a drag
+
+    // Snap to nearest edge (left or right)
+    setPosition((prev) => {
+      if (!prev) return prev
+      const midX = window.innerWidth / 2
+      const btnSize = 62
+      const snappedX = prev.x < midX ? 12 : window.innerWidth - btnSize - 12
+      return { x: snappedX, y: prev.y }
+    })
+  }, [])
 
   const handleSend = async (e?: React.FormEvent) => {
     e?.preventDefault()
@@ -78,8 +150,23 @@ export default function FloatingSocials() {
     }
   }
 
+  // Build inline style for dragged position
+  const containerStyle: React.CSSProperties = position
+    ? {
+        bottom: 'auto',
+        right: 'auto',
+        left: position.x,
+        top: position.y,
+        transition: isDragging.current ? 'none' : 'left 0.3s cubic-bezier(0.25, 1, 0.5, 1)',
+      }
+    : {}
+
   return (
-    <div className="floating-socials-container">
+    <div
+      className={`floating-socials-container ${position ? 'is-dragged' : ''}`}
+      ref={containerRef}
+      style={containerStyle}
+    >
       {/* The expanded chat window */}
       <div className={`floating-menu ${isOpen ? 'is-open' : ''}`}>
         {/* Chat Header with quick social links */}
@@ -185,10 +272,13 @@ export default function FloatingSocials() {
         </div>
       </div>
 
-      {/* The main toggle button */}
+      {/* The main toggle button — draggable on mobile */}
       <button
         className={`floating-toggle-btn ${isOpen ? 'active' : ''}`}
         onClick={toggleOpen}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         aria-label="Toggle AI Chat"
       >
         <span className="btn-icon">
@@ -224,7 +314,7 @@ export default function FloatingSocials() {
       </button>
 
       {/* Tooltip bubble when closed */}
-      {!isOpen && <div className="floating-tooltip">💬 Chat AI CM8</div>}
+      {!isOpen && !position && <div className="floating-tooltip">💬 Chat AI CM8</div>}
     </div>
   )
 }

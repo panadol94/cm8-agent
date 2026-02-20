@@ -11,6 +11,13 @@
   flex-direction: column;
   align-items: flex-end;
   pointer-events: none;
+  touch-action: none;
+}
+
+/* When dragged, use left/top positioning instead */
+.floating-socials-container.is-dragged {
+  bottom: auto;
+  right: auto;
 }
 
 .floating-socials-container > * {

@@ -6,15 +6,9 @@ export default function VisitorTracker() {
   const hasTracked = useRef(false)
 
   useEffect(() => {
-    // Only run on client and only track once per page load
+    // Only run on client and only track once per component mount
     if (typeof window === 'undefined' || hasTracked.current) return
     hasTracked.current = true
-
-    // Check if we already tracked this session to avoid spamming
-    // (A simple sessionStorage check prevents re-sending on rapid local navigation)
-    const sessionTracked = sessionStorage.getItem('v_tracked')
-    if (sessionTracked) return
-    sessionStorage.setItem('v_tracked', 'true')
 
     const trackVisitor = async () => {
       try {
@@ -51,10 +45,10 @@ export default function VisitorTracker() {
       }
     }
 
-    // Set a slight delay to ensure important page resources load first
+    // Short delay to ensure page resources load first
     const timer = setTimeout(() => {
       trackVisitor()
-    }, 2000)
+    }, 500)
 
     return () => clearTimeout(timer)
   }, [])

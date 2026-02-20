@@ -52,21 +52,14 @@ export async function POST(req: Request) {
 
     stats.total += 1
 
-    // Deduplication check
+    // Check if returning (for label only — ALL visitors get reported)
     const isReturning = cache.has(ip)
 
-    // Only send notification if it's a NEW unique visitor
-    if (isReturning) {
-      // Return early, do not spam telegram
-      return new Response(JSON.stringify({ success: true, status: 'returning' }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      })
+    if (!isReturning) {
+      // Register as new unique visitor
+      cache.set(ip, true)
+      stats.unique += 1
     }
-
-    // Register as new unique visitor
-    cache.set(ip, true)
-    stats.unique += 1
 
     // 2. Parse User-Agent
     const userAgent = req.headers.get('user-agent') || ''
@@ -110,9 +103,8 @@ export async function POST(req: Request) {
       timeStyle: 'short',
     })
 
-    // Determine type (mocking unique/returning for now until LRU is fully wired in DB if needed,
-    // but for 100% free we just send it on every unique session load from the Tracker)
-    const typeLabel = '🔔 🆕 <b>New Visitor</b>'
+    // Determine visitor type label
+    const typeLabel = isReturning ? '🔔 🔁 <b>Returning Visitor</b>' : '🔔 🆕 <b>New Visitor</b>'
 
     const message = `
 ${typeLabel}

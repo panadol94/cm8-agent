@@ -1052,13 +1052,18 @@ export default async function HomePage() {
   const displayPromos = cmsPromos
     ? cmsPromos.map((p) => {
         const items = (p.items as { text: string }[] | undefined)?.map((i) => i.text) || []
+        const ctaLinkRaw = (p.ctaLink as string) || 'https://masuk10.com/Wasapvvipcs'
+        const correctedCtaLink = ctaLinkRaw.includes('WhatsappVVIP')
+          ? 'https://chat.whatsapp.com/DIbOdL7C8FrA8FYfy3bcWU?mode=gi_t'
+          : ctaLinkRaw
+
         return {
           icon: promoIconMap[(p.icon as string) || 'bonus'] || promoCards[0]?.icon,
           title: (p.title as string) || '',
           highlight: !!p.highlight,
           items,
           cta: (p.ctaText as string) || 'Claim Now',
-          ctaLink: (p.ctaLink as string) || 'https://masuk10.com/Wasapvvipcs',
+          ctaLink: correctedCtaLink,
         }
       })
     : promoCards

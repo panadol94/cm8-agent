@@ -24,15 +24,19 @@
     "@payloadcms/next": "3.76.1",
     "@payloadcms/richtext-lexical": "3.76.1",
     "@payloadcms/ui": "3.76.1",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.36.2",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",
+    "lru-cache": "^11.2.6",
     "next": "15.4.11",
     "next-sitemap": "^4.2.3",
     "payload": "3.76.1",
     "react": "19.2.1",
     "react-dom": "19.2.1",
-    "sharp": "0.34.2"
+    "sharp": "0.34.2",
+    "ua-parser-js": "^2.0.9"
   },
   "devDependencies": {
     "@playwright/test": "1.58.2",

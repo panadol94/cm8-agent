@@ -5,6 +5,7 @@ import Image from 'next/image'
 import BottomNav from './BottomNav'
 import ScrollReveal from './ScrollReveal'
 import { RefreshRouteOnSave } from './RefreshRouteOnSave'
+import VisitorTracker from './components/VisitorTracker'
 
 export const metadata = {
   title: {
@@ -115,6 +116,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <RefreshRouteOnSave />
 
         <main>{children}</main>
+
+        <VisitorTracker />
 
         {/* Bottom Navigation */}
         <BottomNav />

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useRef, useEffect, useCallback } from 'react'
+import ReactMarkdown from 'react-markdown'
 import './floating-socials.css'
 
 interface Message {
@@ -222,7 +223,21 @@ export default function FloatingSocials() {
               key={i}
               className={`fm-msg-row ${msg.role === 'user' ? 'fm-msg-user' : 'fm-msg-bot'}`}
             >
-              <div className="fm-bubble">{msg.content}</div>
+              <div className="fm-bubble">
+                {msg.role === 'assistant' ? (
+                  <ReactMarkdown
+                    components={{
+                      a: ({ _node, ...props }) => (
+                        <a {...props} target="_blank" rel="noopener noreferrer" />
+                      ),
+                    }}
+                  >
+                    {msg.content}
+                  </ReactMarkdown>
+                ) : (
+                  msg.content
+                )}
+              </div>
             </div>
           ))}
           {isTyping && (

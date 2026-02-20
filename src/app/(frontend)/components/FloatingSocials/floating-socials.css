@@ -491,6 +491,19 @@
   word-wrap: break-word;
 }
 
+/* Markdown links inside the chat bubble */
+.fm-bubble a {
+  color: inherit;
+  text-decoration: underline;
+  font-weight: 700;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+
+.fm-bubble a:hover {
+  opacity: 0.8;
+}
+
 .fm-msg-user .fm-bubble {
   background: linear-gradient(135deg, #e63520 0%, #ff6b4a 100%);
   color: white;

@@ -227,7 +227,7 @@ export default function FloatingSocials() {
                 {msg.role === 'assistant' ? (
                   <ReactMarkdown
                     components={{
-                      a: ({ _node, ...props }) => (
+                      a: ({ node: _, ...props }) => (
                         <a {...props} target="_blank" rel="noopener noreferrer" />
                       ),
                     }}

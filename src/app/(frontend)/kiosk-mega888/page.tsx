@@ -385,7 +385,7 @@ export default function KioskMega888Page() {
             Daftar akaun Mega888 melalui CM8 dan nikmati AI Scanner percuma.
           </p>
           <a
-            href="https://masuk10.com/Wasapvvipcs"
+            href="https://cm8play.com/r/luckyhorse879"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-white btn-lg"

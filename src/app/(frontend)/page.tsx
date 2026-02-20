@@ -1623,7 +1623,7 @@ export default async function HomePage() {
           <span>•</span>
           <div className="footer-social">
             <a
-              href="https://wa.me/60123456789"
+              href="https://masuk10.com/Wasapvvipcs"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
@@ -1633,7 +1633,7 @@ export default async function HomePage() {
               </svg>
             </a>
             <a
-              href="https://t.me/+aK5iX_FE_b9kMzQ1"
+              href="https://masuk10.com/Televvipcs"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Telegram"

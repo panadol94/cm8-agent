@@ -63,8 +63,8 @@
   z-index: -2;
 }
 
-/* Premium AI Core (Minimalist & Expensive Look) */
-.premium-ai-core {
+/* Animated Robot Face with Moving Eyes */
+.animated-robot-face {
   position: relative;
   width: 38px;
   height: 38px;
@@ -72,64 +72,101 @@
   align-items: center;
   justify-content: center;
   z-index: 5;
+  animation: bot-float 3s ease-in-out infinite;
 }
 
-/* The underlying glowing energy orb */
-.core-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #fff 0%, #ffcc00 40%, rgba(255, 100, 0, 0) 80%);
-  box-shadow:
-    0 0 15px #ffaa00,
-    0 0 30px #ff5500,
-    inset 0 0 10px #fff;
-  animation: core-pulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
-  z-index: 1;
+.robot-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
 }
 
-/* Elegant sleek AI sparkle icon */
-.ai-sparkle-icon {
-  position: relative;
-  z-index: 2;
-  color: #fff;
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9));
-  animation: sparkle-rotate 12s linear infinite;
+.antenna-glow {
+  animation: antenna-pulse 1.5s infinite alternate;
+}
+
+/* The Eye Animation Sequence */
+.robot-eyes-group {
   transform-origin: center;
+  animation: look-around 8s infinite;
 }
 
-@keyframes core-pulse {
+.bot-eye-svg {
+  transform-origin: center;
+  animation: eye-blink 4s infinite;
+}
+
+@keyframes bot-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes antenna-pulse {
   0% {
-    transform: translate(-50%, -50%) scale(0.9);
-    opacity: 0.85;
+    opacity: 0.6;
+    filter: drop-shadow(0 0 2px #fc5c65);
   }
   100% {
-    transform: translate(-50%, -50%) scale(1.15);
     opacity: 1;
+    filter: drop-shadow(0 0 8px #ff4757);
   }
 }
 
-@keyframes sparkle-rotate {
-  0% {
-    transform: rotate(0deg);
-  }
+/* Move the eye group left/right/up/down */
+@keyframes look-around {
+  0%,
+  10% {
+    transform: translate(0, 0);
+  } /* Center */
+  15%,
+  25% {
+    transform: translate(-6px, 0);
+  } /* Look Left */
+  30%,
+  40% {
+    transform: translate(6px, 0);
+  } /* Look Right */
+  45%,
+  55% {
+    transform: translate(0, -4px);
+  } /* Look Up */
+  60%,
+  70% {
+    transform: translate(0, 4px);
+  } /* Look Down */
+  75%,
+  90% {
+    transform: translate(0, 0);
+  } /* Center */
+  95%,
   100% {
-    transform: rotate(360deg);
+    transform: translate(4px, -2px);
+  } /* Look Top Right */
+}
+
+/* Blink the eyes (scaleY) */
+@keyframes eye-blink {
+  0%,
+  46%,
+  48%,
+  50%,
+  96%,
+  98%,
+  100% {
+    transform: scaleY(1);
   }
+  47%,
+  97% {
+    transform: scaleY(0.1);
+  } /* Quick blink */
 }
 
-.floating-toggle-btn:hover {
-  transform: scale(1.1) translateY(-3px);
-  box-shadow:
-    0 6px 25px rgba(230, 53, 32, 0.6),
-    0 12px 40px rgba(230, 53, 32, 0.3);
-}
-
-.floating-toggle-btn:hover .bot-mascot {
+.floating-toggle-btn:hover .animated-robot-face {
   animation: bot-excited 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 

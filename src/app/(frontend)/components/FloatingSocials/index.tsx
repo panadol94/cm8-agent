@@ -297,22 +297,78 @@ export default function FloatingSocials() {
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           ) : (
-            // Premium Glowing AI Core + Sparkles
-            <div className="premium-ai-core">
-              <div className="core-glow"></div>
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="ai-sparkle-icon"
-              >
-                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-                <circle cx="12" cy="12" r="4" />
+            // Animated Robot Face with Moving Eyes
+            <div className="animated-robot-face">
+              <svg width="36" height="36" viewBox="0 0 100 100" className="robot-svg">
+                <defs>
+                  <linearGradient id="botGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#ffffff" />
+                    <stop offset="100%" stopColor="#d1d8e0" />
+                  </linearGradient>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                    <feMerge>
+                      <feMergeNode in="coloredBlur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                {/* Robot Head Shape */}
+                <rect
+                  x="15"
+                  y="20"
+                  width="70"
+                  height="60"
+                  rx="15"
+                  fill="url(#botGrad)"
+                  stroke="#bdc3c7"
+                  strokeWidth="2"
+                />
+
+                {/* Antenna */}
+                <rect x="47" y="5" width="6" height="15" rx="3" fill="#a5b1c2" />
+                <circle
+                  cx="50"
+                  cy="5"
+                  r="4"
+                  fill="#fc5c65"
+                  filter="url(#glow)"
+                  className="antenna-glow"
+                />
+
+                {/* Ears */}
+                <rect x="5" y="40" width="10" height="20" rx="4" fill="#a5b1c2" />
+                <rect x="85" y="40" width="10" height="20" rx="4" fill="#a5b1c2" />
+
+                {/* Face Plate (Black Screen) */}
+                <rect x="25" y="32" width="50" height="35" rx="8" fill="#1e272e" />
+
+                {/* Moving Eyes Container */}
+                <g className="robot-eyes-group">
+                  {/* Left Eye */}
+                  <rect
+                    x="32"
+                    y="42"
+                    width="12"
+                    height="12"
+                    rx="4"
+                    fill="#2bcbba"
+                    filter="url(#glow)"
+                    className="bot-eye-svg left-eye"
+                  />
+                  {/* Right Eye */}
+                  <rect
+                    x="56"
+                    y="42"
+                    width="12"
+                    height="12"
+                    rx="4"
+                    fill="#2bcbba"
+                    filter="url(#glow)"
+                    className="bot-eye-svg right-eye"
+                  />
+                </g>
               </svg>
             </div>
           )}

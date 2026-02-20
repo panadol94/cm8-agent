@@ -94,8 +94,7 @@ const posts = [
       'Rahsia bagaimana Top Agent menggunakan data RTP Live dan Scanner AI untuk gandakan deposit harian pemain.',
     category: 'Panduan Agent',
     date: '20 Feb 2026',
-    image:
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+    image: '/blog/passive-income.png',
     readTime: 6,
     views: 4520,
     tags: ['#Scanner', '#Mega888', '#HackSlot'],
@@ -107,8 +106,7 @@ const posts = [
       'Jangan tertipu lagi. Kenali 5 model perniagaan online 100% tanpa modal yang boleh jana RM5,000 sebulan.',
     category: 'Tips & Strategi',
     date: '18 Feb 2026',
-    image:
-      'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+    image: '/blog/high-commission.png',
     readTime: 8,
     views: 8900,
     tags: ['#TanpaModal', '#BisnesOnline', '#IncomePasif'],

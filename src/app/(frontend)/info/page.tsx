@@ -4,8 +4,6 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
-import { getPayload } from 'payload'
-import config from '@payload-config'
 
 export const metadata: Metadata = {
   title: 'Info CM8 VVIP — Scanner Slot AI, Program Agent & Komuniti',
@@ -96,19 +94,9 @@ const scannerSteps = [
    PAGE
    ============================================================ */
 export default async function InfoPage() {
-  let ssAny: Record<string, string> = {}
-  try {
-    const payload = await getPayload({ config })
-    const ss = await payload.findGlobal({ slug: 'site-settings' })
-    ssAny = ss as unknown as Record<string, string>
-  } catch (error) {
-    console.error('Error fetching site-settings during InfoPage prerender:', error)
-  }
-
-  const telegramGroupLink = ssAny?.telegramGroupLink || 'https://t.me/+7qOP1Y8RQcthYjll'
-  const whatsappGroupLink =
-    ssAny?.whatsappGroupLink || 'https://chat.whatsapp.com/DIbOdL7C8FrA8FYfy3bcWU?mode=gi_t'
-  const adminWhatsappLink = ssAny?.adminWhatsappLink || 'https://masuk10.com/Wasapvvipcs'
+  const telegramGroupLink = 'https://t.me/+7qOP1Y8RQcthYjll'
+  const whatsappGroupLink = 'https://chat.whatsapp.com/DIbOdL7C8FrA8FYfy3bcWU?mode=gi_t'
+  const adminWhatsappLink = 'https://masuk10.com/Wasapvvipcs'
 
   return (
     <>

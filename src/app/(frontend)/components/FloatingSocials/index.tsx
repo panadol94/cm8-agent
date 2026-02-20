@@ -174,7 +174,15 @@ export default function FloatingSocials() {
         <div className="floating-menu-header">
           <div className="fm-header-top">
             <h4 className="fm-title">
-              <span className="fm-dot"></span> AI Assistant CM8
+              <div className="fm-header-avatar">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Robot.png"
+                  alt="AI Assistant"
+                  className="fm-header-robot"
+                />
+              </div>
+              <span className="fm-title-text">AI Assistant CM8</span>
             </h4>
             <div className="fm-header-actions">
               <div className="fm-quick-links">

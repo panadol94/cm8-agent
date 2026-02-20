@@ -254,15 +254,59 @@
   letter-spacing: 0.2px;
 }
 
-.fm-dot {
-  width: 9px;
-  height: 9px;
+.fm-header-avatar {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 20, 28, 0.05); /* Very subtle circle behind robot */
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.fm-header-robot {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+  animation: header-robot-float 4s ease-in-out infinite;
+}
+
+/* Online Status Badge on the Avatar */
+.fm-header-avatar::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 12px;
+  height: 12px;
   background: #2ed573;
   border-radius: 50%;
-  box-shadow:
-    0 0 8px #2ed573,
-    0 0 16px rgba(46, 213, 115, 0.4);
-  animation: dot-pulse 1.5s ease-in-out infinite;
+  border: 2px solid #ffffff; /* White border to cut out from avatar */
+  box-shadow: 0 0 8px rgba(46, 213, 115, 0.6);
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes header-robot-float {
+  0%,
+  100% {
+    transform: scale(1.1) translateY(0px);
+  }
+  50% {
+    transform: scale(1.1) translateY(-3px);
+  }
+}
+
+.fm-title-text {
+  font-size: 1.1rem;
+  letter-spacing: 0.3px;
+  background: linear-gradient(90deg, #1a1a2e, #4a4a6a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .fm-header-actions {

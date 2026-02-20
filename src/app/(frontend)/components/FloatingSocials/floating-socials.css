@@ -24,52 +24,68 @@
   pointer-events: auto;
 }
 
-/* ── PREMIUM TOGGLE BUTTON ─────────────────────────── */
+/* ── PREMIUM TOGGLE BUTTON (EXPENSIVE DESIGN) ─────────────────────────── */
 .floating-toggle-btn {
-  width: 68px;
-  height: 68px;
+  width: 60px; /* Slightly smaller as requested */
+  height: 60px;
   border-radius: 50%;
-  background: rgba(20, 25, 35, 0.85); /* Clean Dark Glass Background */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(15, 20, 28, 0.95); /* Deep, rich dark base */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: none; /* Removed solid border in favor of gradient padding */
   color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    inset 0 0 20px rgba(46, 213, 115, 0.1); /* Subtle green inner glow */
+    0 10px 40px -10px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(46, 213, 115, 0.15); /* Premium soft glow */
   z-index: 10;
 }
 
-/* Animated glow ring pulse */
-.floating-toggle-btn::before,
-.floating-toggle-btn::after {
+/* Premium Animated Gradient Border (Spinning effect) */
+.floating-toggle-btn::before {
   content: '';
   position: absolute;
-  inset: -4px;
+  inset: -2px; /* Thickness of the animated border */
   border-radius: 50%;
-  border: 1.5px solid rgba(46, 213, 115, 0.4); /* Cyan/Green futuristic glow */
-  animation: glow-ping 3s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(46, 213, 115, 0.6) 50%,
+    rgba(0, 212, 255, 0.8) 60%,
+    transparent 100%
+  );
+  animation: spin-border 4s linear infinite;
   z-index: -1;
+  opacity: 0.8;
+  mask-image: radial-gradient(white, black);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
-.floating-toggle-btn::after {
-  inset: -8px;
-  border-color: rgba(46, 213, 115, 0.15);
-  animation-delay: 1.5s;
-  z-index: -2;
+/* Hover Interaction - Expensive Feel */
+.floating-toggle-btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow:
+    0 15px 45px -10px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(46, 213, 115, 0.3); /* Glow intensifies smoothly */
+}
+
+@keyframes spin-border {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Realistic 3D Robot Avatar */
 .realistic-robot-avatar {
   position: relative;
-  width: 54px; /* Increased to give the full body room */
-  height: 54px;
+  width: 46px; /* Optimized for the new 60px button */
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,7 +98,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transform: scale(1.2) translateY(-1px); /* Gentle scale to fit nicely in the glass button */
+  transform: scale(1.15) translateY(-1px); /* Gentle scale to fit nicely in the glass button */
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
 }
 

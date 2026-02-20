@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { getOtpStore } from '../utils'
 
 const GROUP_LINK = 'https://t.me/+aK5iX_FE_b9kMzQ1'
+const GROUP_ID = '-1003733462677'
 
 /* ── Telegram Bot Webhook for Patch ID OTP ──────────────────── */
 export async function POST(req: Request) {
@@ -15,6 +16,26 @@ export async function POST(req: Request) {
 
     const chatId = message.chat?.id
     if (!chatId) return NextResponse.json({ ok: true })
+
+    const fromId = message.from?.id
+    if (!fromId) return NextResponse.json({ ok: true })
+
+    // Ignore messages from groups, we only deal with users in private chat
+    if (message.chat?.type !== 'private') return NextResponse.json({ ok: true })
+
+    // ── Check if user is in the compulsory group ──
+    const isMember = await checkGroupMembership(botToken, fromId)
+    if (!isMember) {
+      await sendTelegramMessage(
+        botToken,
+        chatId,
+        `🚨 *Akses Ditolak*\n\n` +
+          `Anda *wajib* menyertai group Telegram rasmi kami terlebih dahulu untuk mendapatkan kod OTP.\n\n` +
+          `👉 Sila tekan link ini untuk Join: ${GROUP_LINK}\n\n` +
+          `Selepas berjaya join, sila hantar apa-apa mesej atau tekan butang *Share Contact* semula di sini.`,
+      )
+      return NextResponse.json({ ok: true })
+    }
 
     // ── User shared contact ──
     if (message.contact) {
@@ -319,4 +340,24 @@ async function sendTelegramMessage(
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
   })
+}
+
+/* ── Check if user is a member of the official group ────────── */
+async function checkGroupMembership(botToken: string, userId: number): Promise<boolean> {
+  try {
+    const res = await fetch(
+      `https://api.telegram.org/bot${botToken}/getChatMember?chat_id=${GROUP_ID}&user_id=${userId}`,
+    )
+    const data = await res.json()
+    if (data.ok && data.result) {
+      const status = data.result.status
+      if (['creator', 'administrator', 'member', 'restricted'].includes(status)) {
+        return true
+      }
+    }
+    return false
+  } catch (err) {
+    console.error('[BOT-WEBHOOK] Error checking group membership', err)
+    return false
+  }
 }

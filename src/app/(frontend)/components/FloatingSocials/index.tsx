@@ -316,7 +316,7 @@ export default function FloatingSocials() {
             <div className="realistic-robot-avatar">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://cdn3d.iconscout.com/3d/premium/thumb/robot-assistant-4993510-4160756.png"
+                src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Robot.png"
                 alt="AI Robot Assistant"
                 className="robot-3d-img"
               />

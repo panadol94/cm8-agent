@@ -980,7 +980,7 @@ export default async function HomePage() {
   const cta1Text = ss?.ctaButton1Text || '🚀 Jadi Agent Sekarang'
   const cta1Link = ss?.ctaButton1Link || 'https://masuk10.com/Wasapvvipcs'
   const cta2Text = ss?.ctaButton2Text || 'Daftar Akaun CM8'
-  const cta2Link = ss?.ctaButton2Link || 'https://masuk10.com/Wasapvvipcs'
+  const cta2Link = ss?.ctaButton2Link || 'https://cm8play.com/r/luckyhorse879'
 
   // Map CMS banners to carousel format
   const cmsBanners = rawBanners
@@ -1220,7 +1220,7 @@ export default async function HomePage() {
       {/* ===== QUICK ACTIONS (Patch ID / Telegram / WhatsApp / Admin) ===== */}
       <div className="quick-actions">
         <a
-          href="https://masuk10.com/Wasapvvipcs"
+          href="https://cm8play.com/r/luckyhorse879"
           target="_blank"
           rel="noopener noreferrer"
           className="quick-action-btn qa-patch"
@@ -1250,7 +1250,7 @@ export default async function HomePage() {
           <span className="qa-arrow">›</span>
         </a>
         <a
-          href="https://masuk10.com/FeedbackVVIP"
+          href="https://whatsapp.com/channel/0029Vb7cSULCxoAtcGaunK37"
           target="_blank"
           rel="noopener noreferrer"
           className="quick-action-btn qa-whatsapp"

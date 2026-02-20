@@ -209,7 +209,7 @@ export default async function BlogPost({ params }: PageProps) {
               ← Kembali ke Blog
             </Link>
             <a
-              href="https://masuk10.com/WhatsappVVIP"
+              href="https://masuk10.com/Wasapvvipcs"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-gradient"
@@ -228,7 +228,7 @@ export default async function BlogPost({ params }: PageProps) {
             Daftar sebagai agent CM8 dan mula jana pendapatan hari ini.
           </p>
           <a
-            href="https://masuk10.com/WhatsappVVIP"
+            href="https://masuk10.com/Wasapvvipcs"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-white btn-lg"

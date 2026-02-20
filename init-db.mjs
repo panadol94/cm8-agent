@@ -837,6 +837,23 @@ async function initDB() {
       "varchar DEFAULT 'https://masuk10.com/WhatsappVVIP'",
     )
 
+    // Community Link columns
+    await addColumnIfNotExists(
+      'site_settings',
+      'telegram_group_link',
+      "varchar DEFAULT 'https://t.me/+7qOP1Y8RQcthYjll'",
+    )
+    await addColumnIfNotExists(
+      'site_settings',
+      'whatsapp_group_link',
+      "varchar DEFAULT 'https://chat.whatsapp.com/DIbOdL7C8FrA8FYfy3bcWU?mode=gi_t'",
+    )
+    await addColumnIfNotExists(
+      'site_settings',
+      'admin_whatsapp_link',
+      "varchar DEFAULT 'https://masuk10.com/Wasapvvipcs'",
+    )
+
     // Scanner Config: add enum + columns to site_settings
     await createEnumIfNotExists('enum_site_settings_scanner_seed_interval', [
       '15',

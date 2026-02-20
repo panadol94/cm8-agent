@@ -87,7 +87,7 @@ export const CommissionTiers: CollectionConfig = {
           required: true,
           label: 'Kelebihan',
           admin: {
-            placeholder: 'cth: Komisyen 45% setiap jualan',
+            placeholder: 'cth: Komisyen 90% setiap jualan',
           },
         },
       ],

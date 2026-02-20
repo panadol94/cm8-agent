@@ -373,7 +373,7 @@ export async function GET(req: Request) {
       {
         title: 'Agent Commission',
         items: [
-          'Komisyen sehingga 45%',
+          'Komisyen sehingga 90%',
           'Bayaran mingguan',
           'Unlimited downline',
           'Training & support percuma',

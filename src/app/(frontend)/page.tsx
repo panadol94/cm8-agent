@@ -1549,7 +1549,7 @@ export default async function HomePage() {
             Join Now
           </a>
           <a
-            href="https://wa.me/60123456789"
+            href="https://masuk10.com/Wasapvvipcs"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-outline btn-lg"

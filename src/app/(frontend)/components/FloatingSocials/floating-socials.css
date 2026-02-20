@@ -483,7 +483,7 @@
 /* ── MOBILE ────────────────────────────────────────── */
 @media (max-width: 768px) {
   .floating-socials-container {
-    bottom: 20px;
+    bottom: 90px;
     right: 16px;
   }
 

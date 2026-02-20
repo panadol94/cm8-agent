@@ -143,7 +143,7 @@ export interface UserAuthOperations {
   };
 }
 /**
- * Pengguna admin yang boleh mengakses panel ini.
+ * Pengguna admin yang boleh mengakses panel ini. Setiap pengguna ada peranan tersendiri.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
@@ -151,8 +151,14 @@ export interface UserAuthOperations {
 export interface User {
   id: number;
   name?: string | null;
-  role?: ('super-admin' | 'editor' | 'viewer') | null;
+  /**
+   * Gambar profil pengguna.
+   */
   avatar?: (number | null) | Media;
+  /**
+   * Super Admin: full access. Editor: edit content. Viewer: read only.
+   */
+  role?: ('super-admin' | 'editor' | 'viewer') | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -173,13 +179,16 @@ export interface User {
   collection: 'users';
 }
 /**
- * Gambar dan fail media untuk website.
+ * Semua gambar dan fail media untuk website. Gunakan kategori untuk susun.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
   id: number;
+  /**
+   * Penerangan gambar untuk SEO dan accessibility.
+   */
   alt: string;
   category?: ('banner' | 'avatar' | 'blog' | 'provider' | 'game' | 'other') | null;
   updatedAt: string;
@@ -221,7 +230,7 @@ export interface Media {
   };
 }
 /**
- * Senarai agent yang mendaftar melalui website.
+ * Senarai agent yang mendaftar melalui website. Gunakan filter untuk cari agent mengikut status.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "agents".
@@ -229,17 +238,18 @@ export interface Media {
 export interface Agent {
   id: number;
   name: string;
-  phone: string;
-  whatsapp?: string | null;
   experience?: ('baru' | 'berpengalaman') | null;
-  message?: string | null;
-  status?: ('pending' | 'contacted' | 'approved' | 'rejected') | null;
+  phone: string;
   /**
-   * Auto-generated. Klik untuk chat terus.
+   * Kosongkan jika sama dengan nombor telefon.
    */
-  whatsappLink?: string | null;
+  whatsapp?: string | null;
   /**
-   * Log setiap follow-up atau nota berkaitan agent ini.
+   * Mesej yang ditulis oleh agent semasa pendaftaran.
+   */
+  message?: string | null;
+  /**
+   * Tambah nota setiap kali follow-up atau ada perkembangan baru.
    */
   notes?:
     | {
@@ -249,11 +259,19 @@ export interface Agent {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Tukar status selepas follow-up.
+   */
+  status?: ('pending' | 'contacted' | 'approved' | 'rejected') | null;
+  /**
+   * Auto-generated. Klik untuk chat terus dengan agent.
+   */
+  whatsappLink?: string | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Testimoni agent & paparan pendapatan untuk homepage.
+ * Testimoni agent & paparan pendapatan untuk homepage. Filter mengikut jenis.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "testimonials".
@@ -262,34 +280,46 @@ export interface Testimonial {
   id: number;
   name: string;
   role?: string | null;
+  /**
+   * Testimoni yang diberikan oleh agent. Dipaparkan di homepage.
+   */
   content?: string | null;
   avatar?: (number | null) | Media;
   /**
-   * URL gambar luaran untuk avatar.
+   * Guna URL luaran jika tiada upload. Salah satu sahaja diperlukan.
    */
   avatarUrl?: string | null;
+  /**
+   * Rating 1-5 bintang. Default: 5.
+   */
   rating?: number | null;
   /**
-   * Contoh: RM4,200
+   * Jumlah pendapatan yang dipaparkan.
    */
   income?: string | null;
   period?: string | null;
   /**
-   * Contoh: +32%
+   * Peratusan pertumbuhan pendapatan.
    */
   growth?: string | null;
   /**
-   * Lebar bar pendapatan dalam peratus.
+   * Lebar bar pendapatan (0-100%). Dipapar sebagai visual bar di frontend.
    */
   bar?: number | null;
+  /**
+   * Tentukan jenis entry ini.
+   */
   type?: ('income' | 'testimonial') | null;
   featured?: boolean | null;
+  /**
+   * Nombor kecil = papar dulu.
+   */
   order?: number | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Soalan lazim (FAQ) untuk website.
+ * Soalan lazim (FAQ) untuk website. Filter mengikut kategori.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "faqs".
@@ -298,13 +328,16 @@ export interface Faq {
   id: number;
   question: string;
   answer: string;
-  order?: number | null;
   category?: ('general' | 'agent' | 'commission' | 'technical') | null;
+  /**
+   * Nombor kecil = papar dulu.
+   */
+  order?: number | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Artikel blog untuk SEO dan content marketing.
+ * Artikel blog untuk SEO dan content marketing. Filter mengikut kategori atau status.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "blog-posts".
@@ -313,13 +346,17 @@ export interface BlogPost {
   id: number;
   title: string;
   /**
-   * Auto-generated dari tajuk. Contoh: cara-jadi-agent-cm8
+   * Auto-generated dari tajuk. Ini jadi URL artikel, cth: /blog/cara-jadi-agent-cm8
    */
   slug: string;
   /**
-   * Ringkasan pendek untuk senarai blog dan SEO meta description.
+   * Ringkasan pendek (1-2 ayat). Dipapar di senarai blog dan sebagai SEO meta description.
    */
   excerpt?: string | null;
+  /**
+   * Gambar yang dipapar sebagai thumbnail dan header artikel.
+   */
+  featuredImage?: (number | null) | Media;
   content: {
     root: {
       type: string;
@@ -335,20 +372,31 @@ export interface BlogPost {
     };
     [k: string]: unknown;
   };
-  featuredImage?: (number | null) | Media;
-  category?: ('tips' | 'guide' | 'news' | 'promo') | null;
-  status?: ('draft' | 'published') | null;
-  publishedDate?: string | null;
   seo?: {
+    /**
+     * Tajuk yang dipapar di Google. Max 60 aksara.
+     */
     metaTitle?: string | null;
+    /**
+     * Penerangan di Google search. Max 160 aksara.
+     */
     metaDescription?: string | null;
   };
+  category?: ('tips' | 'guide' | 'news' | 'promo') | null;
+  /**
+   * Tukar ke "Diterbitkan" untuk live.
+   */
+  status?: ('draft' | 'published') | null;
+  /**
+   * Auto-set apabila diterbitkan.
+   */
+  publishedDate?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
 }
 /**
- * Provider permainan yang dipaparkan di homepage.
+ * Provider permainan yang dipaparkan di homepage. Toggle "Papar di Homepage" untuk kawal visibility.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "providers".
@@ -358,16 +406,19 @@ export interface Provider {
   name: string;
   logo?: (number | null) | Media;
   /**
-   * URL gambar luaran. Digunakan jika tiada upload.
+   * Guna URL luaran jika tiada upload.
    */
   logoUrl?: string | null;
+  /**
+   * Nombor kecil = papar dulu.
+   */
   order?: number | null;
   showOnHomepage?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Banner carousel di bahagian atas homepage.
+ * Banner carousel di bahagian atas homepage. Susun mengikut "Susunan".
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "banners".
@@ -375,21 +426,34 @@ export interface Provider {
 export interface Banner {
   id: number;
   /**
-   * Nama dalaman untuk mengenal pasti banner.
+   * Nama dalaman untuk mengenal pasti banner. Tidak dipapar di frontend.
    */
   title: string;
-  image: number | Media;
   /**
-   * URL apabila banner diklik.
+   * Upload gambar banner. Saiz disyorkan: 1920 x 640 piksel.
+   */
+  image?: (number | null) | Media;
+  /**
+   * Guna URL jika tiada upload. Salah satu sahaja diperlukan.
+   */
+  imageUrl?: string | null;
+  /**
+   * URL apabila banner diklik. Kosongkan jika tiada.
    */
   link?: string | null;
+  /**
+   * Nombor kecil = papar dulu.
+   */
   order?: number | null;
+  /**
+   * Nyahaktif untuk sembunyikan tanpa delete.
+   */
   active?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Kad promosi yang dipaparkan di homepage.
+ * Kad promosi yang dipaparkan di homepage. Toggle "Highlight" untuk featured.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "promos".
@@ -397,6 +461,9 @@ export interface Banner {
 export interface Promo {
   id: number;
   title: string;
+  /**
+   * Poin-poin yang dipapar dalam kad promosi.
+   */
   items?:
     | {
         text: string;
@@ -404,38 +471,53 @@ export interface Promo {
       }[]
     | null;
   ctaText?: string | null;
+  /**
+   * URL yang dibuka apabila butang diklik.
+   */
   ctaLink?: string | null;
   icon?: ('bonus' | 'star' | 'vip') | null;
+  /**
+   * Aktifkan untuk jadikan kad ini lebih menonjol.
+   */
   highlight?: boolean | null;
+  /**
+   * Nombor kecil = papar dulu.
+   */
   order?: number | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Provider untuk Patch ID Scanner (Pragmatic, JILI, dll).
+ * Provider untuk Patch ID Scanner (Pragmatic, JILI, dll). Setiap provider ada ID unik.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "patch-providers".
  */
 export interface PatchProvider {
   id: number;
+  name: string;
   /**
-   * ID unik, cth: pragmatic, jili, hacksaw
+   * ID unik yang digunakan oleh system. Huruf kecil sahaja.
    */
   providerId: string;
-  name: string;
   logo?: (number | null) | Media;
   /**
-   * URL gambar luaran. Digunakan jika tiada upload.
+   * Guna URL luaran jika tiada upload.
    */
   logoUrl?: string | null;
+  /**
+   * Nombor kecil = papar dulu.
+   */
   order?: number | null;
+  /**
+   * Nyahaktif untuk sembunyikan tanpa delete.
+   */
   active?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Senarai permainan slot untuk Patch ID Scanner.
+ * Senarai permainan slot untuk Patch ID Scanner. Setiap game mesti ada Provider ID.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "games".
@@ -444,19 +526,19 @@ export interface Game {
   id: number;
   name: string;
   /**
-   * ID provider, cth: pragmatic, jili, hacksaw. Mesti sama dengan Provider ID dalam Patch Providers.
+   * Mesti sama dengan Provider ID dalam Patch Providers.
    */
   provider: string;
   image?: (number | null) | Media;
   /**
-   * URL gambar luaran. Digunakan jika tiada upload.
+   * Guna URL luaran jika tiada upload. Salah satu sahaja diperlukan.
    */
   imageUrl?: string | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Struktur komisyen mengikut tier agent. Dipaparkan di homepage.
+ * Struktur komisyen mengikut tier agent. Dipaparkan di homepage sebagai kad tier.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "commission-tiers".
@@ -475,24 +557,30 @@ export interface CommissionTier {
    * Jumlah minimum downline untuk layak tier ini.
    */
   minDownline?: number | null;
+  /**
+   * Warna hex untuk badge tier di frontend. Contoh: #d4a853
+   */
+  color?: string | null;
+  /**
+   * Senarai kelebihan yang dipapar di kad tier.
+   */
   benefits?:
     | {
         text: string;
         id?: string | null;
       }[]
     | null;
-  /**
-   * Warna hex untuk badge tier di frontend. Contoh: #d4a853
-   */
-  color?: string | null;
   icon?: ('star' | 'crown' | 'diamond' | 'rocket') | null;
+  /**
+   * Nombor kecil = papar dulu.
+   */
   order?: number | null;
   active?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
 /**
- * Log semua notifikasi yang dihantar (Telegram, WhatsApp).
+ * Log semua notifikasi yang dihantar (Telegram, WhatsApp, Email). Filter mengikut saluran atau status.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "notifications-log".
@@ -500,16 +588,19 @@ export interface CommissionTier {
 export interface NotificationsLog {
   id: number;
   title: string;
+  /**
+   * Kandungan yang dihantar.
+   */
   message: string;
-  channel: 'telegram' | 'whatsapp' | 'email';
-  status?: ('sent' | 'failed' | 'pending') | null;
   /**
    * Chat ID, nombor telefon, atau email penerima.
    */
   recipient?: string | null;
+  channel: 'telegram' | 'whatsapp' | 'email';
+  status?: ('sent' | 'failed' | 'pending') | null;
   relatedAgent?: (number | null) | Agent;
   /**
-   * Mesej ralat jika status gagal.
+   * Mesej ralat jika notifikasi gagal dihantar.
    */
   errorMessage?: string | null;
   updatedAt: string;
@@ -639,8 +730,8 @@ export interface PayloadMigration {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
-  role?: T;
   avatar?: T;
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -717,12 +808,10 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface AgentsSelect<T extends boolean = true> {
   name?: T;
+  experience?: T;
   phone?: T;
   whatsapp?: T;
-  experience?: T;
   message?: T;
-  status?: T;
-  whatsappLink?: T;
   notes?:
     | T
     | {
@@ -731,6 +820,8 @@ export interface AgentsSelect<T extends boolean = true> {
         addedAt?: T;
         id?: T;
       };
+  status?: T;
+  whatsappLink?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -762,8 +853,8 @@ export interface TestimonialsSelect<T extends boolean = true> {
 export interface FaqsSelect<T extends boolean = true> {
   question?: T;
   answer?: T;
-  order?: T;
   category?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -775,17 +866,17 @@ export interface BlogPostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   excerpt?: T;
-  content?: T;
   featuredImage?: T;
-  category?: T;
-  status?: T;
-  publishedDate?: T;
+  content?: T;
   seo?:
     | T
     | {
         metaTitle?: T;
         metaDescription?: T;
       };
+  category?: T;
+  status?: T;
+  publishedDate?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -810,6 +901,7 @@ export interface ProvidersSelect<T extends boolean = true> {
 export interface BannersSelect<T extends boolean = true> {
   title?: T;
   image?: T;
+  imageUrl?: T;
   link?: T;
   order?: T;
   active?: T;
@@ -841,8 +933,8 @@ export interface PromosSelect<T extends boolean = true> {
  * via the `definition` "patch-providers_select".
  */
 export interface PatchProvidersSelect<T extends boolean = true> {
-  providerId?: T;
   name?: T;
+  providerId?: T;
   logo?: T;
   logoUrl?: T;
   order?: T;
@@ -870,13 +962,13 @@ export interface CommissionTiersSelect<T extends boolean = true> {
   name?: T;
   percentage?: T;
   minDownline?: T;
+  color?: T;
   benefits?:
     | T
     | {
         text?: T;
         id?: T;
       };
-  color?: T;
   icon?: T;
   order?: T;
   active?: T;
@@ -890,9 +982,9 @@ export interface CommissionTiersSelect<T extends boolean = true> {
 export interface NotificationsLogSelect<T extends boolean = true> {
   title?: T;
   message?: T;
+  recipient?: T;
   channel?: T;
   status?: T;
-  recipient?: T;
   relatedAgent?: T;
   errorMessage?: T;
   updatedAt?: T;
@@ -955,6 +1047,22 @@ export interface SiteSetting {
   heroCTA?: string | null;
   heroImage?: (number | null) | Media;
   /**
+   * Teks butang utama (oren/gradient)
+   */
+  ctaButton1Text?: string | null;
+  /**
+   * URL yang dituju bila klik butang utama
+   */
+  ctaButton1Link?: string | null;
+  /**
+   * Teks butang kedua (outline)
+   */
+  ctaButton2Text?: string | null;
+  /**
+   * URL yang dituju bila klik butang kedua
+   */
+  ctaButton2Link?: string | null;
+  /**
    * Format: 60123456789 (tanpa + atau -)
    */
   whatsappNumber?: string | null;
@@ -981,6 +1089,38 @@ export interface SiteSetting {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Percentage terendah yang boleh keluar (default: 30%)
+   */
+  scannerMinRtp?: number | null;
+  /**
+   * Percentage tertinggi yang boleh keluar (default: 97%)
+   */
+  scannerMaxRtp?: number | null;
+  /**
+   * RTP ≥ nilai ini = 🔥 HOT
+   */
+  scannerHotThreshold?: number | null;
+  /**
+   * RTP ≥ nilai ini = ⚡ WARM, bawah = ❄️ COLD
+   */
+  scannerWarmThreshold?: number | null;
+  /**
+   * Berapa % game yang akan jadi HOT (default: 10%)
+   */
+  scannerHotPercent?: number | null;
+  /**
+   * Berapa % game yang akan jadi WARM (default: 30%)
+   */
+  scannerWarmPercent?: number | null;
+  /**
+   * Auto-kira: selebihnya jadi ❄️ COLD
+   */
+  scannerColdPercent?: number | null;
+  /**
+   * Result scan akan berubah setiap interval ini. Semua user nampak result sama dalam tempoh yang sama.
+   */
+  scannerSeedInterval?: ('15' | '30' | '60' | '180') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1036,6 +1176,10 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   heroSubtitle?: T;
   heroCTA?: T;
   heroImage?: T;
+  ctaButton1Text?: T;
+  ctaButton1Link?: T;
+  ctaButton2Text?: T;
+  ctaButton2Link?: T;
   whatsappNumber?: T;
   telegramLink?: T;
   footerText?: T;
@@ -1057,6 +1201,14 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         text?: T;
         id?: T;
       };
+  scannerMinRtp?: T;
+  scannerMaxRtp?: T;
+  scannerHotThreshold?: T;
+  scannerWarmThreshold?: T;
+  scannerHotPercent?: T;
+  scannerWarmPercent?: T;
+  scannerColdPercent?: T;
+  scannerSeedInterval?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

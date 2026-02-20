@@ -25,6 +25,19 @@
   height: 200px;
   background: radial-gradient(circle, rgba(255, 59, 122, 0.15) 0%, transparent 60%);
   pointer-events: none;
+  animation: bgGlowPulse 4s ease-in-out infinite;
+}
+
+@keyframes bgGlowPulse {
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(-50%) scale(1.15);
+    opacity: 1;
+  }
 }
 
 .patch-title {
@@ -116,6 +129,13 @@
   max-height: 340px;
   overflow-y: auto;
   padding-right: 4px;
+}
+
+@media (max-width: 380px) {
+  .provider-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
 }
 
 .provider-btn {
@@ -1917,6 +1937,18 @@ body.scan-shake {
   gap: 14px;
   position: relative;
   z-index: 1;
+  animation: formSlideFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes formSlideFade {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .register-label {
@@ -2029,15 +2061,15 @@ body.scan-shake {
 
 .otp-input-row {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   justify-content: center;
 }
 
 .otp-digit {
-  width: 46px;
-  height: 56px;
-  border: 1px solid #2a2a3a;
-  border-radius: 10px;
+  width: 48px;
+  height: 58px;
+  border: 2px solid #2a2a3a;
+  border-radius: 12px;
   text-align: center;
   font-size: 1.4rem;
   font-weight: 800;

@@ -55,19 +55,26 @@ export default buildConfig({
     },
   },
   collections: [
-    Users,
-    Media,
+    // 👥 Pengurusan Agent
     Agents,
+    CommissionTiers,
+    NotificationsLog,
+
+    // 📝 Kandungan
+    Banners,
+    Promos,
     Testimonials,
     FAQs,
     BlogPosts,
+
+    // 🎮 Permainan
     Providers,
-    Banners,
-    Promos,
     PatchProviders,
     Games,
-    CommissionTiers,
-    NotificationsLog,
+
+    // ⚙️ Sistem
+    Users,
+    Media,
   ],
   globals: [SiteSettings, PopupAnnouncement],
   editor: lexicalEditor(),

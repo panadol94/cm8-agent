@@ -119,31 +119,15 @@
 }
 
 .floating-toggle-btn.active {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background: rgba(15, 20, 28, 0.95); /* Keep the premium glass look for the close button */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  width: 50px; /* Make the close button smaller and elegant */
+  height: 50px;
   box-shadow:
-    0 4px 15px rgba(0, 0, 0, 0.4),
-    0 0 20px rgba(255, 107, 74, 0.15);
+    0 10px 25px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(255, 107, 74, 0.15); /* Soft reddish glow for close action */
   transform: rotate(0deg);
-}
-
-.floating-toggle-btn.active::before,
-.floating-toggle-btn.active::after,
-.floating-toggle-btn.active .radar-sweep,
-.floating-toggle-btn.active .radar-ring {
-  animation: none;
-  display: none;
-}
-
-@keyframes glow-ping {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  75%,
-  100% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
 }
 
 .btn-icon {
@@ -153,8 +137,21 @@
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.btn-icon svg {
+  width: 22px; /* Scale down the X icon so it isn't huge */
+  height: 22px;
+}
+
 .floating-toggle-btn.active .btn-icon {
   transform: rotate(90deg);
+}
+
+.floating-toggle-btn.active::before,
+.floating-toggle-btn.active::after,
+.floating-toggle-btn.active .radar-sweep,
+.floating-toggle-btn.active .radar-ring {
+  animation: none;
+  display: none;
 }
 
 /* ── PREMIUM TOOLTIP ───────────────────────────────── */

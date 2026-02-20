@@ -172,7 +172,7 @@ export default function KioskMega888Page() {
                 <p>
                   Hubungi admin melalui{' '}
                   <a
-                    href="https://masuk10.com/WhatsappVVIP"
+                    href="https://masuk10.com/Wasapvvipcs"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -385,7 +385,7 @@ export default function KioskMega888Page() {
             Daftar akaun Mega888 melalui CM8 dan nikmati AI Scanner percuma.
           </p>
           <a
-            href="https://masuk10.com/WhatsappVVIP"
+            href="https://masuk10.com/Wasapvvipcs"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-white btn-lg"

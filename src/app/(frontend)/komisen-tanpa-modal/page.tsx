@@ -414,7 +414,7 @@ export default function KomisenTanpaModalPage() {
           <h2 className="cta-title">Mula Jana Komisen Hari Ini</h2>
           <p className="cta-subtitle">Daftar percuma, tanpa modal, komisyen sehingga 90%.</p>
           <a
-            href="https://masuk10.com/WhatsappVVIP"
+            href="https://masuk10.com/Wasapvvipcs"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-white btn-lg"

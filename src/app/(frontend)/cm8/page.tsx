@@ -381,7 +381,7 @@ export default function CM8Page() {
             Daftar percuma dan mula jana pendapatan sebagai agent CM8 hari ini.
           </p>
           <a
-            href="https://masuk10.com/WhatsappVVIP"
+            href="https://masuk10.com/Wasapvvipcs"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-white btn-lg"

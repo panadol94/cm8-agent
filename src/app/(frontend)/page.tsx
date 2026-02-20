@@ -754,7 +754,7 @@ const promoCards: {
       'Hubungi admin untuk claim',
     ],
     cta: 'Claim Now',
-    ctaLink: 'https://masuk10.com/WhatsappVVIP',
+    ctaLink: 'https://masuk10.com/Wasapvvipcs',
   },
   {
     icon: (
@@ -978,9 +978,9 @@ export default async function HomePage() {
   // CTA buttons from admin panel (fallback to defaults)
   const ss = siteSettings as unknown as Record<string, string> | null
   const cta1Text = ss?.ctaButton1Text || '🚀 Jadi Agent Sekarang'
-  const cta1Link = ss?.ctaButton1Link || 'https://masuk10.com/WhatsappVVIP'
+  const cta1Link = ss?.ctaButton1Link || 'https://masuk10.com/Wasapvvipcs'
   const cta2Text = ss?.ctaButton2Text || 'Daftar Akaun CM8'
-  const cta2Link = ss?.ctaButton2Link || 'https://masuk10.com/WhatsappVVIP'
+  const cta2Link = ss?.ctaButton2Link || 'https://masuk10.com/Wasapvvipcs'
 
   // Map CMS banners to carousel format
   const cmsBanners = rawBanners
@@ -1058,7 +1058,7 @@ export default async function HomePage() {
           highlight: !!p.highlight,
           items,
           cta: (p.ctaText as string) || 'Claim Now',
-          ctaLink: (p.ctaLink as string) || 'https://masuk10.com/WhatsappVVIP',
+          ctaLink: (p.ctaLink as string) || 'https://masuk10.com/Wasapvvipcs',
         }
       })
     : promoCards
@@ -1215,7 +1215,7 @@ export default async function HomePage() {
       {/* ===== QUICK ACTIONS (Patch ID / Telegram / WhatsApp / Admin) ===== */}
       <div className="quick-actions">
         <a
-          href="https://masuk10.com/WhatsappVVIP"
+          href="https://masuk10.com/Wasapvvipcs"
           target="_blank"
           rel="noopener noreferrer"
           className="quick-action-btn qa-patch"

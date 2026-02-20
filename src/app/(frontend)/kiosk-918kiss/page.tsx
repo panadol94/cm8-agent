@@ -170,7 +170,7 @@ export default function Kiosk918KissPage() {
                 <p>
                   Hubungi admin melalui{' '}
                   <a
-                    href="https://masuk10.com/WhatsappVVIP"
+                    href="https://masuk10.com/Wasapvvipcs"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -414,7 +414,7 @@ export default function Kiosk918KissPage() {
             Daftar akaun 918Kiss melalui CM8 dan nikmati AI Scanner percuma.
           </p>
           <a
-            href="https://masuk10.com/WhatsappVVIP"
+            href="https://masuk10.com/Wasapvvipcs"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-white btn-lg"

@@ -452,7 +452,7 @@ export default function BuatDuitOnlinePage() {
             Daftar percuma sebagai agent CM8 dan mula jana pendapatan tanpa modal.
           </p>
           <a
-            href="https://masuk10.com/WhatsappVVIP"
+            href="https://masuk10.com/Wasapvvipcs"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-white btn-lg"

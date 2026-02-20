@@ -649,6 +649,78 @@ function ScanWarningModal({
   )
 }
 
+/* ── Scan Limit Reached Popup ── */
+function ScanLimitPopup({
+  used,
+  limit,
+  onClose,
+}: {
+  used: number
+  limit: number
+  onClose: () => void
+}) {
+  return (
+    <div className="scan-modal-overlay" onClick={onClose}>
+      <div className="scan-modal scan-limit-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="scan-modal-icon">🚫</div>
+        <h3 className="scan-modal-title">HAD SCAN HARIAN TERCAPAI</h3>
+        <p className="scan-modal-text">
+          Anda telah menggunakan{' '}
+          <strong>
+            {used}/{limit}
+          </strong>{' '}
+          scan hari ini. Hubungi admin untuk dapatkan scan tambahan.
+        </p>
+        <div className="scan-limit-bar">
+          <div className="scan-limit-fill" style={{ width: '100%' }} />
+        </div>
+        <div className="scan-modal-actions">
+          <button className="scan-modal-cancel" onClick={onClose}>
+            TUTUP
+          </button>
+          <a
+            href="https://masuk10.com/Wasapvvipcs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="scan-modal-confirm scan-wa-btn"
+          >
+            💬 WhatsApp Admin
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ── Scan Banned Popup ── */
+function ScanBannedPopup({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="scan-modal-overlay" onClick={onClose}>
+      <div className="scan-modal scan-banned-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="scan-modal-icon">⛔</div>
+        <h3 className="scan-modal-title">AKAUN DISEKAT</h3>
+        <p className="scan-modal-text">
+          Akaun anda telah disekat daripada menggunakan scanner. Sila hubungi admin untuk maklumat
+          lanjut.
+        </p>
+        <div className="scan-modal-actions">
+          <button className="scan-modal-cancel" onClick={onClose}>
+            TUTUP
+          </button>
+          <a
+            href="https://masuk10.com/Wasapvvipcs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="scan-modal-confirm scan-wa-btn"
+          >
+            💬 WhatsApp Admin
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 /* ── Circular RTP Gauge ── */
 function RtpGauge({ rtp, color, size = 56 }: { rtp: number; color: string; size?: number }) {
   const strokeWidth = 5
@@ -720,6 +792,13 @@ export default function PatchIDPage() {
   const [scanPhase, setScanPhase] = useState('')
   const [showFlash, setShowFlash] = useState(false)
   const [copied, setCopied] = useState(false)
+
+  // Scan limit states
+  const [scansUsed, setScansUsed] = useState(0)
+  const [scanLimit, setScanLimit] = useState(10)
+  const [showLimitPopup, setShowLimitPopup] = useState(false)
+  const [showBannedPopup, setShowBannedPopup] = useState(false)
+  const [limitChecking, setLimitChecking] = useState(false)
   const deviceIntel = useDeviceIntel()
 
   // CMS-managed providers, games & scanner config (with hardcoded fallbacks)
@@ -741,7 +820,7 @@ export default function PatchIDPage() {
       })
   }, [])
 
-  // Check localStorage for verified status
+  // Check localStorage for verified status + fetch scan limit
   useEffect(() => {
     try {
       const saved = localStorage.getItem('patchIdVerified')
@@ -753,6 +832,20 @@ export default function PatchIDPage() {
             setLockedUsername(data.cm8Username)
             setCm8Id(data.cm8Username)
           }
+          // Fetch current scan usage
+          fetch('/api/scan-limit/check', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone: data.phone }),
+          })
+            .then((r) => r.json())
+            .then((res) => {
+              if (res.used !== undefined) setScansUsed(res.used)
+              if (res.limit !== undefined) setScanLimit(res.limit)
+            })
+            .catch(() => {
+              /* use defaults */
+            })
         }
       }
     } catch {
@@ -839,9 +932,45 @@ export default function PatchIDPage() {
     return () => document.body.classList.remove('nav-locked')
   }, [scanning])
 
-  const startScan = useCallback(() => {
+  const startScan = useCallback(async () => {
     if (!cm8Id.trim() || !selectedProvider) return
-    setShowWarning(true)
+
+    // Check scan limit before proceeding
+    try {
+      setLimitChecking(true)
+      const saved = localStorage.getItem('patchIdVerified')
+      const phone = saved ? JSON.parse(saved).phone : null
+      if (!phone) return
+
+      const res = await fetch('/api/scan-limit/check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone }),
+      })
+      const data = await res.json()
+
+      if (!data.allowed) {
+        if (data.reason === 'banned') {
+          setShowBannedPopup(true)
+        } else {
+          setScansUsed(data.used ?? 0)
+          setScanLimit(data.limit ?? 10)
+          setShowLimitPopup(true)
+        }
+        return
+      }
+
+      // Update counter from server
+      if (data.used !== undefined) setScansUsed(data.used)
+      if (data.limit !== undefined) setScanLimit(data.limit)
+
+      setShowWarning(true)
+    } catch {
+      // If API fails, allow scan anyway (graceful degradation)
+      setShowWarning(true)
+    } finally {
+      setLimitChecking(false)
+    }
   }, [cm8Id, selectedProvider])
 
   const confirmScan = useCallback(() => {
@@ -863,9 +992,32 @@ export default function PatchIDPage() {
         // Screen shake
         document.body.classList.add('scan-shake')
         setTimeout(() => document.body.classList.remove('scan-shake'), 500)
+
+        // Record scan usage
+        try {
+          const saved = localStorage.getItem('patchIdVerified')
+          const parsed = saved ? JSON.parse(saved) : null
+          if (parsed?.phone) {
+            fetch('/api/scan-limit/use', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ phone: parsed.phone, cm8Username: cm8Id }),
+            })
+              .then((r) => r.json())
+              .then((res) => {
+                if (res.used !== undefined) setScansUsed(res.used)
+                if (res.limit !== undefined) setScanLimit(res.limit)
+              })
+              .catch(() => {
+                /* ignore */
+              })
+          }
+        } catch {
+          /* ignore */
+        }
       }, 400)
     }, 7000)
-  }, [selectedProvider, activeGameData, scannerConfig])
+  }, [selectedProvider, activeGameData, scannerConfig, cm8Id])
 
   const getRtpColor = (rtp: number) => {
     if (rtp >= 85) return '#22C55E'
@@ -924,6 +1076,18 @@ export default function PatchIDPage() {
 
       {/* Screen Flash on Complete */}
       {showFlash && <div className="scan-flash" />}
+
+      {/* Scan Limit Popup */}
+      {showLimitPopup && (
+        <ScanLimitPopup
+          used={scansUsed}
+          limit={scanLimit}
+          onClose={() => setShowLimitPopup(false)}
+        />
+      )}
+
+      {/* Scan Banned Popup */}
+      {showBannedPopup && <ScanBannedPopup onClose={() => setShowBannedPopup(false)} />}
 
       {/* Warning Modal */}
       {showWarning && selectedProvider && (
@@ -1004,17 +1168,36 @@ export default function PatchIDPage() {
         </div>
       </div>
 
+      {/* Scan Counter Badge */}
+      <div className="scan-counter-badge">
+        <span className="scan-counter-icon">🎯</span>
+        <span className="scan-counter-text">
+          Scan: <strong>{scansUsed}</strong>/{scanLimit} hari ini
+        </span>
+        <div className="scan-counter-bar">
+          <div
+            className="scan-counter-fill"
+            style={{ width: `${Math.min(100, (scansUsed / scanLimit) * 100)}%` }}
+          />
+        </div>
+      </div>
+
       {/* Scan Button */}
       <button
-        className={`scan-btn hacker-scan-btn ${scanning ? 'scan-loading' : ''} ${!cm8Id.trim() || !selectedProvider ? 'scan-disabled' : ''}`}
+        className={`scan-btn hacker-scan-btn ${scanning || limitChecking ? 'scan-loading' : ''} ${!cm8Id.trim() || !selectedProvider ? 'scan-disabled' : ''}`}
         onClick={startScan}
-        disabled={scanning || !cm8Id.trim() || !selectedProvider}
+        disabled={scanning || limitChecking || !cm8Id.trim() || !selectedProvider}
       >
         {scanning ? (
           <>
             <span className="scan-spinner" />
             <span>SCANNING</span>
             <HexCrawl />
+          </>
+        ) : limitChecking ? (
+          <>
+            <span className="scan-spinner" />
+            <span>CHECKING LIMIT...</span>
           </>
         ) : (
           <>

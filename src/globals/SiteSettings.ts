@@ -353,6 +353,18 @@ export const SiteSettings: GlobalConfig = {
               ],
             },
             {
+              name: 'scannerDailyLimit',
+              type: 'number',
+              label: '🔒 Had Scan Harian',
+              defaultValue: 10,
+              min: 1,
+              max: 100,
+              admin: {
+                description:
+                  'Berapa kali setiap pengguna boleh execute scan dalam sehari. Default: 10 kali.',
+              },
+            },
+            {
               name: 'scannerSeedInterval',
               type: 'select',
               label: 'Tukar Result Setiap',

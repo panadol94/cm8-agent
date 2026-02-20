@@ -18,6 +18,7 @@ import { PatchProviders } from './collections/PatchProviders'
 import { Games } from './collections/Games'
 import { CommissionTiers } from './collections/CommissionTiers'
 import { NotificationsLog } from './collections/NotificationsLog'
+import { ScanUsage } from './collections/ScanUsage'
 import { SiteSettings } from './globals/SiteSettings'
 import { PopupAnnouncement } from './globals/PopupAnnouncement'
 
@@ -71,6 +72,7 @@ export default buildConfig({
     Providers,
     PatchProviders,
     Games,
+    ScanUsage,
 
     // ⚙️ Sistem
     Users,

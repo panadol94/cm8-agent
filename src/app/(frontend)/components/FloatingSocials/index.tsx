@@ -14,7 +14,7 @@ export default function FloatingSocials() {
     {
       role: 'assistant',
       content:
-        'Hai! 👋 Saya AI Assistant CM8. Boleh saya bantu anda dengan apa-apa info tentang VVIP atau cara daftar Mega888/918Kiss?',
+        'Yo! 👋 Aku AI CM8 bro. Ada apa nak tanya? Nak daftar, nak tahu komisyen, atau nak link admin — tanya je terus!',
     },
   ])
   const [input, setInput] = useState('')
@@ -224,7 +224,7 @@ export default function FloatingSocials() {
       </button>
 
       {/* Tooltip bubble when closed */}
-      {!isOpen && <div className="floating-tooltip">Tanya AI CM8</div>}
+      {!isOpen && <div className="floating-tooltip">💬 Chat AI CM8</div>}
     </div>
   )
 }

@@ -4,6 +4,8 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
 export const metadata: Metadata = {
   title: 'Info CM8 VVIP — Scanner Slot AI, Program Agent & Komuniti',
@@ -93,7 +95,15 @@ const scannerSteps = [
 /* ============================================================
    PAGE
    ============================================================ */
-export default function InfoPage() {
+export default async function InfoPage() {
+  const payload = await getPayload({ config })
+  const ss = await payload.findGlobal({ slug: 'site-settings' })
+
+  const ssAny = ss as unknown as Record<string, string>
+  const telegramGroupLink = ssAny?.telegramGroupLink || 'https://masuk10.com/TeleGrupVVIP'
+  const whatsappGroupLink = ssAny?.whatsappGroupLink || 'https://masuk10.com/WasapGrupVVIP'
+  const adminWhatsappLink = ssAny?.adminWhatsappLink || 'https://masuk10.com/WhatsappVVIP'
+
   return (
     <>
       {/* ── Structured Data: BreadcrumbList ── */}
@@ -312,7 +322,7 @@ export default function InfoPage() {
                 hanya peluang pendapatan tanpa had.
               </p>
               <a
-                href="https://masuk10.com/WhatsappVVIP"
+                href={adminWhatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-outline btn-sm"
@@ -370,7 +380,7 @@ export default function InfoPage() {
                 strategi, dan sokongan bersama.
               </p>
               <a
-                href="https://masuk10.com/TeleGrupVVIP"
+                href={telegramGroupLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-outline btn-sm"
@@ -529,7 +539,7 @@ export default function InfoPage() {
 
           <div style={{ textAlign: 'center', marginTop: '40px' }}>
             <a
-              href="https://masuk10.com/WhatsappVVIP"
+              href={adminWhatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-gradient btn-lg"
@@ -558,7 +568,7 @@ export default function InfoPage() {
           </p>
           <div className="info-community-grid">
             <a
-              href="https://masuk10.com/TeleGrupVVIP"
+              href={telegramGroupLink}
               target="_blank"
               rel="noopener noreferrer"
               className="community-card"
@@ -618,7 +628,7 @@ export default function InfoPage() {
               <span className="community-cta">Join Telegram →</span>
             </a>
             <a
-              href="https://masuk10.com/WasapGrupVVIP"
+              href={whatsappGroupLink}
               target="_blank"
               rel="noopener noreferrer"
               className="community-card"
@@ -678,7 +688,7 @@ export default function InfoPage() {
               <span className="community-cta">Join WhatsApp →</span>
             </a>
             <a
-              href="https://masuk10.com/WhatsappVVIP"
+              href={adminWhatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               className="community-card"
@@ -822,7 +832,7 @@ export default function InfoPage() {
           </p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
-              href="https://masuk10.com/WhatsappVVIP"
+              href={adminWhatsappLink}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-white btn-lg"

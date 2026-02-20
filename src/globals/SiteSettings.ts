@@ -126,6 +126,41 @@ export const SiteSettings: GlobalConfig = {
           ],
         },
         {
+          label: '🔗 Pautan Komuniti',
+          description:
+            'Link-link komuniti yang dipapar di seluruh website (Halaman Info, Blog, dll).',
+          fields: [
+            {
+              name: 'telegramGroupLink',
+              type: 'text',
+              label: 'Link Telegram Group',
+              defaultValue: 'https://masuk10.com/TeleGrupVVIP',
+              admin: {
+                description: 'Link group Telegram komuniti agent. Dipapar di halaman Info & Blog.',
+              },
+            },
+            {
+              name: 'whatsappGroupLink',
+              type: 'text',
+              label: 'Link WhatsApp Group',
+              defaultValue: 'https://masuk10.com/WasapGrupVVIP',
+              admin: {
+                description: 'Link group WhatsApp komuniti agent.',
+              },
+            },
+            {
+              name: 'adminWhatsappLink',
+              type: 'text',
+              label: 'Link WhatsApp Admin',
+              defaultValue: 'https://masuk10.com/WhatsappVVIP',
+              admin: {
+                description:
+                  'Link WhatsApp untuk chat terus dengan admin / pendaftaran agent baru.',
+              },
+            },
+          ],
+        },
+        {
           label: 'Footer',
           fields: [
             {

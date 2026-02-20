@@ -784,7 +784,7 @@ export default function PatchIDPage() {
     text += `🚀 Nak scan slot anda? Guna AI Scanner PERCUMA di:\n`
     text += `🌐 cm8vvip.com/patch-id\n\n`
     text += `🔒 Scanner paling tepat — data real-time!\n`
-    text += `📲 Join: https://t.me/+aK5iX_FE_b9kMzQ1\n`
+    text += `📲 Join: https://t.me/+7qOP1Y8RQcthYjll\n`
     text += `#CM8VVIP #PatchID #SlotScanner`
 
     return text

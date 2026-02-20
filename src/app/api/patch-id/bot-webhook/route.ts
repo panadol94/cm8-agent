@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getOtpStore } from '../utils'
 
-const GROUP_LINK = 'https://t.me/+aK5iX_FE_b9kMzQ1'
+const GROUP_LINK = 'https://t.me/+7qOP1Y8RQcthYjll'
 const GROUP_ID = '-1003733462677'
 
 /* ── Telegram Bot Webhook for Patch ID OTP ──────────────────── */

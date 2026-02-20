@@ -379,7 +379,7 @@ export default function RegisterGate({ onVerified }: RegisterGateProps) {
             <div className="join-group-cta">
               <span>📢</span>
               <span>Join group Telegram kami:</span>
-              <a href="https://t.me/+aK5iX_FE_b9kMzQ1" target="_blank" rel="noopener noreferrer">
+              <a href="https://t.me/+7qOP1Y8RQcthYjll" target="_blank" rel="noopener noreferrer">
                 Join Group Telegram
               </a>
             </div>

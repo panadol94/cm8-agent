@@ -68,22 +68,21 @@
 /* Realistic 3D Robot Avatar */
 .realistic-robot-avatar {
   position: relative;
-  width: 48px;
-  height: 48px;
+  width: 54px; /* Increased to give the full body room */
+  height: 54px;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 5;
   animation: bot-float 3s ease-in-out infinite;
-  border-radius: 50%;
-  overflow: hidden;
+  /* Removed overflow: hidden so arms and legs aren't clipped */
 }
 
 .robot-3d-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transform: scale(1.4) translateY(-2px); /* Scale up the transparent PNG to fit perfectly */
+  transform: scale(1.2) translateY(-1px); /* Gentle scale to fit nicely in the glass button */
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
 }
 

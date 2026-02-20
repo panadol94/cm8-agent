@@ -1536,7 +1536,7 @@ export default async function HomePage() {
         </ul>
         <div className="why-actions">
           <a
-            href={mainWhatsappLink}
+            href="https://cm8play.com/r/luckyhorse879"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-gradient btn-lg"

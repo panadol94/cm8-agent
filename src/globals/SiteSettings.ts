@@ -134,7 +134,7 @@ export const SiteSettings: GlobalConfig = {
               name: 'telegramGroupLink',
               type: 'text',
               label: 'Link Telegram Group',
-              defaultValue: 'https://masuk10.com/TeleGrupVVIP',
+              defaultValue: 'https://t.me/+7qOP1Y8RQcthYjll',
               admin: {
                 description: 'Link group Telegram komuniti agent. Dipapar di halaman Info & Blog.',
               },

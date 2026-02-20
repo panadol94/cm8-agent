@@ -100,7 +100,7 @@ export default async function InfoPage() {
   const ss = await payload.findGlobal({ slug: 'site-settings' })
 
   const ssAny = ss as unknown as Record<string, string>
-  const telegramGroupLink = ssAny?.telegramGroupLink || 'https://masuk10.com/TeleGrupVVIP'
+  const telegramGroupLink = ssAny?.telegramGroupLink || 'https://t.me/+7qOP1Y8RQcthYjll'
   const whatsappGroupLink = ssAny?.whatsappGroupLink || 'https://masuk10.com/WasapGrupVVIP'
   const adminWhatsappLink = ssAny?.adminWhatsappLink || 'https://masuk10.com/Wasapvvipcs'
 

@@ -312,79 +312,14 @@ export default function FloatingSocials() {
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           ) : (
-            // Animated Robot Face with Moving Eyes
-            <div className="animated-robot-face">
-              <svg width="36" height="36" viewBox="0 0 100 100" className="robot-svg">
-                <defs>
-                  <linearGradient id="botGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#ffffff" />
-                    <stop offset="100%" stopColor="#d1d8e0" />
-                  </linearGradient>
-                  <filter id="glow">
-                    <feGaussianBlur stdDeviation="2" result="coloredBlur" />
-                    <feMerge>
-                      <feMergeNode in="coloredBlur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
-
-                {/* Robot Head Shape */}
-                <rect
-                  x="15"
-                  y="20"
-                  width="70"
-                  height="60"
-                  rx="15"
-                  fill="url(#botGrad)"
-                  stroke="#bdc3c7"
-                  strokeWidth="2"
-                />
-
-                {/* Antenna */}
-                <rect x="47" y="5" width="6" height="15" rx="3" fill="#a5b1c2" />
-                <circle
-                  cx="50"
-                  cy="5"
-                  r="4"
-                  fill="#fc5c65"
-                  filter="url(#glow)"
-                  className="antenna-glow"
-                />
-
-                {/* Ears */}
-                <rect x="5" y="40" width="10" height="20" rx="4" fill="#a5b1c2" />
-                <rect x="85" y="40" width="10" height="20" rx="4" fill="#a5b1c2" />
-
-                {/* Face Plate (Black Screen) */}
-                <rect x="25" y="32" width="50" height="35" rx="8" fill="#1e272e" />
-
-                {/* Moving Eyes Container */}
-                <g className="robot-eyes-group">
-                  {/* Left Eye */}
-                  <rect
-                    x="32"
-                    y="42"
-                    width="12"
-                    height="12"
-                    rx="4"
-                    fill="#2bcbba"
-                    filter="url(#glow)"
-                    className="bot-eye-svg left-eye"
-                  />
-                  {/* Right Eye */}
-                  <rect
-                    x="56"
-                    y="42"
-                    width="12"
-                    height="12"
-                    rx="4"
-                    fill="#2bcbba"
-                    filter="url(#glow)"
-                    className="bot-eye-svg right-eye"
-                  />
-                </g>
-              </svg>
+            // Realistic 3D Robot Avatar
+            <div className="realistic-robot-avatar">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://img.freepik.com/premium-psd/3d-futuristic-white-robot-assistant-floating_410516-29112.jpg?w=740"
+                alt="AI Robot Assistant"
+                className="robot-3d-img"
+              />
             </div>
           )}
         </span>

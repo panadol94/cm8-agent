@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { sql } from 'drizzle-orm'
 
 /**
  * GET /api/fix-db
@@ -14,34 +15,32 @@ export async function GET() {
     const db = (payload.db as any).drizzle
 
     // Add scan_usage_id column to payload_locked_documents_rels
-    await db.execute({
-      sql: `ALTER TABLE payload_locked_documents_rels ADD COLUMN IF NOT EXISTS scan_usage_id integer`,
-    })
+    await db.execute(
+      sql`ALTER TABLE payload_locked_documents_rels ADD COLUMN IF NOT EXISTS scan_usage_id integer`,
+    )
 
     // Add scan_usage_id column to payload_preferences_rels
-    await db.execute({
-      sql: `ALTER TABLE payload_preferences_rels ADD COLUMN IF NOT EXISTS scan_usage_id integer`,
-    })
+    await db.execute(
+      sql`ALTER TABLE payload_preferences_rels ADD COLUMN IF NOT EXISTS scan_usage_id integer`,
+    )
 
     // Create scan_usage table if it doesn't exist
-    await db.execute({
-      sql: `CREATE TABLE IF NOT EXISTS scan_usage (
-        id serial PRIMARY KEY,
-        phone varchar NOT NULL,
-        cm8_username varchar DEFAULT '',
-        date varchar NOT NULL,
-        scan_count integer DEFAULT 0,
-        bonus_scans integer DEFAULT 0,
-        is_banned boolean DEFAULT false,
-        updated_at timestamptz DEFAULT now() NOT NULL,
-        created_at timestamptz DEFAULT now() NOT NULL
-      )`,
-    })
+    await db.execute(sql`CREATE TABLE IF NOT EXISTS scan_usage (
+      id serial PRIMARY KEY,
+      phone varchar NOT NULL,
+      cm8_username varchar DEFAULT '',
+      date varchar NOT NULL,
+      scan_count integer DEFAULT 0,
+      bonus_scans integer DEFAULT 0,
+      is_banned boolean DEFAULT false,
+      updated_at timestamptz DEFAULT now() NOT NULL,
+      created_at timestamptz DEFAULT now() NOT NULL
+    )`)
 
     // Add scanner_daily_limit to site_settings if missing
-    await db.execute({
-      sql: `ALTER TABLE site_settings ADD COLUMN IF NOT EXISTS scanner_daily_limit numeric DEFAULT 10`,
-    })
+    await db.execute(
+      sql`ALTER TABLE site_settings ADD COLUMN IF NOT EXISTS scanner_daily_limit numeric DEFAULT 10`,
+    )
 
     return NextResponse.json({
       success: true,

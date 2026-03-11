@@ -28,6 +28,7 @@
     "@upstash/redis": "^1.36.2",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
+    "drizzle-orm": "^0.44.6",
     "graphql": "^16.8.1",
     "lottie-react": "^2.4.1",
     "lru-cache": "^11.2.6",

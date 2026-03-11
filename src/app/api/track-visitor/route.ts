@@ -31,13 +31,19 @@ export async function POST(req: Request) {
     const { page, screen, lang, battery, from } = body
 
     // 1. Get IP Address
-    // Next.js (Vercel) forwarded IP header, or fallback to request socket
+    // Cloudflare sets CF-Connecting-IP with the real visitor IP (most reliable)
+    // Fallback to x-forwarded-for, then x-real-ip
+    const cfIp = req.headers.get('cf-connecting-ip')
     const forwardedFor = req.headers.get('x-forwarded-for')
+    const realIp = req.headers.get('x-real-ip')
     let ip = ''
-    if (forwardedFor) {
+    if (cfIp) {
+      ip = cfIp.trim()
+    } else if (forwardedFor) {
       ip = forwardedFor.split(',')[0].trim()
+    } else if (realIp) {
+      ip = realIp.trim()
     } else {
-      // Fallback for local development
       ip = '127.0.0.1'
     }
 

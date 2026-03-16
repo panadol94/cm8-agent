@@ -171,6 +171,67 @@ const posts = [
     views: 3412,
     tags: ['#Downline', '#Pasif', '#Pendapatan'],
   },
+  // New SEO blog posts
+  {
+    slug: 'cm8-malaysia-agent-slot-terbaik',
+    title: 'CM8 Malaysia: Agent Slot Terbaik & Paling Dipercayai 2026',
+    excerpt:
+      'Kenapa CM8 VVIP jadi pilihan utama para agent slot di Malaysia? Cari tau fakta lengkap tentang platform kami.',
+    category: 'Panduan Agent',
+    date: '14 Mar 2026',
+    image: '/blog/agent-success.png',
+    readTime: 5,
+    views: 3200,
+    tags: ['#CM8Malaysia', '#AgentSlot', '#Terbaik'],
+  },
+  {
+    slug: 'cara-daftar-agent-cm8',
+    title: 'Cara Daftar Agent CM8: Guide Lengkap 2026',
+    excerpt:
+      'Nak jadi agent CM8? Ini step-by-step cara daftar dengan lengkap. Free register, tiada modal needed!',
+    category: 'Panduan Agent',
+    date: '13 Mar 2026',
+    image: '/blog/passive-income.png',
+    readTime: 4,
+    views: 5800,
+    tags: ['#DaftarAgent', '#CM8', '#Guide'],
+  },
+  {
+    slug: 'slot-malaysia-strategi-menang',
+    title: 'Strategi Menang Slot Online Malaysia 2026',
+    excerpt:
+      'Tips dan strategi terkini untuk menang lebih masa bermain slot online di Malaysia. Bukan hack, tapi teknik sebenar.',
+    category: 'Tips & Strategi',
+    date: '12 Mar 2026',
+    image: '/blog/high-commission.png',
+    readTime: 7,
+    views: 4200,
+    tags: ['#SlotMalaysia', '#Strategi', '#Menang'],
+  },
+  {
+    slug: 'cm8-vs-platform-lain',
+    title: 'CM8 vs Platform Lain: Mana Lebih Bagus?',
+    excerpt:
+      'Perbandingan jujur antara CM8 dengan platform agent slot lain di Malaysia. Komisyen, system, support semua.',
+    category: 'Tips & Strategi',
+    date: '11 Mar 2026',
+    image: '/blog/high-commission.png',
+    readTime: 6,
+    views: 2100,
+    tags: ['#Perbandingan', '#CM8', '#Platform'],
+  },
+  {
+    slug: 'jana-pendapatan-online-agent-slot',
+    title: 'Cara Jana Pendapatan Online RM5,000 Sebulan Sebagai Agent Slot',
+    excerpt:
+      'Real case study dari agent CM8 yang berjaya jana RM5k sebulan. Bukan cepat kaya, tapi boleh dicapai.',
+    category: 'Tips & Strategi',
+    date: '10 Mar 2026',
+    image: '/blog/passive-income.png',
+    readTime: 8,
+    views: 6500,
+    tags: ['#JanaPendapatan', '#Online', '#AgentSlot'],
+  },
 ]
 
 const categories = ['Semua', ...Array.from(new Set(posts.map((p) => p.category)))]

@@ -9,6 +9,11 @@ const blogSlugs = [
   'cara-jadi-agent-cm8-berjaya',
   'komisyen-tinggi-platform-cm8',
   'pendapatan-pasif-agent-downline',
+  'cm8-malaysia-agent-slot-terbaik',
+  'cara-daftar-agent-cm8',
+  'slot-malaysia-strategi-menang',
+  'cm8-vs-platform-lain',
+  'jana-pendapatan-online-agent-slot',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {

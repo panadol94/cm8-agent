@@ -190,6 +190,162 @@ const postData: Record<string, { title: string; category: string; date: string; 
       <p>Sudah bersedia untuk membina empayar perniagaan anda sendiri? <a href="/info">Pelajari Model Bisnes VVIP</a> kami sekarang.</p>
       `,
     },
+    'cm8-malaysia-agent-slot-terbaik': {
+      title: 'CM8 Malaysia: Agent Slot Terbaik & Paling Dipercayai 2026',
+      category: 'Panduan Agent',
+      date: '14 Mar 2026',
+      content: `
+      <p>Dalam industri slot online Malaysia yang semakin berkembang, mencari platform yang boleh dipercayai adalah penting. <strong>CM8 VVIP</strong> muncul sebagai pilihan utama para agent slot di Malaysia terima kasih kepada sistem yang stabil, komisyen tinggi, dan sokongan 24/7.</p>
+
+      <h2>Mengapa CM8 VVIP Di anggap Terbaik?</h2>
+      <ul>
+        <li><strong>Platform Stable:</strong> Server yang tidak mudah down, memastikan pemain anda sentiasa boleh main.</li>
+        <li><strong>Komisyen Tinggi:</strong> sehingga 90% untuk agent yang aktif.</li>
+        <li><strong>Sokongan Pantas:</strong> Team support sedia bantu dalam masa 5 minit.</li>
+        <li><strong>Sistem Automatik:</strong> Semua transaksi, komisyen, dan penarikan diselesaikann sendiri.</li>
+      </ul>
+
+      <h2>Apa Kata Agent CM8?</h2>
+      <blockquote>"Saya Dah Cuba Banyak Platform, CM8 Terbaik" – <em>Agent AF</em></blockquote>
+      <blockquote>"Komisen Dia Bagi Settled Cepat, Saya Suggest Semua Kawan Join CM8" – <em>Agent MJ</em></blockquote>
+
+      <h2>Nak Cuba?</h2>
+      <p>Cuba sendiri. Daftar percuma sekarang dan lihat perbezaannya. Tiada risiko, tiada modal needed.</p>
+      <p><a href="/register">Daftar sebagai agent CM8</a> hari ini dan mulakan perjalanan anda dalam industri slot Malaysia.</p>
+      `,
+    },
+    'cara-daftar-agent-cm8': {
+      title: 'Cara Daftar Agent CM8: Guide Lengkap 2026',
+      category: 'Panduan Agent',
+      date: '13 Mar 2026',
+      content: `
+      <p>Nak jadi agent slot tapi tak tahu cara daftar? Jangan risau, процесс ini sangat mudah dan takes only 5 minit!</p>
+
+      <h2>Langkah 1: Pergi Ke Halaman Register</h2>
+      <p>Buka <a href="/register">laman daftar CM8 VVIP</a>. Isi nama penuh dan nombor telefon WhatsApp anda.</p>
+
+      <h2>Langkah 2: Tunggu Verification Code</h2>
+      <p>Kami akan hantar code ke WhatsApp anda. Masukkan code tu untuk verify akaun.</p>
+
+      <h2>Langkah 3: Login ke Dashboard Agent</h2>
+      <p>Selepas verify, anda akan dapat akses ke dashboard agent. Kat sini boleh:
+      - Dapat link promo peribadi
+      - Lihat komisyen
+      - tarik duit</p>
+
+      <h2>Langkah 4: Mula Promote</h2>
+      <p>kongsi link anda kat, TikTok, WhatsApp Facebook atau mana-mana platform social media. Lebih banyak yang register bawah link anda, lebih banyak komisyen!</p>
+
+      <h2>Tips Untuk Agent Baru</h2>
+      <ul>
+        <li>Fokus pada 1-2 platform social media dulu</li>
+        <li>Study produk CM8 dulu sebelum promote</li>
+        <li>Join group agent untuk belajar dari yang lebih senior</li>
+      </ul>
+
+      <p><a href="/register">Daftar Sekarang →</a></p>
+      `,
+    },
+    'slot-malaysia-strategi-menang': {
+      title: 'Strategi Menang Slot Online Malaysia 2026',
+      category: 'Tips & Strategi',
+      date: '12 Mar 2026',
+      content: `
+      <p>Nak menang lebih masa main slot online? Ini bukan tentang "hack" tapi tentang strategy yang betui. Berikut adalah tips yang digunakan oleh player-player berpengalaman di Malaysia.</p>
+
+      <h2>1. Pilih Masa Yang Betul</h2>
+      <p>Berdasarkan pengalaman, masa-masa tertentu RTP slot adalah lebih tinggi. Cuba main antara 11 malam – 3 pagi, masa ni kebanyakkan player dah tidur, admin slot bagi peluang lebih baik.</p>
+
+      <h2>2. Manage Bankroll Anda</h2>
+      <p>Jangan pernah bet dengan emotions. Tetapkan budget untuk each session dan stickpadam ia. Contoh: Budget RM200 untuk sehari, bila dah habis, stop.</p>
+
+      <h2>3. Pilih Game Dengan RTP Tinggi</h2>
+      <p>RTP (Return to Player) yang tinggi bermakna potensi menang lagi baik. Cari games dengan RTP 96% ke atas seperti:
+      - Great Blue
+      - Panther Moon
+      - Ocean King</p>
+
+      <h2>4. Guna Teknik "Hit and Run"</h2>
+      <p>Technik ni popular among experienced players. Main dalam short sessions, lepas dapat win kecik atau sederhana, terus cash out dan try another game.</p>
+
+      <h2>5. Jangan KEJAR LOSS</h2>
+      <p>Ini adalah mistake paling besar. Kalau anda dah lose banyak, ambik break. Chasing losses hanya akan buat anda lose lg banyak.</p>
+
+      <h2>Platform Dengan RTP和数据</h2>
+      <p>Di CM8 VVIP, agent boleh akses <strong>Scanner RTP</strong> yang menunjukkan games mana yang "panas" masa itu. Info ni sangat berguna untuk bagi tips kepada pemain.</p>
+      `,
+    },
+    'cm8-vs-platform-lain': {
+      title: 'CM8 vs Platform Lain: Mana Lebih Bagus?',
+      category: 'Tips & Strategi',
+      date: '11 Mar 2026',
+      content: `
+      <p>Aneka platform slot online ada di Malaysia, tapi mana satu yang terbaik untuk jadi agent? Kita compare CM8 VVIP dengan beberapa platform lain.</p>
+
+      <h2>Perbandingan Komisyen</h2>
+      <table>
+      <tr><th>Platform</th><th>Komisyen Baru</th><th>Komisyen Max</th></tr>
+      <tr><td>CM8 VVIP</td><td>60%</td><td>90%</td></tr>
+      <tr><td>Platform A</td><td>20%</td><td>40%</td></tr>
+      <tr><td>Platform B</td><td>15%</td><td>35%</td></tr>
+      </table>
+
+      <h2>Sistem Automatik</h2>
+      <p><strong>CM8 VVIP:</strong> 100% automatik. Player register, deposit, withdraw, semua sistem buat sendiri. Agent free!</p>
+      <p><strong>Platform Lain:</strong> Ramai still guna manual. Agent kene buat kerja banyak.</p>
+
+      <h2>Support</h2>
+      <p><strong>CM8 VVIP:</strong> WhatsApp support dalam 5 minit, 24/7.</p>
+      <p><strong>Platform Lain:</strong> Support slow, ada yang ambi hari untuk reply.</p>
+
+      <h2>Keluar Duit</h2>
+      <p><strong>CM8 VVIP:</strong> Proses withdraw dalam 2 minit.</p>
+      <p><strong>Platform Lain:</strong> Kene tunggu 24-48 jam.</p>
+
+      <h2>Keputusan?</h2>
+      <p>Berdasarkan comparison, CM8 VVIP menang di semua aspek. Komisyen tinggi, sistem auto, support pantas, withdraw laju.</p>
+      <p><a href="/register">Cuba sendiri →</a></p>
+      `,
+    },
+    'jana-pendapatan-online-agent-slot': {
+      title: 'Cara Jana Pendapatan Online RM5,000 Sebulan Sebagai Agent Slot',
+      category: 'Tips & Strategi',
+      date: '10 Mar 2026',
+      content: `
+      <p>Ramai orang cari cara untuk buat duit online, tapi tak tahu mana satu yang legit. Ini adalah real case study dari agent CM8 yang berjaya.</p>
+
+      <h2>Case Study: Agent Din, 28 Tahun</h2>
+      <p>Din mule dengan only smartphone dan laptop. Dia buat bisnes part-time selama 6 bulan. Sekarang dia buat RM5,000 – RM8,000 sebulan.</p>
+
+      <h2>Step 1: Daftar Free</h2>
+      <p>Din register sebagai agent CM8 VVIP secara percuma. No modal needed.</p>
+
+      <h2>Step 2: Promote Gaya Hidup</h2>
+      <p>Dia buat Facebook dan TikTok content tentang:
+      - Tips menang slot
+      - Resit winning players
+      - Testimoni dari players</p>
+
+      <h2>Step 3: Build Network</h2>
+      <p>Din approach rakan-rakan yang interest, dan minta diorang try main. Untuk each new player yang register bawah link dia, dia dapat komisyen.</p>
+
+      <h2>Step 4: Scale Up</h2>
+      <p> bila dah ada 20-30 players active, dia recruit agent-agent baru untuk work bawah dia. Sekarang dia ada 5 sub-agents.</p>
+
+      <h2>Math di sebalik RM5k/Bulan</h2>
+      <ul>
+      <li>50 players aktif x RM200 avg deposit = RM10,000 turnover</li>
+      <li>Komisyen 50% = RM5,000/bulan</li>
+      <li>Plus extra dari sub-agents = Additional income</li>
+      </ul>
+
+      <h2>Bole ke buat part-time?</h2>
+      <p>YES! Din buat ni sambil kerja biasa. Allocate 2-3 jam sehari untuk manage players dan create content.</p>
+
+      <h2>Nak Try?</h2>
+      <p><a href="/register">Register free sekarang →</a> Takde modal, takde risk.</p>
+      `,
+    },
   }
 
 type PageProps = {

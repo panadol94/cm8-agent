@@ -196,10 +196,10 @@ export default function WheelDemoClient() {
     <div className="wheel-demo-page">
       <div className="wheel-demo-shell">
         <div className="hero-card">
-          <div className="eyebrow">🎡 Demo Event Login + Wheel</div>
-          <h1>CM8 Lucky Wheel Demo</h1>
+          <div className="eyebrow">🎡 Lucky Wheel Event</div>
+          <h1>CM8 Lucky Wheel</h1>
           <p>
-            Demo ni ikut flow yang Garry minta: <strong>ID Agent + nombor WhatsApp</strong> mesti
+            Ikut flow: <strong>ID Agent + nombor WhatsApp</strong> wajib
             match dalam whitelist dulu, baru boleh dapat <strong>1 spin</strong>.
           </p>
         </div>
@@ -230,7 +230,7 @@ export default function WheelDemoClient() {
             </label>
 
             <button className="primary-btn" onClick={handleLogin} disabled={loading || spinning}>
-              {loading ? 'Checking whitelist...' : 'Login Demo'}
+              {loading ? 'Checking...' : 'Login'}
             </button>
 
             {verified && !result && (
@@ -263,17 +263,6 @@ export default function WheelDemoClient() {
             )}
 
             {error && <div className="error-box">{error}</div>}
-
-            <div className="odds-card">
-              <div className="odds-title">Peratusan Demo</div>
-              <ul>
-                <li><strong>RM100</strong> — 84%</li>
-                <li><strong>RM288</strong> — 10%</li>
-                <li><strong>RM388</strong> — 5%</li>
-                <li><strong>RM588</strong> — 1%</li>
-                <li><strong>5G Gold</strong> — 0%</li>
-              </ul>
-            </div>
           </section>
 
           <section className="panel wheel-panel">

@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import WheelDemoClient from './wheel-demo-client'
 
 export const metadata: Metadata = {
-  title: 'Wheel Demo Event — CM8VVIP',
-  description: 'Demo Lucky Wheel berasaskan whitelist ID Agent dan nombor WhatsApp.',
+  title: 'Lucky Wheel — CM8VVIP',
+  description: 'Putar rod a bertuah dan menangi hadiah eksklusif!',
   alternates: {
-    canonical: 'https://www.cm8vvip.com/wheel-demo',
+    canonical: 'https://www.cm8vvip.com/wheel',
   },
   robots: {
     index: false,
@@ -13,6 +13,6 @@ export const metadata: Metadata = {
   },
 }
 
-export default function WheelDemoPage() {
+export default function WheelPage() {
   return <WheelDemoClient />
 }

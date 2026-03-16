@@ -159,7 +159,7 @@ export default function WheelDemoDashboard() {
           background: '#0f3460', padding: '40px', borderRadius: '16px',
           boxShadow: '0 20px 60px rgba(0,0,0,0.5)', textAlign: 'center', minWidth: 320
         }}>
-          <h1 style={{ color: '#ffd700', margin: '0 0 8px', fontSize: '24px' }}>🎡 Wheel Demo Admin</h1>
+          <h1 style={{ color: '#ffd700', margin: '0 0 8px', fontSize: '24px' }}>🎡 Wheel Admin</h1>
           <p style={{ color: '#aaa', margin: '0 0 24px', fontSize: '14px' }}>Admin Access Only</p>
           <input
             type="password"
@@ -193,7 +193,7 @@ export default function WheelDemoDashboard() {
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-          <h1 style={{ color: '#ffd700', fontSize: '28px', margin: '0 0 4px' }}>🎡 Wheel Demo Admin</h1>
+          <h1 style={{ color: '#ffd700', fontSize: '28px', margin: '0 0 4px' }}>🎡 Wheel Admin</h1>
           <p style={{ color: '#aaa', margin: 0 }}>Kelola hadiah, whitelist & settings</p>
         </div>
 
@@ -393,7 +393,7 @@ export default function WheelDemoDashboard() {
         </div>
 
         <p style={{ textAlign: 'center', color: '#444', marginTop: '32px', fontSize: '12px' }}>
-          CM8 Wheel Demo Admin • Key: cm8admin2026
+          CM8 Wheel Admin • Key: cm8admin2026
         </p>
       </div>
     </div>

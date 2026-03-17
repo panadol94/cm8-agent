@@ -315,7 +315,7 @@ export default function CheckinPage() {
                     required
                   />
                   <a
-                    href="https://cm8play.com/r/luckyhorse879"
+                    href="https://cm8huat.com/r/luckyhorse879"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{

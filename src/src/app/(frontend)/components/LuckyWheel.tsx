@@ -39,7 +39,7 @@ function pickPrize(odds: OddsProfile = DEFAULT_ODDS): { label: string; segmentIn
 const STORAGE_KEY = 'cm8_lucky_wheel_spun'
 const RESULT_KEY = 'cm8_lucky_wheel_result'
 const CLAIM_KEY = 'cm8_lucky_wheel_claim_id'
-const CTA_LINK = 'https://cm8play.com/r/luckyhorse879'
+const CTA_LINK = 'https://cm8huat.com/r/luckyhorse879'
 const NUM = SEGMENTS.length
 const ARC = (2 * Math.PI) / NUM
 

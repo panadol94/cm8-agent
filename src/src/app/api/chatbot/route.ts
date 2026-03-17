@@ -27,7 +27,7 @@ LINK PENTING KAMI:
 - Bantuan / Masalah Teknikal / Cuci: [WhatsApp Admin](https://masuk10.com/Wasapvvipcs)
 - Sembang Komuniti / Tips Saluran: [Telegram Group](https://t.me/+7qOP1Y8RQcthYjll)
 - Info & Update Rasmi: [WhatsApp Channel](https://whatsapp.com/channel/0029VazDCCQFHWpyPXAJVH0J)
-- Borang Pendaftaran: [Daftar Akaun CM8](https://cm8play.com/r/luckyhorse879)
+- Borang Pendaftaran: [Daftar Akaun CM8](https://cm8huat.com/r/luckyhorse879)
 - Laman Utama Platform: [Website CM8 VVIP](https://www.cm8vvip.com)
 - Patch ID / AI Scanner: [Guna AI Scanner Live](https://www.cm8vvip.com/patch-id)
 

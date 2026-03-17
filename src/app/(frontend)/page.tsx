@@ -1003,11 +1003,14 @@ export default async function HomePage() {
             if (!u) return u
             return u.includes('?') ? `${u}&v=20260227` : `${u}?v=20260227`
           }
+          // Force all banner links to use cm8huat.com
+          const oldLink = (b.link as string) || undefined
+          const newLink = oldLink?.replace(/https?:\/\/cm8play\.com\/r\/luckyhorse879/g, 'https://cm8huat.com/r/luckyhorse879')
           return {
             src: withBust(src) as string,
             mobileSrc: withBust(mobileSrc) || undefined,
             alt: (b.title as string) || 'Banner',
-            link: (b.link as string) || undefined,
+            link: newLink || 'https://cm8huat.com/r/luckyhorse879',
             mimeType,
           }
         })

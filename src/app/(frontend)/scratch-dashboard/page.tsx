@@ -1,11 +1,5 @@
 'use client'
 
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Scratch Event Admin | CM8 VVIP',
-}
-
 export default function ScratchAdminDashboard() {
   const stats = {
     totalParticipants: 127,

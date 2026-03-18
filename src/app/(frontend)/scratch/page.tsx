@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import ScratchEvent from '../../components/ScratchEvent'
+import ScratchEvent from '../components/ScratchEvent'
 
 export const metadata: Metadata = {
   title: 'Scratch Event — Menang RM20! | CM8 VVIP',

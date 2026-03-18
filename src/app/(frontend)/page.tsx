@@ -1285,6 +1285,19 @@ export default async function HomePage() {
             <span className="qa-sub">Support 24/7</span>
           </div>
           <span className="qa-arrow">›</span>
+        <a
+          href="/scratch"
+          className="quick-action-btn qa-scratch"
+        >
+          <div className="qa-icon-ring">
+            🎫
+          </div>
+          <div className="qa-text">
+            <span className="quick-action-label">Scratch Event</span>
+            <span className="qa-sub">Win RM20!</span>
+          </div>
+          <span className="qa-arrow">›</span>
+        </a>
         </a>
       </div>
 

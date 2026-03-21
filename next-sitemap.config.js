@@ -1,5 +1,5 @@
 /** @type {import('next-sitemap').IConfig} */
-module.exports = {
+const config = {
   siteUrl: 'https://www.cm8vvip.com',
   generateRobotsTxt: true,
   outDir: './public',
@@ -21,3 +21,5 @@ module.exports = {
     ]
   },
 }
+
+export default config

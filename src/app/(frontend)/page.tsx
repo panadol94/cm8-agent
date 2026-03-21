@@ -303,8 +303,8 @@ const agentSteps: { num: string; icon: React.ReactNode; title: string; desc: str
         <circle cx="20" cy="25" r="3" fill="url(#stepGrad3)" />
       </svg>
     ),
-    title: 'Capital Allocation',
-    desc: 'Komitmen modal permulaan untuk akses Tier-1 Commission (Max Yield).',
+    title: 'Pendaftaran Akaun',
+    desc: 'Buka akaun ahli dan sahkan profil perniagaan anda.',
   },
   {
     num: '04',
@@ -1430,7 +1430,7 @@ export default async function HomePage() {
       <div className="section-title-bar">
         <h2>🏆 Langkah Jadi Agent</h2>
       </div>
-      <p className="section-subtitle-bar">Mudah je, 4 langkah sahaja</p>
+      <p className="section-subtitle-bar">Mudah je, 5 langkah sahaja</p>
       <div className="steps-section">
         {agentSteps.map((step, i) => (
           <div key={i} className="step-item">

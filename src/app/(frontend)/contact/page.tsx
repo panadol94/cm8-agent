@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Hubungi Kami | CM8 VVIP',
+  title: 'Hubungi Kami',
   description:
     'Hubungi CM8 VVIP untuk pertanyaan mengenai menjadi agent, komisyen, atau sebarang masalah akaun. Kami sedia membantu.',
   alternates: { canonical: 'https://www.cm8vvip.com/contact' },
@@ -72,7 +72,7 @@ export default function ContactPage() {
 
             <div className="feature-card">
               <div className="feature-icon">🏢</div>
-              <h3>PejabatAgent</h3>
+              <h3>Daftar sebagai Agen</h3>
               <p>
                 Daftar sebagai agent untuk akses kepada alat pengurusan lengkap,
                 laporan komisyen, dan sokongan VIP.
@@ -129,6 +129,10 @@ export default function ContactPage() {
           </a>
         </div>
       </section>
+    </>
+  )
+}
+on>
     </>
   )
 }

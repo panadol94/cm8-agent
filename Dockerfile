@@ -21,6 +21,7 @@ ENV NODE_OPTIONS=--no-deprecation
 COPY --from=deps /app/node_modules ./node_modules
 COPY package.json ./
 COPY next.config.mjs ./
+COPY next-sitemap.config.js ./
 COPY tsconfig.json ./
 COPY src ./src
 COPY public ./public

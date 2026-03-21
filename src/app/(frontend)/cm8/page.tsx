@@ -6,26 +6,26 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://www.cm8vvip.com/cm8' },
-  title: 'CM8 — Platform Agent & Scanner Slot #1 Malaysia 2026',
+  title: 'CM8 Malaysia — Platform Agent Gaming & Analisis Provider 2026',
   description:
-    'CM8 adalah platform agent slot terbesar di Malaysia. Daftar percuma, komisyen sehingga 90%, AI scanner slot real-time, dan sokongan 24/7. Mula jana pendapatan hari ini.',
+    'CM8 (CashMarket 8) ialah platform rujukan agent gaming online terbesar di Malaysia. Daftar percuma, komisyen sehingga 90%, analisis RTP provider, dan sokongan komuniti 24/7.',
   keywords: [
     'CM8',
     'CM8 Malaysia',
     'CM8 agent',
     'CM8 platform',
-    'CM8 slot',
-    'CM8 scanner',
     'CM8 VVIP',
     'CM8 login',
     'CM8 register',
     'CM8 daftar',
     'platform agent Malaysia',
+    'agent gaming Malaysia',
+    'CM8 affiliate',
   ],
   openGraph: {
-    title: 'CM8 — Platform Agent & Scanner Slot #1 Malaysia',
+    title: 'CM8 Malaysia — Platform Agent Gaming & Analisis Provider',
     description:
-      'Platform agent slot terbesar di Malaysia. Komisyen 90%, AI scanner, daftar percuma.',
+      'Platform rujukan agent gaming online Malaysia. Komisyen sehingga 90%, analisis RTP provider, daftar percuma.',
     url: 'https://www.cm8vvip.com/cm8',
     siteName: 'CM8 VVIP',
     type: 'website',
@@ -35,43 +35,43 @@ export const metadata: Metadata = {
 const cm8Faqs = [
   {
     q: 'Apa itu CM8?',
-    a: 'CM8 adalah singkatan untuk CashMarket 8, platform agent slot dan gaming online terbesar di Malaysia. Kami menyediakan teknologi AI scanner, program komisyen agent sehingga 90%, dan komuniti sokongan aktif.',
+    a: 'CM8 (CashMarket 8) ialah platform perantara agent gaming online yang telah beroperasi di Malaysia sejak 2020. CM8 menghubungkan agent dengan pelbagai provider gaming dan menyediakan alat pengurusan serta program komisyen yangtelus.',
   },
   {
     q: 'Adakah CM8 platform yang sah?',
-    a: 'Ya, CM8 beroperasi sebagai platform perantara agent yang telah beroperasi sejak 2020. Kami mempunyai ribuan agent aktif dan rekod pembayaran yang konsisten setiap minggu.',
+    a: 'CM8 beroperasi sebagai platform perantara agent yang berdaftar dan telah melayan ribuan agent aktif sejak 2020. Pembayaran komisyen dibuat secara konsisten setiap minggu terus ke akaun agent.',
   },
   {
     q: 'Bagaimana cara daftar CM8?',
-    a: 'Anda boleh mendaftar secara percuma melalui halaman pendaftaran kami atau menghubungi admin melalui WhatsApp. Proses pendaftaran mengambil masa kurang dari 5 minit dan tiada modal diperlukan.',
+    a: 'Pendaftaran adalah percuma. Anda boleh hubungi admin CM8 melalui WhatsApp atau lengkapkan borang di halaman pendaftaran. Proses normally selesai dalam kurang dari 5 minit.',
   },
   {
     q: 'Berapa komisyen yang ditawarkan CM8?',
-    a: 'CM8 menawarkan komisyen bermula dari 60% untuk Newbie Agent, 80% untuk Solo Player Agent, dan sehingga 90% untuk Team Builder Agent. Bayaran dibuat secara mingguan terus ke akaun bank.',
+    a: 'CM8 menawarkan program komisyen 3 tier: Newbie Agent (60%), Solo Player Agent (80%), dan Team Builder Agent (90%). Bayaran dibuat secara mingguan.',
   },
   {
     q: 'Apakah kelebihan CM8 berbanding platform lain?',
-    a: 'CM8 menawarkan komisyen tertinggi di pasaran, AI scanner slot real-time, dashboard agent yang lengkap, sokongan 24/7, tiada yuran tersembunyi, dan 20+ provider gaming.',
+    a: 'CM8 menyediakan komisyen kompetitif, alat pengurusan agent (dashboard), akses kepada 20+ provider gaming, sokongan komuniti, dan latihan untuk agent baharu.',
   },
   {
-    q: 'Adakah CM8 menyokong Mega888 dan 918Kiss?',
-    a: 'Ya! CM8 menyokong sepenuhnya Mega888, 918Kiss, dan 20+ provider lain termasuk JILI, Pragmatic Play, Hacksaw Gaming, Habanero, Playtech, Spade Gaming, dan banyak lagi.',
+    q: 'Provider gaming apa yang disokong CM8?',
+    a: 'CM8 menyediakan akses kepada Mega888, 918Kiss, JILI, Pragmatic Play, Hacksaw Gaming, Habanero, Playtech, Spade Gaming, dan 20+ provider lain.',
   },
   {
     q: 'Apa itu AI Scanner CM8?',
-    a: 'AI Scanner CM8 adalah teknologi eksklusif yang menganalisis peratusan RTP (Return to Player) slot secara real-time. Ia membantu pemain memilih slot yang sedang "panas" untuk peluang menang yang lebih baik.',
+    a: 'AI Scanner CM8 memberikan analisis data RTP (Return to Player) dari pelbagai provider gaming. Ia membantu agent dan pemain membuat keputusan berdasarkan maklumat yang tersedia.',
   },
   {
     q: 'Bolehkah saya jadi agent CM8 secara part-time?',
-    a: 'Ya! Ramai agent CM8 menjalankannya secara part-time. Anda hanya perlu 2-3 jam sehari untuk mengurus pemain dan promosi. Tiada jadual tetap — kerja pada masa yang sesuai untuk anda.',
+    a: 'Ya! Ramai agent CM8 menjalankan urusan ini secara part-time. Anda boleh menetapkan jadual sendiri dan bekerja pada masa yang sesuai.',
   },
   {
     q: 'Berapa pendapatan purata agent CM8?',
-    a: 'Agent baru biasa menjana RM500-RM2,000 seminggu. Agent berpengalaman dengan rangkaian yang kukuh menjana RM5,000-RM15,000 seminggu. Pendapatan bergantung pada usaha dan saiz rangkaian anda.',
+    a: 'Pendapatan agent bergantung pada usaha dan saiz rangkaian. Agent baharu biasanya menjana RM500-RM2,000 seminggu, manakala agent berpengalaman dengan rangkaian yang lebih besar boleh menjana RM5,000-RM15,000 seminggu.',
   },
   {
     q: 'Adakah CM8 menyediakan latihan untuk agent baru?',
-    a: 'Ya! CM8 menyediakan panduan lengkap, tutorial video, bahan pemasaran percuma, dan sokongan mentor 24/7. Anda juga boleh belajar dari komuniti 1,200+ agent aktif di Telegram.',
+    a: 'Ya. CM8 menyediakan panduan, tutorial video, bahan pemasaran, dan sokongan mentor. Agent baharu juga boleh belajar dari komuniti agent aktif melalui Telegram.',
   },
 ]
 
@@ -110,23 +110,25 @@ export default function CM8Page() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'Article',
-            headline: 'CM8 — Platform Agent & Scanner Slot #1 Malaysia',
+            '@type': 'Organization',
+            name: 'CM8 VVIP',
+            url: 'https://www.cm8vvip.com/cm8',
             description:
-              'Panduan lengkap tentang platform CM8, cara daftar, komisyen, dan kelebihan menjadi agent CM8.',
-            author: { '@type': 'Organization', name: 'CM8 VVIP' },
-            publisher: { '@type': 'Organization', name: 'CM8 VVIP' },
-            datePublished: '2026-01-01',
-            dateModified: '2026-02-20',
+              'CM8 (CashMarket 8) — platform perantara agent gaming online di Malaysia. Komisyen sehingga 90%, akses kepada 20+ provider, dan sokongan komuniti agent.',
+            foundingDate: '2020',
+            areaServed: 'Malaysia',
+            sameAs: [
+              'https://t.me/cm8vvip',
+            ],
           }),
         }}
       />
 
       <div className="page-hero">
-        <h1 className="page-hero-title">CM8 — Platform Agent Slot #1 Malaysia</h1>
+        <h1 className="page-hero-title">CM8 Malaysia — Platform Agent Gaming Online</h1>
         <p className="page-hero-subtitle">
-          Platform agent dan scanner slot terbesar di Malaysia dengan komisyen sehingga 90%,
-          teknologi AI scanner, dan komuniti ribuan agent aktif.
+          CM8 (CashMarket 8) ialah platform perantara agent gaming online Malaysia yang dipercayai
+          sejak 2020. Komisyen sehingga 90%, akses kepada 20+ provider, dan komuniti agent aktif.
         </p>
       </div>
 
@@ -135,28 +137,25 @@ export default function CM8Page() {
           <div className="section-tag">Pengenalan</div>
           <h2 className="info-section-title">Apa Itu CM8?</h2>
           <p className="info-section-desc">
-            <strong>CM8</strong> (CashMarket 8) adalah platform agent slot dan gaming online yang
-            paling dipercayai di Malaysia. Sejak penubuhannya pada tahun 2020, CM8 telah membina
-            rangkaian lebih daripada <strong>1,200 agent aktif</strong> di seluruh Malaysia yang
-            menjana pendapatan tetap setiap minggu.
+            <strong>CM8</strong> (CashMarket 8) ialah platform perantara yang menghubungkan agent
+            dengan pelbagai provider gaming online. Beroperasi sejak 2020, CM8 telah membina
+            rangkaian lebih daripada <strong>1,200 agent aktif</strong> di seluruh Malaysia.
           </p>
           <p className="info-section-desc">
-            Berbeza dengan platform lain, CM8 bukan sekadar tempat untuk mendaftar sebagai agent.
-            CM8 adalah <strong>ekosistem lengkap</strong> yang menyediakan teknologi{' '}
-            <Link href="/patch-id">AI Scanner slot</Link>, program komisyen bertingkat sehingga 90%,
-            dashboard pengurusan agent yang canggih, serta komuniti sokongan yang aktif melalui{' '}
+            CM8 menyediakan program komisyen bertingkat sehingga 90%, alat pengurusan agent
+            (dashboard), akses kepada <strong>20+ provider gaming</strong> termasuk Mega888 dan
+            918Kiss, serta komuniti sokongan aktif melalui{' '}
             <strong>Telegram</strong> dan <strong>WhatsApp</strong>.
           </p>
           <p className="info-section-desc">
-            Sama ada anda ingin <Link href="/buat-duit-online">buat duit online</Link> secara
-            sampingan atau menjadikannya pendapatan utama, CM8 menyediakan semua alat yang anda
-            perlukan untuk berjaya. Ramai agent kami yang bermula tanpa pengalaman kini menjana{' '}
-            <strong>RM3,000 - RM15,000 seminggu</strong>.
+            Sama ada anda mencari pendapatan sampingan atau peluang lebih besar, CM8 menawarkan
+            infrastruktur dan sokongan untuk membantu agent berjaya. Agent yang konsisten boleh
+            menjana antara <strong>RM500 hingga RM15,000 seminggu</strong> bergantung pada
+            usaha dan saiz rangkaian.
           </p>
           <p className="info-section-desc">
-            Platform CM8 direka untuk kemudahan — dari pendaftaran yang mengambil masa kurang 5
-            minit hingga pembayaran komisyen automatik setiap minggu. Kami percaya teknologi harus
-            memudahkan kerja anda, bukan menyukarkannya.
+            Pendaftaran adalah percuma dan mengambil masa kurang 5 minit. Komisyen dibayar
+            secara automatik setiap minggu terus ke akaun anda.
           </p>
         </div>
       </section>
@@ -178,15 +177,12 @@ export default function CM8Page() {
               </Link>
             </div>
             <div className="info-pillar">
-              <h3>🔍 AI Scanner Slot</h3>
+              <h3>🔍 AI Scanner RTP</h3>
               <p>
-                Teknologi eksklusif CM8 yang menganalisis peratusan RTP slot secara real-time.
-                Scanner kami menyokong platform seperti Mega888, 918Kiss, dan 20+ provider lain.
-                Ketahui slot mana yang &apos;panas&apos; sebelum bermain.
+                CM8 menyediakan alat analisis data RTP dari pelbagai provider gaming. Scanner
+                menyokong Mega888, 918Kiss, dan 20+ provider lain — memberikan maklumat
+                kepada agent untuk membuat keputusan yang lebih baik.
               </p>
-              <Link href="/hack-slot-malaysia" className="btn btn-outline btn-sm">
-                Tentang Scanner →
-              </Link>
             </div>
             <div className="info-pillar">
               <h3>👥 Komuniti Terbesar</h3>
@@ -211,19 +207,19 @@ export default function CM8Page() {
 
       <section className="info-section">
         <div className="info-section-inner">
-          <div className="section-tag">Teknologi</div>
-          <h2 className="info-section-title">🤖 Teknologi Eksklusif CM8</h2>
+          <div className="section-tag">Alat Agent</div>
+          <h2 className="info-section-title">🤖 Alat Pengurusan Agent CM8</h2>
           <p className="info-section-desc">
-            CM8 bukan sekadar platform agent biasa. Kami melaburkan dalam teknologi canggih untuk
-            memberikan kelebihan kepada agent dan pemain kami.
+            CM8 menyediakan pelbagai alat untuk membantu agent mengurus operasi dengan lebih cekap.
+            Alat-alat ini termasuk analisis data provider dan dashboard pengurusan.
           </p>
           <div className="info-pillars">
             <div className="info-pillar">
               <h3>AI Scanner RTP</h3>
               <p>
-                <Link href="/hack-slot-malaysia">Scanner AI</Link> yang menganalisis peratusan RTP
-                slot dari 20+ provider secara real-time. Pemain anda boleh membuat keputusan yang
-                lebih bijak tentang slot mana yang patut dimainkan.
+                Analisis data RTP provider gaming dari
+                20+ provider. Maklumat ini membantu agent membuat keputusan yang
+                lebih baik berdasarkan data yang tersedia.
               </p>
             </div>
             <div className="info-pillar">
@@ -361,9 +357,9 @@ export default function CM8Page() {
             </div>
             <div className="info-pillar">
               <h3>
-                <Link href="/hack-slot-malaysia">Hack Slot Malaysia</Link>
+                <Link href="/cm8-play">Platform Gaming CM8</Link>
               </h3>
-              <p>Ketahui teknologi AI scanner slot dan cara ia membantu pemain.</p>
+              <p>Ketahui pelbagai provider gaming dan cara akses kiosk CM8.</p>
             </div>
             <div className="info-pillar">
               <h3>

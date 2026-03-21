@@ -21,7 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Main public pages (indexable only — NO dashboards, NO internal tools)
   const routes = [
-    { path: '', priority: 1, changeFrequency: 'daily' as const },
+    { path: '/', priority: 1, changeFrequency: 'daily' as const },
     { path: '/register', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/buat-duit-online', priority: 0.8, changeFrequency: 'daily' as const },
     { path: '/komisen-tanpa-modal', priority: 0.8, changeFrequency: 'daily' as const },
@@ -37,10 +37,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/checkin', priority: 0.6, changeFrequency: 'daily' as const },
     { path: '/info', priority: 0.6, changeFrequency: 'weekly' as const },
     { path: '/about', priority: 0.6, changeFrequency: 'monthly' as const },
-    { path: '/chat', priority: 0.5, changeFrequency: 'weekly' as const },
-    { path: '/patch-id', priority: 0.5, changeFrequency: 'weekly' as const },
-    { path: '/tap-coin', priority: 0.5, changeFrequency: 'weekly' as const },
-    { path: '/wheel-dashboard', priority: 0.3, changeFrequency: 'monthly' as const },
+    // Trust / legal pages
+    { path: '/privacy-policy', priority: 0.5, changeFrequency: 'monthly' as const },
+    { path: '/terms', priority: 0.5, changeFrequency: 'monthly' as const },
+    { path: '/contact', priority: 0.5, changeFrequency: 'monthly' as const },
   ].map((route) => ({
     url: `${baseUrl}${route.path}`,
     lastModified: new Date(),

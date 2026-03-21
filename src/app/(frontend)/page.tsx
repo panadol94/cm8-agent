@@ -923,9 +923,9 @@ const faqs = [
    ============================================================ */
 export const metadata: Metadata = {
   alternates: { canonical: 'https://www.cm8vvip.com/' },
-  title: 'CM8 VVIP — Buat Duit Online & Agent Slot Tanpa Modal #1 Malaysia',
+  title: 'CM8 VVIP — Platform Agent Slot Malaysia #1',
   description:
-    'Jana income pasif sebagai Agent Slot CM8 VVIP. Daftar percuma, tiada modal. Akses tips hack slot & scanner live. Komisyen sehingga 90%!',
+    'Jana income pasif sebagai Agent Slot CM8 VVIP. Daftar percuma, tiada modal. Akses scanner RTP Live & data kemenangan pemain. Komisyen sehingga 90%!',
 }
 
 // ... (existing constants)
@@ -950,7 +950,7 @@ const articleSchema = {
   image: 'https://www.cm8vvip.com/og-image.jpg',
   author: 'CM8 VVIP Team',
   genre: 'Business & Finance',
-  keywords: 'buat duit online, agent slot, tanpa modal, income pasif, hack slot',
+  keywords: 'buat duit online Malaysia, agent slot, tanpa modal, income pasif, affiliate slot',
   publisher: {
     '@type': 'Organization',
     name: 'CM8 VVIP',
@@ -960,7 +960,7 @@ const articleSchema = {
     },
   },
   description:
-    'Panduan lengkap cara menjana pendapatan pasif 5-angka sebulan sebagai agent slot CM8 tanpa sebarang modal. Tips hack slot dan strategi marketing percuma.',
+    'Panduan lengkap cara menjana pendapatan pasif 5-angka sebulan sebagai agent slot CM8 tanpa sebarang modal. Strategi marketing & data RTP untuk menang lebih kerap.',
 }
 
 /* ============================================================
@@ -1163,7 +1163,7 @@ export default async function HomePage() {
           <div className="agent-cta-headline">
             <span className="agent-cta-badge">👑 VIP AGENT</span>
             <h1 className="agent-cta-title">
-              Jana Sehingga <span className="text-gradient">90% Komisen</span>
+              CM8 VVIP — Jana Sehingga <span className="text-gradient">90% Komisen</span>
             </h1>
             <p className="agent-cta-subtitle">
               Jumlah bet pemain akan menjadi sumber pendapatan anda. Tiada modal, tiada risiko.
@@ -1730,7 +1730,7 @@ export default async function HomePage() {
           <div className="footer-links-grid">
             <Link href="/agent-judi">Agent Judi Online</Link>
             <Link href="/buat-duit-online">Buat Duit Online</Link>
-            <Link href="/hack-slot-malaysia">Hack Slot Malaysia</Link>
+            <Link href="/hack-slot-malaysia">Tips Menang Slot Malaysia</Link>
             <Link href="/komisen-tanpa-modal">Komisen Tanpa Modal</Link>
             <Link href="/cm8">Platform CM8</Link>
             <Link href="/cm8-play">CM8 Play</Link>
@@ -1801,15 +1801,9 @@ export default async function HomePage() {
               </p>
             </div>
             <div className="seo-item">
-              <h3>🎰 Tips & &quot;Hack Slot&quot; Strategy</h3>
+              <h3>🎰 Tips & Strategi Menang Slot</h3>
               <p>
-                Sebagai agent, kami bekalkan anda dengan data <strong>RTP Live</strong> dan scanner
-                terkini. Walaupun tiada istilah sebenar untuk{' '}
-                <Link href="/hack-slot-malaysia">
-                  <strong>hack slot</strong>
-                </Link>{' '}
-                (kerana sistem server-side), analisis data kami membantu pemain anda menang lebih
-                kerap — bermakna mereka deposit lebih kerap, dan komisyen anda naik!
+                Sebagai agent CM8 VVIP, kami bekalkan anda dengan data <strong>RTP Live</strong> dan scanner入境 terkini untuk bantu pemain menang lebih konsisten — bermakna deposit lebih kerap dan komisyen anda naik!
               </p>
             </div>
             <div className="seo-item">

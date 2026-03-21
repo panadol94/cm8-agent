@@ -13,29 +13,20 @@ import WelcomePopup from './components/WelcomePopup'
 
 export const metadata = {
   title: {
-    default: 'CM8 VVIP — Buat Duit Online & Agent Slot Tanpa Modal #1 Malaysia',
+    default: 'CM8 VVIP — Platform Agent Slot Malaysia #1',
     template: '%s | CM8 VVIP',
   },
   description:
-    'Jana income pasif sebagai Agent Slot CM8 VVIP. Daftar percuma, tiada modal. Akses tips hack slot & scanner live. Komisyen sehingga 90%!',
+    'Jana income pasif sebagai Agent Slot CM8 VVIP. Daftar percuma, tiada modal. Akses scanner RTP Live & data kemenangan pemain. Komisyen sehingga 90%!',
   keywords: [
-    'CM8',
+    'CM8 VVIP',
     'CM8 agent',
     'agent CM8',
-    'CM8 VVIP',
-    'agent slot',
-    'agent slot tanpa modal',
-    'buat duit online',
-    'buat duit tanpa modal',
+    'agent slot Malaysia',
+    'buat duit online Malaysia',
     'income pasif',
-    'hack slot',
-    'cara hack slot',
-    'mega888 agent',
-    '918kiss agent',
-    'pussy888 agent',
-    'company trusted',
-    'judi online malaysia',
-    'slot game online',
+    'komisyen slot',
+    'platform affiliate slot',
     'daftar agent percuma',
   ],
   authors: [{ name: 'CM8 VVIP' }],
@@ -50,13 +41,13 @@ export const metadata = {
     siteName: 'CM8 VVIP',
     title: 'CM8 VVIP — Buat Duit Online & Agent Slot Tanpa Modal',
     description:
-      'Jana income pasif sebagai Agent Slot CM8 VVIP. Daftar percuma, tiada modal. Akses tips hack slot & scanner live.',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'CM8 VVIP Agent Platform' }],
+      'Jana income pasif sebagai Agent Slot CM8 VVIP. Daftar percuma, tiada modal. Akses scanner RTP Live & data kemenangan pemain.',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'CM8 VVIP — Platform Agent Slot Malaysia' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CM8 VVIP — Buat Duit Online & Agent Slot Tanpa Modal',
-    description: 'Jana income pasif sebagai Agent Slot CM8 VVIP. Komisyen sehingga 90%!',
+    title: 'CM8 VVIP — Platform Agent Slot Malaysia',
+    description: 'Jana income pasif sebagai Agent CM8 VVIP. Komisyen sehingga 90%!',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -92,7 +83,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
               '@type': 'Organization',
               name: 'CM8 VVIP',
               url: 'https://www.cm8vvip.com',
-              description: 'Platform agent slot CM8 VVIP - jana komisyen sehingga 90%',
+              description: 'Platform affiliate slot CM8 VVIP Malaysia - jana komisyen sehingga 90%',
               logo: 'https://www.cm8vvip.com/cm8-logo.png',
               sameAs: [
                 'https://www.facebook.com/cm8vvip',

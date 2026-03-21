@@ -15,6 +15,8 @@ export default function robots(): MetadataRoute.Robots {
           '/event-dashboard/',
           '/lucky-pick-dashboard/',
           '/lucky-wheel-dashboard/',
+          '/scratch-dashboard/',
+          '/wheel-dashboard/',
         ],
       },
     ],

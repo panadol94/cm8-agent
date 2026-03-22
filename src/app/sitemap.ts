@@ -2,6 +2,8 @@ import { MetadataRoute } from 'next'
 
 // Blog post slugs — keep in sync with blog page data
 const blogSlugs = [
+  'apa-itu-cm8-vvip',
+  'cara-daftar-cm8-vvip',
   'cara-guna-scanner-ai-mega888',
   'bisnes-online-tiada-modal',
   'rahsia-tarik-high-roller',

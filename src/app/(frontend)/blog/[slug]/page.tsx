@@ -406,13 +406,34 @@ function lexicalToHtml(content: any) {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const cmsPost: any = await getCMSPost(slug)
+  const baseUrl = 'https://www.cm8vvip.com'
+
   if (cmsPost) {
+    const publishedTime = cmsPost.publishedDate || cmsPost.createdAt
     return {
       title: cmsPost?.seo?.metaTitle || cmsPost?.title || 'Blog Post',
       description:
         cmsPost?.seo?.metaDescription ||
         cmsPost?.excerpt ||
         (cmsPost?.title ? `Baca artikel: ${cmsPost.title} — CM8 VVIP` : 'Artikel dari CM8 VVIP'),
+      alternates: { canonical: `${baseUrl}/blog/${slug}` },
+      openGraph: {
+        type: 'article',
+        url: `${baseUrl}/blog/${slug}`,
+        title: cmsPost?.seo?.metaTitle || cmsPost?.title || 'Blog Post',
+        description: cmsPost?.seo?.metaDescription || cmsPost?.excerpt || '',
+        images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: cmsPost?.title }],
+        publishedTime,
+        modifiedTime: publishedTime,
+        authors: ['CM8 VVIP'],
+        tags: [cmsCategoryLabel[cmsPost.category] || cmsPost.category],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: cmsPost?.seo?.metaTitle || cmsPost?.title || 'Blog Post',
+        description: cmsPost?.seo?.metaDescription || cmsPost?.excerpt || '',
+        images: ['/og-image.jpg'],
+      },
     }
   }
 
@@ -420,6 +441,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: post?.title || 'Blog Post',
     description: post?.title ? `Baca artikel: ${post.title} — CM8 VVIP` : 'Artikel dari CM8 VVIP',
+    alternates: { canonical: `${baseUrl}/blog/${slug}` },
+    openGraph: {
+      type: 'article',
+      url: `${baseUrl}/blog/${slug}`,
+      title: post?.title || 'Blog Post',
+      description: post?.title ? `Baca artikel: ${post.title} — CM8 VVIP` : 'Artikel dari CM8 VVIP',
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: post?.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post?.title || 'Blog Post',
+      description: post?.title ? `Baca artikel: ${post.title} — CM8 VVIP` : 'Artikel dari CM8 VVIP',
+      images: ['/og-image.jpg'],
+    },
   }
 }
 

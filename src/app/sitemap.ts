@@ -16,6 +16,9 @@ const blogSlugs = [
   'slot-malaysia-strategi-menang',
   'cm8-vs-platform-lain',
   'jana-pendapatan-online-agent-slot',
+  // Batch 2 new articles
+  'faq-cm8-vvip',
+  'panduan-cm8-biasa-vs-vvip',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {

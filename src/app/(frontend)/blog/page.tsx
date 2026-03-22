@@ -256,6 +256,31 @@ const posts = [
     views: 6500,
     tags: ['#JanaPendapatan', '#Online', '#AgentSlot'],
   },
+  // Batch 2 new articles
+  {
+    slug: 'faq-cm8-vvip',
+    title: 'FAQ CM8 VVIP: Soalan Lazim Yang Sering Ditanya',
+    excerpt:
+      'Jawapan kepada persoalan paling kerap ditanya tentang CM8 VVIP. Sesuai untuk agent baru mahu jelaskan keraguan.',
+    category: 'Panduan Agent',
+    date: '21 Mac 2026',
+    image: '/blog/agent-success.png',
+    readTime: 5,
+    views: 0,
+    tags: ['#FAQ', '#CM8VVIP', '#Panduan'],
+  },
+  {
+    slug: 'panduan-cm8-biasa-vs-vvip',
+    title: 'Panduan Lengkap: CM8 Biasa vs CM8 VVIP - Mana Lebih Baik?',
+    excerpt:
+      'Perbandingan terperinci antara akaun CM8 biasa dan CM8 VVIP. Pilih yang sesuai dengan keperluan dan matlamat anda.',
+    category: 'Panduan Agent',
+    date: '22 Mac 2026',
+    image: '/blog/high-commission.png',
+    readTime: 6,
+    views: 0,
+    tags: ['#CM8VVIP', '#Perbandingan', '#Panduan'],
+  },
 ]
 
 const categories = ['Semua', ...Array.from(new Set(posts.map((p) => p.category)))]

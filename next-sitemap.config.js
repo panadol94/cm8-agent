@@ -30,6 +30,19 @@ const config = {
         changefreq: 'weekly',
         priority: 0.8,
       },
+      // Batch 2 new articles
+      {
+        loc: '/blog/faq-cm8-vvip',
+        lastmod: new Date().toISOString(),
+        changefreq: 'weekly',
+        priority: 0.7,
+      },
+      {
+        loc: '/blog/panduan-cm8-biasa-vs-vvip',
+        lastmod: new Date().toISOString(),
+        changefreq: 'weekly',
+        priority: 0.7,
+      },
     ]
   },
 }

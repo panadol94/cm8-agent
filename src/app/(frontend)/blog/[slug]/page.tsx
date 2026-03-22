@@ -3,6 +3,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
+import RelatedArticles from './RelatedArticles'
+
 
 /* Placeholder blog post detail — will be fetched from CMS */
 const postData: Record<string, { title: string; category: string; date: string; content: string }> =
@@ -586,6 +588,9 @@ export default async function BlogPost({ params }: PageProps) {
               Daftar Jadi Agent →
             </a>
           </div>
+
+          {/* Related Articles — Internal Linking Hub */}
+          <RelatedArticles currentSlug={slug} />
         </div>
       </section>
 

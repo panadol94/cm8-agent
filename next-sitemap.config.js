@@ -18,6 +18,18 @@ const config = {
         changefreq: 'monthly',
         priority: 0.3,
       },
+      {
+        loc: '/blog/apa-itu-cm8-vvip',
+        lastmod: new Date().toISOString(),
+        changefreq: 'weekly',
+        priority: 0.8,
+      },
+      {
+        loc: '/blog/cara-daftar-cm8-vvip',
+        lastmod: new Date().toISOString(),
+        changefreq: 'weekly',
+        priority: 0.8,
+      },
     ]
   },
 }

@@ -88,6 +88,30 @@ function SlotCounter({ value, suffix = '' }: { value: string; suffix?: string })
 /* ── Blog post data ── */
 const posts = [
   {
+    slug: 'apa-itu-cm8-vvip',
+    title: 'Apa Itu CM8 VVIP? Panduan Ringkas Untuk Pengguna Baru',
+    excerpt:
+      'Kenali CM8 VVIP dengan lebih jelas melalui panduan ringkas untuk pengguna baru di Malaysia.',
+    category: 'Panduan Agent',
+    date: '22 Mac 2026',
+    image: '/blog/agent-success.png',
+    readTime: 4,
+    views: 0,
+    tags: ['#CM8', '#CM8VVIP', '#Panduan'],
+  },
+  {
+    slug: 'cara-daftar-cm8-vvip',
+    title: 'Cara Daftar CM8 VVIP Dan Hubungi Team',
+    excerpt:
+      'Panduan ringkas untuk daftar CM8 VVIP dengan lebih selamat dan cara hubungi team rasmi.',
+    category: 'Panduan Agent',
+    date: '22 Mac 2026',
+    image: '/blog/passive-income.png',
+    readTime: 4,
+    views: 0,
+    tags: ['#DaftarCM8', '#CM8Malaysia', '#HubungiTeam'],
+  },
+  {
     slug: 'cara-guna-scanner-ai-mega888',
     title: 'Cara Guna Scanner AI Mega888 & 918Kiss Untuk Tarik Pemain',
     excerpt:

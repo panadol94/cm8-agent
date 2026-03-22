@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
 
 /* Placeholder blog post detail — will be fetched from CMS */
 const postData: Record<string, { title: string; category: string; date: string; content: string }> =
@@ -352,8 +354,68 @@ type PageProps = {
   params: Promise<{ slug: string }>
 }
 
+const cmsCategoryLabel: Record<string, string> = {
+  guide: 'Panduan Agent',
+  tips: 'Tips & Strategi',
+  news: 'Berita',
+  promo: 'Promosi',
+}
+
+async function getCMSPost(slug: string) {
+  try {
+    const payload = await getPayload({ config })
+    const result = await payload.find({
+      collection: 'blog-posts',
+      where: {
+        and: [{ slug: { equals: slug } }, { status: { equals: 'published' } }],
+      },
+      draft: false,
+      limit: 1,
+    })
+    return result.docs?.[0] || null
+  } catch {
+    return null
+  }
+}
+
+function formatCMSDate(input?: string | null) {
+  if (!input) return 'Artikel CM8'
+  try {
+    return new Date(input).toLocaleDateString('ms-MY', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    })
+  } catch {
+    return input
+  }
+}
+
+function lexicalToHtml(content: any) {
+  const children = content?.root?.children || []
+  const parts = children
+    .map((node: any) => {
+      const text = typeof node?.text === 'string' ? node.text.trim() : ''
+      if (!text) return ''
+      return `<p>${text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>`
+    })
+    .filter(Boolean)
+  return parts.join('')
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
+  const cmsPost: any = await getCMSPost(slug)
+  if (cmsPost) {
+    return {
+      title: cmsPost?.seo?.metaTitle || cmsPost?.title || 'Blog Post',
+      description:
+        cmsPost?.seo?.metaDescription ||
+        cmsPost?.excerpt ||
+        (cmsPost?.title ? `Baca artikel: ${cmsPost.title} — CM8 VVIP` : 'Artikel dari CM8 VVIP'),
+    }
+  }
+
   const post = postData[slug]
   return {
     title: post?.title || 'Blog Post',
@@ -363,7 +425,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BlogPost({ params }: PageProps) {
   const { slug } = await params
-  const post = postData[slug]
+  const cmsPost: any = await getCMSPost(slug)
+  const post = cmsPost
+    ? {
+        title: cmsPost.title,
+        category: cmsCategoryLabel[cmsPost.category] || 'Blog',
+        date: formatCMSDate(cmsPost.publishedDate || cmsPost.createdAt),
+        content: lexicalToHtml(cmsPost.content),
+      }
+    : postData[slug]
 
   if (!post) {
     return (
@@ -390,7 +460,7 @@ export default async function BlogPost({ params }: PageProps) {
             '@context': 'https://schema.org',
             '@type': 'Article',
             headline: post.title,
-            datePublished: '2026-02-15',
+            datePublished: cmsPost?.publishedDate || cmsPost?.createdAt || '2026-02-15',
             author: { '@type': 'Organization', name: 'CM8 VVIP' },
             publisher: { '@type': 'Organization', name: 'CM8 VVIP' },
           }),

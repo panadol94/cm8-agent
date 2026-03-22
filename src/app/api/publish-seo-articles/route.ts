@@ -172,14 +172,14 @@ export async function GET(req: Request) {
         result = await payload.update({
           collection: 'blog-posts',
           id: existing.docs[0].id,
-          data: article,
+          data: article as any,
         })
         results.push({ action: 'updated', slug: article.slug, id: result.id })
       } else {
         // Create new
         result = await payload.create({
           collection: 'blog-posts',
-          data: article,
+          data: article as any,
         })
         results.push({ action: 'created', slug: article.slug, id: result.id })
       }

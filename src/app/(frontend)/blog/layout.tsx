@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     'strategi buat duit online',
     'cara jadi agent berjaya',
     'komisyen agent slot',
-    'hack slot tips',
+    'tips scanner RTP slot',
     'scanner AI slot',
     'income pasif Malaysia',
   ],

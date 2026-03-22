@@ -6,25 +6,25 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://www.cm8vvip.com/hack-slot-malaysia' },
-  title: 'Hack Slot Malaysia 2026 — AI Scanner RTP Slot Mega888 & 918Kiss',
+  title: 'Slot Malaysia Scanner 2026 — AI Analisis RTP Slot Mega888 & 918Kiss',
   description:
-    'Scanner slot AI terbaik di Malaysia. Analisis RTP slot Mega888 & 918Kiss secara real-time. Bukan hack — ini teknologi AI canggih untuk pilih slot terpanas.',
+    'AI Scanner slot terbaik di Malaysia. Analisis RTP slot Mega888 & 918Kiss secara real-time. Gunakan data untuk pilih slot dengan peluang menang lebih tinggi.',
   keywords: [
-    'hack slot malaysia',
-    'hack slot',
-    'scanner slot',
+    'scanner slot malaysia',
+    'analisis RTP slot',
     'scanner slot AI',
     'RTP slot Malaysia',
-    'hack Mega888',
-    'hack 918Kiss',
     'tips slot Malaysia',
     'cara menang slot',
     'scanner RTP',
     'AI scanner slot',
+    'mega888 RTP',
+    '918kiss RTP',
+    'slot scanner malaysia',
   ],
   openGraph: {
-    title: 'Hack Slot Malaysia — AI Scanner RTP Slot',
-    description: 'Scanner AI yang analisis peratusan RTP slot secara real-time.',
+    title: 'Slot Malaysia Scanner — AI Analisis RTP Slot',
+    description: 'AI Scanner yang analisis peratusan RTP slot secara real-time.',
     url: 'https://www.cm8vvip.com/hack-slot-malaysia',
     siteName: 'CM8 VVIP',
     type: 'website',
@@ -115,7 +115,7 @@ export default function HackSlotPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Article',
-            headline: 'Hack Slot Malaysia — AI Scanner RTP Slot',
+            headline: 'Slot Malaysia Scanner — AI Analisis RTP Slot',
             author: { '@type': 'Organization', name: 'CM8 VVIP' },
             publisher: { '@type': 'Organization', name: 'CM8 VVIP' },
             datePublished: '2026-01-05',
@@ -125,21 +125,21 @@ export default function HackSlotPage() {
       />
 
       <div className="page-hero">
-        <h1 className="page-hero-title">Hack Slot Malaysia — AI Scanner RTP</h1>
+        <h1 className="page-hero-title">Slot Malaysia Scanner — AI Analisis RTP</h1>
         <p className="page-hero-subtitle">
-          Bukan hack biasa — ini teknologi AI canggih yang menganalisis peratusan RTP slot secara
-          real-time. Ketahui slot mana yang &apos;panas&apos; sebelum anda bermain.
+          Bukan janji kosong — ini teknologi AI yang menganalisis peratusan RTP slot secara
+          real-time. Gunakan data untuk mengenal pasti slot yang lebih aktif sebelum anda bermain.
         </p>
       </div>
 
       <section className="info-section">
         <div className="info-section-inner">
           <div className="section-tag">Teknologi AI</div>
-          <h2 className="info-section-title">Apa Itu &quot;Hack Slot&quot; AI Scanner?</h2>
+          <h2 className="info-section-title">Apa Itu AI Scanner Slot Malaysia?</h2>
           <p className="info-section-desc">
-            Ramai orang di Malaysia mencari cara untuk <strong>&quot;hack slot&quot;</strong> —
-            iaitu cara untuk meningkatkan peluang menang dalam permainan slot. Kebanyakan
-            &quot;hack&quot; di luar sana adalah penipuan atau tidak berkesan.
+            Ramai orang di Malaysia mencari cara untuk meningkatkan peluang menang dalam permainan
+            slot. Di internet, istilah <strong>&quot;hack slot&quot;</strong> sering digunakan,
+            walaupun kebanyakannya mengelirukan atau tidak berkesan.
           </p>
           <p className="info-section-desc">
             Di <Link href="/cm8">CM8 VVIP</Link>, kami mengambil pendekatan berbeza. Kami
@@ -154,10 +154,10 @@ export default function HackSlotPage() {
             dan 20+ provider lain termasuk JILI, Pragmatic Play, dan Hacksaw Gaming.
           </p>
           <p className="info-section-desc">
-            Berbeza dengan &quot;hack slot&quot; palsu yang boleh mendatangkan risiko kepada akaun
-            anda, AI Scanner CM8 adalah 100% selamat. Ia tidak mengubah sebarang data atau
-            memanipulasi permainan — ia hanya membaca dan menganalisis data yang sedia ada untuk
-            memberikan anda maklumat yang berguna.
+            Berbeza dengan tips atau &quot;hack slot&quot; palsu yang boleh mendatangkan risiko
+            kepada akaun anda, AI Scanner CM8 adalah 100% selamat. Ia tidak mengubah sebarang data
+            atau memanipulasi permainan — ia hanya membaca dan menganalisis data yang sedia ada
+            untuk memberikan anda maklumat yang berguna.
           </p>
         </div>
       </section>

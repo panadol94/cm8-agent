@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     'mega888 APK',
     'mega888 scanner',
     'mega888 RTP',
-    'mega888 hack',
-    'mega888 tips',
+    'mega888 tips menang',
     'mega888 agent',
+    'cara main mega888',
   ],
   openGraph: {
     title: 'Kiosk Mega888 — Daftar, Download & Scanner',
@@ -359,7 +359,7 @@ export default function KioskMega888Page() {
             </div>
             <div className="info-pillar">
               <h3>
-                <Link href="/hack-slot-malaysia">Hack Slot Malaysia</Link>
+                <Link href="/hack-slot-malaysia">Slot Scanner Malaysia</Link>
               </h3>
               <p>AI Scanner untuk analisis RTP semua platform termasuk Mega888.</p>
             </div>

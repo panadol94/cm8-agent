@@ -381,7 +381,7 @@ export default function CM8PlayPage() {
             </div>
             <div className="info-pillar">
               <h3>
-                <Link href="/hack-slot-malaysia">Hack Slot Malaysia</Link>
+                <Link href="/hack-slot-malaysia">Slot Scanner Malaysia</Link>
               </h3>
               <p>AI Scanner untuk analisis RTP slot secara real-time.</p>
             </div>

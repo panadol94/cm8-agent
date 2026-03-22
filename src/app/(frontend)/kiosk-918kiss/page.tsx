@@ -19,9 +19,9 @@ export const metadata: Metadata = {
     '918kiss APK',
     '918kiss scanner',
     '918kiss RTP',
-    '918kiss hack',
-    '918kiss tips',
+    '918kiss tips menang',
     '918kiss agent',
+    'cara main 918kiss',
   ],
   openGraph: {
     title: 'Kiosk 918Kiss — Daftar, Download & Scanner',
@@ -388,7 +388,7 @@ export default function Kiosk918KissPage() {
             </div>
             <div className="info-pillar">
               <h3>
-                <Link href="/hack-slot-malaysia">Hack Slot Malaysia</Link>
+                <Link href="/hack-slot-malaysia">Slot Scanner Malaysia</Link>
               </h3>
               <p>AI Scanner untuk analisis RTP semua platform termasuk 918Kiss.</p>
             </div>

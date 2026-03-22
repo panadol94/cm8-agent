@@ -513,7 +513,7 @@ export default function AgentJudiPage() {
             </div>
             <div className="info-pillar">
               <h3>
-                <Link href="/hack-slot-malaysia">Hack Slot Malaysia</Link>
+                <Link href="/hack-slot-malaysia">Slot Scanner Malaysia</Link>
               </h3>
               <p>Teknologi AI scanner untuk pemain anda — analisis RTP real-time.</p>
             </div>

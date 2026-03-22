@@ -402,7 +402,7 @@ export default function KomisenTanpaModalPage() {
             </div>
             <div className="info-pillar">
               <h3>
-                <Link href="/hack-slot-malaysia">Hack Slot Malaysia</Link>
+                <Link href="/hack-slot-malaysia">Slot Scanner Malaysia</Link>
               </h3>
               <p>AI Scanner CM8 untuk analisis RTP slot secara real-time.</p>
             </div>

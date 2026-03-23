@@ -9,7 +9,7 @@ const blogSlugs = [
   'rahsia-tarik-high-roller',
   'adakah-agent-cm8-selamat',
   'cara-jadi-agent-cm8-berjaya',
-  'komisyen-tinggi-platform-cm8',
+  'kenapa-komisyen-cm8-paling-tinggi',
   'pendapatan-pasif-agent-downline',
   'cm8-malaysia-agent-slot-terbaik',
   'cara-daftar-agent-cm8',

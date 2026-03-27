@@ -275,15 +275,15 @@ export default function LuckyWheelPage() {
         .x { color: #ff9999; font-size: 13px; margin-bottom: 16px; line-height: 1.5; }\
         .y { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; border-radius: 999px; background: #25D366; color: #fff; font-size: 16px; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 6px 24px rgba(37,211,102,0.35); transition: all 0.25s ease; text-decoration: none; }\
         .y:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(37,211,102,0.45); }\
-        .z { background: rgba(0,0,0,0.3); border-radius: 16px; padding: 16px; margin-top: 20px; }\
-        .aa { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }\
-        .ab { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }\
-        .ac { font-size: 14px; font-weight: 700; min-width: 80px; }\
-        .ad { flex: 1; height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }\
-        .ae { height: 100%; border-radius: 3px; transition: width 0.5s; }\
-        .af { font-size: 13px; font-weight: 800; color: #ffd700; min-width: 40px; text-align: right; }\
-        .ag { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,215,0,0.12); border-radius: 28px; padding: 28px; backdrop-filter: blur(20px); animation: su 1s ease; margin-top: 20px; }\
-        .ah { color: #ffd700; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }\
+        \
+        \
+        \
+        \
+        \
+        \
+        \
+        \
+        \
         .ai { text-align: center; margin-top: 24px; font-size: 11px; color: rgba(255,255,255,0.15); line-height: 1.6; }\
         .sp { border: 3px solid rgba(255,255,255,0.2); border-top-color: #fff; border-radius: 50%; width: 20px; height: 20px; animation: s 0.7s linear infinite; display: inline-block; }\
         @media (max-width: 600px) { .f { padding: 20px; border-radius: 20px; } .a { padding: 28px 16px 16px; } }\
@@ -348,20 +348,6 @@ export default function LuckyWheelPage() {
             )}
           </div>
         )}
-
-        <div className="ag">
-          <div className="ah">Senarai Hadiah & Odds</div>
-          <div className="z">
-            {prizes.map((p) => (
-              <div key={p.id} className="aa">
-                <div className="ab" style={{ background: 'linear-gradient(135deg, ' + p.colorPrimary + ', ' + p.colorSecondary + ')' }} />
-                <span className="ac">{p.name}</span>
-                <div className="ad"><div className="ae" style={{ width: p.probability + '%', background: 'linear-gradient(90deg, ' + p.colorPrimary + ', ' + p.colorSecondary + ')' }} /></div>
-                <span className="af">{p.probability}%</span>
-              </div>
-            ))}
-          </div>
-        </div>
 
         <p className="ai">* Setiap agent layak 1 spin sahaja. Keputusan muktamad.</p>
       </div>

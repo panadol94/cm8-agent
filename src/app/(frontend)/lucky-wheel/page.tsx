@@ -229,7 +229,7 @@ export default function LuckyWheelPage() {
   // Load prizes + fingerprint
   useEffect(() => {
     getFingerprint().then(setFingerprint)
-    fetch('/api/prizes')
+    fetch('/api/wheel-event/prizes')
       .then(r => r.json())
       .then(data => {
         setPrizes(data.prizes || [])
@@ -247,7 +247,7 @@ export default function LuckyWheelPage() {
     setIsChecking(true)
     setError('')
     try {
-      const res = await fetch('/api/spin', {
+      const res = await fetch('/api/wheel-event/spin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ whatsappNumber: whatsapp.trim(), agentId: agentId.trim(), deviceFingerprint: fingerprint }),

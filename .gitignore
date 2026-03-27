@@ -4,3 +4,4 @@ media/
 *.tsbuildinfo
 .env
 .env.local
+.next

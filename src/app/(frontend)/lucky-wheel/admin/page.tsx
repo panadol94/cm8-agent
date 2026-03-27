@@ -23,7 +23,7 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
     setLoading(true)
     setError('')
     try {
-      const res = await fetch('/api/admin/auth', {
+      const res = await fetch('/api/wheel-event/admin/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -97,7 +97,7 @@ export default function AdminPanel() {
 
   // Check auth on mount
   useEffect(() => {
-    fetch('/api/admin/auth')
+    fetch('/api/wheel-event/admin/auth')
       .then(r => r.json())
       .then(data => {
         if (data.authenticated) setIsAuthenticated(true)
@@ -109,11 +109,11 @@ export default function AdminPanel() {
     setLoading(true)
     try {
       const [statsRes, prizesRes, wlRes, spinsRes, settingsRes] = await Promise.all([
-        fetch('/api/admin/stats').then(r => r.json()),
-        fetch('/api/admin/prizes').then(r => r.json()),
-        fetch('/api/admin/whitelist').then(r => r.json()),
-        fetch('/api/admin/spins').then(r => r.json()),
-        fetch('/api/admin/settings').then(r => r.json()),
+        fetch('/api/wheel-event/admin/stats').then(r => r.json()),
+        fetch('/api/wheel-event/admin/prizes').then(r => r.json()),
+        fetch('/api/wheel-event/admin/whitelist').then(r => r.json()),
+        fetch('/api/wheel-event/admin/spins').then(r => r.json()),
+        fetch('/api/wheel-event/admin/settings').then(r => r.json()),
       ])
       setStats(statsRes)
       setPrizes(prizesRes.prizes || [])
@@ -135,7 +135,7 @@ export default function AdminPanel() {
   }
 
   const handleLogout = async () => {
-    await fetch('/api/admin/auth', { method: 'DELETE' })
+    await fetch('/api/wheel-event/admin/auth', { method: 'DELETE' })
     setIsAuthenticated(false)
   }
 
@@ -143,7 +143,7 @@ export default function AdminPanel() {
   const updatePrize = async (id: string, field: string, value: any) => {
     const prize = prizes.find(p => p.id === id)
     if (!prize) return
-    const res = await fetch('/api/admin/prizes', {
+    const res = await fetch('/api/wheel-event/admin/prizes', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, [field]: value }),
@@ -155,7 +155,7 @@ export default function AdminPanel() {
   // Whitelist actions
   const addWhitelist = async () => {
     if (!newWL.whatsappNumber || !newWL.agentId) return showMsg('error', 'WhatsApp & Agent ID wajib')
-    const res = await fetch('/api/admin/whitelist', {
+    const res = await fetch('/api/wheel-event/admin/whitelist', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newWL),
@@ -165,7 +165,7 @@ export default function AdminPanel() {
   }
 
   const toggleWhitelist = async (id: string, isActive: boolean) => {
-    const res = await fetch('/api/admin/whitelist', {
+    const res = await fetch('/api/wheel-event/admin/whitelist', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, isActive: !isActive }),
@@ -183,7 +183,7 @@ export default function AdminPanel() {
 
   // Spin actions
   const updateClaimStatus = async (id: string, status: string) => {
-    const res = await fetch('/api/admin/spins', {
+    const res = await fetch('/api/wheel-event/admin/spins', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, status }),
@@ -195,7 +195,7 @@ export default function AdminPanel() {
   // Settings actions
   const saveSettings = async () => {
     if (!settings) return
-    const res = await fetch('/api/admin/settings', {
+    const res = await fetch('/api/wheel-event/admin/settings', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(settings),

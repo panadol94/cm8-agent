@@ -1,24 +1,19 @@
 import { MetadataRoute } from 'next'
 
-// Blog post slugs — keep in sync with blog page data
+// Blog post slugs — ONLY slugs that have actual content in blog/[slug]/page.tsx
+// DO NOT add slugs here unless content exists —会导致 Google 404
 const blogSlugs = [
-  'apa-itu-cm8-vvip',
-  'cara-daftar-cm8-vvip',
   'cara-guna-scanner-ai-mega888',
   'bisnes-online-tiada-modal',
   'rahsia-tarik-high-roller',
   'adakah-agent-cm8-selamat',
   'cara-jadi-agent-cm8-berjaya',
-  'kenapa-komisyen-cm8-paling-tinggi',
   'pendapatan-pasif-agent-downline',
   'cm8-malaysia-agent-slot-terbaik',
   'cara-daftar-agent-cm8',
   'slot-malaysia-strategi-menang',
   'cm8-vs-platform-lain',
   'jana-pendapatan-online-agent-slot',
-  // Batch 2 new articles
-  'faq-cm8-vvip',
-  'panduan-cm8-biasa-vs-vvip',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {

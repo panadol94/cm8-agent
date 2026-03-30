@@ -40,6 +40,36 @@ export async function GET(req: NextRequest) {
   })
 }
 
+export async function DELETE(req: NextRequest) {
+  const key = req.nextUrl.searchParams.get('key')
+  if (!isAuthorized(req, key)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
+  const agentId = req.nextUrl.searchParams.get('agentId')
+  const whatsapp = req.nextUrl.searchParams.get('whatsapp')
+
+  if (!agentId || !whatsapp) {
+    return NextResponse.json({ error: 'Missing agentId or whatsapp' }, { status: 400 })
+  }
+
+  const config = await getDemoAdminConfig()
+  const phone = whatsapp.startsWith('60') ? whatsapp : `60${whatsapp.replace(/^0/, '')}`
+
+  const filtered = config.whitelist.filter(
+    (entry) =>
+      !(entry.agentId.trim().toLowerCase() === agentId.trim().toLowerCase() &&
+        entry.whatsapp.replace(/^60/, '') === phone.replace(/^60/, ''))
+  )
+
+  if (filtered.length === config.whitelist.length) {
+    return NextResponse.json({ error: 'Participant not found' }, { status: 404 })
+  }
+
+  const updated = await saveDemoAdminConfig({ ...config, whitelist: filtered })
+  return NextResponse.json({ ok: true, whitelist: updated.whitelist })
+}
+
 export async function POST(req: NextRequest) {
   let body: any = null
 

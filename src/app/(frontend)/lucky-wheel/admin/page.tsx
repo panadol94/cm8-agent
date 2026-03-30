@@ -176,7 +176,7 @@ export default function AdminPanel() {
 
   const deleteWhitelist = async (id: string) => {
     if (!confirm('Padam entry ini?')) return
-    const res = await fetch(`/api/admin/whitelist?id=${id}`, { method: 'DELETE' })
+    const res = await fetch(`/api/wheel-event/admin/whitelist?id=${id}`, { method: 'DELETE' })
     if (res.ok) loadData()
     else showMsg('error', 'Gagal padam')
   }

@@ -1285,6 +1285,7 @@ export default async function HomePage() {
             <span className="qa-sub">Support 24/7</span>
           </div>
           <span className="qa-arrow">›</span>
+        </a>
         <a
           href="/scratch"
           className="quick-action-btn qa-scratch"
@@ -1297,7 +1298,6 @@ export default async function HomePage() {
             <span className="qa-sub">Win RM20!</span>
           </div>
           <span className="qa-arrow">›</span>
-        </a>
         </a>
       </div>
 

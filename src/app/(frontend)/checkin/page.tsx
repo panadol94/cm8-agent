@@ -361,10 +361,6 @@ export default function CheckinPage() {
         desc: 'Pilih kad & menang sehingga RM388!',
         bg: 'linear-gradient(135deg, #0a2e1a 0%, #1a3a2e 100%)',
         border: 'rgba(76,175,80,0.25)', color: '#4CAF50', arrow: 'rgba(76,175,80,0.6)' },
-      { href: '/lucky-wheel', icon: '\uD83C\uDFA1', title: 'Lucky Wheel',
-        desc: 'Spin & menang hadiah menarik',
-        bg: 'linear-gradient(135deg, #2e1a0a 0%, #3a2a1a 100%)',
-        border: 'rgba(255,152,0,0.25)', color: '#FF9800', arrow: 'rgba(255,152,0,0.6)' },
     ]
     return (
       <div style={styles.pageWrap}>

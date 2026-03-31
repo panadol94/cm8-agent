@@ -11,12 +11,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/admin/',
           '/api/',
-          '/checkin-dashboard/',
-          '/event-dashboard/',
-          '/lucky-pick-dashboard/',
-          '/lucky-wheel-dashboard/',
-          '/scratch-dashboard/',
-          '/wheel-dashboard/',
         ],
       },
     ],

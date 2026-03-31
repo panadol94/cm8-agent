@@ -123,7 +123,7 @@ export default function WelcomePopup() {
         />
 
         {/* CTA Button */}
-        <Link href="/checkin" className="welcome-popup-cta" onClick={handleClose}>
+        <Link href="https://masuk10.com/Wasapvvipcs" className="welcome-popup-cta" onClick={handleClose}>
           Daftar & Claim Sekarang!
         </Link>
       </div>

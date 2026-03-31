@@ -1286,6 +1286,7 @@ export default async function HomePage() {
           </div>
           <span className="qa-arrow">›</span>
         </a>
+<<<<<<< HEAD
         <a
           href="/scratch"
           className="quick-action-btn qa-scratch"
@@ -1299,6 +1300,8 @@ export default async function HomePage() {
           </div>
           <span className="qa-arrow">›</span>
         </a>
+=======
+>>>>>>> d2151c0 (Remove daily check-in, Lucky Pick, Lucky Wheel, and Scratch event systems)
       </div>
 
       {/* ===== 1. WIN GALLERY ===== */}

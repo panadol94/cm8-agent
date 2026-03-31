@@ -33,8 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/benefits', priority: 0.7, changeFrequency: 'weekly' as const },
     { path: '/cm8', priority: 0.7, changeFrequency: 'weekly' as const },
     { path: '/cm8-play', priority: 0.7, changeFrequency: 'weekly' as const },
-    { path: '/wheel', priority: 0.8, changeFrequency: 'weekly' as const },
-    { path: '/checkin', priority: 0.6, changeFrequency: 'daily' as const },
+
     { path: '/info', priority: 0.6, changeFrequency: 'weekly' as const },
     { path: '/about', priority: 0.6, changeFrequency: 'monthly' as const },
     // Trust / legal pages

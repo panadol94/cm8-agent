@@ -164,9 +164,6 @@ export default function FloatingSocials() {
       }
     : {}
 
-  // Hide on check-in page to avoid overlap
-  if (pathname === '/checkin') return null
-
   return (
     <div
       className={`floating-socials-container ${position ? 'is-dragged' : ''}`}

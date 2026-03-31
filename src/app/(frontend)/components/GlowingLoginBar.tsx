@@ -146,9 +146,6 @@ export default function GlowingLoginBar() {
               Welcome back, <span>{displayName}</span>
             </div>
             <div className="login-bar-buttons">
-              <Link href="/checkin" className="login-bar-btn login-bar-btn-event">
-                🎁 Event
-              </Link>
               <button onClick={handleLogout} className="login-bar-btn login-bar-btn-logout">
                 Logout
               </button>
@@ -158,8 +155,8 @@ export default function GlowingLoginBar() {
           <>
             <span className="login-bar-text">Hi, you are not logged in yet</span>
             <div className="login-bar-buttons">
-              <Link href="/checkin" className="login-bar-btn login-bar-btn-login">Login</Link>
-              <Link href="/checkin" className="login-bar-btn login-bar-btn-register">Register</Link>
+              <Link href="https://masuk10.com/Wasapvvipcs" className="login-bar-btn login-bar-btn-login">Login</Link>
+              <Link href="https://masuk10.com/Wasapvvipcs" className="login-bar-btn login-bar-btn-register">Register</Link>
             </div>
           </>
         )}

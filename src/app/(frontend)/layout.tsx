@@ -9,8 +9,6 @@ import VisitorTracker from './components/VisitorTracker'
 import FloatingSocials from './components/FloatingSocials'
 import GlowingLoginBar from './components/GlowingLoginBar'
 import BackgroundMusic from './components/BackgroundMusic'
-import WelcomePopup from './components/WelcomePopup'
-
 export const metadata = {
   title: {
     default: 'CM8 VVIP — Platform Agent Slot Malaysia #1',
@@ -149,7 +147,6 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <VisitorTracker />
         <FloatingSocials />
         <BackgroundMusic />
-        <WelcomePopup />
 
         {/* Bottom Navigation */}
         <BottomNav />

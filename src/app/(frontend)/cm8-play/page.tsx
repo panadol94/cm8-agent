@@ -400,7 +400,7 @@ export default function CM8PlayPage() {
           <h2 className="cta-title">Mula Main di CM8 Sekarang</h2>
           <p className="cta-subtitle">1,000+ game, 20+ provider, AI Scanner percuma.</p>
           <a
-            href="https://cm8huat.com/r/luckyhorse879"
+            href="https://cm8ong.com/r/luckyhorse879"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-white btn-lg"

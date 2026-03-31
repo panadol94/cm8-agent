@@ -981,7 +981,7 @@ export default async function HomePage() {
   const cta1Text = ss?.ctaButton1Text || '🚀 Jadi Agent Sekarang'
   const cta1Link = ss?.ctaButton1Link || 'https://masuk10.com/Wasapvvipcs'
   const cta2Text = ss?.ctaButton2Text || 'Daftar Akaun CM8'
-  const cta2Link = ss?.ctaButton2Link || 'https://cm8huat.com/r/luckyhorse879'
+  const cta2Link = ss?.ctaButton2Link || 'https://cm8ong.com/r/luckyhorse879'
 
   // Map CMS banners to carousel format
   const cmsBanners = rawBanners
@@ -1005,12 +1005,12 @@ export default async function HomePage() {
           }
           // Force all banner links to use cm8huat.com
           const oldLink = (b.link as string) || undefined
-          const newLink = oldLink?.replace(/https?:\/\/cm8play\.com\/r\/luckyhorse879/g, 'https://cm8huat.com/r/luckyhorse879')
+          const newLink = oldLink?.replace(/https?:\/\/cm8play\.com\/r\/luckyhorse879/g, 'https://cm8ong.com/r/luckyhorse879')
           return {
             src: withBust(src) as string,
             mobileSrc: withBust(mobileSrc) || undefined,
             alt: (b.title as string) || 'Banner',
-            link: newLink || 'https://cm8huat.com/r/luckyhorse879',
+            link: newLink || 'https://cm8ong.com/r/luckyhorse879',
             mimeType,
           }
         })
@@ -1227,7 +1227,7 @@ export default async function HomePage() {
       {/* ===== QUICK ACTIONS (Patch ID / Telegram / WhatsApp / Admin) ===== */}
       <div className="quick-actions">
         <a
-          href="https://cm8huat.com/r/luckyhorse879"
+          href="https://cm8ong.com/r/luckyhorse879"
           target="_blank"
           rel="noopener noreferrer"
           className="quick-action-btn qa-patch"
@@ -1667,7 +1667,7 @@ export default async function HomePage() {
         </ul>
         <div className="why-actions">
           <a
-            href="https://cm8huat.com/r/luckyhorse879"
+            href="https://cm8ong.com/r/luckyhorse879"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-gradient btn-lg"

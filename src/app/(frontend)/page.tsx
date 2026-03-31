@@ -1286,22 +1286,6 @@ export default async function HomePage() {
           </div>
           <span className="qa-arrow">›</span>
         </a>
-<<<<<<< HEAD
-        <a
-          href="/scratch"
-          className="quick-action-btn qa-scratch"
-        >
-          <div className="qa-icon-ring">
-            🎫
-          </div>
-          <div className="qa-text">
-            <span className="quick-action-label">Scratch Event</span>
-            <span className="qa-sub">Win RM20!</span>
-          </div>
-          <span className="qa-arrow">›</span>
-        </a>
-=======
->>>>>>> d2151c0 (Remove daily check-in, Lucky Pick, Lucky Wheel, and Scratch event systems)
       </div>
 
       {/* ===== 1. WIN GALLERY ===== */}

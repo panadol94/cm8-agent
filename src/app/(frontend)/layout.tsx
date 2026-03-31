@@ -7,7 +7,6 @@ import ScrollReveal from './ScrollReveal'
 import { RefreshRouteOnSave } from './RefreshRouteOnSave'
 import VisitorTracker from './components/VisitorTracker'
 import FloatingSocials from './components/FloatingSocials'
-import GlowingLoginBar from './components/GlowingLoginBar'
 import BackgroundMusic from './components/BackgroundMusic'
 export const metadata = {
   title: {
@@ -137,7 +136,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         </header>
 
         {/* Glowing Login/Register Bar */}
-        <GlowingLoginBar />
+
 
         <ScrollReveal />
         <RefreshRouteOnSave />

@@ -20,6 +20,10 @@ import { CommissionTiers } from './collections/CommissionTiers'
 import { NotificationsLog } from './collections/NotificationsLog'
 import { ScanUsage } from './collections/ScanUsage'
 import { WinGallery } from './collections/WinGallery'
+import { LuckySpinWhitelist } from './collections/LuckySpinWhitelist'
+import { LuckySpinRewards } from './collections/LuckySpinRewards'
+import { LuckySpinRecords } from './collections/LuckySpinRecords'
+import { LuckySpinSettings } from './collections/LuckySpinSettings'
 import { SiteSettings } from './globals/SiteSettings'
 import { PopupAnnouncement } from './globals/PopupAnnouncement'
 
@@ -79,6 +83,12 @@ export default buildConfig({
     // ⚙️ Sistem
     Users,
     Media,
+
+    // 🎰 Lucky Spin
+    LuckySpinWhitelist,
+    LuckySpinRewards,
+    LuckySpinRecords,
+    LuckySpinSettings,
   ],
   globals: [SiteSettings, PopupAnnouncement],
   editor: lexicalEditor(),

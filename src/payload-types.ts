@@ -82,6 +82,10 @@ export interface Config {
     'scan-usage': ScanUsage;
     users: User;
     media: Media;
+    'lucky-spin-whitelist': LuckySpinWhitelist;
+    'lucky-spin-rewards': LuckySpinReward;
+    'lucky-spin-records': LuckySpinRecord;
+    'lucky-spin-settings': LuckySpinSetting;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -104,6 +108,10 @@ export interface Config {
     'scan-usage': ScanUsageSelect<false> | ScanUsageSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'lucky-spin-whitelist': LuckySpinWhitelistSelect<false> | LuckySpinWhitelistSelect<true>;
+    'lucky-spin-rewards': LuckySpinRewardsSelect<false> | LuckySpinRewardsSelect<true>;
+    'lucky-spin-records': LuckySpinRecordsSelect<false> | LuckySpinRecordsSelect<true>;
+    'lucky-spin-settings': LuckySpinSettingsSelect<false> | LuckySpinSettingsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -446,7 +454,7 @@ export interface WinGallery {
    */
   image: number | Media;
   /**
-   * Nama pemain (optional). Dipapar di overlay bawah gambar.
+   * Nama provider (optional). Dipapar di overlay bawah gambar.
    */
   playerName?: string | null;
   /**
@@ -689,6 +697,98 @@ export interface User {
   collection: 'users';
 }
 /**
+ * Senarai agent ID yang layak untuk Lucky Spin.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lucky-spin-whitelist".
+ */
+export interface LuckySpinWhitelist {
+  id: number;
+  agentId: string;
+  /**
+   * Aktifkan/nyahaktifkan agent ini.
+   */
+  isActive?: boolean | null;
+  /**
+   * Otomatik ditetapkan selepas spin.
+   */
+  hasSpun?: boolean | null;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * Konfigurasi hadiah dan вероятность menang.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lucky-spin-rewards".
+ */
+export interface LuckySpinReward {
+  id: number;
+  rewardName: string;
+  rewardType?: ('cash' | 'gold' | 'bonus') | null;
+  /**
+   * Peratus вероятность menang. Jumlah semua = 100%.
+   */
+  probability: number;
+  isActive?: boolean | null;
+  /**
+   * Kedudukan di wheel (1 = paling atas).
+   */
+  position: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Rekod semua spin yang telah dilakukan.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lucky-spin-records".
+ */
+export interface LuckySpinRecord {
+  id: number;
+  agentId: string;
+  rewardWon: string;
+  rewardType?: string | null;
+  spunAt: string;
+  ipAddress?: string | null;
+  userAgent?: string | null;
+  /**
+   * Tandakan false jika disyaki fraud.
+   */
+  isValid?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Konfigurasi event Lucky Spin.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lucky-spin-settings".
+ */
+export interface LuckySpinSetting {
+  id: number;
+  /**
+   * Aktifkan event Lucky Spin.
+   */
+  eventStatus?: boolean | null;
+  eventStart: string;
+  eventEnd: string;
+  /**
+   * Timezone untuk validation masa event.
+   */
+  timezone?: string | null;
+  /**
+   * Username untuk login admin Lucky Spin.
+   */
+  adminUsername: string;
+  /**
+   * Password untuk login admin Lucky Spin. Akan di-hash secara automatik.
+   */
+  adminPassword: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -771,6 +871,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'lucky-spin-whitelist';
+        value: number | LuckySpinWhitelist;
+      } | null)
+    | ({
+        relationTo: 'lucky-spin-rewards';
+        value: number | LuckySpinReward;
+      } | null)
+    | ({
+        relationTo: 'lucky-spin-records';
+        value: number | LuckySpinRecord;
+      } | null)
+    | ({
+        relationTo: 'lucky-spin-settings';
+        value: number | LuckySpinSetting;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -1117,6 +1233,59 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lucky-spin-whitelist_select".
+ */
+export interface LuckySpinWhitelistSelect<T extends boolean = true> {
+  agentId?: T;
+  isActive?: T;
+  hasSpun?: T;
+  createdAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lucky-spin-rewards_select".
+ */
+export interface LuckySpinRewardsSelect<T extends boolean = true> {
+  rewardName?: T;
+  rewardType?: T;
+  probability?: T;
+  isActive?: T;
+  position?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lucky-spin-records_select".
+ */
+export interface LuckySpinRecordsSelect<T extends boolean = true> {
+  agentId?: T;
+  rewardWon?: T;
+  rewardType?: T;
+  spunAt?: T;
+  ipAddress?: T;
+  userAgent?: T;
+  isValid?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "lucky-spin-settings_select".
+ */
+export interface LuckySpinSettingsSelect<T extends boolean = true> {
+  eventStatus?: T;
+  eventStart?: T;
+  eventEnd?: T;
+  timezone?: T;
+  adminUsername?: T;
+  adminPassword?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -29,18 +29,19 @@ export async function POST(request: NextRequest) {
     const agentId = String(session.agentId).trim()
     const payload = await getPayload({ config: configPromise })
 
-    // Check whitelist (case-insensitive fallback by trying exact then upper)
-    const whitelist = await payload.find({
+    // Check whitelist (case-insensitive)
+    const allWhitelist = await payload.find({
       collection: 'lucky-spin-whitelist',
-      where: { agentId: { equals: agentId } },
-      limit: 1,
+      limit: 1000,
     })
 
-    if (whitelist.docs.length === 0) {
+    const entry = allWhitelist.docs.find(
+      (doc: any) => String(doc.agentId || '').toLowerCase() === agentId.toLowerCase(),
+    )
+
+    if (!entry) {
       return NextResponse.json({ error: 'ID Agent tiada dalam whitelist. Sila hubungi admin.' }, { status: 403 })
     }
-
-    const entry = whitelist.docs[0]
 
     if (!entry.isActive) {
       return NextResponse.json({ error: 'ID Agent tidak aktif. Sila hubungi admin.' }, { status: 403 })

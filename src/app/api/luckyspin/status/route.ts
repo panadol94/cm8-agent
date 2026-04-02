@@ -29,18 +29,19 @@ export async function GET(request: NextRequest) {
 
     const payload = await getPayload({ config: configPromise })
 
-    // Check whitelist
-    const whitelist = await payload.find({
+    // Check whitelist (case-insensitive)
+    const allWhitelist = await payload.find({
       collection: 'lucky-spin-whitelist',
-      where: { agentId: { equals: session.agentId } },
-      limit: 1,
+      limit: 1000,
     })
 
-    if (whitelist.docs.length === 0) {
+    const entry = allWhitelist.docs.find(
+      (doc: any) => String(doc.agentId || '').toLowerCase() === String(session.agentId || '').toLowerCase(),
+    )
+
+    if (!entry) {
       return NextResponse.json({ hasSpun: false, error: 'ID tidak dalam whitelist.' }, { status: 403 })
     }
-
-    const entry = whitelist.docs[0]
 
     // Check event status
     const settingsRes = await payload.find({ collection: 'lucky-spin-settings', limit: 1 })

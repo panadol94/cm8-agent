@@ -21,21 +21,22 @@ export async function POST(req: NextRequest) {
 
     const payload = await getPayload({ config: configPromise })
 
-    // Check whitelist
-    const entry = await payload.find({
+    // Check whitelist (case-insensitive by normalizing in memory)
+    const allEntries = await payload.find({
       collection: 'lucky-spin-whitelist',
-      where: { agentId: { equals: agentId } },
-      limit: 1,
+      limit: 1000,
     })
 
-    if (entry.docs.length === 0) {
+    const whitelistEntry = allEntries.docs.find(
+      (doc: any) => String(doc.agentId || '').toLowerCase() === agentId.toLowerCase(),
+    )
+
+    if (!whitelistEntry) {
       return NextResponse.json(
         { error: 'ID Agent tiada dalam whitelist. Sila hubungi admin.' },
         { status: 403 },
       )
     }
-
-    const whitelistEntry = entry.docs[0]
 
     if (!whitelistEntry.isActive) {
       return NextResponse.json(

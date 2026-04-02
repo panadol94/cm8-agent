@@ -79,7 +79,6 @@ export default function LuckySpinPage() {
 
       setIsLoggedIn(true)
 
-      // Check event status after login
       const statusRes = await fetch('/api/luckyspin/status', { credentials: 'include' })
       const statusData = await statusRes.json()
 
@@ -125,14 +124,23 @@ export default function LuckySpinPage() {
   const canSpin = isLoggedIn && eventActive && !hasSpun && !spinning && !error
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] via-[#111133] to-[#0a0a1a] text-white">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#1c214f_0%,#0b1026_35%,#060812_100%)] text-white overflow-x-hidden">
+      <div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(120deg,transparent_0%,rgba(255,215,0,0.08)_20%,transparent_40%,rgba(255,255,255,0.04)_60%,transparent_80%)]" />
+
       {/* Header */}
-      <div className="bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-600 py-4 px-6 text-center shadow-lg">
-        <h1 className="text-2xl font-black tracking-wider">🎰 LUCKY SPIN WHEEL 🎰</h1>
-        <p className="text-yellow-100 text-sm mt-1">Event Eksklusif untuk Agent CM8 VVIP</p>
+      <div className="relative border-b border-yellow-500/20 bg-black/20 backdrop-blur-xl">
+        <div className="max-w-5xl mx-auto px-4 py-6 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-400/20 text-yellow-300 text-xs font-bold tracking-[0.2em] uppercase mb-4">
+            <span>VVIP Event</span>
+          </div>
+          <h1 className="text-3xl md:text-5xl font-black tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 drop-shadow-[0_0_18px_rgba(255,215,0,0.25)]">
+            🎰 Lucky Spin VVIP
+          </h1>
+          <p className="text-white/60 text-sm md:text-base mt-3">Event eksklusif untuk agent CM8 VVIP. Login, spin dan tuntut hadiah anda.</p>
+        </div>
       </div>
 
-      <div className="max-w-lg mx-auto px-4 py-8">
+      <div className="relative max-w-5xl mx-auto px-4 py-8 md:py-10">
         {winner && (
           <LuckySpinWinPopup
             reward={winner.reward}
@@ -140,92 +148,130 @@ export default function LuckySpinPage() {
             onClose={() => {
               setWinner(null)
               setHasSpun(true)
-              setError('Terima kasih! Hadiah anda akan di kontak oleh admin.')
+              setError('Terima kasih! Hadiah anda akan dihubungi oleh admin.')
             }}
           />
         )}
 
         {!isLoggedIn ? (
-          /* LOGIN FORM */
-          <div className="bg-white/5 backdrop-blur-xl rounded-3xl p-8 border border-yellow-500/20 shadow-2xl mt-8">
-            <div className="text-center mb-6">
-              <div className="text-5xl mb-3">🎡</div>
-              <h2 className="text-xl font-bold text-yellow-400">Login dengan Agent ID</h2>
-              <p className="text-white/60 text-sm mt-1">Masukkan Agent ID anda untuk participate</p>
+          <div className="max-w-md mx-auto mt-6 md:mt-10">
+            <div className="relative bg-white/5 backdrop-blur-2xl rounded-[28px] p-7 md:p-8 border border-yellow-500/20 shadow-[0_20px_80px_rgba(0,0,0,0.45)] overflow-hidden">
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-yellow-400/60 to-transparent" />
+              <div className="text-center mb-6">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-400/20 via-yellow-300/10 to-transparent border border-yellow-400/20 flex items-center justify-center text-4xl shadow-[0_0_40px_rgba(255,215,0,0.18)]">
+                  🎡
+                </div>
+                <h2 className="text-xl md:text-2xl font-bold text-yellow-300">Login dengan Agent ID</h2>
+                <p className="text-white/55 text-sm mt-2">Masukkan Agent ID yang telah dimasukkan dalam whitelist untuk terus bermain.</p>
+              </div>
+
+              <form onSubmit={handleLogin} className="space-y-4">
+                <div>
+                  <label className="block text-xs uppercase tracking-[0.18em] text-white/45 mb-2">Agent ID</label>
+                  <input
+                    type="text"
+                    value={agentId}
+                    onChange={e => setAgentId(e.target.value.toUpperCase())}
+                    placeholder="Contoh: V8GARRY"
+                    className="w-full px-4 py-4 rounded-2xl bg-white/10 border border-yellow-500/25 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 font-mono text-center text-lg uppercase shadow-inner"
+                    autoComplete="off"
+                  />
+                </div>
+
+                {loginError && (
+                  <div className="rounded-2xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-red-200 text-sm text-center">
+                    {loginError}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={loading || !agentId.trim()}
+                  className="w-full py-4 rounded-2xl font-black text-black text-lg bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 shadow-[0_10px_30px_rgba(255,215,0,0.28)] disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.01] active:scale-[0.99] transition-all"
+                >
+                  {loading ? 'Memproses...' : 'MASUK SEKARANG'}
+                </button>
+              </form>
             </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 xl:grid-cols-[360px,1fr] gap-6 md:gap-8 items-start mt-4">
+            {/* Left info panel */}
+            <div className="space-y-4">
+              <div className="bg-white/5 backdrop-blur-2xl rounded-[24px] border border-yellow-500/20 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+                <div className="flex items-start justify-between gap-3 mb-4">
+                  <div>
+                    <p className="text-white/45 text-xs uppercase tracking-[0.18em] mb-2">Agent</p>
+                    <p className="text-yellow-300 font-mono text-xl font-bold break-all">{agentId}</p>
+                  </div>
+                  <button onClick={handleLogout} className="text-white/45 hover:text-white text-xs underline underline-offset-2">Logout</button>
+                </div>
 
-            <form onSubmit={handleLogin} className="space-y-4">
-              <input
-                type="text"
-                value={agentId}
-                onChange={e => setAgentId(e.target.value.toUpperCase())}
-                placeholder="Masukkan Agent ID"
-                className="w-full px-4 py-3 rounded-xl bg-white/10 border border-yellow-500/30 text-white placeholder-white/40 focus:outline-none focus:border-yellow-400 font-mono text-center text-lg uppercase"
-                autoComplete="off"
-              />
+                <div className="flex flex-wrap gap-2">
+                  <span className={`px-3 py-1.5 rounded-full text-[11px] font-black tracking-wide ${eventActive ? 'bg-green-500/15 text-green-300 border border-green-400/20' : 'bg-red-500/15 text-red-300 border border-red-400/20'}`}>
+                    {eventActive ? 'EVENT AKTIF' : 'EVENT TUTUP'}
+                  </span>
+                  {hasSpun && (
+                    <span className="px-3 py-1.5 rounded-full text-[11px] font-black tracking-wide bg-yellow-500/15 text-yellow-300 border border-yellow-400/20">
+                      SUDAH SPIN
+                    </span>
+                  )}
+                </div>
+              </div>
 
-              {loginError && (
-                <div className="bg-red-500/20 border border-red-500/50 rounded-xl p-3 text-red-300 text-sm text-center">
-                  {loginError}
+              {error && (
+                <div className="rounded-[24px] border border-red-500/35 bg-red-500/10 backdrop-blur-xl p-4 text-red-200 text-sm shadow-[0_12px_40px_rgba(0,0,0,0.25)]">
+                  <div className="font-bold mb-1">⚠️ Makluman</div>
+                  <div>{error}</div>
                 </div>
               )}
 
-              <button
-                type="submit"
-                disabled={loading || !agentId.trim()}
-                className="w-full py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-xl font-bold text-black text-lg disabled:opacity-50 hover:from-yellow-400 hover:to-yellow-500 transition-all"
-              >
-                {loading ? 'Memproses...' : 'Login'}
-              </button>
-            </form>
-          </div>
-        ) : (
-          /* WHEEL VIEW */
-          <div className="flex flex-col items-center gap-6 mt-8">
-            {/* Agent info */}
-            <div className="flex items-center justify-between w-full bg-white/5 backdrop-blur rounded-xl px-4 py-2 border border-yellow-500/20">
-              <span className="text-yellow-400 font-mono text-sm">Agent: <strong>{agentId}</strong></span>
-              <div className="flex gap-2">
-                <span className={`px-2 py-0.5 rounded text-xs font-bold ${eventActive ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
-                  {eventActive ? 'EVENT AKTIF' : 'EVENT TUTUP'}
-                </span>
-                {hasSpun && (
-                  <span className="px-2 py-0.5 rounded text-xs font-bold bg-yellow-500/20 text-yellow-400">
-                    SUDAH SPIN
-                  </span>
-                )}
+              <div className="bg-white/5 backdrop-blur-2xl rounded-[24px] border border-yellow-500/20 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
+                <h3 className="text-yellow-300 font-bold text-sm uppercase tracking-[0.18em] mb-3">Info Event</h3>
+                <div className="space-y-3 text-sm text-white/70">
+                  <div className="flex items-start gap-3">
+                    <span className="text-yellow-300">•</span>
+                    <p>Hanya Agent ID yang ada dalam whitelist dibenarkan login dan spin.</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-yellow-300">•</span>
+                    <p>Setiap Agent ID hanya ada <strong className="text-white">satu peluang</strong>.</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-yellow-300">•</span>
+                    <p>Hadiah diagih ikut <strong className="text-white">fixed pool</strong>.</p>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-white/10 text-xs text-white/45">
+                  Event time: 1 April 2026, 5:00 PM - 11:00 PM (MYT)
+                </div>
               </div>
-              <button onClick={handleLogout} className="text-white/50 hover:text-white text-xs underline">Logout</button>
             </div>
 
-            {/* Error message */}
-            {error && (
-              <div className="w-full bg-red-500/20 border border-red-500/50 rounded-xl p-4 text-red-300 text-center text-sm">
-                {error}
+            {/* Right wheel section */}
+            <div className="bg-white/5 backdrop-blur-2xl rounded-[28px] border border-yellow-500/20 p-5 md:p-8 shadow-[0_24px_80px_rgba(0,0,0,0.4)]">
+              <div className="text-center mb-6">
+                <h2 className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-yellow-500">
+                  Putar & Menang
+                </h2>
+                <p className="text-white/50 text-sm mt-2">Tekan butang spin untuk cuba nasib anda dalam event eksklusif ini.</p>
               </div>
-            )}
 
-            {/* Wheel */}
-            <div className="flex justify-center py-4">
-              <LuckySpinWheel
-                segments={SEGMENTS}
-                onSpin={handleSpin}
-                spinning={spinning}
-                setSpinning={setSpinning}
-                hasError={!!error || !canSpin}
-              />
-            </div>
+              <div className="flex justify-center py-2 md:py-4">
+                <LuckySpinWheel
+                  segments={SEGMENTS}
+                  onSpin={handleSpin}
+                  spinning={spinning}
+                  setSpinning={setSpinning}
+                  hasError={!!error || !canSpin}
+                />
+              </div>
 
-            {/* Instructions */}
-            <div className="text-center text-white/50 text-xs">
-              {!eventActive && <p>⛔ Event Lucky Spin belum bermula.</p>}
-              {eventActive && !hasSpun && !error && <p>Tekan SPIN untukCuba nasib anda!</p>}
-              {hasSpun && <p>Anda telah参加 dalam Lucky Spin event ini.</p>}
-            </div>
-
-            {/* Event time info */}
-            <div className="text-center text-white/40 text-xs mt-4">
-              <p>Event: 1 April 2026, 5:00 PM - 11:00 PM (MYT)</p>
+              <div className="mt-6 text-center">
+                {!eventActive && <p className="text-red-300 text-sm">⛔ Event Lucky Spin belum bermula atau telah tamat.</p>}
+                {eventActive && !hasSpun && !error && <p className="text-white/55 text-sm">Tekan butang <span className="text-yellow-300 font-bold">SPIN</span> untuk cuba nasib anda.</p>}
+                {hasSpun && <p className="text-yellow-300 text-sm font-medium">Terima kasih kerana menyertai Lucky Spin event ini.</p>}
+              </div>
             </div>
           </div>
         )}

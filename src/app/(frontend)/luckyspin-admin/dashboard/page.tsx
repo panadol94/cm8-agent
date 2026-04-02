@@ -17,7 +17,8 @@ interface RewardEntry {
   id: string
   rewardName: string
   rewardType: string
-  probability: number
+  stock: number
+  claimedCount?: number
   isActive: boolean
   position: number
 }
@@ -57,7 +58,7 @@ export default function LuckySpinAdminDashboard() {
   // Settings state
   const [settings, setSettings] = useState<Record<string, unknown>>({})
 
-  const [newReward, setNewReward] = useState({ rewardName: '', rewardType: 'cash', probability: 0, position: 1 })
+  const [newReward, setNewReward] = useState({ rewardName: '', rewardType: 'cash', stock: 0, position: 1 })
 
   const checkAuth = useCallback(async () => {
     try {
@@ -163,7 +164,7 @@ export default function LuckySpinAdminDashboard() {
 
   // Reward actions
   const handleAddReward = async () => {
-    if (newReward.probability <= 0) { setProbError('Probability mestilah lebih dari 0.'); return }
+    if (newReward.stock < 0) { setProbError('Jumlah hadiah tidak sah.'); return }
     const res = await fetch('/api/luckyspin/admin/rewards', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -173,15 +174,15 @@ export default function LuckySpinAdminDashboard() {
     const data = await res.json()
     if (!res.ok) { setProbError(data.error); return }
     setProbError(null)
-    setNewReward({ rewardName: '', rewardType: 'cash', probability: 0, position: 1 })
+    setNewReward({ rewardName: '', rewardType: 'cash', stock: 0, position: 1 })
     fetchRewards()
   }
 
-  const handleUpdateProb = async (id: string, probability: number) => {
+  const handleUpdateStock = async (id: string, stock: number) => {
     const res = await fetch('/api/luckyspin/admin/rewards', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, probability }),
+      body: JSON.stringify({ id, stock }),
       credentials: 'include',
     })
     const data = await res.json()
@@ -224,7 +225,7 @@ export default function LuckySpinAdminDashboard() {
     router.push('/luckyspin-admin')
   }
 
-  const totalProb = rewards.reduce((s, r) => s + (r.probability || 0), 0)
+  const totalStock = rewards.reduce((s, r) => s + (r.stock || 0), 0)
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0a0a1a] to-[#111133] text-white">
@@ -332,16 +333,17 @@ export default function LuckySpinAdminDashboard() {
                   <option value="gold">🥇 Emas</option>
                   <option value="bonus">🎁 Bonus</option>
                 </select>
-                <input type="number" value={newReward.probability} onChange={e => setNewReward({ ...newReward, probability: Number(e.target.value) })} placeholder="%" className="px-3 py-2 bg-white/10 border border-yellow-500/30 rounded-lg" />
+                <input type="number" value={newReward.stock} onChange={e => setNewReward({ ...newReward, stock: Number(e.target.value) })} placeholder="Jumlah" className="px-3 py-2 bg-white/10 border border-yellow-500/30 rounded-lg" />
                 <input type="number" value={newReward.position} onChange={e => setNewReward({ ...newReward, position: Number(e.target.value) })} placeholder="Position" className="px-3 py-2 bg-white/10 border border-yellow-500/30 rounded-lg" />
                 <button onClick={handleAddReward} className="px-4 py-2 bg-yellow-500 text-black font-bold rounded-lg">Tambah</button>
               </div>
               {probError && <p className="text-red-400 text-sm mt-2">{probError}</p>}
+              <p className="text-white/50 text-xs mt-2">Fixed pool: hadiah diagih ikut baki stok, bukan probability.</p>
             </div>
 
-            {/* Total probability */}
-            <div className={`text-center py-2 rounded-xl font-bold ${totalProb === 100 ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
-              Jumlah Probability: {totalProb}% {totalProb === 100 ? '✅ = 100%' : '❌ Mestilah = 100%'}
+            {/* Total stock */}
+            <div className="text-center py-2 rounded-xl font-bold bg-green-500/20 text-green-400">
+              Jumlah Hadiah Pool: {totalStock}
             </div>
 
             {/* Rewards list */}
@@ -359,12 +361,12 @@ export default function LuckySpinAdminDashboard() {
                   <div className="flex items-center gap-2">
                     <input
                       type="number"
-                      defaultValue={r.probability}
-                      onBlur={e => handleUpdateProb(r.id, Number(e.target.value))}
+                      defaultValue={r.stock}
+                      onBlur={e => handleUpdateStock(r.id, Number(e.target.value))}
                       className="w-16 px-2 py-1 bg-white/10 border border-yellow-500/30 rounded text-center"
                       min={0} max={100}
                     />
-                    <span className="text-yellow-400 text-sm">%</span>
+                    <span className="text-yellow-400 text-sm">unit</span>
                     <button onClick={() => handleDeleteReward(r.id)} className="text-red-400 hover:text-red-300 text-xs underline ml-2">Padam</button>
                   </div>
                 </div>

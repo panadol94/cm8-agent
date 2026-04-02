@@ -6,6 +6,7 @@ import LuckySpinWinPopup from '../components/LuckySpinWinPopup'
 
 const SEGMENTS = [
   { label: 'RM100', color: '#FFD700', textColor: '#000', type: 'cash' },
+  { label: 'RM188', color: '#FF6B6B', textColor: '#FFF', type: 'cash' },
   { label: 'RM288', color: '#E879F9', textColor: '#FFF', type: 'cash' },
   { label: 'RM388', color: '#F7931A', textColor: '#000', type: 'cash' },
   { label: 'RM588', color: '#7C3AED', textColor: '#FFF', type: 'cash' },

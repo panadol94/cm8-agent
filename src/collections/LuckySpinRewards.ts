@@ -15,9 +15,9 @@ export const LuckySpinRewards: CollectionConfig = {
   admin: {
     useAsTitle: 'rewardName',
     group: '🎰 Lucky Spin',
-    defaultColumns: ['rewardName', 'rewardType', 'probability', 'isActive', 'position'],
+    defaultColumns: ['rewardName', 'rewardType', 'stock', 'claimedCount', 'isActive', 'position'],
     listSearchableFields: ['rewardName', 'rewardType'],
-    description: 'Konfigurasi hadiah dan вероятность menang.',
+    description: 'Konfigurasi hadiah fixed pool lucky spin.',
   },
   fields: [
     {
@@ -41,15 +41,25 @@ export const LuckySpinRewards: CollectionConfig = {
       defaultValue: 'cash',
     },
     {
-      name: 'probability',
+      name: 'stock',
       type: 'number',
       required: true,
-      label: 'Probability (%)',
+      label: 'Jumlah Hadiah',
       min: 0,
-      max: 100,
       admin: {
-        placeholder: '0-100',
-        description: 'Peratus вероятность menang. Jumlah semua = 100%.',
+        placeholder: 'cth: 80',
+        description: 'Jumlah hadiah sebenar dalam fixed pool.',
+      },
+    },
+    {
+      name: 'claimedCount',
+      type: 'number',
+      label: 'Sudah Dituntut / Dapat',
+      defaultValue: 0,
+      min: 0,
+      admin: {
+        readOnly: true,
+        description: 'Auto kira selepas peserta spin.',
       },
     },
     {

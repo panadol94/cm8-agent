@@ -45,18 +45,9 @@ export async function POST(request: NextRequest) {
     const data = await request.json()
     const payload = await getPayload({ config: configPromise })
 
-    // Validate probability total
-    const all = await payload.find({ collection: 'lucky-spin-rewards', limit: 100 })
-    const currentTotal = all.docs.reduce((s, r) => s + (r.probability || 0), 0)
-    const newTotal = currentTotal + (data.probability || 0)
-
-    if (newTotal > 100) {
-      return NextResponse.json({ error: `Probability total akan jadi ${newTotal}%. Tidak boleh lebih dari 100%.` }, { status: 400 })
-    }
-
     const result = await payload.create({
       collection: 'lucky-spin-rewards',
-      data: { ...data, isActive: true },
+      data: { ...data, isActive: true, claimedCount: 0 },
     })
 
     return NextResponse.json(result)
@@ -71,23 +62,13 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
   try {
-    const { id, probability, ...rest } = await request.json()
+    const { id, ...rest } = await request.json()
     const payload = await getPayload({ config: configPromise })
-
-    // Validate probability total = 100%
-    const all = await payload.find({ collection: 'lucky-spin-rewards', limit: 100 })
-    const othersTotal = all.docs
-      .filter((r) => r.id !== id)
-      .reduce((s, r) => s + (r.probability || 0), 0)
-
-    if (othersTotal + probability > 100) {
-      return NextResponse.json({ error: `Probability total akan jadi ${othersTotal + probability}%. Tidak boleh lebih dari 100%.` }, { status: 400 })
-    }
 
     await payload.update({
       collection: 'lucky-spin-rewards',
       id,
-      data: { probability, ...rest },
+      data: rest,
     })
 
     return NextResponse.json({ success: true })

@@ -75,9 +75,9 @@ export async function POST(request: NextRequest) {
       limit: 100,
     })
 
-    const rewards = rewardsRes.docs.filter((r: any) => {
-      const stock = Number(r.stock || 0)
-      const claimed = Number(r.claimedCount || 0)
+    const rewards: any[] = rewardsRes.docs.filter((r: any) => {
+      const stock = Number((r as any).stock || 0)
+      const claimed = Number((r as any).claimedCount || 0)
       return stock > claimed
     })
 
@@ -89,12 +89,12 @@ export async function POST(request: NextRequest) {
     const totalRemaining = rewards.reduce((sum: number, r: any) => sum + Math.max(0, Number(r.stock || 0) - Number(r.claimedCount || 0)), 0)
     let random = Math.floor(Math.random() * totalRemaining)
 
-    let selectedReward = rewards[0]
-    for (const reward of rewards) {
-      const remaining = Math.max(0, Number(reward.stock || 0) - Number(reward.claimedCount || 0))
+    let selectedReward: any = rewards[0]
+    for (const reward of rewards as any[]) {
+      const remaining = Math.max(0, Number((reward as any).stock || 0) - Number((reward as any).claimedCount || 0))
       random -= remaining
       if (random < 0) {
-        selectedReward = reward
+        selectedReward = reward as any
         break
       }
     }

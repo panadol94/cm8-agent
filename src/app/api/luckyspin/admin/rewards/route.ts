@@ -45,9 +45,9 @@ export async function POST(request: NextRequest) {
     const data = await request.json()
     const payload = await getPayload({ config: configPromise })
 
-    const result = await payload.create({
+    const result = await (payload as any).create({
       collection: 'lucky-spin-rewards',
-      data: { ...data, isActive: true, claimedCount: 0 },
+      data: { ...data, isActive: true, claimedCount: 0 } as any,
     })
 
     return NextResponse.json(result)
@@ -65,10 +65,10 @@ export async function PUT(request: NextRequest) {
     const { id, ...rest } = await request.json()
     const payload = await getPayload({ config: configPromise })
 
-    await payload.update({
+    await (payload as any).update({
       collection: 'lucky-spin-rewards',
       id,
-      data: rest,
+      data: rest as any,
     })
 
     return NextResponse.json({ success: true })

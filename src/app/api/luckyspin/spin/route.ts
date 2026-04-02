@@ -107,10 +107,10 @@ export async function POST(request: NextRequest) {
     })
 
     // Increment claimed count
-    await payload.update({
+    await (payload as any).update({
       collection: 'lucky-spin-rewards',
       id: selectedReward.id,
-      data: { claimedCount: Number(selectedReward.claimedCount || 0) + 1 },
+      data: { claimedCount: Number(selectedReward.claimedCount || 0) + 1 } as any,
     })
 
     // Save record

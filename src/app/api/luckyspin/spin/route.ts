@@ -67,16 +67,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Event belum bermula atau telah tamat.' }, { status: 403 })
     }
 
-    // Get all rewards, filter and sort in JS - use page-based pagination to avoid Payload sort bug
-    const rewardsRes = await payload.find({
-      collection: 'lucky-spin-rewards',
-      page: 1,
-      perPage: 100,
+    // Get all rewards using direct DB query to bypass Payload ORM bug
+    const { Client } = require('pg')
+    const dbClient = new Client({
+      host: process.env.PGHOST || '10.0.1.20',
+      port: parseInt(process.env.PGPORT || '5432'),
+      user: process.env.PGUSER || 'cm8user',
+      password: process.env.PGPASSWORD || 'cm8pass',
+      database: process.env.PGDATABASE || 'cm8vvip',
     })
+    await dbClient.connect()
+    const dbResult = await dbClient.query(
+      'SELECT reward_name, reward_type, probability, position FROM lucky_spin_rewards WHERE is_active = true ORDER BY position ASC LIMIT 100'
+    )
+    await dbClient.end()
 
-    let rewards = (rewardsRes.docs as any[])
-      .filter(r => r.isActive)
-      .sort((a, b) => (a.position || 0) - (b.position || 0))
+    const rewards = dbResult.rows
     if (rewards.length === 0) {
       return NextResponse.json({ error: 'Tiada hadiah tersedia.' }, { status: 403 })
     }

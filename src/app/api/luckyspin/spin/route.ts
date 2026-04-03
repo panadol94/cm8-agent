@@ -67,10 +67,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Event belum bermula atau telah tamat.' }, { status: 403 })
     }
 
-    // Get all rewards, filter and sort in JS
+    // Get all rewards, filter and sort in JS - use page-based pagination to avoid Payload sort bug
     const rewardsRes = await payload.find({
       collection: 'lucky-spin-rewards',
-      limit: 100,
+      page: 1,
+      perPage: 100,
     })
 
     let rewards = (rewardsRes.docs as any[])

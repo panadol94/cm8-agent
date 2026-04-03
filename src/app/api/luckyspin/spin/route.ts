@@ -70,23 +70,25 @@ export async function POST(request: NextRequest) {
     // Get active rewards sorted by position
     const rewardsRes = await payload.find({
       collection: 'lucky-spin-rewards',
-      where: { isActive: { equals: true } },
       sort: 'position',
       limit: 100,
     })
 
-    const rewards = rewardsRes.docs
+    const rewards = rewardsRes.docs.filter((r: any) => r.isActive)
     if (rewards.length === 0) {
       return NextResponse.json({ error: 'Tiada hadiah tersedia.' }, { status: 403 })
     }
 
     // Probability-based selection (total probability = sum of all probabilities)
-    const totalProb = rewards.reduce((sum: number, r: any) => sum + Number(r.probability || 0), 0)
+    const totalProb = rewards.reduce((sum: number, r: any) => {
+      const p = Number(r.probability || r.prob || r.stock || 1)
+      return sum + p
+    }, 0)
     let random = Math.floor(Math.random() * totalProb)
 
     let selectedReward: any = rewards[0]
     for (const reward of rewards as any[]) {
-      const prob = Number(reward.probability || 0)
+      const prob = Number(reward.probability || reward.prob || reward.stock || 1)
       random -= prob
       if (random < 0) {
         selectedReward = reward
@@ -123,8 +125,8 @@ export async function POST(request: NextRequest) {
     response.cookies.delete('ls_session')
 
     return response
-  } catch (error) {
-    console.error('Spin error:', error)
+  } catch (error: any) {
+    console.error('Spin error:', error?.message || error, error?.stack)
     return NextResponse.json({ error: 'Ralat server.' }, { status: 500 })
   }
 }

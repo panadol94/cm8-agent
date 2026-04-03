@@ -13,7 +13,7 @@ async function verifySession(request: NextRequest) {
   if (!token) return null
   try {
     const { payload } = await jwtVerify(token, getJwtSecret())
-    return payload as { agentId?: string }
+    return payload as { agentId?: string; whitelistId?: string }
   } catch {
     return null
   }
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     const agentId = String(session.agentId).trim()
     const payload = await getPayload({ config: configPromise })
 
-    // Check whitelist (case-insensitive)
+    // Check whitelist
     const allWhitelist = await payload.find({
       collection: 'lucky-spin-whitelist',
       limit: 1000,
@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Event belum bermula atau telah tamat.' }, { status: 403 })
     }
 
-    // Get active rewards with stock remaining
+    // Get active rewards sorted by position
     const rewardsRes = await payload.find({
       collection: 'lucky-spin-rewards',
       where: { isActive: { equals: true } },
@@ -75,26 +75,21 @@ export async function POST(request: NextRequest) {
       limit: 100,
     })
 
-    const rewards: any[] = rewardsRes.docs.filter((r: any) => {
-      const stock = Number((r as any).stock || 0)
-      const claimed = Number((r as any).claimedCount || 0)
-      return stock > claimed
-    })
-
+    const rewards = rewardsRes.docs
     if (rewards.length === 0) {
-      return NextResponse.json({ error: 'Semua hadiah telah habis.' }, { status: 403 })
+      return NextResponse.json({ error: 'Tiada hadiah tersedia.' }, { status: 403 })
     }
 
-    // Fixed pool selection based on remaining stock
-    const totalRemaining = rewards.reduce((sum: number, r: any) => sum + Math.max(0, Number(r.stock || 0) - Number(r.claimedCount || 0)), 0)
-    let random = Math.floor(Math.random() * totalRemaining)
+    // Probability-based selection (total probability = sum of all probabilities)
+    const totalProb = rewards.reduce((sum: number, r: any) => sum + Number(r.probability || 0), 0)
+    let random = Math.floor(Math.random() * totalProb)
 
     let selectedReward: any = rewards[0]
     for (const reward of rewards as any[]) {
-      const remaining = Math.max(0, Number((reward as any).stock || 0) - Number((reward as any).claimedCount || 0))
-      random -= remaining
+      const prob = Number(reward.probability || 0)
+      random -= prob
       if (random < 0) {
-        selectedReward = reward as any
+        selectedReward = reward
         break
       }
     }
@@ -104,13 +99,6 @@ export async function POST(request: NextRequest) {
       collection: 'lucky-spin-whitelist',
       id: entry.id,
       data: { hasSpun: true },
-    })
-
-    // Increment claimed count
-    await (payload as any).update({
-      collection: 'lucky-spin-rewards',
-      id: selectedReward.id,
-      data: { claimedCount: Number(selectedReward.claimedCount || 0) + 1 } as any,
     })
 
     // Save record

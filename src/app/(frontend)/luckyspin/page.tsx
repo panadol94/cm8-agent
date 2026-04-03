@@ -6,13 +6,21 @@ import { useState, useEffect, useCallback } from 'react'
 import LuckySpinWheel from '../components/LuckySpinWheel'
 import LuckySpinWinPopup from '../components/LuckySpinWinPopup'
 
-const SEGMENTS = [
-  { label: 'RM100', color: '#FFD700', textColor: '#000', type: 'cash' },
-  { label: 'RM188', color: '#FF6B6B', textColor: '#FFF', type: 'cash' },
-  { label: 'RM288', color: '#E879F9', textColor: '#FFF', type: 'cash' },
-  { label: 'RM388', color: '#F7931A', textColor: '#000', type: 'cash' },
-  { label: 'RM588', color: '#7C3AED', textColor: '#FFF', type: 'cash' },
-  { label: 'Gold 5g', color: '#00D4AA', textColor: '#000', type: 'gold' },
+// Segment colors keyed by reward type
+const REWARD_TYPE_COLORS: Record<string, { color: string; textColor: string }> = {
+  cash: { color: '#FFD700', textColor: '#000' },
+  gold: { color: '#00D4AA', textColor: '#000' },
+  bonus: { color: '#E879F9', textColor: '#FFF' },
+}
+
+// Fallback segments (used before login or when API fails)
+const FALLBACK_SEGMENTS = [
+  { label: 'RM100', color: '#DC3545', textColor: '#FFF', type: 'cash' },
+  { label: 'RM188', color: '#FDD835', textColor: '#000', type: 'cash' },
+  { label: 'RM288', color: '#8E24AA', textColor: '#FFD700', type: 'cash' },
+  { label: 'RM388', color: '#1E88E5', textColor: '#FFF', type: 'cash' },
+  { label: 'RM588', color: '#37474F', textColor: '#FFD700', type: 'cash' },
+  { label: '5 Gram Emas', color: '#FFD700', textColor: '#000', type: 'gold' },
 ]
 
 export default function LuckySpinPage() {
@@ -25,15 +33,53 @@ export default function LuckySpinPage() {
   const [hasSpun, setHasSpun] = useState(false)
   const [winner, setWinner] = useState<{ reward: string; rewardType: string } | null>(null)
   const [loginError, setLoginError] = useState<string | null>(null)
+  const [segments, setSegments] = useState(FALLBACK_SEGMENTS)
+  const [eventStart, setEventStart] = useState<string | null>(null)
+  const [eventEnd, setEventEnd] = useState<string | null>(null)
+
+  const formatDate = (dateStr: string | null) => {
+    if (!dateStr) return 'Tiada data'
+    try {
+      const d = new Date(dateStr)
+      return d.toLocaleString('ms-MY', {
+        timeZone: 'Asia/Kuching',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      }) + ' (MYT)'
+    } catch {
+      return dateStr
+    }
+  }
 
   const checkStatus = useCallback(async () => {
     try {
       const res = await fetch('/api/luckyspin')
       const data = await res.json()
       setEventActive(data.active)
+      if (data.eventStart) setEventStart(data.eventStart)
+      if (data.eventEnd) setEventEnd(data.eventEnd)
     } catch {
       setEventActive(false)
     }
+  }, [])
+
+  const fetchRewards = useCallback(async () => {
+    try {
+      const res = await fetch('/api/luckyspin/admin/rewards', { credentials: 'include' })
+      if (!res.ok) return
+      const rewards: Array<{ rewardName: string; rewardType: string; isActive: boolean; position: number }> = await res.json()
+      const active = rewards.filter((r: any) => r.isActive).sort((a: any, b: any) => a.position - b.position)
+      if (active.length > 0) {
+        const built = active.map((r: any) => {
+          const style = REWARD_TYPE_COLORS[r.rewardType] || REWARD_TYPE_COLORS.cash
+          return { label: r.rewardName, color: style.color, textColor: style.textColor, type: r.rewardType }
+        })
+        setSegments(built)
+      }
+    } catch {}
   }, [])
 
   const checkLoginStatus = async () => {
@@ -67,7 +113,7 @@ export default function LuckySpinPage() {
     try {
       const res = await fetch('/api/luckyspin/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type: application/json' },
         body: JSON.stringify({ agentId: agentId.trim() }),
         credentials: 'include',
       })
@@ -80,6 +126,7 @@ export default function LuckySpinPage() {
       }
 
       setIsLoggedIn(true)
+      await fetchRewards()
 
       const statusRes = await fetch('/api/luckyspin/status', { credentials: 'include' })
       const statusData = await statusRes.json()
@@ -107,10 +154,18 @@ export default function LuckySpinPage() {
     const data = await res.json()
 
     if (!res.ok) {
-      setError(data.error || 'Spin gagal.')
-      return data
+      if (res.status === 409) {
+        setHasSpun(true)
+        setError('ID ini telah digunakan untuk spin.')
+      } else {
+        setError(data.error || 'Spin gagal.')
+      }
+      return
     }
 
+    // Show win popup
+    setWinner({ reward: data.reward, rewardType: data.rewardType })
+    setHasSpun(true)
     return data
   }
 
@@ -121,67 +176,64 @@ export default function LuckySpinPage() {
     setHasSpun(false)
     setError(null)
     setWinner(null)
+    setSegments(FALLBACK_SEGMENTS)
   }
 
   const canSpin = isLoggedIn && eventActive && !hasSpun && !spinning && !error
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#1c214f_0%,#0b1026_35%,#060812_100%)] text-white overflow-x-hidden">
-      <div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(120deg,transparent_0%,rgba(255,215,0,0.08)_20%,transparent_40%,rgba(255,255,255,0.04)_60%,transparent_80%)]" />
-
+    <div className="min-h-screen bg-gradient-to-b from-[#050510] via-[#0d0d2b] to-[#050510] text-white">
       {/* Header */}
-      <div className="relative border-b border-yellow-500/20 bg-black/20 backdrop-blur-xl">
-        <div className="max-w-5xl mx-auto px-4 py-6 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-400/20 text-yellow-300 text-xs font-bold tracking-[0.2em] uppercase mb-4">
-            <span>VVIP Event</span>
-          </div>
-          <h1 className="text-3xl md:text-5xl font-black tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 drop-shadow-[0_0_18px_rgba(255,215,0,0.25)]">
-            🎰 Lucky Spin VVIP
-          </h1>
-          <p className="text-white/60 text-sm md:text-base mt-3">Event eksklusif untuk agent CM8 VVIP. Login, spin dan tuntut hadiah anda.</p>
+      <div className="relative overflow-hidden bg-gradient-to-r from-yellow-900 via-yellow-600 to-yellow-900 py-5 px-6 text-center shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-yellow-300/20 to-transparent -skew-x-12 ls-shimmer" />
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-yellow-400 to-transparent" />
+        <div className="inline-flex items-center gap-1.5 bg-black/20 backdrop-blur px-3 py-1 rounded-full mb-2">
+          <span className="text-yellow-300 text-xs font-bold tracking-widest uppercase">✨ VVIP Event</span>
         </div>
+        <h1 className="text-2xl md:text-4xl font-black tracking-widest relative z-10">🎰 Lucky Spin VVIP 🎰</h1>
+        <p className="text-yellow-100 text-xs mt-1.5 tracking-wide">Event eksklusif untuk agent CM8 VVIP</p>
       </div>
 
-      <div className="relative max-w-5xl mx-auto px-4 py-8 md:py-10">
+      <div className="max-w-2xl mx-auto px-4 py-8">
+        {/* Win Popup */}
         {winner && (
           <LuckySpinWinPopup
             reward={winner.reward}
             rewardType={winner.rewardType}
-            onClose={() => {
-              setWinner(null)
-              setHasSpun(true)
-              setError('Terima kasih! Hadiah anda akan dihubungi oleh admin.')
-            }}
+            onClose={() => setWinner(null)}
           />
         )}
 
         {!isLoggedIn ? (
-          <div className="max-w-md mx-auto mt-6 md:mt-10">
-            <div className="relative bg-white/5 backdrop-blur-2xl rounded-[28px] p-7 md:p-8 border border-yellow-500/20 shadow-[0_20px_80px_rgba(0,0,0,0.45)] overflow-hidden">
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-yellow-400/60 to-transparent" />
-              <div className="text-center mb-6">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-400/20 via-yellow-300/10 to-transparent border border-yellow-400/20 flex items-center justify-center text-4xl shadow-[0_0_40px_rgba(255,215,0,0.18)]">
-                  🎡
+          /* Login Form */
+          <div className="relative mt-6">
+            <div className="absolute -inset-0.5 rounded-[22px] bg-gradient-to-r from-yellow-600 via-yellow-400 to-yellow-600 opacity-60 animate-pulse" />
+            <div className="relative bg-[#0d0d2b]/90 backdrop-blur-2xl rounded-[20px] p-8 border border-yellow-500/20 shadow-2xl">
+              <div className="absolute top-3 left-3 w-2 h-2 bg-yellow-400 rounded-full shadow-[0_0_8px_rgba(255,215,0,0.8)]" />
+              <div className="absolute top-3 right-3 w-2 h-2 bg-yellow-400 rounded-full shadow-[0_0_8px_rgba(255,215,0,0.8)]" />
+
+              <div className="text-center mb-7">
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-yellow-500/20 to-yellow-700/20 rounded-full mb-3 border border-yellow-500/30">
+                  <span className="text-4xl">🎡</span>
                 </div>
-                <h2 className="text-xl md:text-2xl font-bold text-yellow-300">Login dengan Agent ID</h2>
-                <p className="text-white/55 text-sm mt-2">Masukkan Agent ID yang telah dimasukkan dalam whitelist untuk terus bermain.</p>
+                <h2 className="text-xl font-bold text-yellow-400 tracking-wide">Login dengan Agent ID</h2>
+                <p className="text-white/40 text-xs mt-1.5">Masukkan Agent ID yang telah dimasukkan dalam whitelist untuk terus bermain.</p>
               </div>
 
               <form onSubmit={handleLogin} className="space-y-4">
-                <div>
-                  <label className="block text-xs uppercase tracking-[0.18em] text-white/45 mb-2">Agent ID</label>
+                <div className="relative">
                   <input
                     type="text"
                     value={agentId}
                     onChange={e => setAgentId(e.target.value.toUpperCase())}
                     placeholder="Contoh: V8GARRY"
-                    className="w-full px-4 py-4 rounded-2xl bg-white/10 border border-yellow-500/25 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 font-mono text-center text-lg uppercase shadow-inner"
+                    className="w-full px-4 py-3.5 rounded-xl bg-white/5 border border-yellow-500/30 text-white placeholder-white/30 focus:outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 font-mono text-center text-lg uppercase tracking-widest transition-all"
                     autoComplete="off"
                   />
                 </div>
 
                 {loginError && (
-                  <div className="rounded-2xl border border-red-500/40 bg-red-500/10 px-4 py-3 text-red-200 text-sm text-center">
+                  <div className="bg-red-500/15 border border-red-500/40 rounded-xl p-3 text-red-300 text-sm text-center backdrop-blur">
                     {loginError}
                   </div>
                 )}
@@ -189,90 +241,114 @@ export default function LuckySpinPage() {
                 <button
                   type="submit"
                   disabled={loading || !agentId.trim()}
-                  className="w-full py-4 rounded-2xl font-black text-black text-lg bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 shadow-[0_10px_30px_rgba(255,215,0,0.28)] disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.01] active:scale-[0.99] transition-all"
+                  className="w-full py-3.5 bg-gradient-to-r from-yellow-500 via-yellow-500 to-yellow-600 rounded-xl font-black text-black text-base tracking-wide uppercase disabled:opacity-40 hover:from-yellow-400 hover:to-yellow-500 active:scale-[0.98] transition-all shadow-lg shadow-yellow-500/20"
                 >
-                  {loading ? 'Memproses...' : 'MASUK SEKARANG'}
+                  {loading ? 'Memproses...' : '🚀 Login Sekarang'}
                 </button>
               </form>
+
+              <p className="text-center text-white/25 text-[10px] mt-5 tracking-wide">🔒 Keselamatan data anda terjamin</p>
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 xl:grid-cols-[360px,1fr] gap-6 md:gap-8 items-start mt-4">
-            {/* Left info panel */}
-            <div className="space-y-4">
-              <div className="bg-white/5 backdrop-blur-2xl rounded-[24px] border border-yellow-500/20 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
-                <div className="flex items-start justify-between gap-3 mb-4">
-                  <div>
-                    <p className="text-white/45 text-xs uppercase tracking-[0.18em] mb-2">Agent</p>
-                    <p className="text-yellow-300 font-mono text-xl font-bold break-all">{agentId}</p>
-                  </div>
-                  <button onClick={handleLogout} className="text-white/45 hover:text-white text-xs underline underline-offset-2">Logout</button>
+          /* Wheel View */
+          <div className="flex flex-col items-center gap-5 mt-6">
+            {/* Agent info bar */}
+            <div className="w-full bg-[#0d0d2b]/80 backdrop-blur-xl rounded-2xl px-5 py-3 border border-yellow-500/20 shadow-xl">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
+                  <span className="text-yellow-400 font-mono text-sm font-bold tracking-wider">Agent: <span className="text-yellow-200">{agentId}</span></span>
                 </div>
-
-                <div className="flex flex-wrap gap-2">
-                  <span className={`px-3 py-1.5 rounded-full text-[11px] font-black tracking-wide ${eventActive ? 'bg-green-500/15 text-green-300 border border-green-400/20' : 'bg-red-500/15 text-red-300 border border-red-400/20'}`}>
-                    {eventActive ? 'EVENT AKTIF' : 'EVENT TUTUP'}
+                <div className="flex items-center gap-2">
+                  <span className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider ${eventActive ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-red-500/20 text-red-400 border border-red-500/30'}`}>
+                    {eventActive ? '● EVENT AKTIF' : '○ EVENT TUTUP'}
                   </span>
                   {hasSpun && (
-                    <span className="px-3 py-1.5 rounded-full text-[11px] font-black tracking-wide bg-yellow-500/15 text-yellow-300 border border-yellow-400/20">
-                      SUDAH SPIN
+                    <span className="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider bg-yellow-500/20 text-yellow-400 border border-yellow-500/30">
+                      ★ TELAH SPIN
                     </span>
+                  )}
+                </div>
+                <button onClick={handleLogout} className="text-white/30 hover:text-white/70 text-xs font-medium transition-colors">Logout</button>
+              </div>
+            </div>
+
+            {/* Error message */}
+            {error && (
+              <div className="w-full bg-red-500/15 border border-red-500/40 rounded-xl p-4 text-red-300 text-center text-sm backdrop-blur">
+                {error}
+              </div>
+            )}
+
+            {/* Rules + Wheel + CTA */}
+            <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Left: Rules */}
+              <div className="bg-[#0d0d2b]/80 backdrop-blur-xl rounded-2xl border border-yellow-500/20 p-5 shadow-xl">
+                <h3 className="text-yellow-400 font-bold text-sm mb-3 uppercase tracking-wider">📋 Syarat Event</h3>
+                <div className="space-y-2.5">
+                  <div className="flex items-start gap-3">
+                    <span className="text-yellow-300">•</span>
+                    <p className="text-white/70 text-xs">Hanya Agent ID dalam <strong className="text-white">whitelist</strong> dibenarkan spin.</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-yellow-300">•</span>
+                    <p className="text-white/70 text-xs">Setiap Agent ID hanya ada <strong className="text-white">satu peluang</strong>.</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-yellow-300">•</span>
+                    <p className="text-white/70 text-xs">Hadiah diagih ikut <strong className="text-white">fixed pool</strong>.</p>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-white/10 text-xs text-white/45">
+                  {eventStart && eventEnd ? (
+                    <>
+                      <p className="mb-1">⏰ Event: {formatDate(eventStart)}</p>
+                      <p>hingga {formatDate(eventEnd)}</p>
+                    </>
+                  ) : (
+                    <p>⏰ Loading event time...</p>
                   )}
                 </div>
               </div>
 
-              {error && (
-                <div className="rounded-[24px] border border-red-500/35 bg-red-500/10 backdrop-blur-xl p-4 text-red-200 text-sm shadow-[0_12px_40px_rgba(0,0,0,0.25)]">
-                  <div className="font-bold mb-1">⚠️ Makluman</div>
-                  <div>{error}</div>
-                </div>
-              )}
-
-              <div className="bg-white/5 backdrop-blur-2xl rounded-[24px] border border-yellow-500/20 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
-                <h3 className="text-yellow-300 font-bold text-sm uppercase tracking-[0.18em] mb-3">Info Event</h3>
-                <div className="space-y-3 text-sm text-white/70">
-                  <div className="flex items-start gap-3">
-                    <span className="text-yellow-300">•</span>
-                    <p>Hanya Agent ID yang ada dalam whitelist dibenarkan login dan spin.</p>
+              {/* Right: Wheel */}
+              <div className="flex flex-col items-center">
+                <div className="bg-[#0d0d2b]/80 backdrop-blur-xl rounded-2xl border border-yellow-500/20 p-5 shadow-xl w-full">
+                  <div className="text-center mb-4">
+                    <h2 className="text-xl font-black text-yellow-400">Putar & Menang</h2>
+                    <p className="text-white/50 text-xs mt-1">Tekan SPIN untuk cuba nasib!</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <span className="text-yellow-300">•</span>
-                    <p>Setiap Agent ID hanya ada <strong className="text-white">satu peluang</strong>.</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <span className="text-yellow-300">•</span>
-                    <p>Hadiah diagih ikut <strong className="text-white">fixed pool</strong>.</p>
+                  <div className="flex justify-center">
+                    <LuckySpinWheel
+                      segments={segments}
+                      onSpin={handleSpin}
+                      spinning={spinning}
+                      setSpinning={setSpinning}
+                      hasError={!!error || !canSpin}
+                      onWin={(reward, rewardType) => setWinner({ reward, rewardType })}
+                    />
                   </div>
                 </div>
-                <div className="mt-4 pt-4 border-t border-white/10 text-xs text-white/45">
-                  Event time: 1 April 2026, 5:00 PM - 11:00 PM (MYT)
-                </div>
-              </div>
-            </div>
 
-            {/* Right wheel section */}
-            <div className="bg-white/5 backdrop-blur-2xl rounded-[28px] border border-yellow-500/20 p-5 md:p-8 shadow-[0_24px_80px_rgba(0,0,0,0.4)]">
-              <div className="text-center mb-6">
-                <h2 className="text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-yellow-500">
-                  Putar & Menang
-                </h2>
-                <p className="text-white/50 text-sm mt-2">Tekan butang spin untuk cuba nasib anda dalam event eksklusif ini.</p>
-              </div>
-
-              <div className="flex justify-center py-2 md:py-4">
-                <LuckySpinWheel
-                  segments={SEGMENTS}
-                  onSpin={handleSpin}
-                  spinning={spinning}
-                  setSpinning={setSpinning}
-                  hasError={!!error || !canSpin}
-                />
-              </div>
-
-              <div className="mt-6 text-center">
-                {!eventActive && <p className="text-red-300 text-sm">⛔ Event Lucky Spin belum bermula atau telah tamat.</p>}
-                {eventActive && !hasSpun && !error && <p className="text-white/55 text-sm">Tekan butang <span className="text-yellow-300 font-bold">SPIN</span> untuk cuba nasib anda.</p>}
-                {hasSpun && <p className="text-yellow-300 text-sm font-medium">Terima kasih kerana menyertai Lucky Spin event ini.</p>}
+                {/* CTA */}
+                {!eventActive && (
+                  <div className="text-center mt-3">
+                    <span className="text-2xl">⛔</span>
+                    <p className="text-white/40 text-xs">Event belum bermula atau telah tamat.</p>
+                  </div>
+                )}
+                {eventActive && !hasSpun && !error && (
+                  <div className="text-center mt-3">
+                    <p className="text-yellow-400/80 text-xs font-bold tracking-wider uppercase animate-pulse">⬇ Tekan SPIN! ⬇</p>
+                  </div>
+                )}
+                {hasSpun && (
+                  <div className="text-center mt-3">
+                    <span className="text-2xl">✅</span>
+                    <p className="text-white/40 text-xs">Terima kasih! Hadiah akan di hubungi oleh admin.</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -67,14 +67,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Event belum bermula atau telah tamat.' }, { status: 403 })
     }
 
-    // Get active rewards sorted by position
+    // Get all rewards, filter and sort in JS
     const rewardsRes = await payload.find({
       collection: 'lucky-spin-rewards',
-      sort: 'position',
       limit: 100,
     })
 
-    const rewards = rewardsRes.docs.filter((r: any) => r.isActive)
+    let rewards = (rewardsRes.docs as any[])
+      .filter(r => r.isActive)
+      .sort((a, b) => (a.position || 0) - (b.position || 0))
     if (rewards.length === 0) {
       return NextResponse.json({ error: 'Tiada hadiah tersedia.' }, { status: 403 })
     }

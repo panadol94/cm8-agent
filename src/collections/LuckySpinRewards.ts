@@ -63,6 +63,16 @@ export const LuckySpinRewards: CollectionConfig = {
       },
     },
     {
+      name: 'probability',
+      type: 'number',
+      label: 'Probability Weight',
+      defaultValue: 1,
+      min: 0,
+      admin: {
+        description: 'Berat probability untuk spin. Semakin tinggi, semakin mungkin menang.',
+      },
+    },
+    {
       name: 'isActive',
       type: 'checkbox',
       defaultValue: true,

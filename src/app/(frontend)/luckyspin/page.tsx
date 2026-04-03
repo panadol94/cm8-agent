@@ -113,7 +113,7 @@ export default function LuckySpinPage() {
     try {
       const res = await fetch('/api/luckyspin/login', {
         method: 'POST',
-        headers: { 'Content-Type: application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ agentId: agentId.trim() }),
         credentials: 'include',
       })

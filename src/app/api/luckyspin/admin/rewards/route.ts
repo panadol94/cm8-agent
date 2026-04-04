@@ -27,23 +27,21 @@ export async function GET(request: NextRequest) {
     // Use direct pg to bypass Payload ORM duplicate-table bug
     const { Client } = require('pg')
     const client = new Client({
-      host: process.env.PGHOST || '10.0.1.20',
-      port: parseInt(process.env.PGPORT || '5432'),
-      user: process.env.PGUSER || 'cm8user',
-      password: process.env.PGPASSWORD || 'cm8pass',
-      database: process.env.PGDATABASE || 'cm8vvip',
+      connectionString: process.env.DATABASE_URL,
     })
     await client.connect()
     const result = await client.query(
-      'SELECT id, reward_name, reward_type, stock, claimed_count, probability, is_active, position FROM lucky_spin_rewards ORDER BY position ASC LIMIT 100'
+      `SELECT id, reward_name, reward_type, stock, claimed_count, probability, is_active, position
+       FROM lucky_spin_rewards
+       ORDER BY position ASC LIMIT 100`
     )
     await client.end()
     const docs = result.rows.map((r: any) => ({
       id: r.id,
       rewardName: r.reward_name,
       rewardType: r.reward_type,
-      stock: r.stock,
-      claimedCount: r.claimed_count,
+      stock: r.stock ?? 0,
+      claimedCount: r.claimed_count ?? 0,
       probability: r.probability,
       isActive: r.is_active,
       position: r.position,
@@ -65,7 +63,12 @@ export async function POST(request: NextRequest) {
 
     const result = await (payload as any).create({
       collection: 'lucky-spin-rewards',
-      data: { ...data, isActive: true, claimedCount: 0 } as any,
+      data: {
+        ...data,
+        isActive: true,
+        claimedCount: 0,
+        stock: data.stock || 0,
+      } as any,
     })
 
     return NextResponse.json(result)
@@ -81,14 +84,42 @@ export async function PUT(request: NextRequest) {
   }
   try {
     const { id, ...rest } = await request.json()
-    const payload = await getPayload({ config: configPromise })
+    // Use direct pg to bypass Payload ORM
+    const { Client } = require('pg')
+    const client = new Client({ connectionString: process.env.DATABASE_URL })
+    await client.connect()
 
-    await (payload as any).update({
-      collection: 'lucky-spin-rewards',
-      id,
-      data: rest as any,
-    })
+    // Build dynamic update based on provided fields
+    const fields: string[] = []
+    const values: unknown[] = []
+    let idx = 1
 
+    const fieldMap: Record<string, string> = {
+      rewardName: 'reward_name',
+      rewardType: 'reward_type',
+      probability: 'probability',
+      isActive: 'is_active',
+      position: 'position',
+      stock: 'stock',
+    }
+
+    for (const [key, dbField] of Object.entries(fieldMap)) {
+      if (rest[key] !== undefined) {
+        fields.push(`${dbField} = $${idx}`)
+        values.push(rest[key])
+        idx++
+      }
+    }
+
+    if (fields.length > 0) {
+      values.push(id)
+      await client.query(
+        `UPDATE lucky_spin_rewards SET ${fields.join(', ')} WHERE id = $${idx}`,
+        values
+      )
+    }
+
+    await client.end()
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error(error)
@@ -105,6 +136,28 @@ export async function DELETE(request: NextRequest) {
     const payload = await getPayload({ config: configPromise })
     await payload.delete({ collection: 'lucky-spin-rewards', id })
     return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error(error)
+    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+  }
+}
+
+// POST /api/luckyspin/admin/rewards/reset - reset all claimed_count to 0
+export async function PATCH(request: NextRequest) {
+  if (!await verifyAdmin(request)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  try {
+    const { action } = await request.json()
+    if (action !== 'reset_counts') {
+      return NextResponse.json({ error: 'Unknown action' }, { status: 400 })
+    }
+    const { Client } = require('pg')
+    const client = new Client({ connectionString: process.env.DATABASE_URL })
+    await client.connect()
+    await client.query('UPDATE lucky_spin_rewards SET claimed_count = 0')
+    await client.end()
+    return NextResponse.json({ success: true, message: 'All claimed counts reset to 0' })
   } catch (error) {
     console.error(error)
     return NextResponse.json({ error: 'Server error' }, { status: 500 })

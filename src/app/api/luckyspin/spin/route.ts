@@ -6,6 +6,7 @@ import {
   markWhitelistSpun,
   insertRecord,
   querySettings,
+  incrementClaimedCount,
 } from '@/lib/luckyspin-db'
 
 function getJwtSecret(): Uint8Array {
@@ -60,17 +61,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Event belum bermula atau telah tamat.' }, { status: 403 })
     }
 
-    // Get rewards
+    // Get available rewards (stock-based)
     const rewards = await queryRewards()
     if (rewards.length === 0) {
       return NextResponse.json({ error: 'Tiada hadiah tersedia.' }, { status: 403 })
     }
 
     // Probability-based selection
-    const totalProb = rewards.reduce((sum, r) => {
-      const p = Number(r.probability || 1)
-      return sum + p
-    }, 0)
+    const totalProb = rewards.reduce((sum: number, r: any) => sum + Number(r.probability || 1), 0)
     let random = Math.floor(Math.random() * totalProb)
     let selectedReward = rewards[0]
     for (const reward of rewards) {
@@ -84,8 +82,9 @@ export async function POST(request: NextRequest) {
 
     const nowISO = now.toISOString()
 
-    // Mark spun + save record — all direct DB, no Payload ORM
+    // Mark spun + save record + increment claimed count
     await markWhitelistSpun(entry.id)
+    await incrementClaimedCount(selectedReward.id)
     await insertRecord({
       agentId,
       rewardWon: selectedReward.reward_name,

@@ -19,11 +19,27 @@ function getPgConfig() {
 export async function queryRewards() {
   const client = new Client(getPgConfig())
   await client.connect()
+  // Only get rewards that are active AND have stock remaining (claimed_count < stock, or stock=0 means unlimited)
   const result = await client.query(
-    'SELECT id, reward_name, reward_type, probability, position FROM lucky_spin_rewards WHERE is_active = true ORDER BY position ASC LIMIT 100'
+    `SELECT id, reward_name, reward_type, probability, position
+     FROM lucky_spin_rewards
+     WHERE is_active = true
+       AND (stock = 0 OR claimed_count < stock)
+     ORDER BY position ASC
+     LIMIT 100`
   )
   await client.end()
   return result.rows
+}
+
+export async function incrementClaimedCount(rewardId: string | number) {
+  const client = new Client(getPgConfig())
+  await client.connect()
+  await client.query(
+    `UPDATE lucky_spin_rewards SET claimed_count = claimed_count + 1 WHERE id = $1`,
+    [rewardId]
+  )
+  await client.end()
 }
 
 export async function queryWhitelist(agentId: string) {

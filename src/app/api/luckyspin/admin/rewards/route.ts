@@ -24,13 +24,31 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
   try {
-    const payload = await getPayload({ config: configPromise })
-    const result = await payload.find({
-      collection: 'lucky-spin-rewards',
-      sort: 'position',
-      limit: 100,
+    // Use direct pg to bypass Payload ORM duplicate-table bug
+    const { Client } = require('pg')
+    const client = new Client({
+      host: process.env.PGHOST || '10.0.1.20',
+      port: parseInt(process.env.PGPORT || '5432'),
+      user: process.env.PGUSER || 'cm8user',
+      password: process.env.PGPASSWORD || 'cm8pass',
+      database: process.env.PGDATABASE || 'cm8vvip',
     })
-    return NextResponse.json(result.docs)
+    await client.connect()
+    const result = await client.query(
+      'SELECT id, reward_name, reward_type, stock, claimed_count, probability, is_active, position FROM lucky_spin_rewards ORDER BY position ASC LIMIT 100'
+    )
+    await client.end()
+    const docs = result.rows.map((r: any) => ({
+      id: r.id,
+      rewardName: r.reward_name,
+      rewardType: r.reward_type,
+      stock: r.stock,
+      claimedCount: r.claimed_count,
+      probability: r.probability,
+      isActive: r.is_active,
+      position: r.position,
+    }))
+    return NextResponse.json(docs)
   } catch (error) {
     console.error(error)
     return NextResponse.json({ error: 'Server error' }, { status: 500 })

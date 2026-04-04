@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
 import { jwtVerify } from 'jose'
+import { queryRecords } from '@/lib/luckyspin-db'
 
 function getJwtSecret(): Uint8Array {
   const secret = process.env.PAYLOAD_SECRET || 'fallback-secret-change-me'
@@ -33,23 +32,13 @@ export async function GET(request: NextRequest) {
     const dateTo = searchParams.get('dateTo') || ''
     const exportCsv = searchParams.get('export') === 'csv'
 
-    const payload = await getPayload({ config: configPromise })
-
-    const where: Record<string, Record<string, unknown>> = {}
-    if (agentId) where.agentId = { contains: agentId }
-    if (rewardWon) where.rewardWon = { contains: rewardWon }
-    if (dateFrom || dateTo) {
-      where.spunAt = {}
-      if (dateFrom) where.spunAt.greater_than = dateFrom
-      if (dateTo) where.spunAt.less_than = dateTo
-    }
-
-    const result = await payload.find({
-      collection: 'lucky-spin-records',
-      where,
+    const result = await queryRecords({
+      agentId: agentId || undefined,
+      rewardWon: rewardWon || undefined,
+      dateFrom: dateFrom || undefined,
+      dateTo: dateTo || undefined,
       page,
       limit,
-      sort: '-spunAt',
     })
 
     if (exportCsv) {

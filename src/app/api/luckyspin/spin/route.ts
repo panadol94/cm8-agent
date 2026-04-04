@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
 import { jwtVerify } from 'jose'
+import {
+  queryRewards,
+  queryWhitelist,
+  markWhitelistSpun,
+  insertRecord,
+  querySettings,
+} from '@/lib/luckyspin-db'
 
 function getJwtSecret(): Uint8Array {
   const secret = process.env.PAYLOAD_SECRET || 'fallback-secret-change-me'
@@ -27,76 +32,49 @@ export async function POST(request: NextRequest) {
     }
 
     const agentId = String(session.agentId).trim()
-    const payload = await getPayload({ config: configPromise })
 
     // Check whitelist
-    const allWhitelist = await payload.find({
-      collection: 'lucky-spin-whitelist',
-      limit: 1000,
-    })
-
-    const entry = allWhitelist.docs.find(
-      (doc: any) => String(doc.agentId || '').toLowerCase() === agentId.toLowerCase(),
-    )
-
+    const entry = await queryWhitelist(agentId)
     if (!entry) {
       return NextResponse.json({ error: 'ID Agent tiada dalam whitelist. Sila hubungi admin.' }, { status: 403 })
     }
 
-    if (!entry.isActive) {
+    if (!entry.is_active) {
       return NextResponse.json({ error: 'ID Agent tidak aktif. Sila hubungi admin.' }, { status: 403 })
     }
 
-    if (entry.hasSpun) {
+    if (entry.has_spun) {
       return NextResponse.json({ error: 'ID ini telah digunakan untuk spin.' }, { status: 403 })
     }
 
     // Check event status
-    const settingsRes = await payload.find({ collection: 'lucky-spin-settings', limit: 1 })
-    const settings = settingsRes.docs[0]
-
-    if (!settings || !settings.eventStatus) {
+    const settings = await querySettings()
+    if (!settings || !settings.event_status) {
       return NextResponse.json({ error: 'Event belum bermula atau telah tamat.' }, { status: 403 })
     }
 
     const now = new Date()
-    const start = new Date(settings.eventStart as string)
-    const end = new Date(settings.eventEnd as string)
-
+    const start = new Date(settings.event_start)
+    const end = new Date(settings.event_end)
     if (now < start || now > end) {
       return NextResponse.json({ error: 'Event belum bermula atau telah tamat.' }, { status: 403 })
     }
 
-    // Get all rewards using direct DB query to bypass Payload ORM bug
-    const { Client } = require('pg')
-    const dbClient = new Client({
-      host: process.env.PGHOST || '10.0.1.20',
-      port: parseInt(process.env.PGPORT || '5432'),
-      user: process.env.PGUSER || 'cm8user',
-      password: process.env.PGPASSWORD || 'cm8pass',
-      database: process.env.PGDATABASE || 'cm8vvip',
-    })
-    await dbClient.connect()
-    const dbResult = await dbClient.query(
-      'SELECT reward_name, reward_type, probability, position FROM lucky_spin_rewards WHERE is_active = true ORDER BY position ASC LIMIT 100'
-    )
-    await dbClient.end()
-
-    const rewards = dbResult.rows
+    // Get rewards
+    const rewards = await queryRewards()
     if (rewards.length === 0) {
       return NextResponse.json({ error: 'Tiada hadiah tersedia.' }, { status: 403 })
     }
 
-    // Probability-based selection (total probability = sum of all probabilities)
-    const totalProb = rewards.reduce((sum: number, r: any) => {
-      const p = Number(r.probability || r.prob || r.stock || 1)
+    // Probability-based selection
+    const totalProb = rewards.reduce((sum, r) => {
+      const p = Number(r.probability || 1)
       return sum + p
     }, 0)
     let random = Math.floor(Math.random() * totalProb)
-
-    let selectedReward: any = rewards[0]
-    for (const reward of rewards as any[]) {
-      const prob = Number(reward.probability || reward.prob || reward.stock || 1)
+    let selectedReward = rewards[0]
+    for (const reward of rewards) {
+      const prob = Number(reward.probability || 1)
       random -= prob
       if (random < 0) {
         selectedReward = reward
@@ -104,31 +82,23 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Mark whitelist as spun
-    await payload.update({
-      collection: 'lucky-spin-whitelist',
-      id: entry.id,
-      data: { hasSpun: true },
-    })
+    const nowISO = now.toISOString()
 
-    // Save record
-    await payload.create({
-      collection: 'lucky-spin-records',
-      data: {
-        agentId,
-        rewardWon: selectedReward.rewardName as string,
-        rewardType: selectedReward.rewardType as string,
-        spunAt: now.toISOString(),
-        ipAddress: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown',
-        userAgent: request.headers.get('user-agent') || 'unknown',
-        isValid: true,
-      },
+    // Mark spun + save record — all direct DB, no Payload ORM
+    await markWhitelistSpun(entry.id)
+    await insertRecord({
+      agentId,
+      rewardWon: selectedReward.reward_name,
+      rewardType: selectedReward.reward_type,
+      spunAt: nowISO,
+      ipAddress: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown',
+      userAgent: request.headers.get('user-agent') || 'unknown',
     })
 
     const response = NextResponse.json({
       success: true,
-      reward: selectedReward.rewardName,
-      rewardType: selectedReward.rewardType,
+      reward: selectedReward.reward_name,
+      rewardType: selectedReward.reward_type,
     })
     response.cookies.delete('ls_session')
 

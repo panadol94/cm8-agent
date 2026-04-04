@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
 import { jwtVerify } from 'jose'
+import { queryWhitelist, querySettings } from '@/lib/luckyspin-db'
 
 function getJwtSecret(): Uint8Array {
   const secret = process.env.PAYLOAD_SECRET || 'fallback-secret-change-me'
@@ -27,37 +26,26 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Sesi tidak sah. Sila login semula.' }, { status: 401 })
     }
 
-    const payload = await getPayload({ config: configPromise })
-
-    // Check whitelist (case-insensitive)
-    const allWhitelist = await payload.find({
-      collection: 'lucky-spin-whitelist',
-      limit: 1000,
-    })
-
-    const entry = allWhitelist.docs.find(
-      (doc: any) => String(doc.agentId || '').toLowerCase() === String(session.agentId || '').toLowerCase(),
-    )
+    // Use direct DB queries
+    const entry = await queryWhitelist(session.agentId)
 
     if (!entry) {
       return NextResponse.json({ hasSpun: false, error: 'ID tidak dalam whitelist.' }, { status: 403 })
     }
 
-    // Check event status
-    const settingsRes = await payload.find({ collection: 'lucky-spin-settings', limit: 1 })
-    const settings = settingsRes.docs[0]
+    const settings = await querySettings()
 
-    if (!settings || !settings.eventStatus) {
-      return NextResponse.json({ hasSpun: entry.hasSpun, eventActive: false })
+    if (!settings || !settings.event_status) {
+      return NextResponse.json({ hasSpun: entry.has_spun, eventActive: false })
     }
 
     const now = new Date()
-    const start = new Date(settings.eventStart)
-    const end = new Date(settings.eventEnd)
+    const start = new Date(settings.event_start)
+    const end = new Date(settings.event_end)
     const eventActive = now >= start && now <= end
 
     return NextResponse.json({
-      hasSpun: entry.hasSpun,
+      hasSpun: entry.has_spun,
       eventActive,
       agentId: session.agentId,
     })

@@ -3,6 +3,7 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { SignJWT } from 'jose'
 import { cookies } from 'next/headers'
+import { queryWhitelist } from '@/lib/luckyspin-db'
 
 const COOKIE_NAME = 'ls_session'
 
@@ -19,33 +20,24 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Agent ID diperlukan.' }, { status: 400 })
     }
 
-    const payload = await getPayload({ config: configPromise })
+    // Use direct DB to bypass Payload ORM duplicate-table bug
+    const entry = await queryWhitelist(agentId.trim())
 
-    // Check whitelist (case-insensitive by normalizing in memory)
-    const allEntries = await payload.find({
-      collection: 'lucky-spin-whitelist',
-      limit: 1000,
-    })
-
-    const whitelistEntry = allEntries.docs.find(
-      (doc: any) => String(doc.agentId || '').toLowerCase() === agentId.toLowerCase(),
-    )
-
-    if (!whitelistEntry) {
+    if (!entry) {
       return NextResponse.json(
         { error: 'ID Agent tiada dalam whitelist. Sila hubungi admin.' },
         { status: 403 },
       )
     }
 
-    if (!whitelistEntry.isActive) {
+    if (!entry.is_active) {
       return NextResponse.json(
         { error: 'ID Agent tidak aktif. Sila hubungi admin.' },
         { status: 403 },
       )
     }
 
-    if (whitelistEntry.hasSpun) {
+    if (entry.has_spun) {
       return NextResponse.json(
         { error: 'ID ini telah digunakan untuk spin.' },
         { status: 403 },
@@ -53,7 +45,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Generate session token (JWT)
-    const token = await new SignJWT({ agentId, whitelistId: whitelistEntry.id })
+    const token = await new SignJWT({ agentId, whitelistId: entry.id })
       .setProtectedHeader({ alg: 'HS256' })
       .setIssuedAt()
       .setExpirationTime('2h')

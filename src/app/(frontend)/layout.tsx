@@ -90,6 +90,58 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             }),
           }}
         />
+        {/* FAQ Schema JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: [
+                {
+                  '@type': 'Question',
+                  name: 'Bagaimana cara menjadi agent CM8?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Daftar melalui link affiliate rasmi CM8 VVIP. Tiada modal diperlukan. Anda akan dapat akses ke Dashboard Agent dan boleh mula promosikan platform serta earn komisen sehingga 90%.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Berapa modal permulaan yang diperlukan?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Tiada modal diperlukan. Pendaftaran sebagai agent CM8 adalah 100% percuma. Anda hanya perlu promosikan platform dan deploy ajar cara promote.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Bagaimana komisyen dibayar?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Komisyen dikreditkan secara automatik setiap deposit pemain. Pembayaran dibuat dua kali seminggu terus ke akaun anda.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Adakah saya perlukan pengalaman?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Tidak. Training percuma disediakan termasuk ayat copyayat, bahan marketing, dan bimbingan lengkap untuk anda mula.',
+                  },
+                },
+                {
+                  '@type': 'Question',
+                  name: 'Bolehkah saya jadi agent sambilan?',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'Ya! Ramai agent CM8 mulakan sebagai sambilan dan boleh hasilkan RM1,000 - RM5,000 seminggu dengan komitmen fleksibel.',
+                  },
+                },
+              ],
+            }),
+          }}
+        />
       </head>
       <body>
         {/* Sticky Header */}

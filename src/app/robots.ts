@@ -9,8 +9,11 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: '*',
         allow: ['/', '/api/media/'],
         disallow: [
-          '/admin/',
-          '/api/',
+          '/luckyspin-admin/',
+          '/luckyspin-admin/dashboard',
+          '/wheel-dashboard',
+          '/test',
+          '/chat',
         ],
       },
     ],

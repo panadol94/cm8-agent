@@ -2,6 +2,13 @@
 User-agent: *
 Allow: /
 
+# Block admin and internal paths
+Disallow: /luckyspin-admin/
+Disallow: /luckyspin-admin/dashboard
+Disallow: /wheel-dashboard
+Disallow: /test
+Disallow: /chat
+
 # Host
 Host: https://www.cm8vvip.com
 

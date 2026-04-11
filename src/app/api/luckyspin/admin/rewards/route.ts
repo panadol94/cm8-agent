@@ -8,158 +8,120 @@ function getJwtSecret(): Uint8Array {
   return new TextEncoder().encode(secret)
 }
 
-async function verifyAdmin(request: NextRequest) {
+async function verifyAdminSession(request: NextRequest) {
   const token = request.cookies.get('ls_admin_session')?.value
-  if (!token) return false
+  if (!token) return null
   try {
     const { payload } = await jwtVerify(token, getJwtSecret())
-    return !!(payload as { admin?: boolean }).admin
+    return payload as { admin?: boolean }
   } catch {
-    return false
+    return null
   }
 }
 
 export async function GET(request: NextRequest) {
-  if (!await verifyAdmin(request)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
   try {
-    // Use direct pg to bypass Payload ORM duplicate-table bug
-    const { Client } = require('pg')
-    const client = new Client({
-      connectionString: process.env.DATABASE_URL,
+    const session = await verifyAdminSession(request)
+    if (!session?.admin) {
+      return NextResponse.json({ error: 'Akses ditolak.' }, { status: 401 })
+    }
+
+    const payload = await getPayload({ config: configPromise })
+    const result = await payload.find({
+      collection: 'lucky-spin-rewards',
+      sort: 'position',
     })
-    await client.connect()
-    const result = await client.query(
-      `SELECT id, reward_name, reward_type, stock, claimed_count, probability, is_active, position
-       FROM lucky_spin_rewards
-       ORDER BY position ASC LIMIT 100`
-    )
-    await client.end()
-    const docs = result.rows.map((r: any) => ({
-      id: r.id,
-      rewardName: r.reward_name,
-      rewardType: r.reward_type,
-      stock: r.stock ?? 0,
-      claimedCount: r.claimed_count ?? 0,
-      probability: r.probability,
-      isActive: r.is_active,
-      position: r.position,
-    }))
-    return NextResponse.json(docs)
+
+    return NextResponse.json({ rewards: result.docs })
   } catch (error) {
-    console.error(error)
-    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+    console.error('Rewards GET error:', error)
+    return NextResponse.json({ error: 'Ralat server.' }, { status: 500 })
   }
 }
 
 export async function POST(request: NextRequest) {
-  if (!await verifyAdmin(request)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
   try {
-    const data = await request.json()
-    const payload = await getPayload({ config: configPromise })
+    const session = await verifyAdminSession(request)
+    if (!session?.admin) {
+      return NextResponse.json({ error: 'Akses ditolak.' }, { status: 401 })
+    }
 
-    const result = await (payload as any).create({
+    const payload = await getPayload({ config: configPromise })
+    const body = await request.json()
+
+    // Validate probability
+    if (body.probability < 0 || body.probability > 100) {
+      return NextResponse.json({ error: 'Probability mesti antara 0-100.' }, { status: 400 })
+    }
+
+    const created = await payload.create({
       collection: 'lucky-spin-rewards',
-      data: {
-        ...data,
-        isActive: true,
-        claimedCount: 0,
-        stock: data.stock || 0,
-      } as any,
+      data: body,
     })
 
-    return NextResponse.json(result)
+    return NextResponse.json({ success: true, reward: created })
   } catch (error) {
-    console.error(error)
-    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+    console.error('Rewards POST error:', error)
+    return NextResponse.json({ error: 'Ralat server.' }, { status: 500 })
   }
 }
 
 export async function PUT(request: NextRequest) {
-  if (!await verifyAdmin(request)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
   try {
-    const { id, ...rest } = await request.json()
-    // Use direct pg to bypass Payload ORM
-    const { Client } = require('pg')
-    const client = new Client({ connectionString: process.env.DATABASE_URL })
-    await client.connect()
-
-    // Build dynamic update based on provided fields
-    const fields: string[] = []
-    const values: unknown[] = []
-    let idx = 1
-
-    const fieldMap: Record<string, string> = {
-      rewardName: 'reward_name',
-      rewardType: 'reward_type',
-      probability: 'probability',
-      isActive: 'is_active',
-      position: 'position',
-      stock: 'stock',
+    const session = await verifyAdminSession(request)
+    if (!session?.admin) {
+      return NextResponse.json({ error: 'Akses ditolak.' }, { status: 401 })
     }
 
-    for (const [key, dbField] of Object.entries(fieldMap)) {
-      if (rest[key] !== undefined) {
-        fields.push(`${dbField} = $${idx}`)
-        values.push(rest[key])
-        idx++
-      }
+    const payload = await getPayload({ config: configPromise })
+    const body = await request.json()
+    const { id, ...data } = body
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID diperlukan.' }, { status: 400 })
     }
 
-    if (fields.length > 0) {
-      values.push(id)
-      await client.query(
-        `UPDATE lucky_spin_rewards SET ${fields.join(', ')} WHERE id = $${idx}`,
-        values
-      )
+    // Validate probability
+    if (data.probability !== undefined && (data.probability < 0 || data.probability > 100)) {
+      return NextResponse.json({ error: 'Probability mesti antara 0-100.' }, { status: 400 })
     }
 
-    await client.end()
-    return NextResponse.json({ success: true })
+    const updated = await payload.update({
+      collection: 'lucky-spin-rewards',
+      id,
+      data,
+    })
+
+    return NextResponse.json({ success: true, reward: updated })
   } catch (error) {
-    console.error(error)
-    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+    console.error('Rewards PUT error:', error)
+    return NextResponse.json({ error: 'Ralat server.' }, { status: 500 })
   }
 }
 
 export async function DELETE(request: NextRequest) {
-  if (!await verifyAdmin(request)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
   try {
-    const { id } = await request.json()
+    const session = await verifyAdminSession(request)
+    if (!session?.admin) {
+      return NextResponse.json({ error: 'Akses ditolak.' }, { status: 401 })
+    }
+
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get('id')
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID diperlukan.' }, { status: 400 })
+    }
+
     const payload = await getPayload({ config: configPromise })
-    await payload.delete({ collection: 'lucky-spin-rewards', id })
+    await payload.delete({
+      collection: 'lucky-spin-rewards',
+      id,
+    })
+
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error(error)
-    return NextResponse.json({ error: 'Server error' }, { status: 500 })
-  }
-}
-
-// POST /api/luckyspin/admin/rewards/reset - reset all claimed_count to 0
-export async function PATCH(request: NextRequest) {
-  if (!await verifyAdmin(request)) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
-  try {
-    const { action } = await request.json()
-    if (action !== 'reset_counts') {
-      return NextResponse.json({ error: 'Unknown action' }, { status: 400 })
-    }
-    const { Client } = require('pg')
-    const client = new Client({ connectionString: process.env.DATABASE_URL })
-    await client.connect()
-    await client.query('UPDATE lucky_spin_rewards SET claimed_count = 0')
-    await client.end()
-    return NextResponse.json({ success: true, message: 'All claimed counts reset to 0' })
-  } catch (error) {
-    console.error(error)
-    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+    console.error('Rewards DELETE error:', error)
+    return NextResponse.json({ error: 'Ralat server.' }, { status: 500 })
   }
 }

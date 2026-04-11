@@ -3,17 +3,13 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { SignJWT } from 'jose'
 import { cookies } from 'next/headers'
-import crypto from 'crypto'
+import { verifyPassword } from '@/lib/auth'
 
 const COOKIE_NAME = 'ls_admin_session'
 
 function getJwtSecret(): Uint8Array {
   const secret = process.env.PAYLOAD_SECRET || 'fallback-secret-change-me'
   return new TextEncoder().encode(secret)
-}
-
-function hashPassword(password: string): string {
-  return crypto.createHash('sha256').update(password).digest('hex')
 }
 
 export async function POST(req: NextRequest) {
@@ -25,38 +21,47 @@ export async function POST(req: NextRequest) {
     }
 
     const payload = await getPayload({ config: configPromise })
-
-    const settingsRes = await payload.find({
+    const { docs: settingsArr } = await payload.find({
       collection: 'lucky-spin-settings',
       limit: 1,
     })
+    const settings = settingsArr[0]
 
-    const settings = settingsRes.docs[0]
     if (!settings) {
-      return NextResponse.json({ error: 'Konfigurasi tidak wujud.' }, { status: 500 })
+      return NextResponse.json({ error: 'Tetapan admin tidak dikonfigurasi.' }, { status: 500 })
     }
 
-    const storedUsername = settings.adminUsername as string
-    const storedPassword = settings.adminPassword as string
+    // Check credentials
+    const storedUsername = settings.adminUsername
+    const storedPassword = settings.adminPassword
 
-    const hashedInput = hashPassword(password)
+    if (!storedUsername || !storedPassword) {
+      return NextResponse.json({ error: 'Kredensial admin tidak dijumpai.' }, { status: 500 })
+    }
 
-    if (username !== storedUsername || hashedInput !== storedPassword) {
+    if (username !== storedUsername) {
       return NextResponse.json({ error: 'Username atau password salah.' }, { status: 401 })
     }
 
+    const passwordValid = await verifyPassword(password, storedPassword)
+    if (!passwordValid) {
+      return NextResponse.json({ error: 'Username atau password salah.' }, { status: 401 })
+    }
+
+    // Generate session token
     const token = await new SignJWT({ admin: true, username })
       .setProtectedHeader({ alg: 'HS256' })
       .setIssuedAt()
-      .setExpirationTime('4h')
+      .setExpirationTime('8h')
       .sign(getJwtSecret())
 
+    // Set cookie
     const cookieStore = await cookies()
     cookieStore.set(COOKIE_NAME, token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
-      maxAge: 60 * 60 * 4,
+      maxAge: 60 * 60 * 8, // 8 hours
       path: '/',
     })
 

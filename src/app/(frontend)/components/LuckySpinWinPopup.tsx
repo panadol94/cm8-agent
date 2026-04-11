@@ -2,53 +2,88 @@
 
 import { useEffect } from 'react'
 
-interface Props {
+interface LuckySpinWinPopupProps {
+  isOpen: boolean
   reward: string
-  rewardType: string
   onClose: () => void
 }
 
-const TYPE_ICONS: Record<string, string> = {
-  cash: '💵',
-  gold: '🥇',
-  bonus: '🎁',
-}
-
-export default function LuckySpinWinPopup({ reward, rewardType, onClose }: Props) {
+export default function LuckySpinWinPopup({ isOpen, reward, onClose }: LuckySpinWinPopupProps) {
   useEffect(() => {
-    document.body.style.overflow = 'hidden'
-    return () => { document.body.style.overflow = '' }
-  }, [])
+    if (isOpen) {
+      const handleEscape = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') onClose()
+      }
+      window.addEventListener('keydown', handleEscape)
+      return () => window.removeEventListener('keydown', handleEscape)
+    }
+  }, [isOpen, onClose])
+
+  if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/75 backdrop-blur-md" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {/* Backdrop with blur */}
+      <div 
+        className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+        onClick={onClose}
+      />
 
-      <div
-        className="relative w-full max-w-md overflow-hidden rounded-[28px] border border-yellow-400/30 bg-[linear-gradient(180deg,#2b1f06_0%,#160f04_35%,#090909_100%)] p-8 md:p-10 text-center shadow-[0_0_80px_rgba(255,215,0,0.25),0_25px_80px_rgba(0,0,0,0.55)]"
-        onClick={e => e.stopPropagation()}
+      {/* Win card */}
+      <div 
+        className="relative w-full max-w-md bg-gradient-to-br from-amber-500/20 via-purple-500/20 to-amber-500/20
+                   backdrop-blur-xl rounded-3xl border border-amber-400/30 p-8 text-center
+                   animate-[fadeIn_0.5s_ease-out,scaleIn_0.5s_ease-out]
+                   shadow-[0_0_60px_rgba(255,215,0,0.3)]"
       >
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-yellow-300/80 to-transparent" />
-        <button onClick={onClose} className="absolute top-4 right-4 text-yellow-300/70 hover:text-yellow-200 text-2xl">&times;</button>
+        {/* Glow effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-purple-500/10 to-amber-500/10 rounded-3xl blur-xl" />
 
-        <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full border border-yellow-300/20 bg-yellow-400/10 text-5xl shadow-[0_0_30px_rgba(255,215,0,0.18)] animate-bounce">
-          {TYPE_ICONS[rewardType] || '🎉'}
+        {/* Content */}
+        <div className="relative z-10">
+          {/* Trophy icon */}
+          <div className="mb-6 text-6xl animate-bounce">
+            🏆
+          </div>
+
+          {/* Winner text */}
+          <h2 className="text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400 mb-4">
+            TAHNIAH!
+          </h2>
+
+          <p className="text-white/80 text-lg mb-6">
+            Anda telah memenangi
+          </p>
+
+          {/* Prize display */}
+          <div 
+            className="text-4xl md:text-5xl font-black text-amber-400 mb-8
+                       animate-[glow_1s_ease-in-out_infinite_alternate]"
+            style={{
+              textShadow: '0 0 20px rgba(255,215,0,0.5), 0 0 40px rgba(255,215,0,0.3)',
+            }}
+          >
+            {reward}
+          </div>
+
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="px-8 py-3 bg-gradient-to-r from-amber-500 to-amber-600 
+                       text-white font-bold rounded-full
+                       hover:from-amber-400 hover:to-amber-500
+                       transition-all duration-300 shadow-lg
+                       hover:shadow-[0_0_30px_rgba(255,215,0,0.5)]"
+          >
+            Teruskan
+          </button>
         </div>
 
-        <p className="text-[11px] uppercase tracking-[0.35em] text-yellow-200/70 mb-2">Tahniah</p>
-        <h1 className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-100 via-yellow-300 to-yellow-500 mb-4 break-words">
-          {reward}
-        </h1>
-        <p className="text-yellow-50/70 text-sm md:text-base mb-8 leading-relaxed">
-          Hadiah anda telah direkodkan. Sila tunggu pihak admin untuk urusan tuntutan hadiah.
-        </p>
-
-        <button
-          onClick={onClose}
-          className="w-full rounded-2xl bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 py-3.5 px-6 font-black text-black text-lg shadow-[0_10px_30px_rgba(255,215,0,0.25)] hover:scale-[1.01] active:scale-[0.99] transition-all"
-        >
-          OKAY, TERIMA KASIH
-        </button>
+        {/* Decorative sparkles */}
+        <div className="absolute top-4 left-4 text-amber-400/60 text-2xl animate-pulse">✨</div>
+        <div className="absolute top-4 right-4 text-amber-400/60 text-2xl animate-pulse delay-150">✨</div>
+        <div className="absolute bottom-4 left-4 text-amber-400/60 text-2xl animate-pulse delay-300">✨</div>
+        <div className="absolute bottom-4 right-4 text-amber-400/60 text-2xl animate-pulse delay-500">✨</div>
       </div>
     </div>
   )

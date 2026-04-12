@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { jwtVerify } from 'jose'
+import type { Where } from 'payload'
 
 function getJwtSecret(): Uint8Array {
   const secret = process.env.PAYLOAD_SECRET || 'fallback-secret-change-me'

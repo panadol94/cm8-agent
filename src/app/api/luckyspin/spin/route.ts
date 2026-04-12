@@ -3,6 +3,7 @@ import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { jwtVerify } from 'jose'
 import { revalidateTag } from 'next/cache'
+import type { LuckySpinReward } from '@/payload-types'
 
 function getJwtSecret(): Uint8Array {
   const secret = process.env.PAYLOAD_SECRET || 'fallback-secret-change-me'
@@ -21,13 +22,13 @@ async function verifySession(request: NextRequest) {
 }
 
 // Weighted random selection based on probability
-function weightedRandom(rewards: Array<{ id: string; rewardName: string; rewardType: string; probability: number }>) {
-  const total = rewards.reduce((sum, r) => sum + r.probability, 0)
+function weightedRandom(rewards: LuckySpinReward[]) {
+  const total = rewards.reduce((sum, r) => sum + (r.probability || 0), 0)
   if (total <= 0) return null
 
   let random = Math.random() * total
   for (const reward of rewards) {
-    random -= reward.probability
+    random -= (reward.probability || 0)
     if (random <= 0) {
       return reward
     }
@@ -89,7 +90,7 @@ export async function POST(request: NextRequest) {
       sort: 'position',
     })
 
-    const rewards = rewardsResult.docs as Array<{ id: string; rewardName: string; rewardType: string; probability: number; position: number }>
+    const rewards = rewardsResult.docs
 
     if (rewards.length === 0) {
       return NextResponse.json({ error: 'Tiada hadiah tersedia.' }, { status: 500 })

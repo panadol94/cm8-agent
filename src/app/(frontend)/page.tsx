@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic'
+export const revalidate = 900 // Cache for 15 minutes to guarantee lightning-fast TTFB for Googlebot
 
 import React from 'react'
 import Link from 'next/link'

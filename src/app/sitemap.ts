@@ -1,5 +1,7 @@
 import { MetadataRoute } from 'next'
 
+export const dynamic = 'force-static'
+
 // Blog post slugs — ONLY slugs that have actual content in blog/[slug]/page.tsx
 // DO NOT add slugs here unless content exists —会导致 Google 404
 const blogSlugs = [

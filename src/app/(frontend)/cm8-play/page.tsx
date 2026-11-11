@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic'
 import React from 'react'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { CM8_REGISTER_URL } from '@/lib/registration-links'
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://www.cm8vvip.com/cm8-play' },
@@ -400,7 +401,7 @@ export default function CM8PlayPage() {
           <h2 className="cta-title">Mula Main di CM8 Sekarang</h2>
           <p className="cta-subtitle">1,000+ game, 20+ provider, AI Scanner percuma.</p>
           <a
-            href="https://cm8ong.com/r/luckyhorse879"
+            href={CM8_REGISTER_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-white btn-lg"

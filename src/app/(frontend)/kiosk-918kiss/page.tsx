@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic'
 import React from 'react'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { CM8_REGISTER_URL } from '@/lib/registration-links'
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://www.cm8vvip.com/kiosk-918kiss' },
@@ -415,7 +416,7 @@ export default function Kiosk918KissPage() {
             Daftar akaun 918Kiss melalui CM8 dan nikmati AI Scanner percuma.
           </p>
           <a
-            href="https://cm8ong.com/r/luckyhorse879"
+            href={CM8_REGISTER_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-white btn-lg"

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useCallback, useRef } from 'react'
+import { CM8_REGISTER_URL } from '@/lib/registration-links'
 
 /* ─── Types ─── */
 interface EventInfo {
@@ -805,7 +806,7 @@ export default function PickABox() {
                     </ol>
                   </div>
 
-                  <a className="pab-cta" href="https://cm8ong.com/r/luckyhorse879" target="_blank" rel="noopener noreferrer">
+                  <a className="pab-cta" href={CM8_REGISTER_URL} target="_blank" rel="noopener noreferrer">
                     🎰 Main Sekarang di CM8
                   </a>
                 </>
@@ -822,7 +823,7 @@ export default function PickABox() {
                       <div className="pab-result-icon">😢</div>
                       <h2 className="pab-lose-title">Tidak Bertuah</h2>
                       <p className="pab-lose-text">Maaf, kotak anda kosong kali ini. Jangan putus asa!</p>
-                      <a className="pab-cta" href="https://cm8ong.com/r/luckyhorse879" target="_blank" rel="noopener noreferrer">
+                      <a className="pab-cta" href={CM8_REGISTER_URL} target="_blank" rel="noopener noreferrer">
                         🎰 Cuba Nasib di CM8
                       </a>
                     </>

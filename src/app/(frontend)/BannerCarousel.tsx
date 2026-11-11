@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
+import { CM8_REGISTER_URL } from '@/lib/registration-links'
 
 type BannerItem = {
   src: string
@@ -12,10 +13,10 @@ type BannerItem = {
 }
 
 const fallbackBanners: BannerItem[] = [
-  { src: '/banners/banner-cm8-scanner.jpg', alt: 'CM8 VVIP AI Scanner - Data RTP Slot Real-Time', link: 'https://cm8ong.com/r/luckyhorse879' },
-  { src: '/banners/banner-cm8-1.png', alt: 'CM8 VVIP - Platform Agent Slot #1 Malaysia', link: 'https://cm8ong.com/r/luckyhorse879' },
-  { src: '/banners/banner-cm8-2.png', alt: 'CM8 VVIP - Komisyen Sehingga 90% Tanpa Modal', link: 'https://cm8ong.com/r/luckyhorse879' },
-  { src: '/banners/banner-cm8-3.png', alt: 'CM8 VVIP - Daftar Agent Slot Percuma Sekarang', link: 'https://cm8ong.com/r/luckyhorse879' },
+  { src: '/banners/banner-cm8-scanner.jpg', alt: 'CM8 VVIP AI Scanner - Data RTP Slot Real-Time', link: CM8_REGISTER_URL },
+  { src: '/banners/banner-cm8-1.png', alt: 'CM8 VVIP - Platform Agent Slot #1 Malaysia', link: CM8_REGISTER_URL },
+  { src: '/banners/banner-cm8-2.png', alt: 'CM8 VVIP - Komisyen Sehingga 90% Tanpa Modal', link: CM8_REGISTER_URL },
+  { src: '/banners/banner-cm8-3.png', alt: 'CM8 VVIP - Daftar Agent Slot Percuma Sekarang', link: CM8_REGISTER_URL },
 ]
 
 export default function BannerCarousel({ banners: cmsBanners }: { banners?: BannerItem[] }) {

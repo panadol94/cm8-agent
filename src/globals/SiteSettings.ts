@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { CM8_REGISTER_URL } from '@/lib/registration-links'
 
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
@@ -100,7 +101,7 @@ export const SiteSettings: GlobalConfig = {
                   name: 'ctaButton2Link',
                   type: 'text',
                   label: 'Butang CTA 2 — Link',
-                  defaultValue: 'https://masuk10.com/Wasapvvipcs',
+                  defaultValue: CM8_REGISTER_URL,
                   admin: { width: '50%', description: 'URL yang dituju bila klik butang kedua' },
                 },
               ],

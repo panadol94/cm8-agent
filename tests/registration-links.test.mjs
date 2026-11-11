@@ -67,6 +67,15 @@ test('no stale hardcoded CM8 referral URLs remain in application source', () => 
   assert.deepEqual(stale, [])
 })
 
+test('player setup guide uses the player signup link while agent registration stays separate', () => {
+  const play = readFileSync(new URL('../src/app/(frontend)/cm8-play/page.tsx', import.meta.url), 'utf8')
+  const playerGuide = play.split('Cara Mula Bermain di CM8')[1].split('</section>')[0]
+  assert.doesNotMatch(playerGuide, /href=["']\/register["']/)
+  assert.match(playerGuide, /href=\{CM8_REGISTER_URL\}[^>]*>\s*pendaftaran/)
+  const agents = readFileSync(new URL('../src/app/(frontend)/agent-judi/page.tsx', import.meta.url), 'utf8')
+  assert.match(agents, /href="\/register">Daftar secara percuma/)
+})
+
 test('CMS-driven home registration, banner and promo links are normalized', () => {
   const home = readFileSync(new URL('../src/app/(frontend)/page.tsx', import.meta.url), 'utf8')
   assert.match(home, /resolveCm8RegistrationLink\(ss\?\.ctaButton2Link\)/)

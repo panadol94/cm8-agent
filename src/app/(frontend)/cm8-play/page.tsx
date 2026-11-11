@@ -270,7 +270,10 @@ export default function CM8PlayPage() {
                 <h4>Daftar Akaun CM8</h4>
                 <p>
                   Hubungi <Link href="/agent-judi">agent CM8</Link> atau daftar melalui halaman{' '}
-                  <Link href="/register">pendaftaran</Link>. Proses mengambil masa kurang 5 minit.
+                  <a href={CM8_REGISTER_URL} target="_blank" rel="noopener noreferrer">
+                    pendaftaran
+                  </a>
+                  . Proses mengambil masa kurang 5 minit.
                 </p>
               </div>
             </div>
